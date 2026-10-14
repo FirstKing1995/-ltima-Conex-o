@@ -113,7 +113,7 @@ export default {
   cloud: true,               // true = dados do servidor (mostra até terça); false = aparelho (até sáb 23:47)
   render(ctx) { /* desenha a tela raiz dentro de ctx.el */ },
   onOpen(ctx) {},            // opcional
-  search() { return [{ title, text, params }] } // opcional: itens para a busca global
+  search({ data, game }) { return [{ title, text, params }] } // opcional: itens da busca global; params vão para render(ctx) ao abrir pelo resultado
 }
 ```
 `ctx = { el, params, phone, nav, game, store, kit, h, time, icon, data }` onde `data = CASE.<chave do app>`.
@@ -181,8 +181,8 @@ Cada arquivo faz `export default { ... }`. `index.js` junta tudo em `CASE`. **Da
 ```
 
 ### sms.js — `{ threads:[{ id, phone, name?, messages:[{id, from:'iara'|'them', at, text, status?, undelivered?}] }] }`
-### calls.js — `{ calls:[{ id, phone, contact?, at, dir:'in'|'out'|'missed'|'blocked', duration /*seg*/, via:'phone'|'papo' }], voicemail:[{ id, phone, contact?, at, duration, transcript }] }`
-### gallery.js
+### telefone.js — `{ calls:[{ id, phone, contact?, at, dir:'in'|'out'|'missed'|'blocked', duration /*seg*/, via:'phone'|'papo' }], voicemail:[{ id, phone, contact?, at, duration, transcript }] }`
+### galeria.js
 ```js
 { albums:[{ id:'camera', name:'Câmera', icon:'camera', locked:false }...,{ id:'segura', name:'Pasta Segura', locked:true, puzzle:'pasta' },{ id:'lixeira', name:'Lixeira' }],
   photos:[{ id:'mirante-cerca', src:'assets/caso01/img/mirante_cerca.jpg', album:'camera', at:'2026-10-10T18:19',
@@ -219,7 +219,7 @@ Arquivos-texto da Pasta Segura (LEIA-ME, planilhas) ficam em `arquivos.js` com `
 ### gravador.js — `{ recordings:[{ id, name, at, duration, folder:'all'|'lixeira'|'segura', deletedAt?, transcript:[{t:'02:09', who:'IARA'|'VOZ FEMININA'|'CAIO'|..., text, kind:'speech'|'sfx'|'gap'}], req }] }`
 ### pulso.js — `{ device:{ name:'Pulso Band 4', lastSync:'2026-10-10T23:41:31' }, steps:[{date, value}], sleep:[{date, hours, quality}], heart:{ '2026-10-10':[['22:00',84],...] }, events:[{ at, kind:'fall'|'disconnect'|'high-hr'|..., title, text }] }`
 ### bora.js (corridas) — `{ trips:[{ id, at, from:{name,lat,lng}, to:{name,lat,lng}, driver:{name, car, plate, rating}, price, minutes, km, payment }] }`
-### config.js (Configurações) — `{ wifi:{ saved:[{ssid, lastConnected, security}], log:[{at, ssid, event:'conectado'|'desconectado'}] }, bluetooth:{ devices:[{name, kind, lastConnected, connected}], log:[{at, device, event}] }, security:{ unlockLog:[{at, method:'Digital'|'PIN'|'Padrão', note?}] }, notifications:{ historyEnabled:true, history:[{at, app, title, text}] }, battery:{ level:41, log:[{at, level, event}] }, accounts:[{ service, email }], devices:[{ name, place, lastActive, current, note }], apps:[{ name, size, lastUsed }], about:[[k,v]] }`
+### configuracoes.js (Configurações) — `{ wifi:{ saved:[{ssid, lastConnected, security}], log:[{at, ssid, event:'conectado'|'desconectado'}] }, bluetooth:{ devices:[{name, kind, lastConnected, connected}], log:[{at, device, event}] }, security:{ unlockLog:[{at, method:'Digital'|'PIN'|'Padrão', note?}] }, notifications:{ historyEnabled:true, history:[{at, app, title, text}] }, battery:{ level:41, log:[{at, level, event}] }, accounts:[{ service, email }], devices:[{ name, place, lastActive, current, note }], apps:[{ name, size, lastUsed }], about:[[k,v]] }`
 ### arquivos.js — `{ files:[{ id, name, folder:'Downloads'|'Documentos'|'segura', type:'pdf'|'xlsx'|'txt'|'docx'|'m4a'|'jpg', size, at, pages:[{ blocks:[{type:'h1'|'h2'|'p'|'li'|'table'|'highlight'|'sign', text, rows }] }], req }] }`
 ### eco.js (roteiro do ECO) — ver seção 8.
 ### terms.js, chapters.js, puzzles.js, answers.js, news.js, endings.js — ver seções 8 e 9 (núcleo/autor do caso).
