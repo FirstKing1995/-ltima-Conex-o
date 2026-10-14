@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Última Conexão</title>
+<style>
+  :root { --bg:#07080a; --fg:#e9e4da; --mut:#7d828b; --acc:#d6b46a; }
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,Consolas,monospace}
+  main{min-height:100%;display:grid;place-items:center;padding:24px;box-sizing:border-box;text-align:center}
+  h1{font:600 clamp(28px,7vw,56px)/1.05 Georgia,serif;letter-spacing:.02em;margin:0 0 12px}
+  p{color:var(--mut);margin:6px 0}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--acc);margin-right:8px;animation:p 1.4s infinite}
+  @keyframes p{50%{opacity:.2}}
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <h1>Última Conexão</h1>
+    <p><span class="dot"></span>visto por último: sábado, 23:47</p>
+    <p>Em construção.</p>
+  </div>
+</main>
+</body>
+</html>
