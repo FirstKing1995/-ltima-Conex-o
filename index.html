@@ -2,25 +2,50 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#07080a">
+<meta name="color-scheme" content="dark">
 <title>Última Conexão</title>
-<style>
-  :root { --bg:#07080a; --fg:#e9e4da; --mut:#7d828b; --acc:#d6b46a; }
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,Consolas,monospace}
-  main{min-height:100%;display:grid;place-items:center;padding:24px;box-sizing:border-box;text-align:center}
-  h1{font:600 clamp(28px,7vw,56px)/1.05 Georgia,serif;letter-spacing:.02em;margin:0 0 12px}
-  p{color:var(--mut);margin:6px 0}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--acc);margin-right:8px;animation:p 1.4s infinite}
-  @keyframes p{50%{opacity:.2}}
-</style>
+<meta name="description" content="Ela mandou a última mensagem para o número errado. O seu. Um jogo de investigação no celular de uma fotógrafa que morreu na Serra da Ibiapaba.">
+<meta property="og:title" content="Última Conexão">
+<meta property="og:description" content="Ela mandou a última mensagem para o número errado. O seu.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080a'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%23d6b46a'/%3E%3Cpath d='M14 32a18 18 0 0 1 36 0' stroke='%23d6b46a' stroke-width='4' fill='none' stroke-linecap='round' opacity='.6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/phone.css">
+<link rel="stylesheet" href="css/overlay.css">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/apps/papo.css">
+<link rel="stylesheet" href="css/apps/sms.css">
+<link rel="stylesheet" href="css/apps/telefone.css">
+<link rel="stylesheet" href="css/apps/galeria.css">
+<link rel="stylesheet" href="css/apps/rotas.css">
+<link rel="stylesheet" href="css/apps/lume.css">
+<link rel="stylesheet" href="css/apps/navegador.css">
+<link rel="stylesheet" href="css/apps/correio.css">
+<link rel="stylesheet" href="css/apps/jandaia.css">
+<link rel="stylesheet" href="css/apps/notas.css">
+<link rel="stylesheet" href="css/apps/agenda.css">
+<link rel="stylesheet" href="css/apps/relogio.css">
+<link rel="stylesheet" href="css/apps/gravador.css">
+<link rel="stylesheet" href="css/apps/pulso.css">
+<link rel="stylesheet" href="css/apps/bora.css">
+<link rel="stylesheet" href="css/apps/configuracoes.css">
+<link rel="stylesheet" href="css/apps/arquivos.css">
+<link rel="stylesheet" href="css/apps/extras.css">
+<script src="vendor/leaflet/leaflet.js" defer></script>
 </head>
 <body>
-<main>
-  <div>
-    <h1>Última Conexão</h1>
-    <p><span class="dot"></span>visto por último: sábado, 23:47</p>
-    <p>Em construção.</p>
+  <div id="stage" class="stage" data-mode="boot">
+    <header id="inv-bar" class="inv-bar" aria-label="Ferramentas do investigador"></header>
+    <aside id="eco-panel" class="side side-left" aria-label="Canal do ECO"></aside>
+    <main id="phone-wrap" class="phone-wrap">
+      <div id="phone" class="phone" aria-label="Celular de Iara"></div>
+    </main>
+    <aside id="board-panel" class="side side-right" aria-label="Quadro de investigação"></aside>
   </div>
-</main>
+  <div id="overlay-root"></div>
+  <noscript><p style="color:#eee;font-family:sans-serif;padding:24px">Ative o JavaScript para jogar Última Conexão.</p></noscript>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

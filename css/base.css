@@ -1,0 +1,153 @@
+/* ÚLTIMA CONEXÃO — base: fontes, tokens, palco */
+@font-face { font-family: 'Roboto Flex'; src: url('../assets/fonts/roboto-flex.woff2') format('woff2'); font-weight: 100 1000; font-display: swap; }
+@font-face { font-family: 'Fraunces'; src: url('../assets/fonts/fraunces.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'Fraunces'; src: url('../assets/fonts/fraunces-italic.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('../assets/fonts/jetbrains-mono-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('../assets/fonts/jetbrains-mono-700.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Caveat'; src: url('../assets/fonts/caveat-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Caveat'; src: url('../assets/fonts/caveat-700.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+:root {
+  /* palco do investigador */
+  --st-bg: #07080a;
+  --st-bg-2: #0d0f12;
+  --st-bg-3: #14171c;
+  --st-line: #22262d;
+  --st-fg: #e9e4da;
+  --st-mut: #8b8f97;
+  --st-gold: #d6b46a;
+  --st-gold-2: #f0d595;
+  --st-red: #e5484d;
+  --st-green: #3ecf8e;
+  --st-blue: #6ea8ff;
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  --font-ui: 'Roboto Flex', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+
+  /* celular (Android escuro, Material You quente) */
+  --ph-bg: #0b0c0e;
+  --ph-s1: #111214;
+  --ph-s2: #1a1c20;
+  --ph-s3: #23262b;
+  --ph-s4: #2d3036;
+  --ph-line: #2a2d33;
+  --ph-fg: #ecebe8;
+  --ph-mut: #9aa0a6;
+  --ph-dim: #6b7078;
+  --ph-acc: #f2b880;
+  --ph-acc-2: #8fb8ff;
+  --ph-on-acc: #2b1704;
+  --ph-danger: #ff6b6b;
+  --ph-ok: #5bd68a;
+  --ph-radius: 22px;
+
+  --inv-bar-h: 46px;
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --t-fast: 160ms;
+  --t-med: 240ms;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bot: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--st-bg);
+  color: var(--st-fg);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--st-gold); outline-offset: 2px; }
+input, textarea, select { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.ic { flex: none; display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[hidden] { display: none !important; }
+
+/* grão de filme no palco */
+.stage::before {
+  content: ''; position: fixed; inset: -50%; pointer-events: none; z-index: 0; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== PALCO ===== */
+.stage {
+  position: relative;
+  height: 100dvh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 420px) 1fr;
+  grid-template-rows: 100%;
+  background:
+    radial-gradient(1200px 700px at 50% 120%, rgba(214,180,106,.08), transparent 60%),
+    radial-gradient(900px 500px at 15% -10%, rgba(110,168,255,.05), transparent 60%),
+    var(--st-bg);
+}
+.stage[data-mode="boot"] > *:not(#phone-wrap) { visibility: hidden; }
+.phone-wrap { grid-column: 2; position: relative; z-index: 1; display: grid; place-items: center; padding: 18px 0; min-height: 0; }
+.side { position: relative; z-index: 2; min-width: 0; min-height: 0; overflow: hidden; }
+.side-left { grid-column: 1; }
+.side-right { grid-column: 3; }
+.inv-bar { display: none; }
+
+/* desktop largo: 3 colunas */
+@media (min-width: 1180px) {
+  .stage { grid-template-columns: minmax(320px, 380px) minmax(380px, 1fr) minmax(360px, 440px); }
+  .side { padding: 18px; }
+  .side-left { padding-right: 0; }
+  .side-right { padding-left: 0; }
+  .side > .panel { height: 100%; }
+}
+
+/* tablet/desktop estreito: gavetas */
+@media (max-width: 1179px) {
+  .stage { grid-template-columns: 1fr; grid-template-rows: var(--inv-bar-h) 1fr; }
+  .inv-bar { display: flex; grid-row: 1; grid-column: 1; }
+  .phone-wrap { grid-row: 2; grid-column: 1; padding: 12px 0; }
+  .side { position: fixed; top: var(--inv-bar-h); bottom: 0; width: min(420px, 100vw); z-index: 40;
+          transition: transform var(--t-med) var(--ease), visibility var(--t-med); visibility: hidden; }
+  .side-left { left: 0; transform: translateX(-102%); }
+  .side-right { right: 0; transform: translateX(102%); }
+  .side.open { transform: none; visibility: visible; }
+  .side > .panel { height: 100%; border-radius: 0; }
+  .scrim { position: fixed; inset: var(--inv-bar-h) 0 0 0; background: rgba(0,0,0,.55); z-index: 35; opacity: 0; pointer-events: none; transition: opacity var(--t-med); }
+  .scrim.on { opacity: 1; pointer-events: auto; }
+}
+
+/* celular de verdade: o celular de Iara ocupa a tela */
+@media (max-width: 759px) {
+  .phone-wrap { padding: 0; place-items: stretch; }
+  .side { width: 100vw; }
+}
+
+/* ===== BARRA DO INVESTIGADOR (mobile/tablet) ===== */
+.inv-bar {
+  align-items: center; gap: 6px; padding: 0 8px; padding-top: var(--safe-top);
+  height: calc(var(--inv-bar-h) + var(--safe-top));
+  background: linear-gradient(#0a0b0d, #07080a); border-bottom: 1px solid var(--st-line);
+  position: relative; z-index: 50; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em;
+}
+.inv-bar .brand { display: flex; align-items: center; gap: 8px; color: var(--st-gold); font-weight: 700; text-transform: uppercase; margin-right: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.inv-bar .brand .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--st-red); box-shadow: 0 0 10px var(--st-red); animation: pulse 1.6s infinite; }
+.inv-btn { position: relative; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px; border-radius: 10px; color: var(--st-fg); border: 1px solid var(--st-line); background: var(--st-bg-2); }
+.inv-btn[aria-pressed="true"] { border-color: var(--st-gold); color: var(--st-gold); background: rgba(214,180,106,.1); }
+.inv-btn .lbl { font-size: 11px; }
+.inv-btn .badge-dot { position: absolute; top: -4px; right: -4px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--st-red); color: #fff; font-size: 10px; display: grid; place-items: center; font-family: var(--font-ui); font-weight: 700; }
+@media (max-width: 420px) { .inv-btn .lbl { display: none; } }
+
+@keyframes pulse { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; } }
+
+/* painel genérico dos lados (ECO / Quadro) */
+.panel { background: rgba(13,15,18,.92); border: 1px solid var(--st-line); border-radius: 18px; display: flex; flex-direction: column; overflow: hidden; backdrop-filter: blur(6px); }
+.panel-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--st-line); }
+.panel-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--st-gold); }
+.panel-body { flex: 1; min-height: 0; overflow: auto; }
