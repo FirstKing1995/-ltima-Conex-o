@@ -1,1 +1,58 @@
-/* estilos do app agenda */
+/* Agenda — a agenda de Iara. Identidade azul (--ph-acc-2); cada compromisso traz --c (cor) e a tela dele --ag-c. Prefixo: .ag- */
+.app-agenda, .ag-screen { --ag-b: var(--ph-acc-2, #8fb8ff); }
+.ag-nav:disabled { opacity: .28; pointer-events: none; }
+
+/* ---------- mês ---------- */
+.ag-cal { margin: 2px 10px 0; padding: 4px 4px 8px; border-radius: 26px; background: var(--ph-s2); }
+.ag-dow { display: grid; grid-template-columns: repeat(7, 1fr); padding: 10px 0 2px; text-align: center; font-size: 12px; font-weight: 600; color: var(--ph-mut); }
+.ag-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; }
+.ag-day { position: relative; height: 50px; display: flex; flex-direction: column; align-items: center; padding-top: 4px; color: var(--ph-fg); border-radius: 14px; }
+.ag-day.out { color: var(--ph-dim); opacity: .42; pointer-events: none; }
+.ag-n { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 14.5px; font-variant-numeric: tabular-nums; transition: background var(--t-fast), box-shadow var(--t-fast); }
+.ag-day.has .ag-n { font-weight: 600; }
+.ag-day.today .ag-n { background: var(--ag-b); color: #0b1a33; font-weight: 700; }
+.ag-day.sel:not(.today) .ag-n { box-shadow: inset 0 0 0 2px var(--ag-b); }
+.ag-day.sel.today .ag-n { box-shadow: 0 0 0 3px rgba(143, 184, 255, .32); }
+.ag-day:active .ag-n { background: rgba(143, 184, 255, .22); }
+.ag-dots { position: absolute; bottom: 4px; left: 0; right: 0; display: flex; justify-content: center; gap: 3px; height: 5px; }
+.ag-dots i { width: 5px; height: 5px; border-radius: 50%; }
+
+/* ---------- programação ---------- */
+.ag-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0; padding: 20px 20px 8px; font-size: 18px; font-weight: 600; }
+.ag-h small { font-size: 12.5px; font-weight: 400; color: var(--ph-mut); text-align: right; }
+.ag-none { margin: 4px 14px; padding: 20px; border-radius: 18px; background: var(--ph-s2); color: var(--ph-mut); display: flex; align-items: center; gap: 12px; font-size: 14px; }
+.ag-group { display: grid; grid-template-columns: 50px minmax(0, 1fr); gap: 10px; padding: 6px 14px; border-radius: 16px; scroll-margin: 70px; }
+.ag-group.flash { animation: ag-flash 1.5s var(--ease); }
+@keyframes ag-flash { 0% { background: rgba(143, 184, 255, .24); } 100% { background: transparent; } }
+.ag-gd { display: flex; flex-direction: column; align-items: center; padding-top: 5px; }
+.ag-gd small { font-size: 11px; letter-spacing: .08em; color: var(--ph-mut); font-weight: 600; }
+.ag-gd b { font-size: 22px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.ag-gd em { margin-top: 3px; padding: 1px 7px; border-radius: 8px; font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #0b1a33; background: var(--ag-b); }
+.ag-group.today .ag-gd b { color: var(--ag-b); }
+.ag-gl { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ag-ev { display: flex; align-items: stretch; width: 100%; text-align: left; border-radius: 16px; overflow: hidden; color: var(--ph-fg); background: color-mix(in srgb, var(--c) 15%, var(--ph-s2)); transition: transform var(--t-fast) var(--ease); }
+.ag-ev:active { transform: scale(.985); }
+.ag-bar { width: 5px; flex: none; background: var(--c); }
+.ag-et { display: flex; flex-direction: column; gap: 2px; padding: 10px 14px 10px 12px; min-width: 0; }
+.ag-et b { font-size: 15px; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.ag-tm { font-size: 13px; color: color-mix(in srgb, var(--c) 72%, #fff); font-variant-numeric: tabular-nums; }
+.ag-pl { display: flex; align-items: flex-start; gap: 5px; font-size: 12.5px; line-height: 1.35; color: var(--ph-mut); }
+.ag-pl .ic { flex: none; margin-top: 1px; }
+.ag-yl { padding: 0 14px 4px; display: flex; flex-direction: column; gap: 8px; }
+.ag-end { height: 104px; }
+
+/* ---------- o compromisso ---------- */
+.ph-screen.ag-screen { --ag-bg: color-mix(in srgb, var(--ag-c) 17%, #121316); background: var(--ag-bg); }
+.ag-screen .k-appbar { background: var(--ag-bg); }
+.ag-view { padding: 4px 20px 36px; }
+.ag-vh { display: flex; align-items: flex-start; gap: 14px; margin: 6px 0 20px; }
+.ag-dot { flex: none; width: 18px; height: 18px; margin-top: 8px; border-radius: 6px; background: var(--ag-c); }
+.ag-vh h1 { margin: 0; font-size: 25px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.ag-row { display: flex; gap: 16px; padding: 12px 0; }
+.ag-ric { flex: none; width: 24px; padding-top: 1px; color: var(--ph-mut); }
+.ag-rt { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ag-rt b { font-size: 16px; font-weight: 500; line-height: 1.35; }
+.ag-rt small { font-size: 13px; color: var(--ph-mut); }
+.ag-notes { white-space: pre-wrap; font-size: 15.5px; line-height: 1.55; overflow-wrap: anywhere; }
+.ag-bottom { position: sticky; bottom: 0; display: flex; justify-content: center; padding: 26px 16px 14px; background: linear-gradient(180deg, transparent, var(--ag-bg) 48%); pointer-events: none; }
+.ag-bottom > * { pointer-events: auto; }

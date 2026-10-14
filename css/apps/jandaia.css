@@ -1,1 +1,114 @@
-/* estilos do app jandaia */
+/* Jandaia — o banco de Iara. Verde #1f9d6b + amarelo #f2c94c, em tema escuro. Prefixo: .ja- */
+.app-jandaia, .ja-screen {
+  --ja-g: #1f9d6b; --ja-gd: #0d3629; --ja-gm: #14573f; --ja-y: #f2c94c; --ja-in: #55d894;
+}
+/* a faixa da barra de status herda o verde do topo */
+.ph-screen.app-jandaia, .ph-screen.ja-screen { background: linear-gradient(var(--ja-gd) 0 34px, var(--ph-s1) 34px); }
+
+/* ---------- topo: saudação e saldo ---------- */
+.ja-hero {
+  position: relative; padding: 0 18px 66px; color: #e9fbf1;
+  background:
+    radial-gradient(80% 80% at 104% 78%, rgba(242, 201, 76, .17), transparent 62%),
+    linear-gradient(180deg, var(--ja-gd), var(--ja-gm));
+  border-radius: 0 0 30px 30px;
+}
+.ja-top { display: flex; align-items: center; gap: 8px; min-height: 56px; margin: 0 -10px 2px -12px; }
+.ja-top .ja-back { color: #e9fbf1; }
+.ja-brand { display: flex; align-items: center; gap: 9px; }
+.ja-brand b { font-size: 17px; font-weight: 700; letter-spacing: .01em; }
+.ja-sp { flex: 1; }
+.ja-logo { width: 30px; height: 30px; flex: none; border-radius: 10px; background: var(--ja-g); display: grid; place-items: center; overflow: hidden; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .16); }
+.ja-logo svg { width: 100%; height: 100%; display: block; }
+.ja-hello { font-size: 25px; font-weight: 600; letter-spacing: -.01em; }
+.ja-acct { font-size: 13px; color: rgba(233, 251, 241, .72); margin-top: 2px; }
+.ja-bal-l { display: flex; align-items: center; gap: 4px; margin-top: 20px; font-size: 13.5px; color: rgba(233, 251, 241, .82); }
+.ja-eye { width: 36px; height: 36px; margin: -6px 0; border-radius: 50%; display: grid; place-items: center; color: #e9fbf1; }
+.ja-eye:active { background: rgba(255, 255, 255, .14); }
+.ja-bal { display: flex; align-items: baseline; gap: 7px; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.ja-cur { font-size: 20px; font-weight: 500; color: var(--ja-y); }
+.ja-num { font-size: 40px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+
+/* ---------- atalhos ---------- */
+.ja-quick {
+  position: relative; z-index: 1; margin: -46px 14px 0; padding: 14px 6px 12px; border-radius: 24px; background: var(--ph-s2);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .38), inset 0 0 0 1px rgba(255, 255, 255, .04);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.ja-qk { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 2px 0; font-size: 13px; font-weight: 500; color: var(--ph-fg); }
+.ja-qk-ic { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: rgba(31, 157, 107, .2); color: var(--ja-y); box-shadow: inset 0 0 0 1px rgba(242, 201, 76, .16); transition: transform var(--t-fast), background var(--t-fast); }
+.ja-qk:active .ja-qk-ic { transform: scale(.92); background: rgba(31, 157, 107, .36); }
+
+.ja-limit { margin: 12px 14px 0; width: calc(100% - 28px); padding: 12px 14px; border-radius: 18px; background: var(--ph-s2); display: flex; align-items: center; gap: 12px; text-align: left; color: var(--ph-fg); }
+.ja-limit-ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(242, 201, 76, .14); color: var(--ja-y); flex: none; }
+.ja-limit-t { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ja-limit-t b { font-size: 14.5px; font-weight: 600; }
+.ja-limit-t small { font-size: 12.5px; color: var(--ph-mut); }
+.ja-limit-v { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------- extrato ---------- */
+.ja-ext { padding: 8px 0 44px; }
+.ja-ext-h { padding: 14px 18px 0; }
+.ja-ext-h h2 { margin: 0; font-size: 20px; font-weight: 600; }
+.ja-chips { padding: 2px 14px 6px; }
+.ja-day { margin: 14px 18px 6px; font-size: 13px; font-weight: 600; color: var(--ph-mut); letter-spacing: .01em; }
+.ja-grp { margin: 0 14px; border-radius: 20px; background: var(--ph-s2); overflow: hidden; }
+.ja-row { width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 13px 14px; text-align: left; color: var(--ph-fg); transition: background var(--t-fast); }
+.ja-row + .ja-row { border-top: 1px solid var(--ph-line); }
+.ja-row:active { background: rgba(255, 255, 255, .05); }
+.ja-ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--ph-s3); color: var(--ph-mut); }
+.ja-row.in .ja-ic { background: rgba(85, 216, 148, .15); color: var(--ja-in); }
+.ja-row.dev .ja-ic { background: rgba(242, 201, 76, .15); color: var(--ja-y); }
+.ja-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.ja-t { font-size: 14.5px; font-weight: 600; }
+.ja-p { font-size: 13px; color: var(--ph-mut); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ja-d { font-size: 12.5px; color: var(--ph-dim); font-style: italic; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ja-val { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-variant-numeric: tabular-nums; }
+.ja-val b { font-size: 14.5px; font-weight: 600; white-space: nowrap; }
+.ja-row.in .ja-val b { color: var(--ja-in); }
+.ja-row.cc .ja-val b { color: var(--ph-mut); font-weight: 500; }
+.ja-val small { font-size: 12px; color: var(--ph-mut); white-space: nowrap; }
+
+/* ---------- comprovante (papel serrilhado) ---------- */
+.ph-screen.ja-rcpt-screen { background: #0a281d; }
+.ja-rcpt-screen .k-appbar { background: #0a281d; }
+.ja-rwrap { padding: 6px 14px 40px; }
+.ja-ticket-shadow { filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .5)); }
+.ja-ticket {
+  --n: 7px;
+  background: #f8f6ef; color: #17231d;
+  -webkit-mask:
+    radial-gradient(circle var(--n) at 50% 0, #0000 97%, #000) top / calc(var(--n) * 2.6) 52% repeat-x,
+    radial-gradient(circle var(--n) at 50% 100%, #0000 97%, #000) bottom / calc(var(--n) * 2.6) 52% repeat-x;
+  mask:
+    radial-gradient(circle var(--n) at 50% 0, #0000 97%, #000) top / calc(var(--n) * 2.6) 52% repeat-x,
+    radial-gradient(circle var(--n) at 50% 100%, #0000 97%, #000) bottom / calc(var(--n) * 2.6) 52% repeat-x;
+}
+.ja-th { display: flex; align-items: center; gap: 9px; padding: 24px 20px 16px; background: linear-gradient(180deg, var(--ja-g), #178558); color: #fff; }
+.ja-th b { font-size: 17px; font-weight: 700; letter-spacing: .01em; }
+.ja-th small { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; opacity: .88; }
+.ja-th .ja-logo { background: rgba(7, 46, 32, .55); }
+.ja-tb { padding: 18px 20px 30px; }
+.ja-tstat { display: flex; align-items: center; gap: 12px; }
+.ja-ok { width: 34px; height: 34px; border-radius: 50%; background: var(--ja-g); color: #fff; display: grid; place-items: center; flex: none; }
+.ja-tstat b { display: block; font-size: 17px; font-weight: 700; }
+.ja-tstat small { font-size: 12.5px; color: #55645c; }
+.ja-tamt { margin: 14px 0 4px; font-size: 38px; font-weight: 800; letter-spacing: -.02em; color: #0f6b49; font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 7px; }
+.ja-tamt span { font-size: 19px; font-weight: 600; color: #7a8a81; letter-spacing: 0; }
+.ja-twhen { font-size: 13px; color: #55645c; line-height: 1.5; }
+.ja-dash { border: 0; border-top: 1.6px dashed #c5cbc1; margin: 17px 0; }
+.ja-blk { margin: 0 0 15px; }
+.ja-blk:last-child { margin-bottom: 0; }
+.ja-blk h4 { margin: 0 0 5px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: #7f8e85; font-weight: 700; }
+.ja-nm { font-size: 15.5px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+.ja-kv { display: flex; justify-content: space-between; gap: 14px; padding: 3px 0; font-size: 13px; }
+.ja-kv span { color: #66766d; flex: none; }
+.ja-kv b { font-weight: 600; text-align: right; overflow-wrap: anywhere; }
+.ja-id { position: relative; margin: 0 0 11px; padding: 10px 46px 10px 12px; border-radius: 12px; background: #ebe9df; display: flex; flex-direction: column; gap: 3px; }
+.ja-id span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #66766d; font-weight: 700; }
+.ja-id code { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.4; word-break: break-all; color: #17231d; user-select: text; -webkit-user-select: text; }
+.ja-id em { font-style: normal; font-size: 12px; color: #66766d; }
+.ja-copy { position: absolute; right: 6px; top: 6px; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #3f5047; }
+.ja-copy:active { background: rgba(0, 0, 0, .08); }
+.ja-fine { margin: 14px 0 0; font-size: 11.5px; color: #86948b; text-align: center; }
+.ja-pinrow { display: flex; justify-content: center; margin-top: 20px; }

@@ -8,7 +8,7 @@ export function h(tag, props, ...children) {
     for (const [k, v] of Object.entries(props)) {
       if (v === undefined || v === null || v === false) continue;
       if (k === 'class' || k === 'className') el.className = Array.isArray(v) ? v.filter(Boolean).join(' ') : v;
-      else if (k === 'style') { if (typeof v === 'string') el.style.cssText = v; else Object.assign(el.style, v); }
+      else if (k === 'style') { if (typeof v === 'string') el.style.cssText = v; else for (const [sk, sv] of Object.entries(v)) { if (sv === undefined || sv === null) continue; if (sk.startsWith('--')) el.style.setProperty(sk, sv); else el.style[sk] = sv; } }
       else if (k === 'on') { for (const [ev, fn] of Object.entries(v)) if (fn) el.addEventListener(ev, fn); }
       else if (k === 'dataset') Object.assign(el.dataset, v);
       else if (k === 'html') el.innerHTML = v;

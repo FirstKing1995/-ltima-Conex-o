@@ -162,6 +162,7 @@ export const phone = {
 
   /* ---------- modais ---------- */
   _mountModal(el, close) { root.appendChild(el); modals.push({ el, close }); },
+  modal(el, close) { phone._mountModal(el, close); },
   _popModal(close) { const i = modals.findIndex(m => m.close === close); if (i >= 0) modals.splice(i, 1); },
 
   sheet({ title, render }) {

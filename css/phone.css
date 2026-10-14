@@ -290,3 +290,6 @@ mark.term.flash { animation: termflash 600ms; }
 
 /* app ainda em construção */
 .app-wip { padding: 40px 24px; text-align: center; color: var(--ph-mut); }
+
+.ic.inline { display: inline-block; vertical-align: -0.15em; }
+.k-toggle.readonly[disabled] { opacity: 1; }

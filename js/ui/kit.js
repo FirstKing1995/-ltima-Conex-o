@@ -65,9 +65,9 @@ export function avatar({ src = '', name = '', color, size = 40, ring = false, ic
 }
 
 /** Imagem com placeholder se faltar. ratio: '4/3', '1/1'... */
-export function img(src, { alt = '', className = '', ratio, onClick, fit = 'cover' } = {}) {
+export function img(src, { alt = '', className = '', ratio, onClick, fit = 'cover', loading = 'lazy' } = {}) {
   const box = h('div', { class: `k-img ${className}`, style: ratio ? { aspectRatio: ratio } : null });
-  const im = h('img', { src: asset(src), alt, loading: 'lazy', draggable: 'false', style: { objectFit: fit } });
+  const im = h('img', { src: asset(src), alt, loading, draggable: 'false', style: { objectFit: fit } });
   im.addEventListener('error', () => { box.classList.add('missing'); clear(box); box.appendChild(icon('image', { size: 28, stroke: 1.5 })); if (alt) box.title = alt; }, { once: true });
   box.appendChild(im);
   if (onClick) { box.style.cursor = 'pointer'; box.addEventListener('click', onClick); }
@@ -179,7 +179,7 @@ export function imageViewer(images, index = 0) {
     info.append(h('div', { class: 'grab', style: 'width:36px;height:4px;border-radius:2px;background:#666;margin:8px auto' }), h('h4', null, 'Detalhes'), it.desc ? h('div', { class: 'desc txt' }, it.desc) : null, kv(it.info || []));
     if (it.key) GAME?.see(it.key);
     prev.hidden = i === 0; next.hidden = i === images.length - 1;
-    foot.querySelector('.pinwrap')?.replaceWith(h('div', { class: 'pinwrap' }, it.key ? pinButton({ key: it.key, label: it.title || 'Foto', app: 'galeria', detail: it.subtitle }) : null));
+    foot.querySelector('.pinwrap')?.replaceWith(h('div', { class: 'pinwrap' }, it.key ? pinButton({ key: it.key, label: it.title || 'Foto', app: it.app || 'galeria', detail: it.subtitle }) : null));
   };
   const prev = h('button', { class: 'navbtn l', 'aria-label': 'Anterior', on: { click: () => { if (i > 0) { i--; show(); } } } }, icon('chevron-left'));
   const next = h('button', { class: 'navbtn r', 'aria-label': 'Próxima', on: { click: () => { if (i < images.length - 1) { i++; show(); } } } }, icon('chevron-right'));

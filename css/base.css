@@ -93,18 +93,18 @@ a { color: inherit; }
 }
 .stage[data-mode="boot"] > *:not(#phone-wrap) { visibility: hidden; }
 .phone-wrap { grid-column: 2; position: relative; z-index: 1; display: grid; place-items: center; padding: 18px 0; min-height: 0; }
-.side { position: relative; z-index: 2; min-width: 0; min-height: 0; overflow: hidden; }
-.side-left { grid-column: 1; }
-.side-right { grid-column: 3; }
+.stage > .side { position: relative; z-index: 2; min-width: 0; min-height: 0; overflow: hidden; }
+.stage > .side-left { grid-column: 1; }
+.stage > .side-right { grid-column: 3; }
 .inv-bar { display: none; }
 
 /* desktop largo: 3 colunas */
 @media (min-width: 1180px) {
   .stage { grid-template-columns: minmax(320px, 380px) minmax(380px, 1fr) minmax(360px, 440px); }
-  .side { padding: 18px; }
-  .side-left { padding-right: 0; }
-  .side-right { padding-left: 0; }
-  .side > .panel { height: 100%; }
+  .stage > .side { padding: 18px; }
+  .stage > .side-left { padding-right: 0; }
+  .stage > .side-right { padding-left: 0; }
+  .stage > .side > .panel { height: 100%; }
 }
 
 /* tablet/desktop estreito: gavetas */
@@ -112,12 +112,12 @@ a { color: inherit; }
   .stage { grid-template-columns: 1fr; grid-template-rows: var(--inv-bar-h) 1fr; }
   .inv-bar { display: flex; grid-row: 1; grid-column: 1; }
   .phone-wrap { grid-row: 2; grid-column: 1; padding: 12px 0; }
-  .side { position: fixed; top: var(--inv-bar-h); bottom: 0; width: min(420px, 100vw); z-index: 40;
+  .stage > .side { position: fixed; top: var(--inv-bar-h); bottom: 0; width: min(420px, 100vw); z-index: 40;
           transition: transform var(--t-med) var(--ease), visibility var(--t-med); visibility: hidden; }
-  .side-left { left: 0; transform: translateX(-102%); }
-  .side-right { right: 0; transform: translateX(102%); }
-  .side.open { transform: none; visibility: visible; }
-  .side > .panel { height: 100%; border-radius: 0; }
+  .stage > .side-left { left: 0; transform: translateX(-102%); }
+  .stage > .side-right { right: 0; transform: translateX(102%); }
+  .stage > .side.open { transform: none; visibility: visible; }
+  .stage > .side > .panel { height: 100%; border-radius: 0; }
   .scrim { position: fixed; inset: var(--inv-bar-h) 0 0 0; background: rgba(0,0,0,.55); z-index: 35; opacity: 0; pointer-events: none; transition: opacity var(--t-med); }
   .scrim.on { opacity: 1; pointer-events: auto; }
 }
@@ -125,7 +125,7 @@ a { color: inherit; }
 /* celular de verdade: o celular de Iara ocupa a tela */
 @media (max-width: 759px) {
   .phone-wrap { padding: 0; place-items: stretch; }
-  .side { width: 100vw; }
+  .stage > .side { width: 100vw; }
 }
 
 /* ===== BARRA DO INVESTIGADOR (mobile/tablet) ===== */

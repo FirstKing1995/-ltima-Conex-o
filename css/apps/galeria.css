@@ -1,1 +1,90 @@
-/* estilos do app galeria */
+/* Galeria — fotos, álbuns, lembranças, Lixeira e Pasta Segura (prefixo gl-) */
+
+.gl-content { padding-bottom: 28px; }
+
+/* ===== grade de fotos por dia ===== */
+.gl-dayhd { margin: 0; padding: 20px 16px 9px; font-size: 14px; font-weight: 600; letter-spacing: .01em; color: var(--ph-fg); }
+.gl-days > .gl-dayhd:first-child { padding-top: 12px; }
+.gl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 2px; padding: 0 2px; }
+.gl-tile { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; background: var(--ph-s3); border-radius: 3px; transition: transform var(--t-fast) var(--ease), filter var(--t-fast); }
+.gl-tile:active { transform: scale(.965); filter: brightness(.85); }
+.gl-tile .k-img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto !important; }
+.gl-vid { position: absolute; left: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 7px 0 6px; border-radius: 10px; background: rgba(10, 10, 12, .66); backdrop-filter: blur(4px); color: #fff; font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; pointer-events: none; }
+.gl-vid .ic { fill: currentColor; }
+
+/* ===== lembranças ===== */
+.gl-memories { display: flex; flex-direction: column; gap: 16px; padding: 14px 14px 28px; }
+.gl-memory { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; border-radius: 30px; overflow: hidden; background: var(--ph-s3); text-align: left; box-shadow: 0 14px 34px rgba(0, 0, 0, .42); transition: transform var(--t-med) var(--ease); }
+.gl-memory:active { transform: scale(.985); }
+.gl-memory .k-img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto !important; }
+.gl-memory-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .38) 0%, transparent 26%, transparent 46%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
+.gl-memory-chip { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px 0 10px; border-radius: 14px; background: rgba(18, 18, 20, .55); backdrop-filter: blur(8px); font-size: 12px; font-weight: 600; letter-spacing: .02em; color: #fff; }
+.gl-memory-in { position: absolute; left: 20px; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: 5px; color: #fff; }
+.gl-memory-in b { font-family: var(--font-serif); font-weight: 500; font-size: 32px; line-height: 1.04; letter-spacing: -.012em; text-shadow: 0 2px 16px rgba(0, 0, 0, .5); }
+.gl-memory-in small { font-size: 13px; color: rgba(255, 255, 255, .82); }
+
+/* ===== álbuns ===== */
+.gl-albums { padding-bottom: 28px; }
+.gl-agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 4px 14px 8px; }
+.gl-album { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 24px; overflow: hidden; background: var(--ph-s2); text-align: left; isolation: isolate; transition: transform var(--t-fast) var(--ease); }
+.gl-album:active { transform: scale(.975); }
+.gl-album.wide { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
+.gl-album .k-img, .gl-album-empty { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto !important; z-index: -1; }
+.gl-album-empty { display: grid; place-items: center; color: var(--ph-dim); background: repeating-linear-gradient(135deg, #1c1e22 0 10px, #202227 10px 20px); }
+.gl-album-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 42%, rgba(0, 0, 0, .72)); pointer-events: none; }
+.gl-album-meta { position: absolute; left: 15px; right: 12px; bottom: 12px; display: flex; flex-direction: column; color: #fff; }
+.gl-album-meta b { font-size: 15.5px; font-weight: 600; text-shadow: 0 1px 8px rgba(0, 0, 0, .55); }
+.gl-album-meta small { font-size: 12.5px; color: rgba(255, 255, 255, .78); }
+
+.gl-special-bg { position: absolute; inset: 0; z-index: -1; display: grid; place-items: center; padding-bottom: 22px; }
+.gl-card-safe .gl-special-bg { background: radial-gradient(120% 95% at 28% 18%, #43388a 0%, #211c45 52%, #120f26 100%); color: #d8cbff; }
+.gl-card-safe.is-open .gl-special-bg { background: radial-gradient(120% 95% at 28% 18%, #2c7f5f 0%, #17402f 55%, #0d231b 100%); color: #cff5df; }
+.gl-card-trash .gl-special-bg { background: linear-gradient(160deg, #31343a, #1b1d21); color: #8f949c; }
+
+/* ===== telas empilhadas (álbum, lixeira, pasta) ===== */
+.gl-banner { display: flex; gap: 12px; align-items: flex-start; margin: 8px 14px 14px; padding: 13px 15px; border-radius: 18px; background: var(--ph-s2); color: var(--ph-mut); }
+.gl-banner .ic { margin-top: 1px; color: var(--ph-acc); }
+.gl-banner b { display: block; color: var(--ph-fg); font-weight: 500; font-size: 14.5px; }
+.gl-banner small { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.35; }
+.gl-tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 10px; padding: 0 14px 28px; }
+.gl-tcell { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.gl-tthumb { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; background: var(--ph-s3); }
+.gl-tthumb .k-img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto !important; filter: grayscale(.4) brightness(.82); }
+.gl-tinfo { display: flex; flex-direction: column; gap: 2px; padding: 0 3px; }
+.gl-tinfo b { display: flex; align-items: flex-start; gap: 5px; font-size: 12.5px; font-weight: 500; line-height: 1.28; }
+.gl-tinfo b .ic { margin-top: 1px; color: var(--ph-danger); }
+.gl-tinfo small { font-size: 11.5px; color: var(--ph-mut); }
+
+/* ===== Pasta Segura: estados ===== */
+.gl-gate { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px 30px 44px; gap: 12px; }
+.gl-gate h2 { margin: 6px 0 0; font-size: 26px; font-weight: 400; letter-spacing: -.005em; }
+.gl-gate-msg { margin: 0; max-width: 290px; font-size: 15.5px; line-height: 1.45; color: var(--ph-fg); }
+.gl-gate-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ph-dim); }
+.gl-gate .k-btn { margin-top: 10px; height: 48px; padding: 0 28px; border-radius: 24px; }
+
+.gl-lockart { position: relative; width: 140px; height: 140px; display: grid; place-items: center; margin: 4px 0 6px; }
+.gl-lockring { position: absolute; inset: 0; border-radius: 50%; border: 2px dashed rgba(203, 184, 255, .36); animation: gl-spin 16s linear infinite; }
+.gl-lockring.r2 { inset: 14px; border-style: solid; border-color: rgba(203, 184, 255, .13); border-top-color: #cbb8ff; animation-duration: 8s; animation-direction: reverse; }
+.gl-lockcore { position: relative; width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 28%, #5242a3, #271f52); color: #eae2ff; box-shadow: 0 12px 34px rgba(70, 48, 160, .5), inset 0 0 0 1px rgba(255, 255, 255, .09); }
+.gl-lockart.opening .gl-lockcore { background: radial-gradient(circle at 35% 28%, #32a077, #17503c); color: #dcffee; box-shadow: 0 12px 34px rgba(40, 160, 110, .45), inset 0 0 0 1px rgba(255, 255, 255, .1); animation: gl-pop 600ms var(--ease); }
+.gl-lockart.opening .gl-lockring { border-color: rgba(120, 230, 170, .5); border-top-color: #7ee8b0; animation-duration: 1.6s; }
+
+.gl-cipher { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; padding: 11px 16px; border-radius: 14px; background: rgba(214, 180, 106, .06); border: 1px solid rgba(214, 180, 106, .17); font-family: var(--font-mono); font-size: 12px; letter-spacing: .07em; color: rgba(214, 180, 106, .82); }
+
+.gl-hint { position: relative; margin: 10px 0 6px; max-width: 292px; padding: 14px 20px 18px; text-align: left; background: #f4e4a1; color: #3a2e0f; border-radius: 4px 4px 22px 4px; transform: rotate(-1.4deg); box-shadow: 0 14px 28px rgba(0, 0, 0, .45), inset 0 -22px 30px rgba(190, 150, 40, .12); }
+.gl-hint::before { content: ''; position: absolute; top: -9px; left: 50%; width: 64px; height: 18px; margin-left: -32px; background: rgba(255, 255, 255, .32); transform: rotate(2deg); }
+.gl-hint small { display: block; margin-bottom: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #86691a; }
+.gl-hint p { margin: 0; font-family: var(--font-hand); font-size: 27px; line-height: 1.06; }
+
+/* ===== Pasta Segura: aberta ===== */
+.gl-safe { padding-bottom: 28px; }
+.gl-safehead { display: flex; align-items: center; gap: 13px; margin: 10px 14px 4px; padding: 13px 15px; border-radius: 20px; background: rgba(91, 214, 138, .1); border: 1px solid rgba(91, 214, 138, .26); }
+.gl-safeico { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none; background: rgba(91, 214, 138, .2); color: var(--ph-ok); }
+.gl-safehead b { display: block; font-size: 15.5px; font-weight: 600; }
+.gl-safehead small { display: block; margin-top: 1px; color: var(--ph-mut); font-size: 12.5px; }
+
+@keyframes gl-spin { to { transform: rotate(360deg); } }
+@keyframes gl-pop { 0% { transform: scale(.82); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .gl-lockring, .gl-lockart.opening .gl-lockcore { animation: none !important; }
+}

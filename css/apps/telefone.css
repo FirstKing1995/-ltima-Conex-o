@@ -1,1 +1,99 @@
-/* estilos do app telefone */
+/* ÚLTIMA CONEXÃO — app Telefone. Seletores prefixados: .app-telefone, .tel-detail */
+
+.app-telefone, .tel-detail {
+  --tl-green: #34c27a;
+  --tl-green-soft: #7be3ab;
+  --tl-green-ink: #04210f;
+}
+
+.app-telefone .k-appbar .ttl h1 { font-weight: 600; }
+.app-telefone .k-tabs { padding: 0 8px; }
+.app-telefone .k-tab { flex: 1; justify-content: center; }
+.app-telefone .k-tab.on { color: var(--tl-green-soft); border-bottom-color: var(--tl-green); }
+.app-telefone .k-badge { background: var(--tl-green); color: var(--tl-green-ink); }
+.app-telefone .k-chip.on { background: rgba(52,194,122,.18); color: var(--tl-green-soft); }
+.app-telefone .k-search { margin: 10px 14px 6px; background: #1c1f24; }
+
+/* ===== Recentes ===== */
+.tl-call .k-title { font-size: 16px; }
+.tl-call.missed .k-title { color: var(--ph-danger); }
+.tl-call.blocked { opacity: .62; }
+.tl-sub { display: inline; }
+.tl-sub .ic { display: inline-block; vertical-align: -2px; margin-right: 5px; }
+.tl-dir.in { color: var(--tl-green-soft); }
+.tl-dir.out { color: #8fb8ff; }
+.tl-dir.missed { color: var(--ph-danger); }
+.tl-dir.blocked { color: var(--ph-mut); }
+.tl-when { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; font-size: 12px; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.tl-call.missed .tl-when { color: #ff9d92; }
+
+/* ===== Contatos ===== */
+.tc-me { display: flex; align-items: center; gap: 14px; width: calc(100% - 28px); margin: 4px 14px 6px; padding: 10px 14px 10px 10px; border-radius: 22px; background: var(--ph-s2); text-align: left; }
+.tc-me:active { background: var(--ph-s3); }
+.tc-me .who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.tc-me small { font-size: 11.5px; font-weight: 600; letter-spacing: .04em; color: var(--tl-green-soft); }
+.tc-me b { font-size: 15.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tc-me .who > span { font-size: 13px; color: var(--ph-mut); }
+.tc-me > .ic { color: var(--ph-dim); flex: none; }
+.tc-favs { display: flex; gap: 14px; padding: 4px 16px 8px; overflow-x: auto; scrollbar-width: none; }
+.tc-favs::-webkit-scrollbar { display: none; }
+.tc-favs .fav { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 64px; flex: none; font-size: 12px; }
+.tc-favs .fav span { max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tc-letter { padding: 14px 20px 2px; font-size: 14px; font-weight: 600; color: var(--tl-green-soft); }
+.tc-row { min-height: 60px; }
+.tc-row .k-title { font-size: 15.5px; }
+.tc-blk { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 10px; background: rgba(255,107,107,.15); color: var(--ph-danger); font-size: 11.5px; font-weight: 600; }
+.tc-count { margin: 16px 0 30px; text-align: center; font-size: 12.5px; color: var(--ph-dim); }
+
+/* ===== detalhe (contato / chamada) ===== */
+.td-hero { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 20px 14px; text-align: center; }
+.td-hero.tinted { background: linear-gradient(180deg, color-mix(in srgb, var(--c, #3a3d44) 30%, var(--ph-s1)), var(--ph-s1) 92%); }
+.td-hero h2 { margin: 10px 0 0; font-size: 22px; font-weight: 500; line-height: 1.25; overflow-wrap: anywhere; }
+.td-hero p { margin: 0; font-size: 14.5px; color: var(--ph-mut); overflow-wrap: anywhere; }
+.td-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 8px; }
+.td-pill { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; padding: 4px 11px; border-radius: 13px; background: var(--ph-s3); color: var(--ph-mut); font-size: 12px; font-weight: 600; }
+.td-tags .td-pill { margin-top: 0; }
+.td-pill.blocked { background: rgba(255,107,107,.16); color: var(--ph-danger); }
+.td-pill.missed { background: rgba(255,107,107,.14); color: #ff9d92; }
+.td-pill.in { background: rgba(52,194,122,.15); color: var(--tl-green-soft); }
+.td-pill.out { background: rgba(143,184,255,.15); color: #9fc2ff; }
+.td-pill.fav { background: rgba(214,180,106,.16); color: var(--st-gold-2); }
+.td-actions { display: flex; justify-content: center; gap: 26px; padding: 6px 16px 14px; }
+.td-act { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: var(--ph-fg); }
+.td-act .c { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; background: var(--ph-s3); }
+.td-act:active .c { background: var(--ph-s4); }
+.td-act.off { opacity: .45; }
+.td-card { margin: 4px 14px 6px; padding: 4px 0; border-radius: 22px; background: var(--ph-s2); }
+.td-row { display: flex; align-items: flex-start; gap: 14px; padding: 11px 16px; }
+.td-row + .td-row { border-top: 1px solid var(--ph-line); }
+.td-row .i { width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--ph-s3); color: var(--ph-mut); }
+.td-row .v { min-width: 0; display: flex; flex-direction: column; }
+.td-row .v small { font-size: 12px; color: var(--ph-mut); }
+.td-row .v .txt { font-size: 15.5px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.td-row.long .v .txt { font-size: 14.5px; line-height: 1.45; }
+.td-pin { display: flex; justify-content: center; padding: 16px 0 30px; }
+.tel-detail .k-kv { margin-top: 4px; }
+
+/* ===== Caixa postal ===== */
+.tv-intro { display: flex; align-items: center; gap: 7px; margin: 12px 18px 8px; font-size: 12.5px; color: var(--ph-mut); }
+.tv-intro .ic { color: var(--tl-green-soft); }
+.tv-card { margin: 0 12px 10px; border-radius: 22px; background: var(--ph-s2); overflow: hidden; transition: box-shadow var(--t-fast); }
+.tv-card.open { background: #1d2024; }
+.tv-card.unread .tv-head .who b { font-weight: 700; }
+.tv-card.unread .tv-head .who b::after { content: ''; display: inline-block; width: 8px; height: 8px; margin-left: 8px; border-radius: 50%; background: var(--tl-green); vertical-align: 1px; }
+.tv-card.flash { animation: tv-flash 2.4s ease-out; }
+@keyframes tv-flash { 0%, 35% { box-shadow: 0 0 0 3px var(--tl-green), 0 0 24px rgba(52,194,122,.45); } 100% { box-shadow: none; } }
+.tv-head { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; text-align: left; }
+.tv-head .who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.tv-head .who b { font-size: 15.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tv-head .who span { font-size: 12.5px; color: var(--ph-mut); margin-top: 2px; }
+.tv-head .dur { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 11px; background: rgba(52,194,122,.14); color: var(--tl-green-soft); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tv-head .chev { color: var(--ph-dim); transition: transform var(--t-fast); }
+.tv-card.open .chev { transform: rotate(180deg); }
+.tv-body { padding: 0 4px 12px; }
+.tv-body .k-audio { background: #14161a; margin: 4px 10px 8px; }
+.tv-body .k-audio .play { background: var(--tl-green); color: var(--tl-green-ink); }
+.tv-body .k-audio .wave i.on { background: var(--tl-green-soft); }
+.tv-trans { margin: 2px 14px 0; padding: 12px 14px; border-radius: 16px; background: #14161a; }
+.tv-trans small { font-size: 11.5px; font-weight: 600; letter-spacing: .05em; color: var(--tl-green-soft); text-transform: uppercase; }
+.tv-trans p { margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; white-space: pre-wrap; }
