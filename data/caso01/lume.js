@@ -1,7 +1,7 @@
 // Lume — rede social de Iara (nuvem: continua até ter 13/10, 23:12). Imagens em assets/caso01/img/.
 
 const IMG = (n) => `assets/caso01/img/${n}.jpg`;
-const AV = (n) => `assets/caso01/avatars/${n}.svg`;
+const AV = (n) => `assets/caso01/avatars/${n}.jpg`;
 const c = (id, author, at, text, likes = 0) => ({ id, author, at, text, likes });
 const prof = (handle, name, bio, followers, following, extra = {}) => ({ handle, name, bio, avatar: '', followers, following, verified: false, private: false, ...extra });
 

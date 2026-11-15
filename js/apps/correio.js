@@ -145,7 +145,7 @@ export default {
     input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(draw, 100); });
     const menuBtn = h('button', { class: 'cr-menubtn', 'aria-label': 'Abrir pastas', on: { click: () => openDrawer() } }, icon('menu', { size: 22 }));
     const pill = h('div', { class: 'cr-search', on: { click: (e) => { if (!e.target.closest('button')) input.focus(); } } }, menuBtn, input,
-      kit.avatar({ src: 'assets/caso01/avatars/iara.svg', name: 'Iara', color: '#e25b45', size: 34 }));
+      kit.avatar({ src: 'assets/caso01/avatars/iara.jpg', name: 'Iara', color: '#e25b45', size: 34 }));
     const newChips = () => kit.chips({ items: [{ id: 'all', label: 'Tudo' }, { id: 'unread', label: 'Não lidas', icon: 'mail' }, { id: 'att', label: 'Com anexo', icon: 'paperclip' }], active: 'all', onChange: (id) => { filter = id; draw(); } });
     let chipsEl = newChips();
     const top = h('div', { class: 'cr-top-sticky' }, pill, chipsEl);

@@ -176,7 +176,7 @@ export default {
 
   // Dossiês (aba Pessoas do Quadro). Fatos aparecem quando o req fica verdadeiro.
   people: [
-    { id: 'iara', name: 'Iara Fontenele', role: 'a vítima', avatar: 'assets/caso01/avatars/iara.svg', facts: [
+    { id: 'iara', name: 'Iara Fontenele', role: 'a vítima', avatar: 'assets/caso01/avatars/iara.jpg', facts: [
       { text: 'Fotógrafa e videomaker, 27 anos. Nasceu em Guaraciaba do Norte, estudou em Sobral, morava em Fortaleza.' },
       { text: 'Morreu ao cair do Mirante da Pedra Lisa, no Sítio Flor da Serra, na noite de sáb 10/10. Polícia: acidente.' },
       { text: 'Às 23:31 mandou uma mensagem para o SEU número, achando que falava com outra pessoa.', req: 'seen:papo:chat:voce' },
@@ -185,7 +185,7 @@ export default {
       { text: 'Tinha reunião marcada com a jornalista Bruna Leal na segunda, 12/10, às 10h.', req: 'seen:correio:mail:bruna-0510 || seen:correio:mail:bruna-1010' },
       { text: 'Descobriu que a Colheita Capital não tinha fazenda nenhuma.', req: 'pasta_aberta' },
     ] },
-    { id: 'duda', name: 'Duda (Maria Eduarda)', role: 'melhor amiga de infância', avatar: 'assets/caso01/avatars/duda.svg', facts: [
+    { id: 'duda', name: 'Duda (Maria Eduarda)', role: 'melhor amiga de infância', avatar: 'assets/caso01/avatars/duda.jpg', facts: [
       { text: 'Melhor amiga de Iara desde a escola. Consultora da Colheita Capital na serra.', req: 'seen:papo:chat:duda' },
       { text: 'A família dela é dona do Sítio Flor da Serra, onde foi o evento.', req: 'seen:lume:profile:dudaandrade.oficial || seen:papo:chat:equipe-evento' },
       { text: 'Em julho, brincou que sabia o PIN de Iara (o aniversário do Bento).', req: 'seen:papo:chat:duda' },
@@ -195,7 +195,7 @@ export default {
       { text: 'Na live, às 23:38, Caio pergunta no microfone: "Cadê a Duda? Sumiu!"', req: 'seen:lume:post:live-colheita' },
       { text: 'Postou às 23:33 um story com um vídeo de banda tocando.', req: 'seen:lume:highlight:lari-noite' },
     ] },
-    { id: 'rafa', name: 'Rafa Aguiar', role: 'ex-namorado', avatar: 'assets/caso01/avatars/rafa.svg', facts: [
+    { id: 'rafa', name: 'Rafa Aguiar', role: 'ex-namorado', avatar: 'assets/caso01/avatars/rafa.jpg', facts: [
       { text: 'Namorou Iara de 2018 a 2023, em Sobral. Está bloqueado no celular dela.', req: 'seen:papo:chat:rafa || seen:telefone:contact:rafa' },
       { text: 'Vocalista da banda contratada para a Noite da Colheita.', req: 'seen:papo:chat:theo || seen:papo:chat:equipe-evento' },
       { text: 'Mandou SMS de números novos: "linda essa blusa verde" (20:40) e "tu ainda vai se arrepender" (22:31).', req: 'seen:sms:thread:rafa-2' },
@@ -203,14 +203,14 @@ export default {
       { text: 'O perfil @visto.por.ultimo tem telefone de recuperação terminado em 56 — como o número dele.', req: 'seen:lume:recovery:visto.por.ultimo' },
       { text: 'Aparece de chapéu de couro na foto do camarim das 23:39.', req: 'seen:papo:chat:equipe-evento' },
     ] },
-    { id: 'caio', name: 'Caio Montenegro', role: 'CEO da Colheita Capital', avatar: 'assets/caso01/avatars/caio.svg', facts: [
+    { id: 'caio', name: 'Caio Montenegro', role: 'CEO da Colheita Capital', avatar: 'assets/caso01/avatars/caio.jpg', facts: [
       { text: 'Fundador da Colheita Capital: promete 4% ao mês "lastreado em contratos de safra".', req: 'seen:papo:chat:caio || seen:lume:profile:colheitacapital' },
       { text: 'Mandou R$ 20 mil de "bônus" para Iara. Ela devolveu no mesmo dia.', req: 'seen:jandaia:tx:devolucao-2509' },
       { text: 'Lembrou Iara do termo de confidencialidade (08/10).', req: 'seen:papo:chat:caio' },
       { text: '21:15: "Depois do discurso, precisamos conversar. Sem drama."', req: 'seen:papo:chat:caio' },
       { text: 'Fez o discurso ao vivo das 23:30 às 23:52.', req: 'seen:lume:post:live-colheita' },
     ] },
-    { id: 'bruna', name: 'Bruna Leal', role: 'jornalista do O Farol', avatar: 'assets/caso01/avatars/bruna.svg', facts: [
+    { id: 'bruna', name: 'Bruna Leal', role: 'jornalista do O Farol', avatar: 'assets/caso01/avatars/bruna.jpg', facts: [
       { text: 'Repórter investigativa. Só falava com Iara por e-mail.', req: 'seen:correio:mail:bruna-1809 || seen:correio:mail:bruna-2209' },
       { text: 'Telefone na assinatura: (85) 98812-4471.', req: 'seen:correio:mail:bruna-1010' },
     ] },
