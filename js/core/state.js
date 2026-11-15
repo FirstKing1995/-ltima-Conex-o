@@ -22,7 +22,8 @@ function fresh() {
     wrong: 0,         // respostas erradas em deduções
     reportAttempts: 0,
     finalResult: null,
-    eco: { log: [], fired: {}, unread: 0 },
+    eco: { log: [], fired: {}, unread: 0, v: 2 },
+    notes: '',
     achievements: {},
     settings: { sound: true, textSize: 'm', analysis: false },
     apps: {},

@@ -58,7 +58,7 @@ export default {
     const { el, screen, kit, game, phone, data, params = {} } = ctx;
     const NOW = ctx.now || time.MIRROR_NOW;
     const notes = () => (data.notes || []).filter(n => game.req(n));
-    const stub = () => phone.toast('Edição indisponível no espelho', { icon: 'info' });
+    const stub = () => phone.toast('Edição indisponível na extração', { icon: 'info' });
 
     /* ----- subtela: a nota ----- */
     function openNote(n) {
@@ -75,7 +75,7 @@ export default {
           const scr = box.parentElement;
           scr.style.setProperty('--nt-bg', c.bg);
           scr.style.setProperty('--nt-ac', c.ac);
-          box.appendChild(kit.appBar({ title: '', actions: [{ icon: 'share-2', label: 'Compartilhar', onClick: () => phone.toast('Compartilhar indisponível no espelho', { icon: 'info' }) }] }));
+          box.appendChild(kit.appBar({ title: '', actions: [{ icon: 'share-2', label: 'Compartilhar', onClick: () => phone.toast('Compartilhar indisponível na extração', { icon: 'info' }) }] }));
           box.append(
             h('article', { class: 'nt-view' },
               n.title ? h('h1', { class: 'nt-title txt' }, n.title) : null,

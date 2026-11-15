@@ -194,7 +194,7 @@ export default {
         body.appendChild(h('div', { class: 'ar-locked' },
           h('div', { class: 'ar-lockring wait' }, icon('lock', { size: 38, stroke: 1.6 })),
           h('h3', null, 'Pasta Segura'),
-          h('p', { class: 'txt' }, 'O ECO ainda está quebrando a criptografia desta pasta.'),
+          h('p', { class: 'txt' }, 'A extração ainda não conseguiu abrir a criptografia desta pasta.'),
           h('div', { class: 'ar-crack', 'aria-hidden': 'true' }, h('i')),
           h('small', null, 'Isso pode levar algum tempo. Continue investigando.')));
         return;
@@ -249,7 +249,7 @@ export default {
       const appbar = kit.appBar({
         title: f.name,
         subtitle: `${folderInfo(folderKey(f)).label} · ${fileDate(f.at, NOW)}`,
-        actions: [{ icon: 'share-2', label: 'Compartilhar', onClick: () => phone.toast('Compartilhar está indisponível no espelho', { icon: 'share-2' }) }],
+        actions: [{ icon: 'share-2', label: 'Compartilhar', onClick: () => phone.toast('Compartilhar está indisponível na extração', { icon: 'share-2' }) }],
       });
       const pin = kit.pinButton({ key: 'arquivos:file:' + f.id, label: f.name, app: 'arquivos', detail: fileDetail(f) });
       let content;

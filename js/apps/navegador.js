@@ -4,7 +4,7 @@ import { h, clear } from '../core/dom.js';
 import { icon } from '../ui/icons.js';
 import * as time from '../core/time.js';
 
-const OFFLINE = 'Esta página não está disponível no espelho (sem conexão)';
+const OFFLINE = 'Esta página não está disponível na extração (modo avião)';
 
 /* ---------- utilitários ---------- */
 const fold = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -84,7 +84,7 @@ export default {
     const tabs = () => (data.tabs || []).filter(t => game.req(t));
     const history = () => (data.history || []).filter(x => game.req(x));
     const bookmarks = () => (data.bookmarks || []).map((b, i) => (typeof b === 'string' ? { id: `bm${i}`, title: b, url: b } : { id: b.id || `bm${i}`, ...b })).filter(b => game.req(b));
-    const stub = (what) => phone.toast(`${what} indisponível no espelho`, { icon: 'info' });
+    const stub = (what) => phone.toast(`${what} indisponível na extração`, { icon: 'info' });
     const offline = () => phone.toast(OFFLINE, { icon: 'wifi-off', ms: 3400 });
 
     /** Página (aba ou histórico) a abrir, ou null. */
@@ -116,7 +116,7 @@ export default {
       cur = t;
       clear(pageBox); clear(addrSlot);
       if (!t) {
-        pageBox.appendChild(h('div', { class: 'nv-start' }, icon('compass', { size: 46, stroke: 1.4 }), h('h3', null, 'Nenhuma aba aberta'), h('p', null, 'O espelho está sem conexão. Só aparece o que estava aberto no aparelho.')));
+        pageBox.appendChild(h('div', { class: 'nv-start' }, icon('compass', { size: 46, stroke: 1.4 }), h('h3', null, 'Nenhuma aba aberta'), h('p', null, 'O aparelho está em modo avião. Só aparece o que estava aberto no aparelho.')));
         addrSlot.appendChild(addrPill('https://', offline));
         tabBtn.firstChild.textContent = '0';
         return;
@@ -151,7 +151,7 @@ export default {
             grid.appendChild(h('div', { class: `nv-card ${cur && cur.id === t.id ? 'on' : ''}` },
               h('div', { class: 'nv-card-h' },
                 h('button', { class: 'nv-card-open', 'aria-label': `Abrir aba ${t.title}`, on: { click: () => { showTab(t); n.back(); } } }, h('span', { class: 'nv-card-t' }, t.title), h('span', { class: 'nv-card-u' }, u.host)),
-                h('button', { class: 'nv-card-x', 'aria-label': 'Fechar aba', on: { click: () => phone.toast('Fechar abas está desativado no espelho', { icon: 'info' }) } }, icon('x', { size: 16 }))),
+                h('button', { class: 'nv-card-x', 'aria-label': 'Fechar aba', on: { click: () => phone.toast('Fechar abas está desativado na extração', { icon: 'info' }) } }, icon('x', { size: 16 }))),
               h('button', { class: 'nv-card-body', 'aria-hidden': 'true', tabindex: '-1', on: { click: () => { showTab(t); n.back(); } } }, thumb)));
           }
           grid.appendChild(h('button', { class: 'nv-card new', on: { click: () => offline() } }, icon('plus', { size: 26 }), h('span', null, 'Nova aba')));

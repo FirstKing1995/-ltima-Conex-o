@@ -58,7 +58,7 @@ export function evaluate() {
 const ACH = [
   { id: 'arqueologo', title: 'Arqueólogo', text: 'Encontrou tudo o que foi apagado.', when: 'seen:config:notif-history && seen:gravador:rec:g-2332 && seen:papo:chat:numero-desconhecido' },
   { id: 'serra', title: 'Serra adentro', text: 'Percorreu a linha do tempo de Guaraciaba do Norte.', when: 'seen:rotas:day:2026-10-09 && seen:rotas:day:2026-10-10' },
-  { id: 'eco', title: 'Eco', text: 'Descobriu quem é o ECO.', when: 'eco_revelado' },
+  { id: 'eco', title: 'A cópia', text: 'Descobriu quem guardava a cópia do celular.', when: 'eco_revelado' },
   { id: 'sem-dicas', title: 'Sem dicas', text: 'Resolveu o caso sem pedir nenhuma dica.', when: 'solved:final && !usou_dica' },
   { id: 'primeira', title: 'De primeira', text: 'Acertou o relatório final na primeira tentativa.', when: 'final_primeira' },
 ];

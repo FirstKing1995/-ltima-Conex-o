@@ -321,7 +321,7 @@ function createGallery(ctx) {
         const waiting = () => h('div', { class: 'gl-gate' },
           lockArt('lock'),
           h('h2', null, 'Pasta Segura'),
-          h('p', { class: 'gl-gate-msg' }, 'O ECO ainda está quebrando a criptografia deste álbum.'),
+          h('p', { class: 'gl-gate-msg' }, 'A extração ainda não conseguiu abrir a criptografia deste álbum.'),
           cipherBox(),
           h('small', { class: 'gl-gate-sub' }, 'Conteúdo criptografado · aguardando a chave'));
 

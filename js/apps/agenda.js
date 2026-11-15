@@ -84,7 +84,7 @@ export default {
     const occs = occurrencesOf((data.events || []).filter(e => game.req(e)), YEAR).sort(byTime);
     const byDate = new Map();
     for (const o of occs) { if (!byDate.has(o.date)) byDate.set(o.date, []); byDate.get(o.date).push(o); }
-    const stub = (what) => phone.toast(`${what} indisponível no espelho`, { icon: 'info' });
+    const stub = (what) => phone.toast(`${what} indisponível na extração`, { icon: 'info' });
 
     /* meses navegáveis: set–dez/2026 (e qualquer mês do ano com compromisso) */
     let lo = YEAR * 12 + 8, hi = YEAR * 12 + 11;

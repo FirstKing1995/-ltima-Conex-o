@@ -55,14 +55,14 @@ export default {
       kit.iconButton({ icon: 'arrow-left', label: 'Voltar', className: 'cm-back', onClick: () => phone.back() }),
       h('span', { class: 'cm-sp' }),
       flashBtn, timerBtn, ratio,
-      h('button', { class: 'cm-tool', 'aria-label': 'Configurações da câmera', title: 'Configurações', on: { click: () => phone.toast('Câmera indisponível no espelho', { icon: 'camera' }) } }, icon('settings', { size: 22 })));
+      h('button', { class: 'cm-tool', 'aria-label': 'Configurações da câmera', title: 'Configurações', on: { click: () => phone.toast('Câmera indisponível na extração', { icon: 'camera' }) } }, icon('settings', { size: 22 })));
 
     /* ---------- visor ---------- */
     const focus = h('div', { class: 'cm-focus', 'aria-hidden': 'true' }, h('i'), h('i'), h('i'), h('i'));
     const hint = h('div', { class: 'cm-hint' },
       h('span', { class: 'cm-hint-ic' }, icon('camera', { size: 26, stroke: 1.5 })),
       h('b', null, 'Sem imagem'),
-      h('small', null, 'Este é um espelho do aparelho. O visor não recebe sinal.'));
+      h('small', null, 'Esta é uma extração forense do aparelho. O visor não recebe sinal.'));
     const zoomRow = h('div', { class: 'cm-zoom', role: 'group', 'aria-label': 'Zoom' },
       ZOOMS.map((z, i) => h('button', {
         class: `cm-z${i === 1 ? ' on' : ''}`, 'aria-label': `Zoom ${z}`,
@@ -96,7 +96,7 @@ export default {
       last ? kit.img(last.src, { alt: 'Última foto', ratio: '1/1' }) : icon('images', { size: 22 }));
     const shutter = h('button', { class: 'cm-shutter', 'aria-label': 'Disparar', on: { click: () => {
       shutter.classList.remove('snap'); void shutter.offsetWidth; shutter.classList.add('snap');
-      phone.toast('Câmera indisponível no espelho', { icon: 'camera' });
+      phone.toast('Câmera indisponível na extração', { icon: 'camera' });
     } } }, h('span', { class: 'cm-shutter-in' }, h('i')));
     const flip = h('button', { class: 'cm-flip', 'aria-label': 'Alternar câmera', title: 'Alternar câmera', on: { click: () => { flip.classList.remove('spin'); void flip.offsetWidth; flip.classList.add('spin'); } } }, icon('refresh-cw', { size: 24 }));
     const bar = h('div', { class: 'cm-bar' }, thumb, shutter, flip);

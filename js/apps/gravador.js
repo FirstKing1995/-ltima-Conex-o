@@ -64,15 +64,15 @@ function pinMini(game, spec) {
 function recCard(rec, game, onOpen, { trash = false } = {}) {
   const dur = time.duration(secs(rec));
   if (trash && !game.req(rec)) {
-    // conteúdo ainda indisponível no espelho: visual de arquivo corrompido
+    // conteúdo ainda indisponível na extração: visual de arquivo corrompido
     return h('button', { class: 'gv-card bad', on: { click: onOpen }, 'aria-label': `${rec.name}, arquivo corrompido` },
       h('div', { class: 'top' },
         h('div', { class: 'ic warn' }, icon('triangle-alert', { size: 22 })),
         h('div', { class: 'tx' },
           h('div', { class: 'nm' }, rec.name),
-          h('div', { class: 'sub warn' }, `Arquivo corrompido no espelho · ${dur} · ${delTag(rec.deletedAt || rec.at).toLowerCase()}`))),
+          h('div', { class: 'sub warn' }, `Arquivo corrompido na extração · ${dur} · ${delTag(rec.deletedAt || rec.at).toLowerCase()}`))),
       waveEl(rec.id, { bad: true }),
-      h('div', { class: 'eco-note' }, icon('square-terminal', { size: 15 }), 'O ECO está tentando reconstruir este arquivo.'));
+      h('div', { class: 'eco-note' }, icon('square-terminal', { size: 15 }), 'A recuperação dos fragmentos está em andamento.'));
   }
   return h('button', { class: `gv-card ${trash ? 'trash' : ''}`, on: { click: onOpen } },
     h('div', { class: 'top' },
@@ -110,11 +110,11 @@ function drawDetail(ctx, el, rec) {
     el.append(h('div', { class: 'gv-corrupt' },
       waveEl(rec.id + '-d', { n: 52, bad: true, tall: true }),
       h('div', { class: 'msg' },
-        h('div', { class: 'badge' }, icon('triangle-alert', { size: 18 }), 'Arquivo corrompido no espelho'),
+        h('div', { class: 'badge' }, icon('triangle-alert', { size: 18 }), 'Arquivo corrompido na extração'),
         h('p', { class: 'meta' }, `${time.duration(dur)} · ${delTag(rec.deletedAt || rec.at).toLowerCase()}`),
-        h('p', { class: 'eco' }, icon('square-terminal', { size: 16 }), 'O ECO está tentando reconstruir este arquivo.'),
+        h('p', { class: 'eco' }, icon('square-terminal', { size: 16 }), 'A recuperação dos fragmentos está em andamento.'),
         h('div', { class: 'rebuild', role: 'progressbar', 'aria-label': 'Reconstruindo arquivo' }, h('i')),
-        h('small', null, 'Reconstruindo a partir dos fragmentos do espelho…'))));
+        h('small', null, 'Reconstruindo a partir dos fragmentos da extração…'))));
     sfx.play('glitch');
     return 'gated';
   }
@@ -224,7 +224,7 @@ export default {
       active: tab,
       onChange: (id) => { tab = id; prefs().tab = id; draw(); },
     });
-    const fab = h('button', { class: 'gv-fab', 'aria-label': 'Gravar', on: { click: () => phone.toast('Espelho somente leitura: não é possível gravar.', { icon: 'mic' }) } }, icon('mic', { size: 26 }));
+    const fab = h('button', { class: 'gv-fab', 'aria-label': 'Gravar', on: { click: () => phone.toast('Extração somente leitura: não é possível gravar.', { icon: 'mic' }) } }, icon('mic', { size: 26 }));
     el.append(kit.appBar({ title: 'Gravador', subtitle: 'Gravações do aparelho' }), tabs, listEl, h('div', { class: 'gv-pad' }));
     screen.appendChild(fab);
     draw();
@@ -246,7 +246,7 @@ export default {
       if (!open && !isTrash(r)) continue;
       out.push({
         title: r.name,
-        text: open ? (trText(r) || `Gravação de ${dateTag(r.at)}`) : 'Arquivo corrompido no espelho',
+        text: open ? (trText(r) || `Gravação de ${dateTag(r.at)}`) : 'Arquivo corrompido na extração',
         params: { rec: r.id },
         at: r.at,
       });

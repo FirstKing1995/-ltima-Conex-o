@@ -103,8 +103,8 @@ export default {
     const unreadIn = (id) => all().filter(m => m.folder === id && !isRead(m)).length;
     let folder = prefs().folder && FOLDERS.some(f => f.id === prefs().folder) ? prefs().folder : 'inbox';
     let filter = 'all';
-    const external = () => phone.toast('Links externos indisponíveis no espelho', { icon: 'link' });
-    const stub = (what) => phone.toast(`${what} indisponível no espelho`, { icon: 'info' });
+    const external = () => phone.toast('Links externos indisponíveis na extração', { icon: 'link' });
+    const stub = (what) => phone.toast(`${what} indisponível na extração`, { icon: 'info' });
 
     const letterAv = (name, email, live, size = 44) => {
       const l = h('span', { class: `cr-av ${live ? 'alert' : ''}`, style: { width: size + 'px', height: size + 'px', fontSize: Math.round(size * 0.42) + 'px', background: live ? '' : colorFor(email || name || '?') } },

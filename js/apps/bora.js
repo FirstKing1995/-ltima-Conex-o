@@ -206,7 +206,7 @@ export default {
 
     const wrap = h('div', { class: 'bo-wrap' });
     wrap.append(
-      h('button', { class: 'bo-where', on: { click: () => phone.toast('Espelho somente leitura: não dá para pedir corridas.', { icon: 'car' }) } },
+      h('button', { class: 'bo-where', on: { click: () => phone.toast('Extração somente leitura: não dá para pedir corridas.', { icon: 'car' }) } },
         icon('search', { size: 20 }), h('span', null, 'Para onde?'), h('em', null, icon('clock', { size: 14 }), 'Agora')),
       h('div', { class: 'bo-sum' },
         h('div', null, h('b', null, String(trips.length)), h('span', null, 'viagens')),

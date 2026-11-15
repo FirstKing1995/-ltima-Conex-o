@@ -84,7 +84,7 @@ function createLume(ctx) {
   const postsOf = (hd) => posts().filter((p) => p.author === hd);
   const dms = () => (data.dms || []).filter((d) => game.req(d));
   const see = (key, item) => { game.see(key); if (item?.onSee?.length) game.flags(item.onSee); };
-  const readonly = () => phone.toast('O espelho é somente leitura', { icon: 'eye' });
+  const readonly = () => phone.toast('A extração é somente leitura', { icon: 'eye' });
 
   /* ---------- tempo ---------- */
   const minsAgo = (at) => Math.floor((time.parse(now) - time.parse(at)) / 60000);
@@ -613,10 +613,10 @@ function createLume(ctx) {
             see('lume:recovery:' + p.handle, p);
             out.append(h('div', { class: 'lm-rec-card' },
               h('h3', null, 'Vamos enviar um código para:'),
-              h('button', { class: 'lm-rec-opt', on: { click: () => phone.toast('Envio indisponível no espelho', { icon: 'eye' }) } },
+              h('button', { class: 'lm-rec-opt', on: { click: () => phone.toast('Envio indisponível na extração', { icon: 'eye' }) } },
                 h('span', { class: 'lm-rec-ic' }, icon('smartphone', { size: 20 })),
                 h('span', null, h('small', null, 'Mensagem de texto'), h('b', { class: 'txt' }, p.recovery.phone || '—'))),
-              h('button', { class: 'lm-rec-opt', on: { click: () => phone.toast('Envio indisponível no espelho', { icon: 'eye' }) } },
+              h('button', { class: 'lm-rec-opt', on: { click: () => phone.toast('Envio indisponível na extração', { icon: 'eye' }) } },
                 h('span', { class: 'lm-rec-ic' }, icon('mail', { size: 20 })),
                 h('span', null, h('small', null, 'E-mail'), h('b', { class: 'txt' }, p.recovery.email || '—'))),
               h('small', { class: 'lm-rec-foot' }, 'O código vale por 10 minutos. Se você não reconhece esses dados, a conta pode ter outro dono.')));

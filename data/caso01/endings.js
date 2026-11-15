@@ -50,17 +50,17 @@ export default {
   },
 
   bonusEco: {
-    title: 'O ECO',
+    title: 'Anexo · e-mail recebido às 03:12',
     paragraphs: [
-      'O canal se abriu uma última vez, às três da manhã, com a coruja de sempre no avatar.',
-      'não vou me despedir direito. eu não sei fazer isso.',
-      'meu nome é théo castro. a iara e eu nos conhecemos na faculdade, em sobral. ela chamava de corujão porque eu dormia nas aulas. eu ria e dizia que era o único que pensava de noite.',
-      'no dia 3 de outubro ela me pediu um espelho do celular. disse: se acontecer alguma coisa, você sabe o que fazer. eu pensei que ela estava exagerando. eu configurei o backup rindo dela.',
-      'não podia ir à polícia. eu entrei onde não tinha ordem, e perderia o emprego, e o caso inteiro. então fiquei esperando alguém de fora. alguém que ninguém conhecesse. alguém que ela tivesse escolhido sem saber, por engano.',
-      'foi você.',
-      'a mensagem das 23:31 foi pro número errado, mas chegou na pessoa certa. obrigado por ter ficado até o fim.',
-      'vou apagar o espelho agora. a iara não precisa mais de testemunha. eu preciso aprender a dormir de dia.',
-      'fica bem.',
+      'De: theo.castro@correio.app. Assunto: (sem assunto).',
+      'inspetor, o senhor chegou no meu nome pelo backup. ninguém mais teria chegado.',
+      'no dia 3 de outubro a iara me pediu uma cópia cifrada do celular. disse: se acontecer alguma coisa, você sabe o que fazer. eu configurei rindo dela. chamei de paranoia.',
+      'quando ela morreu eu abri a cópia. não tinha ordem judicial, não tinha nada. só tinha medo. passei dois dias olhando para a tela sem saber a quem entregar aquilo.',
+      'aí vi que a última mensagem dela tinha ido para um número que não era o da jornalista. dois dígitos trocados. pensei em ligar para esse número. não liguei.',
+      'o senhor chegou antes.',
+      'a pasta que ela fala na mensagem existe. está anexada. é a mesma que o senhor já abriu, mais três vídeos brutos das "fazendas". são seus.',
+      'eu vou apagar a minha cópia hoje. ela não precisa mais de testemunha escondida. precisa de alguém com nome.',
+      'théo',
     ],
   },
 };

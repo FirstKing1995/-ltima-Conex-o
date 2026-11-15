@@ -334,7 +334,7 @@ function renderRoot(env, views) {
     if (filter === 'all' && archivedN) {
       listSlot.append(kit.list([kit.listItem({ icon: 'archive', title: 'Conversas arquivadas', meta: String(archivedN), className: 'pp-row pp-arch', onClick: () => openArchived(env, views) })]));
     }
-    listSlot.append(h('p', { class: 'pp-foot no-terms' }, icon('lock', { size: 13 }), 'Espelho somente leitura. Nada do que você fizer aqui chega às outras pessoas.'));
+    listSlot.append(h('p', { class: 'pp-foot no-terms' }, icon('lock', { size: 13 }), 'Extração somente leitura. Nada do que você fizer aqui chega às outras pessoas.'));
     env.phone.scan(listSlot);
   };
 
@@ -424,7 +424,7 @@ function buildChat(env, chat, opts, body, nav) {
   const scroller = h('div', { class: 'pc-scroll' }, list);
   const foot = h('div', { class: 'pc-foot no-terms' },
     h('div', { class: 'pc-input', 'aria-disabled': 'true' }, icon('lock', { size: 16 }),
-      h('input', { type: 'text', disabled: true, placeholder: 'Somente leitura — espelho do aparelho', 'aria-label': 'Somente leitura — espelho do aparelho' })));
+      h('input', { type: 'text', disabled: true, placeholder: 'Somente leitura — extração do aparelho', 'aria-label': 'Somente leitura — extração do aparelho' })));
   body.append(bar, ...banners, scroller, foot);
 
   /* ---------- rolagem ---------- */
@@ -568,7 +568,7 @@ function buildChat(env, chat, opts, body, nav) {
         const d = m.doc || {};
         const ext = (String(d.name || '').split('.').pop() || '').toLowerCase();
         cls += ' doc';
-        parts.push(h('button', { class: 'pm-doc', on: { click: (e) => { e.stopPropagation(); if (d.file) phone.open('arquivos', { file: d.file }); else phone.toast('Arquivo indisponível no espelho', { icon: 'file-text' }); } } },
+        parts.push(h('button', { class: 'pm-doc', on: { click: (e) => { e.stopPropagation(); if (d.file) phone.open('arquivos', { file: d.file }); else phone.toast('Arquivo indisponível na extração', { icon: 'file-text' }); } } },
           h('span', { class: `ft ${ext}` }, icon(EXT_ICON[ext] || 'file', { size: 22 })),
           h('span', { class: 'fi' }, h('b', { class: 'txt' }, d.name || 'Documento'), h('small', null, [ext.toUpperCase(), fmtSize(d.size)].filter(Boolean).join(' · ')))));
         if (m.caption || m.text) parts.push(textBody(m.caption || m.text, m)); else parts.push(footMeta(m));

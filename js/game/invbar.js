@@ -26,7 +26,7 @@ export function mount({ barEl, ecoEl, boardEl, onMenu }) {
   bar = barEl; ecoPanel = ecoEl; boardPanel = boardEl;
   scrim = h('div', { class: 'scrim', on: { click: () => { setOpen(ecoPanel, false); setOpen(boardPanel, false); } } });
   document.body.appendChild(scrim);
-  ecoBtn = h('button', { class: 'inv-btn', 'aria-pressed': 'false', 'aria-label': 'Abrir canal do ECO', on: { click: () => { sfx.play('tap'); setOpen(ecoPanel, !ecoPanel.classList.contains('open')); } } }, appIconEl('eco', 20, 'round'), h('span', { class: 'lbl' }, 'ECO'), h('span', { class: 'badge-dot', hidden: true }));
+  ecoBtn = h('button', { class: 'inv-btn', 'aria-pressed': 'false', 'aria-label': 'Abrir o caderno de investigação', on: { click: () => { sfx.play('tap'); setOpen(ecoPanel, !ecoPanel.classList.contains('open')); } } }, icon('notebook-pen', { size: 17 }), h('span', { class: 'lbl' }, 'Caderno'), h('span', { class: 'badge-dot', hidden: true }));
   lupaBtn = h('button', { class: 'inv-btn', 'aria-pressed': String(!!state.settings.analysis), 'aria-label': 'Modo Análise (lupa)', on: { click: () => { const on = game.analysis.toggle(); sfx.play(on ? 'collect' : 'tap'); lupaBtn.setAttribute('aria-pressed', String(on)); } } }, icon('scan-search', { size: 17 }), h('span', { class: 'lbl' }, 'Lupa'));
   boardBtn = h('button', { class: 'inv-btn', 'aria-pressed': 'false', 'aria-label': 'Abrir o Quadro', on: { click: () => { sfx.play('tap'); setOpen(boardPanel, !boardPanel.classList.contains('open')); } } }, icon('layout-grid', { size: 17 }), h('span', { class: 'lbl' }, 'Quadro'));
   const menuBtn = h('button', { class: 'inv-btn', 'aria-label': 'Menu', on: { click: () => onMenu?.() } }, icon('menu', { size: 17 }));

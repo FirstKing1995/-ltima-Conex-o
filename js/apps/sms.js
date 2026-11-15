@@ -131,12 +131,12 @@ function buildThread(env, t, opts, body, nav) {
     kit.iconButton({ icon: 'arrow-left', label: 'Voltar', onClick: () => nav.back() }),
     avatarFor(env, t, 38),
     h('div', { class: 'nm' }, h('span', { class: 't txt' }, name), h('span', { class: 's txt' }, threadSub(t))),
-    kit.iconButton({ icon: 'phone', label: 'Ligar', onClick: () => phone.toast('Ligações indisponíveis no espelho', { icon: 'phone' }) }));
+    kit.iconButton({ icon: 'phone', label: 'Ligar', onClick: () => phone.toast('Ligações indisponíveis na extração', { icon: 'phone' }) }));
 
   const list = h('div', { class: 'sm-msgs' });
   const scroller = h('div', { class: 'sm-scroll' }, list);
   const foot = h('div', { class: 'sm-foot-bar no-terms' }, h('div', { class: 'sm-input', 'aria-disabled': 'true' }, icon('lock', { size: 16 }),
-    h('input', { type: 'text', disabled: true, placeholder: 'Somente leitura — espelho do aparelho', 'aria-label': 'Somente leitura — espelho do aparelho' })));
+    h('input', { type: 'text', disabled: true, placeholder: 'Somente leitura — extração do aparelho', 'aria-label': 'Somente leitura — extração do aparelho' })));
   append(body, [bar, scroller, foot]);
 
   let target = null, stick = true;

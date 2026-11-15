@@ -1,4 +1,4 @@
-// Configurações — ajustes do Nimbus N9 (Android 16) de Iara. Espelho somente leitura:
+// Configurações — ajustes do Nimbus N9 (Android 16) de Iara. Extração somente leitura:
 // Wi-Fi, Bluetooth, histórico de notificações, bateria, atividade de desbloqueio e dispositivos da conta.
 import { h, clear } from '../core/dom.js';
 import { bus } from '../core/bus.js';
@@ -37,7 +37,7 @@ const appInfoByName = (name) => {
   return APPS.find((a) => normalize(a.id) === n || normalize(a.title) === n) || null;
 };
 
-function readonly(ctx) { ctx.phone.toast('Somente leitura: o espelho não permite alterar ajustes.', { icon: 'lock' }); }
+function readonly(ctx) { ctx.phone.toast('Somente leitura: a extração não permite alterar ajustes.', { icon: 'lock' }); }
 
 /* ---------- componentes ---------- */
 function iconBox(name, tint, size = 22) {
@@ -79,7 +79,7 @@ function logRow(ctx, { tm, ic, tone = '', title, sub, pin, hot = false }) {
 function spinner() {
   return h('div', { class: 'cf-restore' },
     h('div', { class: 'orb', 'aria-hidden': 'true' }, icon('database', { size: 30 })),
-    h('h3', null, 'Restaurando dados do sistema…', h('span', null, ' o ECO está trabalhando nisso.')),
+    h('h3', null, 'Restaurando dados do sistema…', h('span', null, ' a extração ainda está processando.')),
     h('div', { class: 'bar', role: 'progressbar', 'aria-label': 'Restaurando' }, h('i')));
 }
 
@@ -574,7 +574,7 @@ function openSobre(ctx, nav) {
       el.append(
         h('div', { class: 'cf-about' }, h('div', { html: phoneArt() }), h('h2', null, meta.device?.model || 'Nimbus N9'), h('p', null, `Android ${meta.device?.android || '16'}`)),
         h('div', { class: 'cf-kv' }, kit.kv(about)),
-        note('Este é um espelho do aparelho restaurado da nuvem. Os ajustes são somente leitura.', 'lock'));
+        note('Esta é uma extração forense do aparelho, em modo avião. Os ajustes são somente leitura.', 'lock'));
     },
   });
 }

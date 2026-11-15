@@ -111,7 +111,7 @@ export default {
     const NOW = ctx.now || time.PRESENT_NOW;
     const acc = data.account || {};
     const holder = acc.holder || 'Iara Fontenele';
-    const stub = (what) => phone.toast(`${what}: indisponível no espelho`, { icon: 'info' });
+    const stub = (what) => phone.toast(`${what}: indisponível na extração`, { icon: 'info' });
     const txs = () => (data.transactions || []).filter(t => game.req(t)).sort((a, b) => time.compare(b.at, a.at));
 
     /* ----- raiz: topo verde com saldo ----- */

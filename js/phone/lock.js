@@ -33,7 +33,7 @@ export function renderLock(el) {
     h('div', { class: 'lk-bottom' },
       h('button', { class: 'lk-sc', 'aria-label': 'Telefone', on: { click: (e) => { e.stopPropagation(); emergency(); } } }, icon('phone', { size: 22 })),
       h('button', { class: 'lk-finger', 'aria-label': 'Desbloquear com digital', on: { click: (e) => { e.stopPropagation(); tryFinger(el); } } }, h('span', { class: 'fp' }, icon('fingerprint', { size: 38 }))),
-      h('button', { class: 'lk-sc', 'aria-label': 'Câmera', on: { click: (e) => { e.stopPropagation(); phone.toast('Câmera indisponível no espelho', { icon: 'camera' }); } } }, icon('camera', { size: 22 }))));
+      h('button', { class: 'lk-sc', 'aria-label': 'Câmera', on: { click: (e) => { e.stopPropagation(); phone.toast('Câmera indisponível na extração', { icon: 'camera' }); } } }, icon('camera', { size: 22 }))));
   el.addEventListener('click', (e) => { if (!e.target.closest('.pin-pad')) openPin(el); });
 }
 

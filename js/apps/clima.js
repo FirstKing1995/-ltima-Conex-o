@@ -218,7 +218,7 @@ export default {
     /* cidades salvas */
     const saved = h('section', { class: 'cl-card cl-saved' },
       h('div', { class: 'ch' }, icon('map-pin', { size: 18 }), h('h3', null, 'Cidades salvas')),
-      m.saved.map((c) => h('button', { class: 'sv', on: { click: () => phone.toast('Sem conexão: a previsão desta cidade não está no espelho.', { icon: 'cloud' }) } },
+      m.saved.map((c) => h('button', { class: 'sv', on: { click: () => phone.toast('Sem conexão: a previsão desta cidade não está na extração.', { icon: 'cloud' }) } },
         h('div', { class: 'tx' }, h('b', null, c.city + (c.region ? `, ${c.region}` : '')), h('small', null, c.desc || '')),
         glyph(c.icon || 'cloud', 34), h('span', { class: 'tp' }, `${c.temp}°`))));
 

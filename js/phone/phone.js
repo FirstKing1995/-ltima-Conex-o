@@ -239,7 +239,7 @@ export const phone = {
     setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, ms);
   },
 
-  notify({ icon: ic = 'square-terminal', app = 'ECO', title = '', text = '', onTap, ms = 5200 } = {}) {
+  notify({ icon: ic = 'square-terminal', app = 'Aviso', title = '', text = '', onTap, ms = 5200 } = {}) {
     const n = h('button', { class: 'ph-heads', 'aria-live': 'polite' }, h('div', { class: 'ap' }, icon(ic, { size: 18 })),
       h('div', { style: 'min-width:0' }, h('div', { class: 'tt' }, title || app, h('span', null, 'agora')), h('div', { class: 'tx' }, text)));
     root.appendChild(n);

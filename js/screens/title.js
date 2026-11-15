@@ -53,12 +53,13 @@ function howTo() {
   shell([
     h('h2', { class: 'ts-h2' }, 'Como jogar'),
     h('ol', { class: 'ts-list' },
-      h('li', null, h('b', null, 'O celular. '), 'É uma cópia do aparelho de Iara, congelada às 23:47 do sábado em que ela morreu. Abra os apps, leia, ouça, compare horários.'),
-      h('li', null, h('b', null, 'O ECO. '), 'Um hacker fala com você pelo canal cifrado. Ele orienta e dá dicas quando você pede, mas não entrega respostas.'),
+      h('li', null, h('b', null, 'Você é o investigador. '), 'O caso foi arquivado como acidente. Ninguém vai te dizer o que procurar.'),
+      h('li', null, h('b', null, 'O celular. '), 'É a extração do aparelho de Iara, parado às 23:47 do sábado em que ela morreu. Abra os apps, leia, ouça, compare horários.'),
+      h('li', null, h('b', null, 'O caderno. '), 'Seu diário de campo, suas notas e as pendências do caso. Se travar, "Repensar" revisa o que você já sabe, mas custa pontos.'),
       h('li', null, h('b', null, 'A lupa. '), 'Ligue o Modo Análise e toque nas palavras destacadas para guardar nomes, horas, lugares e objetos.'),
       h('li', null, h('b', null, 'O Quadro. '), 'Objetivos, provas fixadas, dossiês e linha do tempo. Cada capítulo termina numa dedução que você preenche com os termos guardados.'),
       h('li', null, h('b', null, 'O relatório. '), 'No fim, você monta o relatório para a jornalista. Ele decide o final.')),
-    h('p', { class: 'ts-note' }, 'O progresso fica salvo neste navegador. Jogue em computador ou celular; no celular, o ECO e o Quadro ficam na barra do topo.'),
+    h('p', { class: 'ts-note' }, 'O progresso fica salvo neste navegador. Jogue em computador ou celular; no celular, o Caderno e o Quadro ficam na barra do topo.'),
     h('div', { class: 'title-menu' }, h('button', { class: 'tbtn primary', on: { click: back } }, 'Entendi')),
   ]);
 }

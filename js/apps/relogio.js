@@ -172,12 +172,12 @@ export default {
     const body = h('div', { class: 'rl-body' });
     let live = {};
 
-    const fab = h('button', { class: 'rl-fab', 'aria-label': 'Adicionar alarme', on: { click: () => ro('Espelho somente leitura: não é possível criar alarmes.') } }, icon('plus', { size: 28 }));
+    const fab = h('button', { class: 'rl-fab', 'aria-label': 'Adicionar alarme', on: { click: () => ro('Extração somente leitura: não é possível criar alarmes.') } }, icon('plus', { size: 28 }));
 
     /* ----- Alarme ----- */
     const alarmCard = (a) => {
       const on = a.on !== false, idx = idxSet(a.days), hl = params?.alarm === a.id;
-      const warn = () => ro('Espelho somente leitura: os alarmes não podem ser alterados.');
+      const warn = () => ro('Extração somente leitura: os alarmes não podem ser alterados.');
       return h('article', { class: `rl-alarm ${on ? 'on' : 'off'} ${hl ? 'hl' : ''}`, dataset: { id: a.id || '' }, tabindex: '0', role: 'button', 'aria-label': `Alarme ${a.time}${a.label ? ', ' + a.label : ''}, ${on ? 'ativado' : 'desativado'}`, on: { click: warn, keydown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); warn(); } } } },
         h('div', { class: 'top' },
           h('span', { class: 'lb txt' }, a.label || 'Alarme'),
@@ -204,7 +204,7 @@ export default {
           nx && nx.alarm.label ? h('em', { class: 'txt' }, nx.alarm.label) : null)));
       if (!alarms.length) body.append(kit.empty({ icon: 'alarm-clock', title: 'Nenhum alarme', text: 'Os alarmes do aparelho aparecem aqui.' }));
       else body.append(h('div', { class: 'rl-alarms' }, alarms.map(alarmCard)));
-      body.append(h('p', { class: 'rl-foot' }, icon('lock', { size: 14 }), 'Espelho somente leitura: os alarmes não tocam neste aparelho.'));
+      body.append(h('p', { class: 'rl-foot' }, icon('lock', { size: 14 }), 'Extração somente leitura: os alarmes não tocam neste aparelho.'));
       const hit = body.querySelector('.rl-alarm.hl');
       if (hit) setTimeout(() => hit.scrollIntoView({ block: 'center', behavior: 'smooth' }), 120);
     };
@@ -218,7 +218,7 @@ export default {
           h('div', { class: 'dd txt' }, `${time.weekdayLong(now)}, ${time.dateLong(now)}`),
           h('div', { class: 'zone' },
             h('span', null, icon('map-pin', { size: 14 }), 'Fortaleza · UTC−3'),
-            h('span', { class: 'frozen' }, icon('lock', { size: 14 }), 'Hora do espelho'))),
+            h('span', { class: 'frozen' }, icon('lock', { size: 14 }), 'Hora da extração'))),
         h('div', { class: 'rl-ct' }, 'Cidades'),
         h('div', { class: 'rl-cities' }, cities.map((c) => h('div', { class: `rl-city ${c.night ? 'night' : ''}` },
           h('div', { class: 'tx' }, h('b', { class: 'txt' }, c.name), h('small', null, `${c.day}, ${c.dtxt}${c.sub ? ' · ' + c.sub : ''}`)),
