@@ -11,19 +11,19 @@ const MSG = 'Bruna, é a Iara. Número novo? Salva esse. Tô indo encontrar ela 
 export async function play() {
   const root = document.getElementById('overlay-root');
   clear(root);
-  let skipped = false;
+  let skipped = false, signed = false, resolveTap = null;
   const stage = h('div', { class: 'in-stage' });
   const el = h('div', { class: 'ov intro-screen' }, stage);
-  const skip = h('button', { class: 'in-skip', on: { click: () => { skipped = true; sign(); } } }, 'Pular');
+  const skip = h('button', { class: 'in-skip', on: { click: () => { skipped = true; if (resolveTap) { const r = resolveTap; resolveTap = null; r(); } sign(); } } }, 'Pular');
   el.appendChild(skip);
   root.appendChild(el);
 
-  const wait = async (ms) => { await sleep(ms); return skipped; };
   const line = (cls, text) => { const p = h('p', { class: `in-line ${cls}` }, text); stage.appendChild(p); requestAnimationFrame(() => p.classList.add('on')); setTimeout(() => p.classList.add('on'), 60); return p; };
   const wipe = async () => { stage.querySelectorAll('.in-line, .in-phone').forEach(n => n.classList.remove('on')); await sleep(800); clear(stage); };
 
   function sign() {
-    skip.remove(); clear(stage);
+    if (signed) return; signed = true;
+    skip.remove(); el.querySelector(".in-next")?.remove(); clear(stage);
     const inp = h('input', { class: 'in-name', type: 'text', maxlength: '24', placeholder: 'seu nome', autocomplete: 'off', 'aria-label': 'Seu nome' });
     const go = () => {
       const v = inp.value.trim().replace(/\s+/g, ' ');
@@ -48,44 +48,46 @@ export async function play() {
     setTimeout(() => inp.focus(), 300);
   }
 
-  // sábado
-  line('when', 'Sábado, 10 de outubro · 23:31');
-  if (await wait(1700)) return;
-  line('where', 'Fortaleza. Você acabou de chegar do plantão.');
-  if (await wait(1900)) return;
-  const notif = h('div', { class: 'in-phone' }, h('div', { class: 'in-notif' }, appIconEl('papo', 34, 'round'),
-    h('div', { class: 'in-n-body' }, h('div', { class: 'in-n-hd' }, 'Papo · agora'), h('div', { class: 'in-n-tt' }, '+55 85 98741-2290'), h('div', { class: 'in-n-tx' }, MSG))));
-  stage.appendChild(notif); sfx.play('notify');
-  requestAnimationFrame(() => notif.classList.add('on')); setTimeout(() => notif.classList.add('on'), 60);
-  if (await wait(6500)) return;
-  line('think', 'Uma Bruna que você não conhece. Uma Iara que você não conhece.');
-  if (await wait(2200)) return;
-  line('think', 'Você não responde.');
-  if (await wait(2400)) return;
-  await wipe(); if (skipped) return;
+  // Cada cena aparece em partes; o jogador avança no próprio ritmo (toque, clique, Enter ou espaço).
+  const notifEl = () => h("div", { class: "in-phone" }, h("div", { class: "in-notif" }, appIconEl("papo", 34, "round"),
+    h("div", { class: "in-n-body" }, h("div", { class: "in-n-hd" }, "Papo · agora"), h("div", { class: "in-n-tt" }, "+55 85 98741-2290"), h("div", { class: "in-n-tx" }, MSG))));
+  const beats = [
+    { items: [["when", "Sábado, 10 de outubro · 23:31"], ["where", "Fortaleza. Você acabou de chegar do plantão."]] },
+    { items: [["notif"]] },
+    { items: [["think", "Uma Bruna que você não conhece. Uma Iara que você não conhece."], ["think", "Você não responde."]] },
+    { wipe: true, items: [["when", "Domingo, 11 de outubro · 06:20"], ["where", "Serra da Ibiapaba. O caseiro de um sítio encontra o corpo de uma mulher no pé de uma pedra de quarenta metros."]] },
+    { items: [["when", "Segunda · 07:10"], ["where", "O jornal dá o nome: Iara Fontenele, 27 anos, fotógrafa."]] },
+    { items: [["think", "Você relê a mensagem de sábado. \"Bruna, é a Iara.\""]] },
+    { wipe: true, items: [["when", "Terça, 13 de outubro · 23:12"], ["where", "O inquérito foi arquivado como acidente em dezenove horas."]] },
+    { items: [["where", "Você pediu o celular dela como quem pede um favor. A mãe entregou sem perguntar nada. Só disse: \"Ela não caía. Ela conhecia aquela pedra desde menina.\""]] },
+    { items: [["think", "Ninguém mandou você fazer isso."]] },
+  ];
 
-  // domingo e segunda
-  line('when', 'Domingo, 11 de outubro · 06:20');
-  if (await wait(1500)) return;
-  line('where', 'Serra da Ibiapaba. O caseiro de um sítio encontra o corpo de uma mulher no pé de uma pedra de quarenta metros.');
-  if (await wait(3400)) return;
-  line('when', 'Segunda · 07:10');
-  if (await wait(1300)) return;
-  line('where', 'O jornal dá o nome: Iara Fontenele, 27 anos, fotógrafa.');
-  if (await wait(2600)) return;
-  line('think', 'Você relê a mensagem de sábado. "Bruna, é a Iara."');
-  if (await wait(3000)) return;
-  await wipe(); if (skipped) return;
+  const hint = h("div", { class: "in-next", "aria-hidden": "true" }, "toque para continuar");
+  el.appendChild(hint);
+  let hurry = false;
+  const tap = () => { if (resolveTap) { const r = resolveTap; resolveTap = null; r(); } else hurry = true; };
+  el.addEventListener("click", (e) => { if (e.target.closest(".in-skip, .in-form")) return; tap(); });
+  const onKey = (e) => { if (skipped) return; if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); tap(); } };
+  document.addEventListener("keydown", onKey);
+  const waitTap = () => new Promise(r => { resolveTap = r; hint.classList.add("on"); }).then(() => hint.classList.remove("on"));
+  const pause = async (ms) => { const t0 = Date.now(); while (!hurry && !skipped && Date.now() - t0 < ms) await sleep(50); };
+  const done = () => { document.removeEventListener("keydown", onKey); hint.remove(); };
 
-  // terça
-  line('when', 'Terça, 13 de outubro · 23:12');
-  if (await wait(1500)) return;
-  line('where', 'O inquérito foi arquivado como acidente em dezenove horas.');
-  if (await wait(2600)) return;
-  line('where', 'Você pediu o celular dela como quem pede um favor. A mãe entregou sem perguntar nada. Só disse: "Ela não caía. Ela conhecia aquela pedra desde menina."');
-  if (await wait(5200)) return;
-  line('think', 'Ninguém mandou você fazer isso.');
-  if (await wait(2400)) return;
+  for (const b of beats) {
+    if (skipped) return done();
+    if (b.wipe) { await wipe(); if (skipped) return done(); }
+    hurry = false;
+    for (const [k, t] of b.items) {
+      if (k === "notif") { const n = notifEl(); stage.appendChild(n); sfx.play("notify"); requestAnimationFrame(() => n.classList.add("on")); setTimeout(() => n.classList.add("on"), 60); }
+      else line(k, t);
+      await pause(900);
+      if (skipped) return done();
+    }
+    await waitTap();
+    if (skipped) return done();
+  }
+  done();
   await wipe(); if (skipped) return;
   sign();
 }
