@@ -115,7 +115,7 @@ export default {
       { at: '2026-10-10T23:10', level: 45, event: 'Descarregando' },
       { at: '2026-10-10T23:29', level: 44, event: 'Descarregando' },
       { at: '2026-10-10T23:41', level: 43, event: 'Descarregando' },
-      { at: '2026-10-10T23:47', level: 41, event: 'Desligado pelo botão de energia' },
+      { at: '2026-10-10T23:47:02', level: 41, event: 'Desligado pelo botão de energia (23:47:02)' },
     ],
   },
 
@@ -130,6 +130,7 @@ export default {
   devices: [
     { name: 'Nimbus N9 de Iara', place: 'Guaraciaba do Norte, CE', lastActive: '2026-10-10T23:47', current: false, note: 'Este aparelho' },
     { name: 'Notebook · Windows 11', place: 'Fortaleza, CE', lastActive: '2026-10-09T06:30', current: false, note: 'Edição de fotos e vídeos' },
+    { name: 'Notebook · Windows 10 (ademar.sa)', place: 'Guaraciaba do Norte, CE', lastActive: '2026-10-12T03:17', current: false, note: 'Primeiro acesso: 12/10/2026 03:09. Nimbus Nuvem: 1 documento modificado.' },
     { name: 'Espelho — backup cifrado', place: 'Fortaleza, CE', lastActive: '2026-10-13T23:10', current: true, note: 'Backup cifrado configurado em 03/10/2026. Sincronização contínua, somente leitura.' },
   ],
 

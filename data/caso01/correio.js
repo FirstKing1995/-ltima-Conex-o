@@ -437,6 +437,28 @@ Pague Bem`),
   { id: 'lixo-1', folder: 'trash', from: { name: 'Bora', email: 'ola@bora.app' }, to: [IARA], at: '2026-09-10T18:00', subject: 'Sua corrida foi avaliada', body: 'Obrigado por avaliar sua motorista. Sua opinião ajuda a melhorar o Bora.', read: true },
   { id: 'lixo-2', folder: 'trash', from: { name: 'Fotografe Mais', email: 'oi@fotografemais.com' }, to: [IARA], at: '2026-09-15T07:30', subject: 'Webinar grátis: iluminação com luz natural', body: 'Quinta, às 19h, ao vivo. Inscreva-se.', read: true },
   { id: 'lixo-3', folder: 'trash', from: IARA, to: [IARA], at: '2026-09-27T16:00', subject: 'rascunho (sem assunto)', body: 'Pergunta pro Théo se ele consegue fazer aquele backup cifrado de que a gente falou.', read: true },
+
+  /* ---------------- PARTE 2 ---------------- */
+  {
+    id: 'nuvem-edicao', folder: 'inbox', live: true, important: false, read: false, req: 'cap6',
+    from: { name: 'Nimbus Nuvem', email: 'nao-responda@nimbus.cloud' }, to: [IARA], at: '2026-10-12T03:19',
+    subject: '"Caderno_da_Serra_rascunho.docx" foi alterado em outro dispositivo',
+    body: `Olá, Iara.
+
+Um arquivo da sua Nimbus Nuvem foi modificado.
+
+Arquivo: Caderno_da_Serra_rascunho.docx
+Alteração: 3 trechos editados
+Horário: seg., 12 de out. de 2026, 03:17
+Dispositivo: Notebook · Windows 10 (usuário do sistema: ademar.sa)
+Local aproximado: Guaraciaba do Norte, CE
+
+A versão do seu celular Nimbus N9 não foi sincronizada desde sáb., 10 de out., 23:47, porque o aparelho está desligado.
+
+Se não foi você, troque sua senha e revise os dispositivos com acesso à conta.
+
+Nimbus Nuvem`,
+  },
 ];
 
 export default {

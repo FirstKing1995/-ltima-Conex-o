@@ -159,6 +159,14 @@ export default {
     ph('lx-print-caio', '2026-10-08T20:14', 'lixeira', 1080, 2400, null,
       'Captura de tela de uma conversa com Caio Montenegro no Papo: "Lembrando o termo de confidencialidade que você assinou. Cláusula 9." Apagada por Iara depois do print.',
       { img: 'lx_print_caio', o: { device: 'Captura de tela', deletedAt: '2026-10-08T20:30' } }),
+
+    /* ---------- PARTE 2 ---------- */
+    ph('festa-2009', '2009-10-10T23:52', 'segura', 1440, 1080, L.trilha,
+      'Foto noturna, muito granulada, de câmera compacta antiga. Em primeiro plano, mato baixo e o começo da trilha. Ao fundo, a massa escura da Pedra Lisa contra o céu. No alto da pedra, uma roda de pequenas luzes amarelas, como lanternas, perfeitamente espaçadas. Na trilha, borrado pelo movimento, um vulto pequeno e claro de cachorro subindo. A data impressa no canto: 10/10/2009.',
+      { o: { caption: 'A última foto da Pipoca. Eu tinha dez anos. Ninguém acredita no que tem em cima da pedra.', device: 'Câmera compacta (digitalizada)', req: 'final_verdade' } }),
+    ph('ultima-2347', '2026-10-10T23:47:31', 'camera', 1080, 1440, L.mirante,
+      'Imagem quase toda preta. Ruído forte de alta sensibilidade. No terço de cima, pontos de luz amarelada dispostos em roda, desfocados, como lanternas vistas de baixo. Nada mais é identificável. Arquivo recuperado do cache de miniaturas: o original não existe na memória.',
+      { o: { caption: 'IMG_20261010_234731 · recuperada do cache de miniaturas · câmera traseira · ISO 6400 · 1/4 s', req: 'cap7' } }),
   ],
 
   memories: [

@@ -8,7 +8,7 @@ export default {
 
   now: {
     temp: 19, feels: 16, desc: 'Céu limpo · ventania na serra, rajadas fortes à noite',
-    min: 17, max: 29, wind: 28, gust: 41, windDir: 'L', humidity: 52, visibility: 10, pressure: 1013, uv: 0, rain: 0, icon: 'clear-night',
+    min: 17, max: 29, wind: 28, gust: 41, windDir: 'SE', humidity: 52, visibility: 10, pressure: 1013, uv: 0, rain: 0, icon: 'clear-night',
   },
 
   sun: { rise: '05:56', set: '18:08' },

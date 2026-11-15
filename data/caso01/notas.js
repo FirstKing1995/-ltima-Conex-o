@@ -78,7 +78,7 @@ Odeio isso. Odeio ter que escolher.`,
   {
     id: 'pipoca-2009', title: 'Pipoca 2009', color: 'laranja',
     created: '2026-09-14T23:55', edited: '2026-09-14T23:55',
-    body: `Pipoca. A primeira cachorrinha, aquela mestiça preta com uma mancha branca no peito. Dormia em cima do meu pé enquanto eu aprendia a segurar a câmera da minha mãe.
+    body: `Pipoca. A primeira cachorrinha, aquela vira-lata branca malhada de marrom. Dormia em cima do meu pé enquanto eu aprendia a segurar a câmera da minha mãe.
 
 Todo mundo acha que foi a faculdade que me fez fotógrafa. Não foi. Foi ela, posando de um jeito que nenhum cachorro posa.`,
   },
@@ -164,6 +164,21 @@ Ludmilla pra acelerar o fim da edição`,
     id: 'senhas-nao', title: 'senhas: NÃO', color: 'cinza',
     created: '2026-06-02T08:00', edited: '2026-06-02T08:00',
     body: `Aqui não vai senha nenhuma. Tá tudo no gerenciador. Se eu esquecer, eu me viro.`,
+  },
+  {
+    id: 'dezessete', title: '17', color: 'cinza', req: 'final_verdade',
+    created: '2026-09-27T23:58', edited: '2026-10-09T00:41',
+    body: `58 · Joana?
+75 · Chica (o seu Zé achou)
+92 · tia Tônia
+09 · Rô
+26 · ?
+
++17 +17 +17 +17
+
+perguntar pro pai da tia Tônia. ele vai sair da sala de novo.
+cartório de Ipu: livro A-3.
+o seu Zé sabe. o seu Zé sempre soube.`,
   },
 ];
 

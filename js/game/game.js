@@ -93,7 +93,7 @@ export const game = {
     const d = game.deduction(id);
     const r = await game.checkDeduction(id);
     if (!d) return r;
-    if (d.final) state.reportAttempts++;
+    if (d.final) { if (id === 'final') state.reportAttempts++; else state.reportAttempts2 = (state.reportAttempts2 || 0) + 1; }
     if (r.allCorrect) {
       if (!state.solved[id]) { state.solved[id] = Date.now(); setFlags(d.onSolve); sfx.play('solve'); bus.emit('solve', { id }); }
       api.event('deducao_ok', id);
@@ -108,9 +108,12 @@ export const game = {
     if (d.final) {
       const blockA = r.blocks[d.blocks[0].id];
       const bonus = Object.values(r.blocks).find(b => b.bonus);
-      r.ending = r.allCorrect ? 'verdade' : (blockA?.correct ? 'incompleto' : 'errado');
+      const [okE, halfE, badE] = d.endings || ['verdade', 'incompleto', 'errado'];
+      r.ending = r.allCorrect ? okE : (blockA?.correct ? halfE : badE);
       r.bonus = !!bonus?.correct;
-      state.finalResult = { ending: r.ending, bonus: r.bonus, at: Date.now(), correct: r.correctCount, total: r.totalCount };
+      r.report = id;
+      const fr = { ending: r.ending, bonus: r.bonus, at: Date.now(), correct: r.correctCount, total: r.totalCount, report: id };
+      if (id === 'final') state.finalResult = fr; else (state.finalResults ??= {})[id] = fr;
     }
     save(true); cloudSaveSoon();
     return r;
@@ -118,11 +121,11 @@ export const game = {
 
   /** Pontuação (mesma fórmula da API). */
   score() {
-    const fr = state.finalResult || {};
-    const total = fr.total || 1, acertos = fr.correct || 0;
+    const frs = [state.finalResult || {}, ...Object.values(state.finalResults || {})];
+    const total = frs.reduce((a, f) => a + (f.total || 0), 0) || 1, acertos = frs.reduce((a, f) => a + (f.correct || 0), 0);
     const tempo = state.playMs / 60000;
     const dicas = Object.values(state.hints).reduce((a, b) => a + (b || 0), 0);
-    let p = Math.round(1000 * (acertos / total)) + Math.max(0, Math.round(400 - tempo * 2)) - dicas * 25 - state.wrong * 10 - Math.max(0, state.reportAttempts - 1) * 100;
+    let p = Math.round(1000 * (acertos / total)) + Math.max(0, Math.round(400 - tempo * 2)) - dicas * 25 - state.wrong * 10 - Math.max(0, state.reportAttempts - 1) * 100 - Math.max(0, (state.reportAttempts2 || 0) - 1) * 100;
     return { pontos: Math.max(0, p), acertos, total, tempo_min: Math.round(tempo * 10) / 10, dicas, erros: state.wrong, tentativa: Math.max(1, state.reportAttempts) };
   },
 };

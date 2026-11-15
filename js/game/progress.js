@@ -60,6 +60,7 @@ const ACH = [
   { id: 'serra', title: 'Serra adentro', text: 'Percorreu a linha do tempo de Guaraciaba do Norte.', when: 'seen:rotas:day:2026-10-09 && seen:rotas:day:2026-10-10' },
   { id: 'eco', title: 'A cópia', text: 'Descobriu quem guardava a cópia do celular.', when: 'eco_revelado' },
   { id: 'sem-dicas', title: 'Sem dicas', text: 'Resolveu o caso sem pedir nenhuma dica.', when: 'solved:final && !usou_dica' },
+  { id: 'dezessete', title: 'Dezessete', text: 'Expôs a Irmandade da Colheita.', when: 'solved:final2' },
   { id: 'primeira', title: 'De primeira', text: 'Acertou o relatório final na primeira tentativa.', when: 'final_primeira' },
 ];
 export const achievements = () => ACH;
@@ -95,6 +96,8 @@ export function useHint(objectiveId) {
 }
 
 export function init() {
+  // saves anteriores à parte 2: quem já tinha o final "verdade" segue para o capítulo 5
+  if (state.finalResult?.ending === 'verdade' && !state.flags.final_verdade) state.flags.final_verdade = Date.now();
   bus.on('flag', () => evaluate());
   bus.on('solve', ({ id }) => { if (id === 'final' && state.reportAttempts === 1) setFlag('final_primeira'); });
   evaluate();

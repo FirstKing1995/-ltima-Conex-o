@@ -92,6 +92,76 @@ export default {
         { think: true, text: 'O relatório vai para o delegado e para a única pessoa que ela queria que soubesse: a jornalista. Desta vez, para o número certo.' },
       ],
     },
+
+    /* ---------- capítulo 5 ---------- */
+    'cap5-abre': {
+      msgs: [
+        { chapter: true, text: 'Capítulo 5 · Dezessete anos' },
+        { doc: true, title: 'Termo de interrogatório · Maria Eduarda Sampaio Andrade (trecho)', lines: [
+          'Perguntada se confirma a voz da gravação das 23:32, respondeu que sim.',
+          'Perguntada se empurrou a vítima, respondeu: "Eu não empurrei. Eu puxei o celular. Ela foi pra trás. A cerca já tava aberta."',
+          'Perguntada por que apagou a gravação e escreveu a mensagem do timelapse, ficou em silêncio por quatro minutos.',
+          'Depois disse, sem que lhe fosse perguntado: "Vocês não são daqui. Pergunta pro meu pai o que aconteceu em 2009. Pergunta o que aconteceu em 92."',
+          'A defesa interrompeu o depoimento.',
+        ] },
+        { doc: true, title: 'Reconstituição · anotação de campo', lines: [
+          'Pedra Lisa, 16/10, 15:10. Presentes: perito, escrivão, o caseiro José Ribamar (Seu Zé), 73 anos, no sítio desde 1971.',
+          'Mostrando o ponto do pé da encosta, o caseiro tirou o chapéu e disse, sem que ninguém perguntasse: "É a quarta que eu acho aqui, doutor."',
+          'Perguntado sobre as outras, recolocou o chapéu e não respondeu mais nada.',
+        ] },
+        'O perito liberou o segundo lote da extração: o que estava só na nuvem dela. Arquivos, notas, recados de voz.',
+        { think: true, text: 'A Galeria chama a foto da Pipoca de "Há 17 anos". Até hoje era só uma lembrança automática.' },
+      ],
+    },
+    'v-festa2009': { msgs: ['Pasta Segura. Uma foto de 10/10/2009, 23:52. No alto da pedra, uma roda de luzes. Espaçadas por igual.', 'Na trilha, um vulto pequeno e claro, subindo. Um cachorro.', { think: true, text: 'Fogueira não se acende em roda. Lanterna se carrega em roda.' }] },
+    'v-recortes': { msgs: ['Recortes de jornal que ela juntou. 1958, 1975, 1992, 2009. Copio as datas e fico olhando para elas.', { think: true, text: 'Somo dezessete à última e chego numa data que eu conheço bem.' }] },
+    'v-nota17': { msgs: ['Uma nota com um título só: 17. "o seu Zé sabe. o seu Zé sempre soube."'] },
+    'v-ademar': { msgs: ['Recado de voz, 09/10, 21:14. Um homem que se apresenta como pai da Duda.', '"A serra não gosta de quem cava." Ela morreu na noite seguinte.'] },
+    'd5-pronta': { msgs: [{ think: true, text: 'As datas, os nomes, quem achou, de quem é a terra. Fecho isso no Quadro antes de seguir.' }] },
+    'd5-ok': {
+      msgs: [
+        'Cinco moças. A mesma noite do ano, a mesma pedra, a mesma terra.',
+        { think: true, text: 'Não acredito em pedra que cobra. Acredito em gente que se organiza para que pareça.' },
+        { chapter: true, text: 'Capítulo 6 · O Caderno da Serra' },
+        { doc: true, title: 'Petição da defesa (trecho) · autos 0417/2026', lines: [
+          'A defesa requer a juntada do manuscrito "Caderno da Serra", obtido da conta de nuvem da vítima, que demonstra seu estado mental nas semanas anteriores à morte.',
+          'Trecho A: "Desde 2009 eu escuto a pedra. Um som que não é som. Fica no peito, embaixo do osso."',
+          'Trecho B: "Fui eu que mandei as mensagens da blusa verde para mim mesma. Precisava de um motivo para a medida protetiva."',
+          'Trecho C: "Às vezes penso em levar a Duda até a beira e deixar a serra decidir qual de nós fica."',
+          'Trecho D: "A serra pede. E eu vou."',
+          'Conclui a defesa: a vítima nutria ideação suicida e fantasias de vingança contra a acusada. A queda decorreu de ato da própria vítima, e a acusada apenas tentou contê-la.',
+        ] },
+        { think: true, text: 'Se isso for dela, eu li a Iara errado desde a primeira mensagem.' },
+      ],
+    },
+
+    /* ---------- capítulo 6 ---------- */
+    'v-caderno': { msgs: ['A versão do manuscrito que ficou no aparelho. Última edição 09/10, 23:58. Ela já estava na serra.', 'Leio procurando os quatro trechos da defesa. Devagar.'] },
+    'v-nuvem': { msgs: ['A Nimbus avisou: o manuscrito foi alterado na nuvem em 12/10, às 03:17. Três trechos.', 'Às 03:17 do dia 12, Iara estava morta havia mais de um dia.'] },
+    'v-devices': { msgs: ['Dispositivos com acesso à conta dela. Um notebook em Guaraciaba do Norte, usuário do sistema "ademar.sa". Primeiro acesso: 12/10, 03:09.'] },
+    'v-blusa': { msgs: [{ think: true, text: 'A defesa diz que ela mandou a si mesma as mensagens da blusa verde. O perfil anônimo tem telefone de recuperação terminado em 56. Comparo.' }] },
+    'd6-pronta': { msgs: [{ think: true, text: 'Tenho as duas versões e tenho quem mexeu. O Quadro espera.' }] },
+    'd6-ok': {
+      msgs: [
+        'Dois trechos acrescentados, um alterado, um dela.',
+        'O que era dela é o que mais pesa: ela ouvia a pedra desde menina.',
+        { think: true, text: 'Alguém reescreveu uma morta às três da manhã. Ninguém faz isso por uma filha só. Faz por uma casa.' },
+        { chapter: true, text: 'Capítulo 7 · A Irmandade' },
+        'O perito mandou o terceiro lote: o que sobrou no cache. Miniaturas, downloads antigos, uma planilha que ela nunca terminou.',
+      ],
+    },
+
+    /* ---------- capítulo 7 ---------- */
+    'v-repasses': { msgs: ['40% de cada taxa, sempre no dia seguinte, para uma associação beneficente. Descrição do Pix: "dizimo".', '15/08, do pai dela: R$ 12.000. "dizimo safra grande".'] },
+    'v-estatuto': { msgs: ['Estatuto de 1941, cartório de Ipu. Copio o artigo 3º palavra por palavra.', { think: true, text: 'Artigo 6º: "O que se faz na Pedra não se escreve." Ela escreveu.' }] },
+    'v-infrassom': { msgs: ['Fenda na face leste da Pedra Lisa. Com vento de sudeste acima de 35 km/h, um tom perto de 17 Hz. Medo sem causa, aperto no peito, sensação de alguém atrás.', 'Volto ao Clima do aparelho, àquele sábado. Volto ao relógio dela: o coração sobe às 23:33. A Duda só chega dois minutos depois.', { think: true, text: 'É física. Escrevo isso duas vezes.' }] },
+    'v-ultima': { msgs: ['Uma foto recuperada do cache. 23:47:31.', 'O aparelho foi desligado no botão às 23:47:02. Releio o registro de bateria. Releio de novo.', { think: true, text: 'Não anoto o que estou pensando.' }] },
+    'final2-pronto': {
+      msgs: [
+        'Tenho o suficiente para um relatório complementar. Vai para o Ministério Público. Não para a delegacia de Guaraciaba.',
+        { think: true, text: 'O delegado de Guaraciaba arquivou o caso em dezenove horas. Não pergunto por quê. Ainda.' },
+      ],
+    },
   },
 
   triggers: [
@@ -121,6 +191,24 @@ export default {
     { id: 't-desb', when: 'cap4 && seen:config:unlock-log && seen:config:battery', node: 'v-desb' },
     { id: 't-grav', when: 'seen:gravador:rec:g-2332', node: 'v-grav' },
     { id: 't-final', when: 'cap4_done', node: 'final-pronto' },
+    { id: 't-cap5', when: 'final_verdade', node: 'cap5-abre' },
+    { id: 't-festa2009', when: 'final_verdade && seen:galeria:photo:festa-2009', node: 'v-festa2009' },
+    { id: 't-recortes', when: 'final_verdade && seen:arquivos:file:recortes-pedra', node: 'v-recortes' },
+    { id: 't-nota17', when: 'final_verdade && seen:notas:note:dezessete', node: 'v-nota17' },
+    { id: 't-ademar', when: 'final_verdade && seen:telefone:voicemail:vm-ademar', node: 'v-ademar' },
+    { id: 't-d5p', when: 'objectives_done:5 && !solved:d5', node: 'd5-pronta' },
+    { id: 't-d5', when: 'solved:d5', node: 'd5-ok' },
+    { id: 't-caderno', when: 'cap6 && seen:arquivos:file:caderno-da-serra', node: 'v-caderno' },
+    { id: 't-nuvem', when: 'cap6 && seen:correio:mail:nuvem-edicao', node: 'v-nuvem' },
+    { id: 't-devices', when: 'cap6 && seen:config:devices', node: 'v-devices' },
+    { id: 't-blusa', when: 'cap6', node: 'v-blusa' },
+    { id: 't-d6p', when: 'objectives_done:6 && !solved:d6', node: 'd6-pronta' },
+    { id: 't-d6', when: 'solved:d6', node: 'd6-ok' },
+    { id: 't-repasses', when: 'cap7 && seen:arquivos:file:repasses-associacao', node: 'v-repasses' },
+    { id: 't-estatuto', when: 'cap7 && seen:arquivos:file:estatuto-1941', node: 'v-estatuto' },
+    { id: 't-infrassom', when: 'cap7 && seen:arquivos:file:infrassom-ibiapaba', node: 'v-infrassom' },
+    { id: 't-ultima', when: 'cap7 && seen:galeria:photo:ultima-2347', node: 'v-ultima' },
+    { id: 't-final2', when: 'cap7_done', node: 'final2-pronto' },
   ],
 
   // "Repensar o caso": três níveis, do mais vago ao quase explícito. Sempre na voz do investigador.
@@ -146,5 +234,18 @@ export default {
     '4.3': ['Ela desbloqueava com o dedo. Naquela noite, alguém não conseguiu.', 'Segurança registra cada desbloqueio. A bateria registra como o aparelho desligou.', 'Configurações, Segurança (23:42 e 23:43) e Bateria (23:47).'],
     '4.4': ['"Vou gravar tudo." Ela disse isso para mim.', 'Apagar não é destruir. Muitos apps têm lixeira.', 'Gravador, Lixeira, 23:32.'],
     'ded:final': ['Cada bloco do relatório é conferido separado.', 'O encobrimento tem quatro passos, na ordem em que aconteceram. O álibi usa um vídeo antigo.', 'PIN, gravação, timelapse, 23:47, desligado. O vídeo é das 22:51.'],
+    '5.1': ['Ela tinha dez anos em 2009 e já fotografava. Uma criança guarda a última foto de um bicho que sumiu.', 'O segundo lote trouxe coisas para a Pasta Segura.', 'Galeria, Pasta Segura, a foto de 10/10/2009.'],
+    '5.2': ['Quem pesquisa o passado de uma cidade pequena vai à hemeroteca.', 'Um PDF de recortes na Pasta Segura. E uma nota com um número só.', 'Arquivos, Pasta Segura, recortes da Pedra Lisa. Notas, a nota "17".'],
+    '5.3': ['Às vezes o aviso chega pela voz.', 'A caixa postal do telefone tem um recado novo, da véspera da festa.', 'Telefone, Caixa postal, 09/10 às 21:14.'],
+    'ded:d5': ['Contar os anos entre uma data e outra.', 'Os recortes dão os nomes. A nota diz quem achou. A terra é de uma família só.', '17, festa da colheita, mirante, Antônia, Rosângela, Iara, Seu Zé, família Sampaio.'],
+    '6.1': ['Um rascunho que ela escrevia no próprio celular estaria lá até 23:47 de sábado. A nuvem continuou depois.', 'Documentos do aparelho.', 'Arquivos, Documentos, Caderno_da_Serra_rascunho.docx. Comparar com os trechos da defesa no caderno.'],
+    '6.2': ['Toda nuvem avisa quando um arquivo muda em outro aparelho.', 'Um e-mail da Nimbus. E a lista de quem tem acesso à conta.', 'Correio, aviso da Nimbus de 12/10. Configurações, Contas, Dispositivos com acesso.'],
+    '6.3': ['A defesa diz que ela mandou as mensagens para si mesma. O que diz o perfil anônimo?', 'O SMS da blusa verde e a recuperação de conta do @visto.por.ultimo.', 'Mensagens, número da blusa verde. Lume, @visto.por.ultimo, "Esqueci a senha": final 56, o número do Rafa.'],
+    'ded:d6': ['Um trecho que existe igual nas duas versões é dela. Um que só existe na nuvem foi acrescentado. Um que mudou foi alterado.', 'A hora está no aviso da Nimbus. O nome, no usuário do notebook. A defesa diz qual era a tese.', 'A dela, B e C acrescentados, D alterado. 03:17, Guaraciaba, Ademar, suicídio.'],
+    '7.1': ['O dinheiro da taxa entrava num chip. Para onde ia depois?', 'Uma planilha nova na Pasta Segura.', 'Arquivos, Pasta Segura, repasses_associacao.xlsx.'],
+    '7.2': ['O Ademar falou de cartório no recado. O manuscrito também.', 'Downloads: uma cópia de cartório de Ipu.', 'Arquivos, Downloads, Estatuto_Irmandade_1941.'],
+    '7.3': ['Ela também queria uma explicação para o barulho.', 'Um relatório técnico nos Downloads. E o vento daquela noite.', 'Arquivos, Downloads, Infrassom (UFC). Clima, o vento de sábado.'],
+    '7.4': ['Fotos apagadas às vezes sobram como miniaturas.', 'O álbum da Câmera, no fim do sábado.', 'Galeria, Câmera, a foto de 23:47:31.'],
+    'ded:final2': ['O primeiro bloco é o que sustenta o resto: quem, quanto e para quem.', 'Estatuto e repasses para a Irmandade; recortes para o padrão; o aviso da Nimbus para o manuscrito.', 'Irmandade da Colheita, Ademar, 40%, taxa de garantia, Caio. Colheita Grande, mirante, Rosângela, Iara. Ademar, Caderno da Serra, suicídio. Anexo: infrassom, sudeste.'],
   },
 };

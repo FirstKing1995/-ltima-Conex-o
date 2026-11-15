@@ -1,6 +1,6 @@
 // Termos coletáveis no Modo Análise (lupa). match: textos que, quando aparecem no celular, viram o termo.
 // cat: pessoa | lugar | hora | objeto | conceito | numero.  cs: true = diferencia maiúsculas.
-const horas = ['18:19', '20:40', '21:15', '21:47', '21:52', '21:55', '22:15', '22:20', '22:31', '22:51', '23:05', '23:07', '23:20', '23:25', '23:26', '23:28', '23:29', '23:30', '23:31', '23:32', '23:33', '23:34', '23:38', '23:39', '23:40', '23:41', '23:42', '23:43', '23:44', '23:45', '23:46', '23:47', '23:52', '23:53', '23:55', '23:58', '00:15', '00:17', '06:20'];
+const horas = ['18:19', '20:40', '21:15', '21:47', '21:52', '21:55', '22:15', '22:20', '22:31', '22:51', '23:05', '23:07', '23:20', '23:25', '23:26', '23:28', '23:29', '23:30', '23:31', '23:32', '23:33', '23:34', '23:38', '23:39', '23:40', '23:41', '23:42', '23:43', '23:44', '23:45', '23:46', '23:47', '23:52', '23:53', '23:55', '23:58', '00:15', '00:17', '03:09', '03:17', '06:20'];
 
 export default {
   terms: [
@@ -18,7 +18,14 @@ export default {
     { id: 'p-igor', label: 'Igor', cat: 'pessoa', match: ['Igor'] },
     { id: 'p-nanda', label: 'Nanda', cat: 'pessoa', match: ['Nanda'] },
     { id: 'p-leo', label: 'Léo', cat: 'pessoa', match: ['Léo'] },
-    { id: 'p-ze', label: 'Seu Zé', cat: 'pessoa', match: ['Seu Zé'] },
+    { id: 'p-ze', label: 'Seu Zé', cat: 'pessoa', match: ['Seu Zé', 'seu Zé', 'José Ribamar'] },
+    { id: 'p-ademar', label: 'Ademar', cat: 'pessoa', match: ['Ademar', 'Ademar Sampaio Andrade', 'ademar.sa'] },
+    { id: 'p-antonia', label: 'Antônia', cat: 'pessoa', match: ['Antônia', 'Antônia Fontenele', 'tia Tônia', 'Tônia'] },
+    { id: 'p-rosangela', label: 'Rosângela', cat: 'pessoa', match: ['Rosângela Sampaio', 'Rô'], cs: true },
+    { id: 'p-firmino', label: 'Cel. Firmino', cat: 'pessoa', match: ['Firmino', 'Firmino Sampaio', 'Coronel Firmino Sampaio'] },
+    { id: 'p-joana', label: 'Joana', cat: 'pessoa', match: ['Joana Batista', 'Joana'] },
+    { id: 'p-chica', label: 'Chica', cat: 'pessoa', match: ['Chica', 'Francisca Bezerra'] },
+    { id: 'p-sampaio', label: 'família Sampaio', cat: 'pessoa', match: ['família Sampaio', 'dos Sampaio', 'os Sampaio', 'família da Duda'] },
     // números
     { id: 'n-99645', label: '(88) 99645-1209', cat: 'numero', match: ['99645-1209', '99645 1209', '996451209'] },
     { id: 'n-4471', label: '98812-4471', cat: 'numero', match: ['98812-4471'] },
@@ -63,6 +70,12 @@ export default {
     { id: 'c-perseguicao', label: 'perseguição', cat: 'conceito', match: ['perseguição', 'stalker'] },
     { id: 'c-bonus', label: 'bônus', cat: 'conceito', match: ['bônus', 'bonus'] },
     { id: 'c-pix', label: 'Pix', cat: 'conceito', match: ['Pix'], cs: true },
+    { id: 'c-festa', label: 'festa da colheita', cat: 'conceito', match: ['festa da colheita', 'Colheita Grande', 'festa da família'] },
+    { id: 'c-irmandade', label: 'Irmandade da Colheita', cat: 'conceito', match: ['Irmandade', 'Irmandade da Colheita', 'Irmandade da Colheita da Serra Grande', 'Associação Beneficente Nossa Senhora da Colheita', 'Associação Beneficente', 'ASSOC BENEF N SRA DA COLHEITA', 'dízimo', 'dizimo'] },
+    { id: 'c-infrassom', label: 'infrassom', cat: 'conceito', match: ['infrassom', 'Infrassom', '17 Hz', 'zumbido'] },
+    { id: 'c-sudeste', label: 'sudeste', cat: 'conceito', match: ['sudeste', 'vento de sudeste'] },
+    { id: 'c-suicidio', label: 'suicídio', cat: 'conceito', match: ['suicídio', 'ideação suicida'] },
+    { id: 'c-manuscrito', label: 'Caderno da Serra', cat: 'conceito', match: ['Caderno da Serra', 'manuscrito', 'Caderno_da_Serra_rascunho.docx'] },
     { id: 'c-apagada', label: 'mensagem apagada', cat: 'conceito', match: ['Mensagem apagada', 'mensagem apagada', 'apagada'] },
   ],
 };

@@ -81,5 +81,9 @@ export default {
       id: 'vm-bruna', phone: '5585988124471', at: '2026-10-12T10:35', duration: 28,
       transcript: 'Iara, é a Bruna Leal, do Farol. Estou aqui no jornal te esperando, são dez e trinta e cinco. A sala está reservada até as onze. Se aconteceu algum imprevisto, me avisa por favor. Eu preciso do que você disse que tinha.',
     },
+    {
+      id: 'vm-ademar', phone: '5588996017741', at: '2026-10-09T21:14', duration: 47, req: 'final_verdade',
+      transcript: 'Iara, minha filha, aqui é o Ademar, pai da Duda. Soube que tu andou no cartório de Ipu pedindo livro velho, e no jornal pedindo jornal de noventa e dois. Eu entendo. É tua tia. Mas deixa os mortos onde Deus deixou. Vem pra festa, faz o teu serviço, volta pra Fortaleza. A serra não gosta de quem cava. Tua família sabe disso melhor que ninguém. Um abraço no teu pai.',
+    },
   ],
 };

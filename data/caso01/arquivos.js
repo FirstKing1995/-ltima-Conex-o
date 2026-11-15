@@ -298,6 +298,126 @@ Iara`,
       { type: 'sign', text: 'Síndico: Edvaldo Moura · Secretária: Rosângela Pinto' },
     ] }],
   },
+
+  /* ================= PARTE 2 (segundo lote da extração: nuvem de Iara) ================= */
+
+  // Cap. 5 — a pesquisa dela sobre a pedra
+  pdf('recortes-pedra', 'Recortes_Pedra_Lisa_hemeroteca.pdf', 'segura', '2026-09-27T23:41', 2140000, [
+    [
+      { type: 'h1', text: 'Recortes — Pedra Lisa' },
+      { type: 'p', text: 'Digitalizados na hemeroteca da Biblioteca Municipal de Guaraciaba do Norte e no arquivo do Serra Notícias. Pedi como "pesquisa para um livro de fotografia". Ninguém perguntou mais nada. Só a moça do arquivo, que disse: "a senhora é a segunda pessoa que pede esses jornais".' },
+      { type: 'h2', text: 'Correio da Ibiapaba · 14 de outubro de 1958' },
+      { type: 'quote', text: 'TRAGÉDIA NO SÍTIO DO CORONEL. A jovem Joana Batista, 18 anos, filha de morador do Sítio Flor da Serra, propriedade do Cel. Firmino Sampaio, faleceu na noite de sábado, 11, ao cair da Pedra Lisa, onde teria subido em busca de uma cabra desgarrada. A festa da colheita, tradição da família, não foi interrompida. O coronel mandou rezar missa de sétimo dia às suas custas.' },
+      { type: 'h2', text: 'Correio da Ibiapaba · 15 de outubro de 1975' },
+      { type: 'quote', text: 'MOÇA CAI DE PEDRA EM GUARACIABA. Francisca Bezerra, a Chica, de 17 anos, ajudante de cozinha contratada para a tradicional festa da colheita dos Sampaio, morreu na madrugada de domingo, 12, após cair da Pedra Lisa. Segundo colegas, ela "saiu da cozinha para tomar um ar" pouco antes da meia-noite. O corpo foi encontrado pelo caseiro José Ribamar, de 22 anos.' },
+    ],
+    [
+      { type: 'h2', text: 'Serra Notícias · 13 de outubro de 1992' },
+      { type: 'quote', text: 'ACIDENTE NA PEDRA LISA. A estudante Antônia Fontenele, 21 anos, natural de Guaraciaba do Norte, morreu na noite de sábado, 10, ao cair do mirante da Pedra Lisa durante a festa da colheita no Sítio Flor da Serra. Amigos disseram que ela tinha subido "para ver as estrelas". O caseiro da propriedade localizou o corpo ao amanhecer. O delegado considerou o caso encerrado.' },
+      { type: 'p', text: 'Anotação minha, a caneta, na margem da cópia: ==tia Tônia==. O pai nunca disse o nome dela em voz alta. Na casa da vó tinha um retrato virado para a parede.' },
+      { type: 'h2', text: 'Serra Notícias · 12 de outubro de 2009' },
+      { type: 'quote', text: 'JOVEM DA FAMÍLIA SAMPAIO MORRE EM QUEDA. Rosângela Sampaio, 19 anos, irmã do produtor Ademar Sampaio Andrade, morreu na noite de sábado, 10, ao cair da Pedra Lisa, na propriedade da família, durante a festa da colheita. Segundo convidados, ela subiu a trilha à procura de uma criança que havia se afastado da festa. A criança foi encontrada bem, pouco depois, na base da trilha.' },
+      { type: 'p', text: 'A criança era eu. Eu tinha dez anos. Eu estava atrás da Pipoca, que correu para a pedra quando começou o barulho. Eu lembro das luzes lá em cima. Eu lembro da Rô me chamando. Eu não lembro de descer.' },
+      { type: 'highlight', text: '1958 · 1975 · 1992 · 2009. Sempre no segundo sábado de outubro. Sempre a festa da colheita. Sempre uma moça. Dezessete anos entre uma e outra.' },
+      { type: 'p', text: 'O próximo segundo sábado de outubro de 17 em 17 é 10/10/2026. É a data da Noite da Colheita. Fui contratada para fotografar.' },
+    ],
+  ], { req: 'final_verdade' }),
+
+  // Cap. 6 — o manuscrito, cópia local (a que ficou no aparelho, sem a edição da nuvem)
+  {
+    id: 'caderno-da-serra', name: 'Caderno_da_Serra_rascunho.docx', folder: 'Documentos', type: 'docx', size: 412000, at: '2026-10-09T23:58', req: 'cap6',
+    pages: [
+      { blocks: [
+        { type: 'h1', text: 'Caderno da Serra' },
+        { type: 'p', text: 'rascunho · não mostrar a ninguém ainda · versão do aparelho' },
+        { type: 'h2', text: '1. A câmera' },
+        { type: 'p', text: 'Ganhei a primeira câmera em junho de 2009. Uma compacta prata, de segunda mão, que o pai comprou na feira de Tianguá. A primeira foto foi da Pipoca. A última daquele ano também.' },
+        { type: 'h2', text: '2. O barulho' },
+        { type: 'p', text: 'Desde 2009 eu escuto a pedra. Um som que não é som. Fica no peito, embaixo do osso.' },
+        { type: 'p', text: 'Não é sempre. É quando venta de um lado só. A Duda também escutava, quando a gente era menina. Ela dizia que era a pedra chamando. Eu dizia que era o vento. Hoje eu não sei qual de nós duas estava com medo de quê.' },
+        { type: 'h2', text: '3. As moças' },
+        { type: 'p', text: 'Quatro moças em sessenta e oito anos. Todas na mesma noite do ano, todas da mesma pedra, todas "acidente". Ninguém da serra acha isso estranho. Ou todo mundo acha e ninguém fala.' },
+        { type: 'p', text: 'O seu Zé achou três delas. Quando eu perguntei da Rô, ele olhou para o chão e disse: "a menina devia ter ficado embaixo". A menina era eu.' },
+      ] },
+      { blocks: [
+        { type: 'h2', text: '4. O Rafa' },
+        { type: 'p', text: 'Ele voltou a mandar mensagem de número novo. Eu reconheço o jeito de escrever, o "tu" sem acento, o mesmo erro em "arrepender". Vou guardar tudo e pedir a medida protetiva na volta da serra. Cansei de ter medo de quem eu conheço.' },
+        { type: 'h2', text: '5. A Duda' },
+        { type: 'p', text: 'A pessoa que eu mais amei nessa vida está tirando dinheiro do meu pai. Eu fico escrevendo isso para ver se a frase fica menos absurda. Não fica.' },
+        { type: 'p', text: 'Eu não quero que ela seja presa. Eu quero que ela devolva, e que pare. E que me olhe na cara uma vez sem a família dela atrás.' },
+        { type: 'h2', text: '6. Eles' },
+        { type: 'p', text: 'O Ademar fala da festa como quem fala de missa. A Lúcia não sobe na pedra. O cartório de Ipu tem um estatuto de 1941 com o nome do bisavô da Duda. Tem uma associação que recebe dinheiro e não faz caridade nenhuma.' },
+        { type: 'p', text: 'A serra não pede nada. Quem pede são eles.' },
+        { type: 'p', text: 'Sábado eu subo. Com a câmera, com o gravador, com o celular no bolso. Se a pedra fizer barulho, eu gravo o barulho. Se for gente, eu gravo a gente.' },
+      ] },
+    ],
+  },
+
+  // Cap. 7 — o dinheiro, o estatuto e o vento
+  {
+    id: 'repasses-associacao', name: 'repasses_associacao.xlsx', folder: 'segura', type: 'xlsx', size: 14000, at: '2026-10-07T00:12', req: 'cap7',
+    sheets: [
+      { name: 'Saídas do chip', rows: [
+        ['Data', 'Entrou (taxa)', 'Família', 'Saiu no dia seguinte', 'Para', 'Descrição do Pix'],
+        ['20/07', 'R$ 18.000,00', 'José Raimundo Moura', 'R$ 7.200,00', 'ASSOC BENEF N SRA DA COLHEITA', 'dizimo'],
+        ['23/07', 'R$ 12.500,00', 'Francisca das Chagas Lima', 'R$ 5.000,00', 'ASSOC BENEF N SRA DA COLHEITA', 'dizimo'],
+        ['03/08', 'R$ 25.000,00', 'Manoel Ferreira Neto', 'R$ 10.000,00', 'ASSOC BENEF N SRA DA COLHEITA', 'dizimo'],
+        ['15/08', 'R$ 30.000,00', 'Antônio Fontenele (meu pai)', 'R$ 12.000,00', 'ASSOC BENEF N SRA DA COLHEITA', 'dizimo safra grande'],
+        ['26/08', 'R$ 20.000,00', 'Sebastião e Lúcia Araújo', 'R$ 8.000,00', 'ASSOC BENEF N SRA DA COLHEITA', 'dizimo'],
+        ['Total', 'R$ 105.500,00', '5 famílias conferidas', 'R$ 42.200,00', '40% de cada taxa', ''],
+      ] },
+      { name: 'Quem é', rows: [
+        ['Campo', 'O que achei'],
+        ['Nome', 'Associação Beneficente Nossa Senhora da Colheita'],
+        ['CNPJ', '12.417.300/0001-17 · aberta em 1987 · Guaraciaba do Norte'],
+        ['Presidente', 'Ademar Sampaio Andrade (pai da Duda)'],
+        ['Endereço', 'Sítio Flor da Serra, s/n — o mesmo do evento'],
+        ['Caridade registrada', 'nenhuma que eu tenha achado'],
+        ['Obs.', 'A Duda não ficava com tudo. 40% ia para o pai, toda vez, no dia seguinte. "Dízimo".'],
+      ] },
+    ],
+  },
+
+  pdf('estatuto-1941', 'Estatuto_Irmandade_1941_cartorio_Ipu.pdf', 'Downloads', '2026-09-24T15:02', 3310000, [
+    [
+      { type: 'p', text: 'Cartório do 1º Ofício de Ipu · Livro A-3 · fls. 112 a 114 · cópia reprográfica, original em mau estado.' },
+      { type: 'h1', text: 'Estatuto da Irmandade da Colheita da Serra Grande' },
+      { type: 'p', text: 'Aos onze dias do mês de outubro de mil novecentos e quarenta e um, no Sítio Flor da Serra, reunidos os chefes das famílias abaixo assinados, sob a provedoria do Coronel Firmino Sampaio, fica fundada esta Irmandade, em ação de graças pela água que voltou à serra depois da grande seca.' },
+      { type: 'h2', text: 'Capítulo I — Dos fins' },
+      { type: 'li', text: 'Art. 1º Zelar pela fartura das famílias da serra e pela memória dos que a seca levou.' },
+      { type: 'li', text: 'Art. 2º Manter a festa da colheita no segundo sábado de outubro, na casa do provedor.' },
+      { type: 'li', text: 'Art. 3º De dezessete em dezessete safras faz-se a ==Colheita Grande==, na Pedra, na noite da festa, com as lanternas em roda. Dezessete foram as covas abertas na seca.' },
+      { type: 'h2', text: 'Capítulo II — Dos irmãos' },
+      { type: 'li', text: 'Art. 4º O cargo de provedor passa de pai a filho na família Sampaio.' },
+      { type: 'li', text: 'Art. 5º Cada irmão contribui com o dízimo de suas colheitas para a caixa da Irmandade.' },
+      { type: 'li', text: 'Art. 6º O que se faz na Pedra não se escreve.' },
+      { type: 'sign', text: 'Firmino Sampaio', role: 'Provedor' },
+    ],
+    [
+      { type: 'h2', text: 'Averbação de 1987' },
+      { type: 'p', text: 'A Irmandade passa a ter, para fins civis, a denominação de ==Associação Beneficente Nossa Senhora da Colheita==, mantidos os fins e a provedoria. Presidente: Ademar Sampaio Andrade.' },
+      { type: 'h2', text: 'Averbação de 2023' },
+      { type: 'p', text: 'Aprovado pela assembleia o fundo semente de R$ 1.200.000,00 em favor do irmão afilhado ==Caio Montenegro==, para a constituição de empresa de investimentos que levará o nome da Irmandade, com retorno à caixa na forma combinada.' },
+      { type: 'p', text: 'Anotação de Iara, no pé da cópia: "Colheita Capital" é a Irmandade de terno.' },
+    ],
+  ], { req: 'cap7' }),
+
+  pdf('infrassom-ibiapaba', 'Infrassom_eolico_lajedos_Ibiapaba_UFC_2014.pdf', 'Downloads', '2026-09-26T01:20', 1880000, [
+    [
+      { type: 'h1', text: 'Infrassom de origem eólica em lajedos graníticos da Ibiapaba' },
+      { type: 'p', text: 'Departamento de Geologia, Universidade Federal do Ceará. Relatório técnico, 2014.' },
+      { type: 'h2', text: 'Resumo' },
+      { type: 'p', text: 'Medimos emissões de baixa frequência em seis afloramentos da Serra da Ibiapaba. No ponto P4 (Pedra Lisa, Guaraciaba do Norte), uma fenda vertical na face leste funciona como um tubo ressonante: com ==vento de sudeste== acima de 35 km/h, registrou-se um tom contínuo próximo de ==17 Hz==, abaixo do limiar da audição humana.' },
+      { type: 'h2', text: 'Efeitos relatados por voluntários expostos' },
+      { type: 'li', text: 'Ansiedade e medo sem causa aparente.' },
+      { type: 'li', text: 'Aperto no peito e aceleração cardíaca.' },
+      { type: 'li', text: 'Visão periférica "tremida"; percepção de vultos.' },
+      { type: 'li', text: 'Sensação de presença: "como se alguém estivesse atrás de mim".' },
+      { type: 'h2', text: 'Ocorrência' },
+      { type: 'p', text: 'O regime de vento de sudeste é mais forte entre setembro e novembro, à noite. Os maiores registros foram feitos em outubro, entre 23h e 1h.' },
+      { type: 'p', text: 'Nota de Iara na primeira página: "não é a pedra chamando. é física. então por que eu ainda tenho medo?"' },
+    ],
+  ], { req: 'cap7' }),
 ];
 
 export default { files };

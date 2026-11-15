@@ -54,6 +54,35 @@ export default {
       allDoneFlag: 'cap4_done',
       deduction: 'final', completeWhen: 'solved:final', onComplete: ['final_done'],
     },
+    {
+      n: 5, title: 'Capítulo 5', subtitle: 'Dezessete anos', startWhen: 'final_verdade',
+      objectives: [
+        { id: '5.1', text: 'O que uma menina de dez anos viu em 2009?', doneWhen: 'seen:galeria:photo:festa-2009' },
+        { id: '5.2', text: 'Quem caiu daquela pedra antes dela?', doneWhen: 'seen:arquivos:file:recortes-pedra && seen:notas:note:dezessete' },
+        { id: '5.3', text: 'Quem mandou Iara parar de cavar?', doneWhen: 'seen:telefone:voicemail:vm-ademar' },
+      ],
+      deduction: 'd5', completeWhen: 'solved:d5', onComplete: ['cap6'],
+    },
+    {
+      n: 6, title: 'Capítulo 6', subtitle: 'O Caderno da Serra', startWhen: 'cap6',
+      objectives: [
+        { id: '6.1', text: 'O manuscrito que a defesa juntou existe neste aparelho?', doneWhen: 'seen:arquivos:file:caderno-da-serra' },
+        { id: '6.2', text: 'Quem abriu a nuvem dela depois da morte?', doneWhen: 'seen:correio:mail:nuvem-edicao && seen:config:devices' },
+        { id: '6.3', text: 'Quem escreveu, de fato, as mensagens da blusa verde?', doneWhen: 'cap6 && seen:sms:thread:rafa-2 && seen:lume:recovery:visto.por.ultimo' },
+      ],
+      deduction: 'd6', completeWhen: 'solved:d6', onComplete: ['cap7'],
+    },
+    {
+      n: 7, title: 'Capítulo 7', subtitle: 'A Irmandade', startWhen: 'cap7',
+      objectives: [
+        { id: '7.1', text: 'Para onde ia o dinheiro da taxa?', doneWhen: 'seen:arquivos:file:repasses-associacao' },
+        { id: '7.2', text: 'O que foi fundado em 11 de outubro de 1941?', doneWhen: 'seen:arquivos:file:estatuto-1941' },
+        { id: '7.3', text: 'O que se ouve na Pedra Lisa?', doneWhen: 'seen:arquivos:file:infrassom-ibiapaba && seen:clima:agora' },
+        { id: '7.4', text: 'O último arquivo do aparelho.', doneWhen: 'seen:galeria:photo:ultima-2347' },
+      ],
+      allDoneFlag: 'cap7_done',
+      deduction: 'final2', completeWhen: 'solved:final2', onComplete: ['final2_done'],
+    },
   ],
 
   deductions: {
@@ -92,6 +121,7 @@ export default {
     },
     final: {
       title: 'Pedido de reabertura do inquérito', chapter: 4, unlockWhen: 'cap4_done', final: true,
+      sendLabel: 'Enviar para Bruna', lockText: 'Conclua os objetivos do capítulo 4 para liberar o relatório.',
       intro: 'Relatório ao delegado de Guaraciaba do Norte, com cópia para a jornalista Bruna Leal. Cada bloco é conferido separadamente. Um relatório errado mantém o caso arquivado.',
       blocks: [
         { id: 'fa', title: 'O crime', parts: ['Quem matou Iara: ', { b: 'f.quem', cat: 'pessoa' }, '. Onde: no ', { b: 'f.onde', cat: 'lugar' }, '. Quando: às ', { b: 'f.quando', cat: 'hora' }, '. Como: durante uma briga pelo ', { b: 'f.como', cat: 'objeto' }, ', Iara caiu da pedra.'] },
@@ -101,6 +131,46 @@ export default {
         { id: 'fe', title: 'Anexo — quem guardava a cópia da nuvem?', bonus: true, parts: ['O backup cifrado do celular, ativo desde 03/10, foi configurado por ', { b: 'f.eco', cat: 'pessoa' }, ', a pessoa a quem ela disse "se acontecer alguma coisa, você sabe o que fazer".'] },
       ],
       onSolve: ['solved:final'],
+    },
+    d5: {
+      title: 'Dezessete anos', chapter: 5, unlockWhen: 'final_verdade',
+      blocks: [{
+        id: 'd5a', title: 'O padrão',
+        parts: ['Desde 1958, de ', { b: 'd5.ciclo', choice: [ch('10', 'dez'), ch('17', 'dezessete'), ch('20', 'vinte')] }, ' em igual número de anos, sempre na noite da ', { b: 'd5.festa', cat: 'conceito' },
+          ', uma moça cai da ', { b: 'd5.lugar', cat: 'lugar' }, '. Em 1992 foi ', { b: 'd5.v1992', cat: 'pessoa' }, ', tia de Iara. Em 2009 foi ', { b: 'd5.v2009', cat: 'pessoa' },
+          ', que subiu a trilha atrás de ', { b: 'd5.crianca', cat: 'pessoa' }, '. Desde 1975, quem acha os corpos é ', { b: 'd5.achou', cat: 'pessoa' },
+          '. Todas morreram nas terras da ', { b: 'd5.familia', cat: 'pessoa' }, '.'],
+      }],
+      onSolve: ['solved:d5'],
+    },
+    d6: {
+      title: 'O Caderno da Serra', chapter: 6, unlockWhen: 'cap6',
+      blocks: [
+        { id: 'd6a', title: 'Os quatro trechos da defesa', parts: [
+          'Trecho A, "escuto a pedra": ', { b: 'd6.a', choice: [ch('dela', 'escrito por Iara'), ch('plantado', 'acrescentado depois'), ch('alterado', 'alterado depois')] },
+          '. Trecho B, "a blusa verde": ', { b: 'd6.b', choice: [ch('dela', 'escrito por Iara'), ch('plantado', 'acrescentado depois'), ch('alterado', 'alterado depois')] },
+          '. Trecho C, "até a beira": ', { b: 'd6.c', choice: [ch('dela', 'escrito por Iara'), ch('plantado', 'acrescentado depois'), ch('alterado', 'alterado depois')] },
+          '. Trecho D, "a serra pede": ', { b: 'd6.d', choice: [ch('dela', 'escrito por Iara'), ch('plantado', 'acrescentado depois'), ch('alterado', 'alterado depois')] }, '.'] },
+        { id: 'd6b', title: 'Quem mexeu', parts: [
+          'A cópia da nuvem foi alterada às ', { b: 'd6.hora', cat: 'hora' }, ' do dia 12, depois da morte, num notebook em ', { b: 'd6.lugar', cat: 'lugar' },
+          ', na conta do sistema de ', { b: 'd6.quem', cat: 'pessoa' }, '. A edição servia para a morte parecer ',
+          { b: 'd6.tese', choice: [ch('acidente', 'acidente'), ch('suicidio', 'suicídio'), ch('crime', 'crime de outra pessoa')] }, '.'] },
+      ],
+      onSolve: ['solved:d6'],
+    },
+    final2: {
+      title: 'Relatório complementar: o padrão', chapter: 7, unlockWhen: 'cap7_done', final: true,
+      endings: ['serra', 'serra_parcial', 'serra_errado'], sendLabel: 'Enviar ao Ministério Público', lockText: 'Conclua os objetivos do capítulo 7 para liberar o relatório.',
+      intro: 'Ao Ministério Público do Ceará, com cópia para Bruna Leal. Não para a delegacia de Guaraciaba. O primeiro bloco é o que sustenta o resto.',
+      blocks: [
+        { id: 'ga', title: 'A Irmandade', parts: ['Por trás da festa existe uma confraria fundada em 1941: a ', { b: 'g.irmandade', cat: 'conceito' }, ', hoje chefiada por ', { b: 'g.provedor', cat: 'pessoa' },
+          '. Ela recebia ', { b: 'g.parte', choice: [ch('10', '10%'), ch('40', '40%'), ch('100', 'tudo')] }, ' de cada ', { b: 'g.taxa', cat: 'conceito' }, ' e financiou a empresa de ', { b: 'g.afilhado', cat: 'pessoa' }, '.'] },
+        { id: 'gb', title: 'O padrão', parts: ['De dezessete em dezessete anos a Irmandade faz a ', { b: 'g.rito', cat: 'conceito' }, ' no alto do ', { b: 'g.lugar', cat: 'lugar' },
+          '. Em 2009 morreu ', { b: 'g.v2009', cat: 'pessoa' }, '. Em 2026, ', { b: 'g.v2026', cat: 'pessoa' }, '.'] },
+        { id: 'gc', title: 'O manuscrito', parts: ['Depois da morte, ', { b: 'g.editou', cat: 'pessoa' }, ' alterou o ', { b: 'g.doc', cat: 'conceito' }, ' para sustentar a tese de ', { b: 'g.tese', choice: [ch('acidente', 'acidente'), ch('suicidio', 'suicídio'), ch('loucura', 'delírio religioso')] }, '.'] },
+        { id: 'gd', title: 'Anexo — o que se ouve na pedra', bonus: true, parts: ['O zumbido da gravação é ', { b: 'g.som', cat: 'conceito' }, ', produzido pela fenda da pedra com vento de ', { b: 'g.vento', cat: 'conceito' }, '.'] },
+      ],
+      onSolve: ['solved:final2'],
     },
   },
 
@@ -150,6 +220,21 @@ export default {
       { text: 'É a chave Pix que recebeu os R$ 30 mil do pai de Iara.', req: 'seen:papo:chat:pai && seen:papo:chat:numero-desconhecido' },
       { text: 'Conteúdo recuperado: "No mirante às 23h30, na hora do discurso. Só nós duas. Por favor 🙏".', req: 'seen:config:notif-history' },
     ] },
+    { id: 'ademar', name: 'Ademar Sampaio Andrade', role: 'pai de Duda, dono do sítio', avatar: '', facts: [
+      { text: 'Pai de Duda. Dono do Sítio Flor da Serra.', req: 'seen:telefone:voicemail:vm-ademar' },
+      { text: '09/10, 21:14: "A serra não gosta de quem cava."', req: 'seen:telefone:voicemail:vm-ademar' },
+      { text: 'Irmão de Rosângela Sampaio, morta na Pedra Lisa em 2009.', req: 'seen:arquivos:file:recortes-pedra' },
+      { text: 'O usuário "ademar.sa" editou o manuscrito de Iara em 12/10, às 03:17.', req: 'seen:correio:mail:nuvem-edicao' },
+      { text: 'Preside a Associação Beneficente Nossa Senhora da Colheita, que recebia 40% de cada taxa.', req: 'seen:arquivos:file:repasses-associacao' },
+      { text: 'Provedor da Irmandade da Colheita, por herança do avô, o Cel. Firmino Sampaio.', req: 'seen:arquivos:file:estatuto-1941' },
+    ] },
+    { id: 'pedra', name: 'As moças da Pedra Lisa', role: '1958 · 1975 · 1992 · 2009', avatar: '', facts: [
+      { text: '1958: Joana Batista, 18 anos, filha de morador.', req: 'seen:arquivos:file:recortes-pedra' },
+      { text: '1975: Francisca "Chica" Bezerra, 17 anos, ajudante de cozinha. Achada pelo caseiro José Ribamar.', req: 'seen:arquivos:file:recortes-pedra' },
+      { text: '1992: Antônia Fontenele, 21 anos, tia de Iara.', req: 'seen:arquivos:file:recortes-pedra' },
+      { text: '2009: Rosângela Sampaio, 19 anos, tia de Duda. Subiu atrás de uma criança: Iara, 10 anos.', req: 'seen:arquivos:file:recortes-pedra' },
+      { text: 'Na foto de 2009, uma roda de luzes no alto da pedra.', req: 'seen:galeria:photo:festa-2009' },
+    ] },
   ],
 
   // Linha do tempo automática (aba do Quadro)
@@ -176,5 +261,9 @@ export default {
     { at: '2026-10-10T23:47', text: 'Última conexão. Celular desligado pelo botão (41% de bateria).', req: 'seen:rotas:last' },
     { at: '2026-10-11T00:17', text: 'Duda: "Ela me disse que ia direto pra casa depois".', req: 'seen:papo:chat:equipe-evento' },
     { at: '2026-10-11T06:20', text: 'O caseiro encontra o corpo no pé da encosta.' },
+    { at: '2009-10-10T23:52', text: 'A última foto da Pipoca: luzes em roda no alto da pedra.', req: 'seen:galeria:photo:festa-2009' },
+    { at: '2026-10-09T21:14', text: 'Recado de voz de Ademar: "A serra não gosta de quem cava."', req: 'seen:telefone:voicemail:vm-ademar' },
+    { at: '2026-10-12T03:17', text: 'O manuscrito de Iara é editado na nuvem, de um notebook em Guaraciaba (ademar.sa).', req: 'seen:correio:mail:nuvem-edicao' },
+    { at: '2026-10-10T23:47:31', text: 'Uma foto é registrada 29 segundos depois de o aparelho ser desligado.', req: 'seen:galeria:photo:ultima-2347' },
   ],
 };

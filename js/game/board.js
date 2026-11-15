@@ -63,7 +63,7 @@ function deductionCard(id, d) {
   const unlocked = evalReq(d.unlockWhen);
   const solved = !!state.solved[id];
   const card = h('div', { class: `bd-ded ${solved ? 'solved' : ''} ${d.final ? 'final' : ''}` }, h('h4', null, icon(d.final ? 'newspaper' : 'puzzle', { size: 16 }), d.title));
-  if (!unlocked) { card.appendChild(h('p', { class: 'bd-lock' }, icon('lock', { size: 14 }), d.final ? 'Conclua os objetivos do capítulo 4 para liberar o relatório.' : 'Disponível em breve.')); return card; }
+  if (!unlocked) { card.appendChild(h('p', { class: 'bd-lock' }, icon('lock', { size: 14 }), d.final ? (d.lockText || 'Conclua os objetivos do capítulo para liberar o relatório.') : 'Disponível em breve.')); return card; }
   if (d.intro) card.appendChild(h('p', { class: 'bd-intro' }, d.intro));
   const feedback = {};
   for (const blk of d.blocks) {
@@ -88,7 +88,7 @@ function deductionCard(id, d) {
         fb.textContent = b.correct ? 'Bloco correto.' : b.empty ? `Faltam ${b.empty} lacuna(s).` : (b.wrong <= 2 ? `Quase: ${b.wrong === 1 ? 'uma lacuna está errada' : 'duas lacunas estão erradas'}.` : 'Várias lacunas estão erradas.');
       }
       if (d.final) bus.emit('final:submitted', r);
-    } } }, icon(d.final ? 'send' : 'check-check', { size: 16 }), d.final ? 'Enviar para Bruna' : 'Conferir dedução');
+    } } }, icon(d.final ? 'send' : 'check-check', { size: 16 }), d.final ? (d.sendLabel || 'Enviar relatório') : 'Conferir dedução');
     card.appendChild(btn);
   } else card.appendChild(h('div', { class: 'bd-fb ok' }, icon('check', { size: 14 }), d.final ? 'Relatório enviado.' : 'Dedução confirmada.'));
   return card;

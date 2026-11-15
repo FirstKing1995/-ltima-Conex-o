@@ -213,3 +213,7 @@
 .in-name { flex: 1; min-width: 0; background: none; border: 0; outline: 0; font-family: var(--font-hand); font-size: 30px; color: #12205a; padding: 2px 0; }
 .in-name.err { animation: shake 360ms; }
 .in-form .tbtn.primary { width: 100%; background: #1d1a14; color: #e9e3d4; }
+.end-kicker.k-verdade { color: var(--st-gold); } .end-kicker.k-serra { color: var(--st-green); } .end-kicker.k-serra_parcial { color: var(--st-gold); } .end-kicker.k-serra_errado { color: var(--st-red); }
+.end-hook { margin: 30px 0 8px; padding: 18px 18px 8px; border: 1px solid rgba(214,180,106,.28); border-radius: 12px; background: rgba(214,180,106,.05); }
+.end-hook p { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: #d8d2c4; margin: 0 0 10px; }
+.end-hook p:last-child { font-style: normal; color: var(--st-gold); }
