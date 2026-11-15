@@ -45,7 +45,8 @@ async function boot() {
   bus.on('phone:unlocked', () => {});
 
   const title = await import('./screens/title.js');
-  title.show();
+  if (location.hash === '#novo') { history.replaceState(null, '', location.pathname + location.search); bus.emit('game:new'); }
+  else title.show();
 
   // sincroniza config remota (aviso global)
   api.config().then(cfg => { if (cfg?.mensagem_global) bus.emit('global:message', cfg.mensagem_global); });

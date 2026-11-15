@@ -9,10 +9,12 @@ import { phone } from './phone.js';
 import { APPS, appInfo, loadApp } from '../apps/index.js';
 import { bus } from '../core/bus.js';
 import { state } from '../core/state.js';
+import { appIconEl, hasAppIcon } from '../ui/appicons.js';
 
 function appIcon(a, { badgeN = 0 } = {}) {
-  const tile = h('span', { class: 'tile', style: { background: a.bg, color: a.fg || '#fff' } }, icon(a.icon, { size: 28, stroke: 1.9 }), badgeN ? kit.badge(badgeN, { red: true }) : null);
-  return h('button', { class: 'app-ic', 'aria-label': a.title, dataset: { app: a.id }, on: { click: () => phone.open(a.id) } }, tile, h('span', { class: 'nm' }, a.title));
+  const ic = hasAppIcon(a.id) ? appIconEl(a.id, 58) : h('span', { class: 'ai', style: { background: a.bg, color: a.fg || '#fff', display: 'grid', placeItems: 'center' } }, icon(a.icon, { size: 28 }));
+  return h('button', { class: 'app-ic', 'aria-label': a.title, dataset: { app: a.id }, on: { click: () => phone.open(a.id) } },
+    h('span', { class: 'icw' }, ic, badgeN ? h('span', { class: 'badge-n' }, String(badgeN)) : null), h('span', { class: 'nm' }, a.title));
 }
 
 /** Notificações "presas" no aparelho às 23:47 (contagem por app para os badges). */
@@ -22,20 +24,20 @@ function badgeCounts() {
   return out;
 }
 
+const MOON = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>';
 export function renderHome(el) {
   const meta = CASE.meta || {};
-  el.style.backgroundImage = meta.wallpapers?.home ? `url("${asset(meta.wallpapers.home)}")` : 'linear-gradient(160deg,#2a1f1a,#0f1216 55%,#0b0c0e)';
+  if (meta.wallpapers?.home) el.style.backgroundImage = `url("${asset(meta.wallpapers.home)}")`;
   const counts = badgeCounts();
   const grid = APPS.filter(a => !a.dock && !a.hidden);
   const dock = APPS.filter(a => a.dock);
+  const wx = h('div', { class: 'wx' }); wx.innerHTML = MOON; wx.append('19° · Guaraciaba do Norte');
   el.append(
-    h('div', { class: 'home-top' },
-      h('div', { class: 'home-clock' }, time.hhmm(time.MIRROR_NOW)),
-      h('div', { class: 'home-date' }, time.weekdayLong(time.MIRROR_NOW) + ', ' + time.dateLong(time.MIRROR_NOW).replace(/ de \d{4}$/, ''), h('span', { style: 'opacity:.7' }, '·'),
-        h('span', { style: 'display:inline-flex;gap:4px;align-items:center' }, icon('moon', { size: 14 }), '19°C Guaraciaba do Norte'))),
-    h('button', { class: 'home-search', on: { click: openSearch } }, icon('search', { size: 20 }), h('span', null, 'Pesquisar no celular')),
-    h('div', { class: 'home-pages' }, h('div', { class: 'home-grid' }, grid.map(a => appIcon(a, { badgeN: counts[a.id] })))),
-    h('div', { class: 'home-dock' }, dock.map(a => appIcon(a, { badgeN: counts[a.id] }))));
+    h('div', { class: 'hm-glance' }, h('div', { class: 'day' }, time.weekdayLong(time.MIRROR_NOW).replace(/^./, c => c.toUpperCase()) + ', ' + time.dateLong(time.MIRROR_NOW).replace(/ de \d{4}$/, '')), wx),
+    h('div', { class: 'hm-pages' }, h('div', { class: 'hm-grid' }, grid.map(a => appIcon(a, { badgeN: counts[a.id] })))),
+    h('div', { class: 'hm-dots' }, h('i', { class: 'on' }), h('i')),
+    h('div', { class: 'hm-dock' }, dock.map(a => appIcon(a, { badgeN: counts[a.id] }))),
+    h('button', { class: 'hm-search', on: { click: openSearch } }, icon('search', { size: 22 }), h('span', { class: 'sp' }, 'Pesquisar no celular'), h('span', { class: 'mic' }, icon('mic', { size: 20 }))));
 }
 
 /* ---------- busca global ---------- */
@@ -56,8 +58,9 @@ function openSearch() {
         if (!res.length) { results.appendChild(kit.empty({ icon: 'search', title: 'Nada encontrado', text: `Nenhum resultado para "${q}".` })); return; }
         for (const r of res) {
           const info = appInfo(r.app) || { title: r.app, icon: 'circle', bg: '#444' };
+          const av = hasAppIcon(r.app) ? appIconEl(r.app, 40, 'round') : null;
           results.appendChild(kit.listItem({
-            avatar: h('div', { class: 'k-avatar', style: { width: '40px', height: '40px', background: info.bg, color: info.fg || '#fff' } }, icon(info.icon, { size: 20 })),
+            avatar: av || h('div', { class: 'k-avatar', style: { width: '40px', height: '40px', background: info.bg, color: info.fg || '#fff' } }, icon(info.icon, { size: 20 })),
             title: r.title || info.title, subtitle: r.snippet, meta: info.title,
             onClick: () => phone.open(r.app, r.params || {}),
           }));

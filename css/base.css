@@ -92,7 +92,7 @@ a { color: inherit; }
     var(--st-bg);
 }
 .stage[data-mode="boot"] > *:not(#phone-wrap) { visibility: hidden; }
-.phone-wrap { grid-column: 2; position: relative; z-index: 1; display: grid; place-items: center; padding: 18px 0; min-height: 0; }
+.phone-wrap { grid-column: 2; position: relative; z-index: 1; padding: 18px 0; min-height: 0; min-width: 0; }
 .stage > .side { position: relative; z-index: 2; min-width: 0; min-height: 0; overflow: hidden; }
 .stage > .side-left { grid-column: 1; }
 .stage > .side-right { grid-column: 3; }

@@ -3,7 +3,7 @@ export default {
  "salt": "uc01",
  "puzzles": {
   "pin": "c8223b7069f5ec8e918177a914fbe20acb7b7258ea6f708dd9de7e525fcedc35",
-  "pasta": "36920fcb276e2a73f718e3887a5e2a1be8a76ea580bd57934a66d720fddd51ee"
+  "pasta": "20472bc26e382538299e471cc06b8fab7d529ca3d55f4c4cee4b617527f98b22"
  },
  "blanks": {
   "d1.saida": "6ee3028217598198de78099e288dd0f2a5020e182b210e0a1481553fe2dd9c06",

@@ -2,6 +2,7 @@
 // Roteiro em data/caso01/eco.js: { nodes:{id:{msgs, choices, next, input, flags, actions}}, triggers:[{when, node}], hints:{objId:[...]}}
 import { h, clear, sleep } from '../core/dom.js';
 import { icon } from '../ui/icons.js';
+import { appIconEl } from '../ui/appicons.js';
 import { state, setFlag, setFlags, evalReq, save } from '../core/state.js';
 import { bus } from '../core/bus.js';
 import { CASE, asset } from '../core/store.js';
@@ -24,7 +25,7 @@ export function mount(el, { isVisible } = {}) {
   choicesEl = h('div', { class: 'eco-choices' });
   const hintBtn = h('button', { class: 'eco-hint', on: { click: askHint } }, icon('circle-help', { size: 16 }), 'Pedir dica');
   panel.appendChild(h('div', { class: 'panel eco' },
-    h('div', { class: 'panel-head' }, h('span', { class: 'eco-owl' }, '🦉'), h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'panel-title' }, 'ECO // canal seguro'), h('div', { class: 'eco-sub' }, 'conexão cifrada · espelho ativo')), hintBtn),
+    h('div', { class: 'panel-head' }, appIconEl('eco', 30, 'round'), h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'panel-title' }, 'ECO // canal seguro'), h('div', { class: 'eco-sub' }, 'conexão cifrada · espelho ativo')), hintBtn),
     h('div', { class: 'panel-body' }, logEl, typingEl),
     choicesEl));
   // redesenha histórico
@@ -86,6 +87,13 @@ async function run() {
     await playNode(id, n);
   }
   playing = false;
+  offerBack();
+}
+
+// em tela pequena o ECO é uma gaveta: ao terminar de falar, oferece voltar ao celular
+function offerBack() {
+  if (window.matchMedia('(min-width: 1180px)').matches || state.eco.pending || choicesEl.children.length) return;
+  choicesEl.appendChild(h('button', { class: 'eco-choice eco-back', on: { click: () => { clear(choicesEl); bus.emit('eco:close'); } } }, 'Voltar ao celular'));
 }
 
 async function playNode(id, n) {
@@ -103,6 +111,7 @@ async function playNode(id, n) {
   }
   if (n.flags) setFlags(n.flags);
   for (const a of (n.actions || [])) await doAction(a);
+  if ((n.input || n.choices?.length) && !visibleFn()) bus.emit('eco:open');
   if (n.input) { await askInput(n.input); }
   if (n.choices?.length) { state.eco.pending = { node: id }; save(); showChoices(state.eco.pending); return; }
   if (n.next) await playNode(n.next, nodes()[n.next] || {});

@@ -1,2 +1,167 @@
-// stub — será substituído pelo conteúdo real
-export default { albums: [], photos: [], memories: [] };
+// Galeria de Iara (aparelho, até sáb 10/10 23:47). Imagens em assets/caso01/img/. Lista completa em privado/imagens/midia.md.
+
+const IMG = (n) => `assets/caso01/img/${n}.jpg`;
+const DEV = 'Nimbus N9';
+
+// lugares (coordenadas da bíblia)
+const L = {
+  casaPais: { name: 'Casa dos pais · Guaraciaba do Norte', lat: -4.1669, lng: -40.7472 },
+  estrada: { name: 'Estrada do Sítio Flor da Serra', lat: -4.1651, lng: -40.7102 },
+  casaSede: { name: 'Sítio Flor da Serra · casa sede', lat: -4.1648, lng: -40.6918 },
+  galpao: { name: 'Sítio Flor da Serra · galpão', lat: -4.1655, lng: -40.6905 },
+  mirante: { name: 'Mirante da Pedra Lisa', lat: -4.1632, lng: -40.686 },
+  trilha: { name: 'Trilha do Mirante da Pedra Lisa', lat: -4.1640, lng: -40.6882 },
+  rodFor: { name: 'Rodoviária Engenheiro João Thomé · Fortaleza', lat: -3.7525, lng: -38.533 },
+  margarida: { name: 'Café Margarida · Sobral', lat: -3.689, lng: -40.35 },
+  apto: { name: 'Apê da Iara · Benfica, Fortaleza', lat: -3.74, lng: -38.541 },
+  escritorio: { name: 'Colheita Capital · Aldeota, Fortaleza', lat: -3.736, lng: -38.495 },
+  dragao: { name: 'Café do Dragão · Praia de Iracema, Fortaleza', lat: -3.7215, lng: -38.517 },
+  hotelSobral: { name: 'Hotel Convenções · Sobral', lat: -3.6905, lng: -40.3475 },
+  fazenda: { name: 'Zona rural de Massapé', lat: -3.5231, lng: -40.3392 },
+  sitioPais: { name: 'Sítio dos pais · Guaraciaba do Norte', lat: -4.1702, lng: -40.7551 },
+  urucui: { name: 'Uruçuí, PI (metadado do arquivo)', lat: -7.2297, lng: -44.5551 },
+};
+
+const ph = (id, at, album, w, h, place, desc, extra = {}) => ({ id, src: IMG(extra.img || id.replace(/-/g, '_')), album, at, w, h, place, device: DEV, desc, ...extra.o });
+
+export default {
+  albums: [
+    { id: 'camera', name: 'Câmera', icon: 'camera', locked: false },
+    { id: 'capturas', name: 'Capturas de tela', icon: 'smartphone', locked: false },
+    { id: 'papo', name: 'Papo', icon: 'message-circle', locked: false },
+    { id: 'lume', name: 'Lume', icon: 'aperture', locked: false },
+    { id: 'favoritos', name: 'Favoritos', icon: 'heart', locked: false },
+    { id: 'segura', name: 'Pasta Segura', icon: 'folder-lock', locked: true, puzzle: 'pasta' },
+    { id: 'lixeira', name: 'Lixeira', icon: 'trash-2' },
+  ],
+
+  photos: [
+    /* ---------- SÁBADO, 10/10 ---------- */
+    ph('cafe-manha-pais', '2026-10-10T08:21', 'camera', 1440, 1080, L.casaPais,
+      'Mesa de café da manhã na cozinha da casa dos pais: cuscuz fumegando num prato, ovos mexidos, tapioca recheada com queijo coalho, bolo de milho e uma garrafa térmica azul. Toalha de plástico florida e a luz da manhã entrando pela janela.'),
+    ph('bento-quintal', '2026-10-10T09:04', 'camera', 1440, 1080, L.casaPais,
+      'Bento, o cachorro caramelo de Iara, deitado de barriga para cima no chão de cimento queimado do quintal, com a língua de fora e olhando para a câmera. Ao fundo, um pé de acerola e o muro baixo pintado de branco.'),
+    ph('estrada-sitio', '2026-10-10T16:07', 'camera', 1440, 1080, L.estrada,
+      'Estrada de terra batida subindo a serra, vista pelo para-brisa de um carro: mata seca dos dois lados, poeira no ar e o morro ao fundo. No canto, a mão de Duda no volante, com uma pulseira de miçangas.'),
+    ph('casa-sede-varanda', '2026-10-10T16:26', 'camera', 1440, 1080, L.casaSede,
+      'Varanda da casa sede do Sítio Flor da Serra: redes coloridas armadas entre as colunas, cadeiras de balanço e vasos de samambaia pendurados. Ao fundo o galpão do evento, de telhado de zinco, e faixas de luz amarela sendo penduradas.'),
+    ph('galpao-montagem-1', '2026-10-10T17:12', 'camera', 1440, 1080, L.galpao,
+      'Interior do galpão ainda vazio de gente: mesas redondas empilhadas num canto, funcionários estendendo toalhas brancas e um rapaz em cima de uma escada prendendo um varal de lâmpadas na viga de madeira. Piso de cimento, cheiro de obra pela cena.'),
+    ph('galpao-montagem-2', '2026-10-10T17:26', 'camera', 1440, 1080, L.galpao,
+      'O palco do galpão sendo montado: dois técnicos de som ajustando caixas pretas, cabos espalhados no chão, o telão com a logo da Colheita Capital ainda apagado e uma bateria coberta por um pano. Atrás do palco, a porta estreita do camarim, um anexo de alvenaria.'),
+    ph('mirante-pedra', '2026-10-10T17:58', 'camera', 1440, 1080, L.mirante,
+      'A Pedra Lisa vista de trás: uma laje enorme de granito cinza, polida pelo tempo, avançando sobre o vazio. À direita, uma cerca de estacas de madeira marca o limite do mirante. O sol já baixo tinge o céu de laranja; ninguém aparece na foto.'),
+    ph('mirante-vale-1814', '2026-10-10T18:14', 'camera', 1440, 1080, L.mirante,
+      'O vale visto do Mirante da Pedra Lisa logo depois do pôr do sol: o céu em brasa, laranja virando rosa no horizonte, serras azuladas em camadas e uma vila com poucas luzes acesas lá embaixo. Na beira inferior da foto, o topo liso da pedra e a ponta de uma estaca de madeira.'),
+    ph('mirante-cerca', '2026-10-10T18:19', 'camera', 1440, 1080, L.mirante,
+      'Detalhe da cerca de madeira do mirante contra o céu do fim de tarde: as estacas estão inteiras dos dois lados, mas num trecho no meio a cerca está quebrada, com duas tábuas caídas e uma estaca solta no chão, deixando a beira da pedra completamente aberta. Atrás, o vazio do vale e o céu alaranjado.',
+      { o: { caption: 'cerca quebrada. avisar a Duda pra consertar antes que alguém se machuque' } }),
+    ph('duda-mirante', '2026-10-10T18:22', 'camera', 1440, 1080, L.mirante,
+      'Duda de costas, de camisa jeans e cabelo preso, de pé sobre a pedra olhando o pôr do sol. Está a alguns passos da cerca quebrada, com as mãos nos bolsos. O céu atrás dela está em tons de laranja e lilás.'),
+    ph('mirante-timelapse', '2026-10-10T18:26', 'camera', 1080, 1920, L.mirante,
+      'Vídeo vertical de timelapse: o céu escurecendo sobre o vale a partir da pedra, com a câmera fixa sobre o tripé e as luzes da vila acendendo uma a uma. Mostra a ponta do tripé de alumínio no canto inferior.',
+      { img: 'mirante_timelapse', o: { video: { duration: 14 } } }),
+    ph('galpao-pronto', '2026-10-10T18:44', 'camera', 1440, 1080, L.galpao,
+      'O galpão pronto, de portas abertas e ainda vazio: mesas postas com guardanapos dobrados, varal de lâmpadas aceso, palco iluminado em âmbar com os instrumentos da banda e o telão exibindo a logo da Colheita Capital. Um funcionário confere uma caixa de som.'),
+    ph('camarim-vazio', '2026-10-10T18:51', 'camera', 1440, 1080, L.galpao,
+      'O camarim, um cômodo pequeno atrás do palco: espelho grande com lâmpadas ao redor, sofá de dois lugares, uma mesa com garrafas de água, frutas e um cooler, e cabides com roupas de palco. A porta dá direto para os fundos do palco.'),
+    ph('selfie-camarim', '2026-10-10T18:56', 'camera', 1080, 1440, L.galpao,
+      'Selfie de Iara no espelho do camarim: cabelo cacheado preso num coque, câmera profissional pendurada no ombro e uma blusa verde-musgo de manga curta. Ela sorri de lado, com o tripé encostado na parede ao fundo.'),
+    ph('caio-recepcao', '2026-10-10T19:42', 'camera', 1440, 1080, L.galpao,
+      'Caio Montenegro, de camisa polo escura com a logo da Colheita Capital e crachá no pescoço, apertando a mão de um casal de agricultores na entrada do galpão. Sorriso aberto, convidados em fila atrás dele, faixa da Noite da Colheita ao fundo.'),
+    ph('banda-palco', '2026-10-10T21:09', 'camera', 1440, 1080, L.galpao,
+      'A banda Forró Pé de Serra do Rafa no palco: Rafa, de chapéu de couro e camisa xadrez, com o microfone; sanfoneiro, zabumbeiro e triangulista ao lado; luzes âmbar e fumaça de gelo seco. Casais dançando na frente do palco.'),
+    ph('video-banda', '2026-10-10T21:40', 'camera', 1920, 1080, L.galpao,
+      'Vídeo da banda tocando um forró animado: a plateia dançando em pares, a sanfona em destaque e Rafa cantando com o chapéu de couro. O som está alto e a câmera acompanha o palco da esquerda para a direita.',
+      { img: 'video_banda', o: { video: { duration: 31 } } }),
+    ph('tripe-galpao', '2026-10-10T22:03', 'camera', 1440, 1080, L.galpao,
+      'O tripé de Iara montado ao lado da porta do camarim, com a câmera mirrorless apontada para o palco. O tripé é preto, de pernas de alumínio, com uma fita vermelha amarrada numa das pernas. Atrás, a luz do palco e os corpos da plateia em silhueta.'),
+    ph('plateia-danca', '2026-10-10T23:02', 'camera', 1440, 1080, L.galpao,
+      'Plateia lotando o galpão na última música do show: braços levantados, casais girando, copos nas mãos e luzes âmbar e vermelhas varrendo o teto. Ao fundo, no palco, a banda em contraluz.'),
+
+    /* ---------- SEXTA, 09/10: A VIAGEM ---------- */
+    ph('rodoviaria-0910', '2026-10-09T06:58', 'camera', 1440, 1080, L.rodFor,
+      'Plataforma da rodoviária de Fortaleza de manhã cedo: um ônibus azul e branco com destino a Sobral, a bolsa de Iara no colo e o bilhete de papel dobrado na mão. Pessoas com malas na fila atrás.'),
+    ph('sobral-cafe-0910', '2026-10-09T12:20', 'camera', 1440, 1080, L.margarida,
+      'Mesa de canto no Café Margarida, em Sobral: duas xícaras de café, uma fatia de bolo de rolo e um livro de fotografia aberto. Na cadeira em frente, o casaco de um senhor de cabelos brancos, o ex-professor de Iara.'),
+    ph('casa-pais-0910', '2026-10-09T17:34', 'camera', 1440, 1080, L.casaPais,
+      'Fachada da casa dos pais de Iara, rosa-clara, com portão de ferro verde. Bento, o caramelo, está de pé no portão com as patas na grade e a língua para fora. Na calçada, o chinelo de alguém e uma bicicleta encostada.'),
+
+    /* ---------- FORTALEZA, 05–08/10 ---------- */
+    ph('cafe-dragao-0510', '2026-10-05T19:22', 'camera', 1440, 1080, L.dragao,
+      'Mesa na calçada do Café do Dragão, na Praia de Iracema, ao entardecer: um capuccino, o notebook aberto na edição de fotos e o celular virado para baixo. Ao fundo, a rua de paralelepípedo e pessoas de bermuda passando.'),
+    ph('estudio-ensaio-0710', '2026-10-07T12:44', 'camera', 1440, 1080, { name: 'Estúdio Lumina · Meireles, Fortaleza', lat: -3.726, lng: -38.504 },
+      'Bastidor de ensaio num estúdio: uma modelo de vestido amarelo diante de um fundo branco, o refletor de softbox à esquerda e a assistente segurando um rebatedor. Cabos e tripés pelo chão.'),
+    ph('escritorio-0810', '2026-10-08T10:12', 'camera', 1440, 1080, L.escritorio,
+      'Sala do escritório da Colheita Capital na Aldeota: parede branca com a logo verde e amarela, mesas de vidro, três pessoas de camisa polo ao telefone e um vaso de planta de plástico. Sobre uma mesa, uma maquete de silo de grãos.'),
+    ph('apto-varanda-0810', '2026-10-08T21:05', 'camera', 1440, 1080, L.apto,
+      'Varanda do apê de Iara à noite: vasos de suculentas, uma cadeira de palha e, ao fundo, os prédios do Benfica com janelas acesas. Em cima do parapeito, um copo de chá e o fone de ouvido.'),
+
+    /* ---------- AGOSTO E SETEMBRO ---------- */
+    ph('duda-iara-0802', '2026-08-02T16:48', 'camera', 1080, 1440, L.casaSede,
+      'Selfie de Duda e Iara rindo, de testa colada, na varanda da casa sede do sítio. Duda de chapéu de palha, Iara de óculos escuros na cabeça; atrás delas, uma rede vermelha e o verde da serra.'),
+    ph('visita-fazenda-0819', '2026-08-19T10:36', 'camera', 1440, 1080, L.fazenda,
+      'Visita à "fazenda" para o vídeo institucional: um milharal verde, uma caminhonete branca com o adesivo da Colheita Capital que parece recém-colado (as bolhas de ar aparecem) e quatro pessoas de colete com a logo posando como equipe. Não há galpão nem maquinário à vista.'),
+    ph('visita-fazenda-0819b', '2026-08-19T10:52', 'camera', 1440, 1080, L.fazenda,
+      'Um barracão de alvenaria vazio no meio do pasto, com uma faixa "Colheita Capital" amarrada com barbante e um funcionário do local, de chinelo, segurando a escada para o rapaz que prende a faixa. Uma vaca magra olha ao lado.'),
+    ph('encontro-sobral-0912', '2026-09-12T15:21', 'camera', 1440, 1080, L.hotelSobral,
+      'Salão de um hotel em Sobral lotado de cadeiras brancas: no palco, Caio Montenegro de terno claro diante de um telão com os dizeres "Safra 2026 — 4% ao mês". A plateia, de maioria de pessoas mais velhas, aplaude em pé.'),
+    ph('pais-terreiro-0816', '2026-08-16T12:40', 'camera', 1440, 1080, L.sitioPais,
+      'Seu Toinho, pai de Iara, de chapéu de palha e camisa de botão, de pé no terreiro mostrando um cercado de arame novo para as galinhas. Dona Socorro aparece ao fundo na porta da cozinha, de avental. Ele sorri orgulhoso, com a mão erguida em direção à câmera.'),
+
+    /* ---------- OUTROS ÁLBUNS ---------- */
+    ph('cap-passagem-0910', '2026-10-09T06:41', 'capturas', 1080, 2400, null,
+      'Captura de tela da passagem de ônibus Fortaleza – Sobral, sexta, 09/10, saída 07:30, poltrona 14, R$ 78,00, com QR code do embarque.', { o: { device: 'Captura de tela' } }),
+    ph('cap-lume-comentario', '2026-08-14T23:20', 'capturas', 1080, 2400, null,
+      'Captura de tela de um comentário do perfil @visto.por.ultimo, sem foto de perfil, numa foto de Iara no Lume: "linda nessa luz". Iara circulou o nome do perfil em vermelho.', { o: { device: 'Captura de tela' } }),
+    ph('cap-receita-bolo', '2026-09-21T14:03', 'capturas', 1080, 2400, null,
+      'Captura de tela de uma receita de bolo de macaxeira com coco, com lista de ingredientes e modo de preparo. Pedido da Dona Socorro.', { o: { device: 'Captura de tela' } }),
+    ph('papo-flyer-noite', '2026-10-05T11:07', 'papo', 1080, 1350, null,
+      'Cartaz da "Noite da Colheita": fundo verde-escuro com espigas de milho douradas, data sábado 10/10, Sítio Flor da Serra, Guaraciaba do Norte, programação com jantar às 20h, show da banda às 21h e discurso do CEO. Enviado por Lari.', { o: { device: 'Recebida no Papo' } }),
+    ph('serra-amanhecer-0507', '2026-05-07T06:02', 'lume', 1440, 1080, { name: 'Serra da Ibiapaba · Guaraciaba do Norte', lat: -4.1703, lng: -40.7311 },
+      'Amanhecer na Serra da Ibiapaba: neblina baixa cobrindo o vale, o sol nascendo atrás de uma fileira de eucaliptos e um telhado de telha colonial em primeiro plano. Tons de ouro e azul-acinzentado. Foto publicada no Lume.',
+      { img: 'serra_amanhecer' }),
+    ph('pipoca-2009', '2009-06-14T10:12', 'favoritos', 1080, 1440, L.casaPais,
+      'Foto antiga, de câmera compacta digital, de uma cachorrinha branca e malhada de marrom, a Pipoca, deitada numa toalha no terraço, olhando para a câmera com a cabeça inclinada. Nas bordas aparece o dedo da pequena Iara, de 10 anos, e a data impressa no canto, 14/06/2009.',
+      { o: { caption: 'Pipoca, meu primeiro amor. 2009, o ano em que eu ganhei a primeira câmera e tudo começou.', device: 'Câmera compacta (digitalizada)' } }),
+    ph('bento-aniversario', '2026-03-22T19:12', 'favoritos', 1080, 1350, L.casaPais,
+      'Bento, o cachorro caramelo, sentado com um chapeuzinho de festa azul, diante de um bolo pequeno com uma vela. Ao fundo, bandeirinhas coloridas na parede e a mão da mãe de Iara segurando a coleira.',
+      { o: { caption: 'Bento, 3 anos. 22 de março' } }),
+
+    /* ---------- PASTA SEGURA (provas) ---------- */
+    ph('seg-planilha-familias', '2026-09-30T21:10', 'segura', 1080, 2400, null,
+      'Captura de tela de uma planilha chamada "Controle Serra": colunas Família, Município, Valor, Data e Chave de destino. A linha de "Antônio Fontenele, Guaraciaba do Norte, R$ 30.000,00, 14/08" está marcada de amarelo por Iara. A chave de destino de várias linhas é o mesmo número, (88) 99645-1209, e a coluna "Resp." só tem as iniciais "ME".',
+      { o: { device: 'Captura de tela' } }),
+    ph('seg-placa-piaui', '2025-11-20T09:41', 'segura', 1440, 1080, L.urucui,
+      'Foto de uma placa de madeira "FAZENDA COLHEITA — Safra Garantida" presa a uma cerca, usada pela Colheita Capital em seus materiais. Num poste ao fundo se lê, em letra miúda, "Faz. Santa Luzia — Uruçuí/PI". Os metadados do arquivo, recebido do marketing, apontam para o Piauí, não para o Ceará.',
+      { o: { caption: 'Marcos disse que foi tirada em Sobral. GPS diz Uruçuí, Piauí.', device: 'Arquivo recebido (metadados)' } }),
+    ph('seg-banco-imagens', '2026-09-28T22:35', 'segura', 1440, 1080, null,
+      'Montagem lado a lado: à esquerda, a "Fazenda da Colheita" do site, um trator vermelho num milharal; à direita, a mesma foto no banco de imagens "PixelBanco" com a marca-d\'água, o código da licença e o crédito de um fotógrafo da Argentina. É a mesma imagem.',
+      { o: { device: 'Captura de tela' } }),
+    ph('seg-contrato', '2026-05-12T17:55', 'segura', 1080, 1440, null,
+      'Foto de uma folha de contrato de prestação de serviços entre Iara Fontenele e Colheita Capital Gestão Ltda., em papel A4. A cláusula 9, de confidencialidade, está grifada com marca-texto verde e a assinatura de Caio Montenegro aparece no rodapé.'),
+    ph('seg-print-promessa', '2026-09-29T20:44', 'segura', 1080, 2400, null,
+      'Captura de tela do aplicativo da Colheita Capital: "Rendimento de setembro: 4,0%", "Lastro: 18 contratos de safra ativos" e um gráfico subindo. Iara escreveu em cima, em vermelho, "quais contratos?".',
+      { o: { device: 'Captura de tela' } }),
+    ph('seg-recibo-aluguel', '2026-08-19T13:15', 'segura', 1080, 1440, L.fazenda,
+      'Foto de um recibo manuscrito num bloco: "Recebi de Colheita Capital R$ 1.800,00 pela diária do uso do sítio para filmagem, dia 19/08", assinado "Raimundo, caseiro". Atrás, a caminhonete branca da visita.'),
+    ph('seg-print-bonus', '2026-09-25T10:44', 'segura', 1080, 2400, null,
+      'Captura de tela do extrato da Jandaia: Pix recebido de "Colheita Capital Gestão Ltda." de R$ 20.000,00 às 10:12 e, logo abaixo, a devolução do mesmo valor às 10:40, ambos em 25/09.',
+      { o: { device: 'Captura de tela' } }),
+    ph('seg-print-cnpj', '2026-09-27T09:20', 'segura', 1080, 2400, null,
+      'Captura de tela da consulta pública do CNPJ da Colheita Capital: capital social R$ 10.000,00, atividade principal "consultoria em gestão empresarial", sem registro de imóvel rural, sem inscrição agropecuária.',
+      { o: { device: 'Captura de tela' } }),
+
+    /* ---------- LIXEIRA ---------- */
+    ph('lx-cerca-tremida', '2026-10-10T18:18', 'lixeira', 1440, 1080, L.mirante,
+      'Foto tremida da cerca de madeira do mirante, apagada logo antes da versão boa. Só se vê um borrão de estacas e o céu laranja.',
+      { img: 'lx_cerca_tremida', o: { deletedAt: '2026-10-10T18:20' } }),
+    ph('lx-print-caio', '2026-10-08T20:14', 'lixeira', 1080, 2400, null,
+      'Captura de tela de uma conversa com Caio Montenegro no Papo: "Lembrando o termo de confidencialidade que você assinou. Cláusula 9." Apagada por Iara depois do print.',
+      { img: 'lx_print_caio', o: { device: 'Captura de tela', deletedAt: '2026-10-08T20:30' } }),
+  ],
+
+  memories: [
+    { id: 'm-pipoca', title: 'Há 17 anos', photo: 'pipoca-2009' },
+  ],
+};

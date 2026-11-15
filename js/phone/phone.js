@@ -14,16 +14,28 @@ const stack = [];       // telas: {el, kind:'home'|'app'|'sub', appId, params, o
 const modals = [];      // {el, close}
 let lockLayer = null;
 
+const svgEl = (markup) => { const t = document.createElement('template'); t.innerHTML = markup.trim(); return t.content.firstChild; };
+// ícones de sistema no padrão Android (preenchidos)
+const SB = {
+  signal: (lvl = 3) => svgEl(`<svg class="sb-ic" viewBox="0 0 18 14" width="17" height="14">${[0, 1, 2, 3].map(i => `<rect x="${i * 4.6}" y="${10 - i * 3.2}" width="3.2" height="${3.6 + i * 3.2}" rx=".9" fill="currentColor" opacity="${i < lvl ? 1 : .32}"/>`).join('')}</svg>`),
+  batt: (pct) => svgEl(`<svg class="sb-ic sb-batt" viewBox="0 0 26 14" width="25" height="14"><rect x=".75" y=".75" width="21.5" height="12.5" rx="3.6" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5"/><rect x="23.3" y="4.4" width="2" height="5.2" rx="1" fill="currentColor" fill-opacity=".55"/><rect x="2.6" y="2.6" width="${Math.max(1.5, 17.8 * pct / 100).toFixed(1)}" height="8.8" rx="2" fill="currentColor"/></svg>`),
+  // pequenos ícones de notificação pendente (monocromáticos)
+  papo: () => svgEl('<svg class="sb-ic sb-n" viewBox="0 0 16 16" width="13" height="13"><path fill="currentColor" d="M8 1.5C4.2 1.5 1.3 4.2 1.3 7.6c0 1.3.4 2.5 1.2 3.5l-.7 2.6c-.1.3.2.5.5.4l2.7-1.2c.9.4 1.9.6 3 .6 3.8 0 6.7-2.7 6.7-6S11.8 1.5 8 1.5z"/></svg>'),
+  lume: () => svgEl('<svg class="sb-ic sb-n" viewBox="0 0 16 16" width="13" height="13"><circle cx="8" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 1v1.8M8 13.2V15M1 8h1.8M13.2 8H15M3 3l1.3 1.3M11.7 11.7 13 13M13 3l-1.3 1.3M4.3 11.7 3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'),
+  pulso: () => svgEl('<svg class="sb-ic sb-n" viewBox="0 0 16 16" width="13" height="13"><path fill="currentColor" d="M8 14S1.5 10.2 1.5 5.6C1.5 3.6 3 2 4.9 2c1.3 0 2.4.7 3.1 1.8C8.7 2.7 9.8 2 11.1 2 13 2 14.5 3.6 14.5 5.6 14.5 10.2 8 14 8 14z"/></svg>'),
+};
+
 function statusBar() {
   const meta = store.CASE.meta || {};
   const batt = meta.device?.battery ?? 41;
+  const apps = [...new Set((meta.lockScreen?.notifications || []).map(n => n.appId))].filter(a => SB[a]);
   return h('div', { class: 'ph-status', 'aria-hidden': 'true' },
     h('span', { class: 'time' }, time.hhmm(time.MIRROR_NOW)),
-    h('span', { class: 'mirror-tag', title: 'Espelho restaurado da nuvem' }, 'ESPELHO'),
+    h('span', { class: 'sb-notifs' }, apps.map(a => SB[a]())),
     h('span', { class: 'sp' }),
-    icon('signal-medium', { size: 15 }),
-    icon('wifi-off', { size: 15 }),
-    h('span', { class: 'batt' }, icon('battery-low', { size: 17 }), `${batt}%`));
+    h('span', { class: 'sb-net' }, '4G'),
+    SB.signal(2),
+    h('span', { class: 'batt' }, SB.batt(batt), h('span', { class: 'pct' }, `${batt}%`)));
 }
 
 export const phone = {

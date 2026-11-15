@@ -68,7 +68,15 @@ export function avatar({ src = '', name = '', color, size = 40, ring = false, ic
 export function img(src, { alt = '', className = '', ratio, onClick, fit = 'cover', loading = 'lazy' } = {}) {
   const box = h('div', { class: `k-img ${className}`, style: ratio ? { aspectRatio: ratio } : null });
   const im = h('img', { src: asset(src), alt, loading, draggable: 'false', style: { objectFit: fit } });
-  im.addEventListener('error', () => { box.classList.add('missing'); clear(box); box.appendChild(icon('image', { size: 28, stroke: 1.5 })); if (alt) box.title = alt; }, { once: true });
+  im.addEventListener('error', () => {
+    // foto ainda não baixada da nuvem: fundo desfocado com a descrição (a pista continua legível)
+    let n = 0; for (const c of String(src)) n = (n * 31 + c.charCodeAt(0)) >>> 0;
+    const hue = n % 360, hue2 = (hue + 40 + (n >> 8) % 80) % 360;
+    box.classList.add('missing'); clear(box);
+    box.style.setProperty('--m1', `hsl(${hue} 32% 30%)`); box.style.setProperty('--m2', `hsl(${hue2} 38% 16%)`);
+    box.append(h('span', { class: 'k-miss-ic' }, icon('cloud-download', { size: 18, stroke: 1.8 })), alt ? h('span', { class: 'k-miss-tx txt' }, alt) : null);
+    if (alt) box.title = alt;
+  }, { once: true });
   box.appendChild(im);
   if (onClick) { box.style.cursor = 'pointer'; box.addEventListener('click', onClick); }
   return box;
@@ -170,7 +178,8 @@ export function imageViewer(images, index = 0) {
     const it = images[i];
     imgEl.src = asset(it.src);
     imgEl.alt = it.title || '';
-    imgEl.onerror = () => { imgEl.removeAttribute('src'); imgEl.alt = 'Imagem indisponível'; };
+    stage.querySelector('.k-img')?.remove(); imgEl.hidden = false;
+    imgEl.onerror = () => { imgEl.hidden = true; const ph = img(it.src + '#x', { alt: it.desc || it.title || '', className: 'viewer-miss' }); stage.appendChild(ph); };
     title.textContent = it.title || '';
     sub.textContent = it.subtitle || '';
     reset();
