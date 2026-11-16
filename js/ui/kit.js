@@ -216,10 +216,23 @@ export function imageViewer(images, index = 0) {
   return close;
 }
 
-/* ---------- player de áudio simulado ---------- */
-export function audioPlayer({ title = 'Áudio', at = '', duration = 30, transcript = [], key, compact = false } = {}) {
+/* ---------- player de áudio (toca o arquivo quando existe; sem ele, simula) ---------- */
+let currentAudio = null; // só um áudio tocando por vez
+export function audioPlayer({ title = 'Áudio', at = '', duration = 30, transcript = [], key, compact = false, src = '' } = {}) {
   const total = Math.max(1, toSec(duration));
   let pos = 0, playing = false, timer = null, speed = 1;
+  let audio = null, audioOk = !!src, audioEnd = Infinity;
+  const getAudio = () => {
+    if (!audioOk) return null;
+    if (!audio) {
+      audio = new Audio(src); audio.preload = 'auto';
+      audio.addEventListener('loadedmetadata', () => { audioEnd = audio.duration || Infinity; });
+      audio.addEventListener('error', () => { audioOk = false; audio = null; if (playing) { stop(); play(); } });
+      audio.addEventListener('ended', () => { if (playing && pos < total - 0.5) { pos = Math.max(pos, audioEnd); simulate(); } });
+    }
+    return audio;
+  };
+  const simulate = () => { clearInterval(timer); timer = setInterval(() => { pos = Math.min(total, pos + 0.25 * speed * (src ? 1 : 4)); draw(); if (pos >= total) stop(); if (!el.isConnected) stop(); }, 250); };
   const bars = Array.from({ length: 42 }, (_, k) => { const v = 0.25 + Math.abs(Math.sin(k * 1.7 + total)) * 0.75; return h('i', { style: { height: Math.round(8 + v * 28) + 'px' } }); });
   const wave = h('div', { class: 'wave', role: 'slider', 'aria-label': 'Posição do áudio', 'aria-valuemin': '0', 'aria-valuemax': String(total) }, bars);
   const tNow = h('span', null, '0:00'), tTot = h('span', null, fmtDur(total));
@@ -236,18 +249,34 @@ export function audioPlayer({ title = 'Áudio', at = '', duration = 30, transcri
     for (const ln of lines) { if (+ln.dataset.t <= pos) cur = ln; ln.classList.remove('now'); }
     if (cur && playing) { cur.classList.add('now'); if (!compact) cur.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
   };
-  const stop = () => { playing = false; clearInterval(timer); clear(playBtn).appendChild(icon('play', { size: 22 })); playBtn.setAttribute('aria-label', 'Tocar'); };
+  const stop = () => {
+    playing = false; clearInterval(timer); audio?.pause();
+    if (currentAudio === stop) currentAudio = null;
+    clear(playBtn).appendChild(icon('play', { size: 22 })); playBtn.setAttribute('aria-label', 'Tocar');
+  };
   const play = () => {
     if (key) GAME?.see(key);
     if (pos >= total) pos = 0;
+    if (currentAudio && currentAudio !== stop) currentAudio();
+    currentAudio = stop;
     playing = true; clear(playBtn).appendChild(icon('pause', { size: 22 })); playBtn.setAttribute('aria-label', 'Pausar');
     clearInterval(timer);
-    timer = setInterval(() => { pos = Math.min(total, pos + 0.25 * speed * 4); draw(); if (pos >= total) stop(); if (!el.isConnected) stop(); }, 250);
+    const a = getAudio();
+    if (a && pos < audioEnd - 0.2) {
+      a.playbackRate = speed;
+      const want = pos;
+      let ready = a.readyState >= 1;
+      if (ready) a.currentTime = want;
+      else a.addEventListener('loadedmetadata', () => { a.currentTime = want; ready = true; }, { once: true });
+      a.play().catch((e) => { if (e?.name === 'NotAllowedError') stop(); else { audioOk = false; audio = null; simulate(); } });
+      timer = setInterval(() => { if (ready && !a.paused && !a.seeking) pos = a.currentTime; draw(); if (!el.isConnected) stop(); }, 120);
+    } else simulate();
   };
+  const seek = (p) => { pos = Math.max(0, Math.min(total, p)); if (audio && pos < audioEnd) { try { audio.currentTime = pos; } catch { /* */ } } if (playing) play(); draw(); };
   playBtn.addEventListener('click', () => (playing ? stop() : play()));
-  spd.addEventListener('click', () => { speed = speed === 1 ? 2 : speed === 2 ? 4 : 1; spd.textContent = speed + 'x'; });
-  wave.addEventListener('click', (e) => { const r = wave.getBoundingClientRect(); pos = Math.max(0, Math.min(total, ((e.clientX - r.left) / r.width) * total)); if (key) GAME?.see(key); draw(); });
-  lines.forEach(ln => ln.addEventListener('click', () => { pos = +ln.dataset.t; draw(); }));
+  spd.addEventListener('click', () => { speed = speed === 1 ? 1.5 : speed === 1.5 ? 2 : 1; spd.textContent = speed + 'x'; if (audio) audio.playbackRate = speed; });
+  wave.addEventListener('click', (e) => { const r = wave.getBoundingClientRect(); if (key) GAME?.see(key); seek(((e.clientX - r.left) / r.width) * total); });
+  lines.forEach(ln => ln.addEventListener('click', () => seek(+ln.dataset.t)));
   const el = h('div', { class: 'k-audio-wrap' },
     h('div', { class: 'k-audio' },
       compact ? null : h('div', { style: 'font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px' }, h('span', null, title), at ? h('span', { style: 'color:var(--ph-mut);font-weight:400;font-size:13px' }, at) : null),

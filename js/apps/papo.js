@@ -548,7 +548,7 @@ function buildChat(env, chat, opts, body, nav) {
       }
       case 'audio': {
         cls += ' audio';
-        parts.push(h('div', { class: 'pm-audio' }, kit.audioPlayer({ compact: true, duration: m.duration || 20, key: 'papo:audio:' + m.id, title: 'Áudio' })));
+        parts.push(h('div', { class: 'pm-audio' }, kit.audioPlayer({ compact: true, duration: m.duration || 20, key: 'papo:audio:' + m.id, title: 'Áudio', src: m.src })));
         if (m.transcript) {
           const tr = h('div', { class: 'pm-trans txt', hidden: true }, m.transcript);
           const lbl = h('span', null, 'Transcrição');

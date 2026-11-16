@@ -32,5 +32,6 @@ export default {
     ['Fontes', 'Roboto Flex, Fraunces, JetBrains Mono, Caveat (SIL OFL)'],
     ['Fotos', 'Geradas com Gemini, ChatGPT e Adobe Firefly; fotos de banco do Pexels (licença Pexels)'],
     ['Prints e documentos', 'Montados em código para o jogo'],
+    ['Vozes', 'Vozes neurais da Microsoft pelo Space innoai/Edge-TTS-Text-to-Speech (Hugging Face); mixagem em código'],
   ],
 };
