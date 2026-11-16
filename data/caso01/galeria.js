@@ -157,7 +157,7 @@ export default {
       'Foto tremida da cerca de madeira do mirante, apagada logo antes da versão boa. Só se vê um borrão de estacas e o céu laranja.',
       { img: 'lx_cerca_tremida', o: { deletedAt: '2026-10-10T18:20' } }),
     ph('lx-print-caio', '2026-10-08T20:14', 'lixeira', 1080, 2400, null,
-      'Captura de tela de uma conversa com Caio Montenegro no Papo: "Lembrando o termo de confidencialidade que você assinou. Cláusula 9." Apagada por Iara depois do print.',
+      'Captura de tela da conversa com Caio Montenegro no Papo, às 20:14 de 08/10: o lembrete do termo de confidencialidade e, às 20:11, "Releia a cláusula 9. Não quero precisar lembrar de novo." A mensagem das 20:11 não existe mais na conversa. Iara apagou o print depois.',
       { img: 'lx_print_caio', o: { device: 'Captura de tela', deletedAt: '2026-10-08T20:30' } }),
 
     /* ---------- PARTE 2 ---------- */

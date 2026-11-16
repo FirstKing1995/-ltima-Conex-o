@@ -1,5 +1,5 @@
 // Junta o conteúdo do Caso 01. Cada arquivo é carregado separadamente: se um falhar, o jogo continua.
-const V = '1.3.1'; // mude a cada publicação para furar o cache
+const V = '1.3.2'; // mude a cada publicação para furar o cache
 const FILES = ['meta', 'contacts', 'papo', 'sms', 'telefone', 'galeria', 'rotas', 'lume', 'navegador', 'correio', 'jandaia', 'notas', 'agenda', 'relogio', 'gravador', 'pulso', 'bora', 'configuracoes', 'arquivos', 'clima', 'eco', 'terms', 'chapters', 'puzzles', 'answers', 'news', 'endings'];
 
 export async function loadCase() {
