@@ -30,6 +30,7 @@ export default {
     ['Ícones', 'Lucide (licença ISC)'],
     ['Mapa', 'Leaflet (BSD-2) · © OpenStreetMap · © CARTO'],
     ['Fontes', 'Roboto Flex, Fraunces, JetBrains Mono, Caveat (SIL OFL)'],
-    ['Avatares', 'DiceBear (estilos CC0)'],
+    ['Fotos', 'Geradas com Gemini, ChatGPT e Adobe Firefly; fotos de banco do Pexels (licença Pexels)'],
+    ['Prints e documentos', 'Montados em código para o jogo'],
   ],
 };
