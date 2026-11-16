@@ -567,7 +567,7 @@ const lari = chat('lari', 'la-', { type: 'direct', contact: 'lari', lastSeen: '2
 10-10 22:38 | iara | tô sim. só cansada
 10-10 22:39 | lari | 🫶 se precisar de mim
 10-10 22:58 | lari | teu tripé tá ocupando o corredor do camarim, posso mover?
-10-11 00:00 | iara | pode, só não perde. deixa no camarim que depois eu pego | ::st=sent
+10-10 23:03 | iara | pode, só não perde. deixa no camarim que depois eu pego
 10-11 09:00 | lari | Iara... meu Deus
 10-11 09:01 | lari | eu não consigo acreditar
 10-12 12:00 | lari | Tô com o teu tripé. Vou entregar pra tua família, prometo
