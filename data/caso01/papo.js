@@ -37,7 +37,7 @@ function msgs(px, raw) {
       const [cmd, ...a] = body.slice(1).split(':');
       if (cmd === 'img') { m.kind = 'image'; m.media = `assets/caso01/img/${a[0]}.jpg`; if (cap) m.caption = cap; }
       else if (cmd === 'vid') { m.kind = 'video'; m.media = `assets/caso01/img/${a[0]}.jpg`; m.duration = +a[1]; if (cap) m.caption = cap; }
-      else if (cmd === 'aud') { m.kind = 'audio'; m.duration = +a[0]; m.transcript = cap; m.src = `assets/caso01/audio/papo_${from}_${when.replace(/[^0-9]/g, '')}.mp3`; }
+      else if (cmd === 'aud') { m.kind = 'audio'; m.duration = +a[0]; m.transcript = cap; }
       else if (cmd === 'doc') { m.kind = 'doc'; m.doc = { name: a[1], size: a[2], file: a[0] }; if (cap) m.caption = cap; }
       else if (cmd === 'stk') { m.kind = 'sticker'; m.text = a[0]; }
       else if (cmd === 'loc') { m.kind = 'location'; m.place = { name: a.slice(2).join(':'), lat: +a[0], lng: +a[1] }; }
@@ -80,7 +80,7 @@ const equipe = chat('equipe-evento', 'eq-', {
 10-08 16:10 | iara | Ok.
 10-09 18:01 | lari | !doc:roteiro:Roteiro_Noite_da_Colheita_v4.pdf:412 KB | Roteiro final v4. Banda para às 23:25, discurso do Caio ao vivo às 23:30. Não atrasem, pelo amor de Deus 🙏
 10-09 18:10 | marcos | Recebido.
-10-09 18:25 | ze | !aud:10 | Dona Lari, o portão de trás tava emperrado, já engraxei, tá funcionando. Pode mandar a banda por ele.
+10-09 18:25 | ze | !aud:14 | Dona Lari, o portão de trás tava emperrado, já engraxei, tá funcionando. Pode mandar a banda por ele.
 10-09 18:40 | lari | Obrigada Seu Zé!!
 10-10 08:30 | duda | !img:eq_ceu_manha | Céu limpo, zero chuva 🌻 vai ser perfeito
 10-10 08:34 | marcos | Previsão confirmada. Sem plano B de chuva.
@@ -181,7 +181,7 @@ const duda = chat('duda', 'du-', { type: 'direct', contact: 'duda', lastSeen: '2
 05-22 18:40 | iara | assinei o contrato. tô nervosa kkkk
 05-22 18:41 | duda | bora ganhar dinheiro juntas 🌻🌻🌻
 05-22 18:42 | duda | e finalmente tu vai ter motivo pra vir mais na serra
-06-12 20:05 | duda | !aud:13 | Amiga, tu não vai acreditar. A Lúcia do salão, aquela que casou com o Wagner, largou o marido e foi morar em Sobral com o professor de zumba. Eu tô passada. Me liga amanhã que eu te conto tudo, tá?
+06-12 20:05 | duda | !aud:48 | Amiga, tu não vai acreditar. A Lúcia do salão, aquela que casou com o Wagner, largou o marido e foi morar em Sobral com o professor de zumba. Eu tô passada. Me liga amanhã que eu te conto tudo, tá?
 06-12 20:09 | iara | KKKKKKKKK não acredito
 06-12 20:10 | iara | o do zumba?? aquele de 50 anos??
 06-12 20:10 | duda | ele mesmo 😂😂
@@ -257,7 +257,7 @@ const duda = chat('duda', 'du-', { type: 'direct', contact: 'duda', lastSeen: '2
 10-11 09:20 | duda | não pode ser
 10-11 09:21 | duda | não pode ser
 10-11 11:02 | duda | eu te amo tanto. me perdoa por tudo. me perdoa
-10-11 14:30 | duda | !aud:13 | Iara... eu não sei nem o que falar. Tu me disse que ia direto pra casa, eu devia ter te levado. Eu devia ter ficado contigo. Tua mãe tá destruída, eu tô aqui com ela. Me perdoa, minha irmã. Me perdoa.
+10-11 14:30 | duda | !aud:41 | Iara... eu não sei nem o que falar. Tu me disse que ia direto pra casa, eu devia ter te levado. Eu devia ter ficado contigo. Tua mãe tá destruída, eu tô aqui com ela. Me perdoa, minha irmã. Me perdoa.
 10-12 08:10 | duda | hoje é o teu velório, minha irmã. tô tentando ser forte por tua mãe
 10-12 21:15 | duda | a polícia disse que foi acidente. a cerca. eu pedi tanto pro Seu Zé arrumar...
 10-13 09:30 | duda | tô postando uma homenagem pra ti. todo mundo tá comentando 🌻
@@ -275,8 +275,8 @@ const pai = chat('pai', 'pa-', { type: 'direct', contact: 'pai', pinned: true, l
 06-06 07:30 | iara | bom dia pai 💛 como tá o Bento?
 06-06 07:41 | pai | !img:bento_quintal | O danado tá deitado na sombra do pé de manga, nem liga pra nada
 06-06 07:44 | iara | kkkkk que amor. dá um cheiro nele por mim
-06-20 18:20 | pai | !aud:20 | Filha, aqui é seu pai. Choveu bem hoje, viu? A roça de feijão tá aprumando que dá gosto. Tua mãe tá com saudade, diz que tu só vem aqui quando tá com fome kkk. Quando tu vem, filha? Deus te abençoe.
-06-20 19:02 | iara | !aud:6 | Oi pai! Eu vou em julho, tá? Dá um abraço apertado na mãe. Te amo.
+06-20 18:20 | pai | !aud:38 | Filha, aqui é seu pai. Choveu bem hoje, viu? A roça de feijão tá aprumando que dá gosto. Tua mãe tá com saudade, diz que tu só vem aqui quando tá com fome kkk. Quando tu vem, filha? Deus te abençoe.
+06-20 19:02 | iara | !aud:19 | Oi pai! Eu vou em julho, tá? Dá um abraço apertado na mãe. Te amo.
 07-04 12:10 | pai | Tua mae fez cuscuz com ovo, ta com saudade de ti
 07-04 12:30 | iara | tô morrendo de saudade do cuscuz da mãe 😭
 08-15 07:30 | pai | Filha a Dudinha veio aqui ontem trazer bolo, que menina educada. Falou muito de ti
@@ -315,7 +315,7 @@ const pai = chat('pai', 'pa-', { type: 'direct', contact: 'pai', pinned: true, l
 10-11 07:40 | pai | !call:missed
 10-11 08:12 | pai | !call:missed
 10-11 09:50 | pai | Filha
-10-11 10:02 | pai | !aud:14 | Minha filha... minha filha... Eles disseram que... Deus, eu não quero acreditar. Atende o teu pai, por favor. Atende.
+10-11 10:02 | pai | !aud:27 | Minha filha... minha filha... Eles disseram que... Deus, eu não quero acreditar. Atende o teu pai, por favor. Atende.
 10-11 17:30 | pai | O Bento nao come desde cedo, ta deitado na porta do teu quarto
 10-12 06:20 | pai | Hoje a gente vai te levar, filha. Eu vou de camisa branca como tu gostava
 10-13 20:11 | pai | Filha eu pensei bem. Eu nao ligo pro dinheiro. Eu so queria tu aqui
@@ -332,7 +332,7 @@ const mae = chat('mae', 'ma-', { type: 'direct', contact: 'mae', pinned: true, l
 07-02 14:35 | iara | tô comendo sim mãe kkk. o pai exagera
 07-02 14:36 | mae | Come arroz com feijão, não vive de miojo
 07-02 14:36 | iara | kkkkk tá bom
-07-18 10:00 | mae | !aud:17 | Filha, é a mamãe. Eu fui no médico hoje, o joelho tá igual, ele falou em cirurgia mas eu não quero agora. Teu pai quer juntar um dinheirinho pra isso, mas eu digo que não precisa. Me liga quando puder, tá? Um beijo.
+07-18 10:00 | mae | !aud:52 | Filha, é a mamãe. Eu fui no médico hoje, o joelho tá igual, ele falou em cirurgia mas eu não quero agora. Teu pai quer juntar um dinheirinho pra isso, mas eu digo que não precisa. Me liga quando puder, tá? Um beijo.
 07-18 19:12 | iara | mãe, tu vai operar sim. a gente dá um jeito. eu ajudo
 07-18 19:20 | mae | Deus te abençoe, minha filha
 08-15 20:00 | mae | Dudinha veio aqui ontem, quanta educação aquela menina. Tua amiga é uma benção
@@ -352,7 +352,7 @@ const mae = chat('mae', 'ma-', { type: 'direct', contact: 'mae', pinned: true, l
 10-11 08:31 | mae | !call:missed
 10-11 08:50 | mae | Filha por favor atende
 10-11 09:28 | mae | A Maria Eduarda ligou. Tá dizendo coisa que eu não quero acreditar
-10-11 10:12 | mae | !aud:10 | Minha filha, atende a mamãe... Dizem que acharam tu... Eu não quero... Tu falou que ia pra casa... Ai, meu Deus...
+10-11 10:12 | mae | !aud:34 | Minha filha, atende a mamãe... Dizem que acharam tu... Eu não quero... Tu falou que ia pra casa... Ai, meu Deus...
 10-11 10:40 | mae | Minha filha
 10-11 15:05 | mae | O padre veio rezar com a gente
 10-12 06:30 | mae | Hoje é o dia, minha filha
@@ -590,7 +590,7 @@ const familia = chat('familia', 'fa-', {
 08-29 07:02 | iara | Parabéns, pai!!! O melhor pai do mundo 💛
 08-29 07:15 | pai | Obrigado filha. Deus te abençoe
 08-29 07:30 | leo | Parabéns tio!
-09-13 17:30 | tia-zuila | !aud:14 | Gente, é a Zuíla. Domingo que vem o almoço de aniversário da Socorro é lá em casa, cada um traz uma coisa. Eu faço a galinha de cabidela.
+09-13 17:30 | tia-zuila | !aud:22 | Gente, é a Zuíla. Domingo que vem o almoço de aniversário da Socorro é lá em casa, cada um traz uma coisa. Eu faço a galinha de cabidela.
 09-13 17:45 | mae | Eu levo o doce
 09-13 17:46 | iara | levo refrigerante!
 09-20 15:20 | iara | !img:familia_almoco | Aniversário da mãe, 56 anos de pura sabedoria 🥰

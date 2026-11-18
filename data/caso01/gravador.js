@@ -179,7 +179,7 @@ export default {
     },
 
     {
-      id: 'g-0308', audio: false,
+      id: 'g-0308',
       name: 'Música pro Bento (versão 2)',
       at: '2026-08-03T21:12',
       duration: 38,

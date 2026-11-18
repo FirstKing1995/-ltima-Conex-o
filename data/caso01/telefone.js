@@ -62,11 +62,11 @@ export default {
 
   voicemail: [
     {
-      id: 'vm-clinica', phone: '5585987720136', contact: 'dentista', at: '2026-08-26T16:12', duration: 15,
+      id: 'vm-clinica', phone: '5585987720136', contact: 'dentista', at: '2026-08-26T16:12', duration: 24,
       transcript: 'Oi, Iara, aqui é da Clínica Odonto Benfica. Estamos ligando para lembrar da sua limpeza amanhã, quinta, às quinze e trinta, com o Dr. Hélio. Se não puder vir, é só retornar neste número para remarcar. Um bom dia.',
     },
     {
-      id: 'vm-marina', phone: '5585996172803', contact: 'marina', at: '2026-10-08T18:14', duration: 12,
+      id: 'vm-marina', phone: '5585996172803', contact: 'marina', at: '2026-10-08T18:14', duration: 19,
       transcript: 'Oi, Iara, é a Marina. Tinha esquecido de falar do horário do casamento, é às quatro da tarde, não às cinco. Me retorna quando puder. Beijo.',
     },
     {
@@ -74,15 +74,15 @@ export default {
       transcript: 'Filha, é teu pai. Tu não dormiu aqui em casa. Me liga, tá? Deus te abençoe.',
     },
     {
-      id: 'vm-mae', phone: '5588994305562', contact: 'mae', at: '2026-10-11T11:20', duration: 16,
+      id: 'vm-mae', phone: '5588994305562', contact: 'mae', at: '2026-10-11T11:20', duration: 31,
       transcript: 'Filha, é a mamãe. Eu sei que tu não vai ouvir. Eu liguei mesmo assim. A tua cama tá arrumada, o Bento tá na porta. Eu só queria ouvir a tua voz no começo da mensagem. É só. Te amo.',
     },
     {
-      id: 'vm-bruna', phone: '5585988124471', at: '2026-10-12T10:35', duration: 15,
+      id: 'vm-bruna', phone: '5585988124471', at: '2026-10-12T10:35', duration: 28,
       transcript: 'Iara, é a Bruna Leal, do Farol. Estou aqui no jornal te esperando, são dez e trinta e cinco. A sala está reservada até as onze. Se aconteceu algum imprevisto, me avisa por favor. Eu preciso do que você disse que tinha.',
     },
     {
-      id: 'vm-ademar', phone: '5588996017741', at: '2026-10-09T21:14', duration: 33, req: 'final_verdade',
+      id: 'vm-ademar', phone: '5588996017741', at: '2026-10-09T21:14', duration: 47, req: 'final_verdade',
       transcript: 'Iara, minha filha, aqui é o Ademar, pai da Duda. Soube que tu andou no cartório de Ipu pedindo livro velho, e no jornal pedindo jornal de noventa e dois. Eu entendo. É tua tia. Mas deixa os mortos onde Deus deixou. Vem pra festa, faz o teu serviço, volta pra Fortaleza. A serra não gosta de quem cava. Tua família sabe disso melhor que ninguém. Um abraço no teu pai.',
     },
   ],

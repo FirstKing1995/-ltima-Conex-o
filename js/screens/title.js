@@ -41,7 +41,7 @@ export function show({ inGame = false } = {}) {
       h('button', { class: `tbtn ${!inGame && !started ? 'primary' : ''}`, on: { click: novo } }, started ? 'Novo jogo' : 'Começar'),
       h('button', { class: 'tbtn ghost', on: { click: howTo } }, 'Como jogar'),
       h('button', { class: 'tbtn ghost', on: { click: credits } }, 'Créditos')),
-    h('p', { class: 'ts-foot' }, 'Ficção. Pessoas, empresas e fatos são inventados. Use fones de ouvido.'),
+    h('p', { class: 'ts-foot' }, 'Ficção. Pessoas, empresas e fatos são inventados.'),
   ]);
 }
 

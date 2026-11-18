@@ -24,7 +24,7 @@ async function boot() {
   phone.mount(document.getElementById('phone'), game);
   phone.setHome(renderHome);
   if (!state.flags.phone_unlocked) phone.showLock(renderLock);
-  game.analysis.attach(phone.root, game, (txt, isNew) => phone.toast(txt, { icon: isNew ? 'sparkles' : 'check' }));
+  game.analysis.attach(phone.root, game, (txt, isNew, ms) => phone.toast(txt, { icon: isNew ? 'sparkles' : 'check', ms: ms || 2400 }));
 
   invbar.mount({ barEl: document.getElementById('inv-bar'), ecoEl: document.getElementById('eco-panel'), boardEl: document.getElementById('board-panel'), onMenu: () => openMenu() });
   game.eco = eco.eco;

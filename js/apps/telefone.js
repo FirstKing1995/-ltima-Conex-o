@@ -264,7 +264,7 @@ function renderVoicemail(env, slot, items, focus, onSeen) {
     const lines = Array.isArray(tr) ? tr : null;
     const text = typeof tr === 'string' ? tr : '';
     const panel = h('div', { class: 'tv-body', hidden: true },
-      kit.audioPlayer({ compact: !lines, title: 'Mensagem de voz', at: when(v.at), duration: v.duration || 20, key, transcript: lines || [], src: `assets/caso01/audio/${v.id}.mp3` }),
+      kit.audioPlayer({ compact: !lines, title: 'Mensagem de voz', at: when(v.at), duration: v.duration || 20, key, transcript: lines || [] }),
       text ? h('div', { class: 'tv-trans' }, h('small', null, 'Transcrição automática'), h('p', { class: 'txt' }, text)) : null);
     const head = h('button', { class: 'tv-head', 'aria-expanded': 'false' },
       partyAvatar(env, party, 46),

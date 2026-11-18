@@ -131,7 +131,7 @@ function drawDetail(ctx, el, rec) {
     el.append(h('div', { class: 'gv-note slim' }, icon('trash-2', { size: 17 }),
       h('span', null, `${delTag(rec.deletedAt || rec.at)}${rec.deletedAt ? ` · exclusão definitiva em ${purgeDate(rec.deletedAt)}` : ''}`)));
   }
-  const player = kit.audioPlayer({ title: rec.name, at: dateTag(rec.at), duration: dur, transcript: rec.transcript || [], key: `gravador:rec:${rec.id}`, src: rec.audio === false ? '' : `assets/caso01/audio/${rec.id}.mp3` });
+  const player = kit.audioPlayer({ title: rec.name, at: dateTag(rec.at), duration: dur, transcript: rec.transcript || [], key: `gravador:rec:${rec.id}` });
   const tr = player.querySelector('.k-transcript');
   const pinRow = h('div', { class: 'gv-pinrow' }, kit.pinButton(pinSpec));
   if (tr) {

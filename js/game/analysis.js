@@ -83,12 +83,11 @@ function unwrapAll(root) {
 function hook(root) {
   if (hooked || !root) return;
   hooked = true;
-  const handler = (e) => {
-    if (!state.settings.analysis) return;
-    const mk = e.target.closest?.('mark.term');
-    if (!mk) return;
-    e.stopPropagation(); e.preventDefault();
-    if (e.type !== 'click') return;
+  // Coleta no "soltar" (pointerup): funciona com dedo, mouse e caneta. No toque NÃO se cancela o touchstart,
+  // senão o celular não gera o resto do gesto (e também não deixa rolar a tela começando num termo).
+  let downAt = null, lastCollect = 0;
+  const collect = (mk) => {
+    lastCollect = Date.now();
     const id = mk.dataset.term;
     const isNew = analysis.game?.collect(id);
     root.querySelectorAll(`mark.term[data-term="${CSS.escape(id)}"]`).forEach(x => x.classList.add('got'));
@@ -96,7 +95,23 @@ function hook(root) {
     const t = (CASE.terms?.terms || []).find(x => x.id === id);
     analysis.toast?.(isNew ? `Termo coletado: ${t?.label || id}` : `Você já tem: ${t?.label || id}`, isNew);
   };
-  ['click', 'pointerdown', 'pointerup', 'mousedown', 'touchstart'].forEach(ev => root.addEventListener(ev, handler, { capture: true, passive: false }));
+  const handler = (e) => {
+    if (!state.settings.analysis) return;
+    const mk = e.target.closest?.('mark.term');
+    if (!mk) { if (e.type === 'pointerdown') downAt = null; return; }
+    e.stopPropagation();                       // o toque no termo não abre conversa nem fixa a mensagem
+    if (e.type === 'pointerdown') { downAt = { x: e.clientX, y: e.clientY, mk }; return; }
+    if (e.type === 'touchstart') return;       // sem preventDefault: o gesto segue normal
+    if (e.cancelable) e.preventDefault();
+    if (e.type === 'pointerup') {
+      const moved = downAt ? Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) : 0;
+      if (downAt && downAt.mk === mk && moved < 12) collect(mk);   // foi um toque, não uma rolagem
+      downAt = null;
+      return;
+    }
+    if (e.type === 'click' && Date.now() - lastCollect > 700) collect(mk);  // teclado/leitor de tela
+  };
+  ['click', 'pointerdown', 'pointerup', 'mousedown', 'touchstart', 'contextmenu'].forEach(ev => root.addEventListener(ev, handler, { capture: true, passive: false }));
 }
 
 export const analysis = {
@@ -108,6 +123,7 @@ export const analysis = {
     state.settings.analysis = !!on; save();
     if (phoneEl) { phoneEl.classList.toggle('analysis', !!on); if (!on) unwrapAll(phoneEl); }
     bus.emit('analysis', { on: !!on });
+    if (on) analysis.toast?.('Lupa ligada. Toque num trecho sublinhado (nome, hora, lugar) para guardá-lo como pista. Elas vão para o Quadro, aba Termos.', true, 5200);
   },
   toggle() { analysis.set(!state.settings.analysis); return state.settings.analysis; },
   scan,
