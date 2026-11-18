@@ -12,7 +12,7 @@ export default {
   lockScreen: {
     notifications: [
       { appId: 'pulso', icon: 'heart-pulse', title: 'Pulso', text: '⚠️ Queda forte detectada. Você está bem?', at: '2026-10-10T23:41' },
-      { appId: 'papo', icon: 'message-circle', title: 'Equipe Noite da Colheita 🌻', text: 'Lari: a banda atacando o churrasco no camarim 😂🍖', at: '2026-10-10T23:40' },
+      { appId: 'papo', icon: 'message-circle', title: 'Equipe Noite da Colheita 🌻', text: 'Igor Som: sinal caiu uns segundos, já voltou', at: '2026-10-10T23:40' },
       { appId: 'lume', icon: 'aperture', title: 'Lume', text: 'dudaandrade.oficial publicou um story.', at: '2026-10-10T23:33' },
       { appId: 'papo', icon: 'message-circle', title: 'Léo 🏛️', text: 'e aí, como tá a festa da firma? 😅', at: '2026-10-10T23:20' },
     ],

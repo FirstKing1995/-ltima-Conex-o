@@ -162,7 +162,9 @@ function drawTrip(ctx, el, t) {
   wrap.append(h('section', { class: 'bo-card bo-line' },
     h('div', { class: 'row' }, h('div', { class: 'tm' }, start), h('div', { class: 'mk' }, h('i', { class: 'o' })), h('div', { class: 'tx' }, h('small', null, 'Embarque'), h('b', null, from))),
     h('div', { class: 'row mid' }, h('div', { class: 'tm' }), h('div', { class: 'mk' }, h('i', { class: 'l' })), h('div', { class: 'tx' }, h('span', { class: 'pill' }, icon('clock', { size: 13 }), `${t.minutes || '—'} min`, ' · ', icon('route', { size: 13 }), `${num1(t.km)} km`))),
+    t.stop ? h('div', { class: 'row mid' }, h('div', { class: 'tm' }), h('div', { class: 'mk' }, h('i', { class: 'l' })), h('div', { class: 'tx' }, h('small', null, 'Parada'), h('b', null, t.stop))) : null,
     h('div', { class: 'row' }, h('div', { class: 'tm' }, end), h('div', { class: 'mk' }, h('i', { class: 'd' })), h('div', { class: 'tx' }, h('small', null, 'Desembarque'), h('b', null, to)))));
+  if (t.split) wrap.append(h('section', { class: 'bo-card' }, h('div', { class: 'tx', style: { padding: '2px 0' } }, h('small', null, 'Corrida dividida'), h('b', { style: { display: 'block' } }, `Com ${t.split} · cada um paga ${money(t.price / 2)}`))));
 
   wrap.append(h('section', { class: 'bo-card bo-driver' },
     h('div', { class: 'av' }, (drv.name || '?').charAt(0).toUpperCase()),

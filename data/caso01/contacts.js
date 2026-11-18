@@ -11,7 +11,7 @@ export default {
 
     // ---- personagens principais
     { id: 'duda', name: 'Duda 🌻', fullName: 'Maria Eduarda Sampaio Andrade', phones: ['5588997120384'], email: '', avatar: A('duda'), color: '#d9a441', relation: 'melhor amiga', birthday: '05-04', company: 'Colheita Capital', favorite: true,
-      notes: 'amiga desde a 4ª série. consultora da Colheita na serra. chip da Colheita: (88) 99645-1209 (ela pediu pra não salvar)' },
+      notes: 'amiga desde a 4ª série. consultora da Colheita na serra.' },
     { id: 'rafa', name: 'Rafa (bloqueado)', fullName: 'Rafael Aguiar', phones: ['5588998312456'], email: '', avatar: A('rafa'), color: '#7c6cf0', relation: 'ex', blocked: true, notes: 'não responder' },
     { id: 'caio', name: 'Caio Montenegro', fullName: 'Caio Montenegro', phones: ['5585991230077'], email: 'caio@colheitacapital.com.br', avatar: A('caio'), color: '#3f4a5a', relation: 'cliente', company: 'Colheita Capital' },
     { id: 'bruna', name: 'Bruna Leal (O Farol)', fullName: 'Bruna Leal', phones: [], email: 'bruna.leal@ofarol.com.br', avatar: A('bruna'), color: '#2bb3a3', relation: 'jornalista', company: 'O Farol', notes: 'reunião seg 12/10 às 10h, Av. Santos Dumont. falar só por e-mail por enquanto.' },

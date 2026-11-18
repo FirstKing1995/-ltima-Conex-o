@@ -22,7 +22,7 @@ const D = {
 };
 
 const CARD = 'Cartão •••• 4412';
-const t = (id, at, from, to, driver, price, minutes, km, payment = CARD) => ({ id, at, from: P[from], to: P[to], driver: D[driver], price, minutes, km, payment });
+const t = (id, at, from, to, driver, price, minutes, km, payment = CARD, x = {}) => ({ id, at, from: P[from], to: P[to], driver: D[driver], price, minutes, km, payment, ...x });
 
 export default {
   trips: [
@@ -33,7 +33,7 @@ export default {
     t('b-0912a', '2026-09-12T12:05', 'rodSob', 'hotelSob', 'jorge', 9.2, 7, 1.9),
     t('b-0912b', '2026-09-12T19:35', 'hotelSob', 'rodSob', 'cicero', 9.6, 7, 1.9),
     t('b-0919a', '2026-09-19T17:20', 'apto', 'dragao', 'wanessa', 18.4, 18, 5.0),
-    t('b-0919b', '2026-09-19T22:05', 'dragao', 'apto', 'edson', 19.1, 17, 5.2),
+    t('b-0919b', '2026-09-19T22:05', 'dragao', 'apto', 'edson', 19.1, 26, 7.4, undefined, { stop: 'Hotel Gran Aldeota · Av. Dom Luís', split: 'Duda' }),
     t('b-0925', '2026-09-25T08:50', 'apto', 'colheita', 'tiago', 15.9, 16, 4.3),
     t('b-0930', '2026-09-30T20:55', 'colheita', 'apto', 'rosana', 17.3, 19, 4.4),
     t('b-0510a', '2026-10-05T08:22', 'apto', 'colheita', 'edson', 14.9, 14, 4.2),

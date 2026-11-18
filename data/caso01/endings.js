@@ -74,6 +74,8 @@ export default {
       'O fundo semente da Irmandade derrubou a última defesa de Caio Montenegro. A Colheita Capital fechou. O dinheiro, na maior parte, não voltou.',
       'As mortes de 1958 e de 1975 estavam prescritas. A de 1992 foi reaberta a pedido de Seu Toinho, que entrou na delegacia sozinho, de chapéu na mão, e pediu para registrar o nome da irmã. Disse que tinha passado trinta e quatro anos sem dizer esse nome em voz alta.',
       'Duda foi condenada por homicídio e fraude processual. No julgamento, perguntada se queria dizer alguma coisa, olhou para a mãe de Iara e disse que tinha crescido ouvindo que a Iarinha devia uma vida à casa dela. Disse que não acreditava nisso. Disse que, naquela noite, por alguns segundos, acreditou.',
+      'Marcos Vieira entregou à polícia as fotos originais das fazendas, de Uruçuí e do banco de imagens, em troca de virar testemunha. Nunca mais trabalhou com marketing.',
+      'Théo Castro nunca disse em voz alta que foi ele quem guardou a cópia. Passou o Natal em Guaraciaba, na casa dos pais de Iara, consertando o computador velho de Seu Toinho.',
       'Rafa Aguiar recebeu a medida protetiva que Iara não teve tempo de pedir. Ele nunca esteve no mirante. Esteve, durante anos, em todos os outros lugares.',
       'Ninguém da Irmandade foi acusado pelas cinco mortes. Não havia como. O que se faz na Pedra não se escreve.',
     ],

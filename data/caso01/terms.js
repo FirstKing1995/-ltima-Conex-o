@@ -1,6 +1,6 @@
 // Termos coletáveis no Modo Análise (lupa). match: textos que, quando aparecem no celular, viram o termo.
 // cat: pessoa | lugar | hora | objeto | conceito | numero.  cs: true = diferencia maiúsculas.
-const horas = ['18:19', '20:40', '21:15', '21:47', '21:52', '21:55', '22:15', '22:20', '22:31', '22:51', '23:05', '23:07', '23:20', '23:25', '23:26', '23:28', '23:29', '23:30', '23:31', '23:32', '23:33', '23:34', '23:38', '23:39', '23:40', '23:41', '23:42', '23:43', '23:44', '23:45', '23:46', '23:47', '23:52', '23:53', '23:55', '23:58', '00:15', '00:17', '03:09', '03:17', '06:20'];
+const horas = ['18:19', '20:40', '21:15', '21:47', '21:52', '21:55', '22:15', '22:20', '22:31', '22:51', '23:05', '23:07', '23:15', '23:20', '23:25', '23:26', '23:27', '23:28', '23:29', '23:30', '23:31', '23:32', '23:33', '23:34', '23:35', '23:36', '23:37', '23:38', '23:39', '23:40', '23:41', '23:42', '23:43', '23:44', '23:45', '23:46', '23:47', '23:49', '23:51', '23:52', '23:53', '23:55', '23:58', '00:15', '00:17', '00:30', '06:12', '03:09', '03:17', '06:20'];
 
 export default {
   terms: [
@@ -26,6 +26,9 @@ export default {
     { id: 'p-joana', label: 'Joana', cat: 'pessoa', match: ['Joana Batista', 'Joana'] },
     { id: 'p-chica', label: 'Chica', cat: 'pessoa', match: ['Chica', 'Francisca Bezerra'] },
     { id: 'p-sampaio', label: 'família Sampaio', cat: 'pessoa', match: ['família Sampaio', 'dos Sampaio', 'os Sampaio', 'família da Duda'] },
+    { id: 'p-eunice', label: 'Eunice', cat: 'pessoa', match: ['Eunice', 'Dona Eunice', 'Maria Eunice Sobreira Andrade'] },
+    { id: 'p-mes', label: 'M E S ANDRADE ME', cat: 'pessoa', match: ['M E S ANDRADE ME', 'M E S ANDRADE', 'M E S'], cs: true },
+    { id: 'p-bodinho', label: 'Bodinho', cat: 'pessoa', match: ['Bodinho'] },
     // números
     { id: 'n-99645', label: '(88) 99645-1209', cat: 'numero', match: ['99645-1209', '99645 1209', '996451209'] },
     { id: 'n-4471', label: '98812-4471', cat: 'numero', match: ['98812-4471'] },
@@ -57,6 +60,15 @@ export default {
     { id: 'o-video', label: 'vídeo', cat: 'objeto', match: ['vídeo'] },
     { id: 'o-comprovante', label: 'comprovante', cat: 'objeto', match: ['comprovante', 'comprovantes'] },
     { id: 'o-pasta', label: 'Pasta Segura', cat: 'objeto', match: ['Pasta Segura'] },
+    { id: 'o-gelo', label: 'gelo', cat: 'objeto', match: ['gelo'] },
+    { id: 'o-fita', label: 'fita de perigo', cat: 'objeto', match: ['fita de perigo', 'fita de sinalização', 'fita'] },
+    { id: 'o-barro', label: 'barro vermelho', cat: 'objeto', match: ['barro vermelho', 'barro'] },
+    { id: 'o-areia', label: 'areia branca', cat: 'objeto', match: ['areia branca'] },
+    { id: 'o-lanterna', label: 'lanterna', cat: 'objeto', match: ['lanterna'] },
+    { id: 'o-espelho', label: 'espelho', cat: 'objeto', match: ['espelho', 'Espelho Seguro'] },
+    { id: 'o-nota', label: 'nota fiscal', cat: 'objeto', match: ['nota fiscal', 'nota do gelo'] },
+    { id: 'o-chave', label: 'chave aleatória', cat: 'objeto', match: ['chave aleatória'] },
+    { id: 'o-van', label: 'van', cat: 'objeto', match: ['van'] },
     { id: 'o-cerca', label: 'cerca quebrada', cat: 'objeto', match: ['cerca quebrada', 'cerca'] },
     { id: 'o-pendrive', label: 'pendrive', cat: 'objeto', match: ['pendrive'] },
     // conceitos

@@ -98,6 +98,8 @@ const equipe = chat('equipe-evento', 'eq-', {
 10-10 18:44 | lari | LINDO. Posso usar nos stories da produção?
 10-10 18:45 | iara | Pode!
 10-10 19:00 | lari | Portões abertos! 🎉
+10-10 19:30 | ze | Molhei o estacionamento pra baixar a poeira. Cuidado que ta barro vermelho, quem tiver de sapato bom deixa no carro
+10-10 19:31 | lari | Valeu Seu Zé! 🙏
 10-10 19:52 | iara | !img:eq_credenciamento | Fila do credenciamento já na porta
 10-10 20:00 | lari | Jantar servido na casa sede e no galpão. Equipe come em revezamento, ninguém sai do posto sem avisar!!
 10-10 20:14 | duda | Alguém viu minha bolsa vermelha? 😅
@@ -122,23 +124,31 @@ const equipe = chat('equipe-evento', 'eq-', {
 10-10 23:05 | iara | vou descansar a câmera 10 min
 10-10 23:10 | lari | Quem tem o roteiro à mão? Preciso do horário exato do discurso.
 10-10 23:11 | marcos | 23:30 em ponto. A live começa junto.
+10-10 23:15 | lari | Seu Zé indo pro mirante de lanterna a essa hora? 👀
+10-10 23:16 | lari | Seu Zé?
+10-10 23:18 | duda | deixa ele, Lari, ele conhece isso aqui de olho fechado 🌻
 10-10 23:24 | lari | Daqui a 1 min a banda para. Caio, se prepara.
 10-10 23:26 | lari | banda parou, Caio subindo
-10-10 23:27 | marcos | Live configurada, sinal ok 📶
+10-10 23:27 | marcos | Live configurada, sinal ok 📶 eu filmo
 10-10 23:28 | igor | Microfone do Caio ok.
-10-10 23:36 | marcos | Alguém viu a Duda? O Caio tá procurando ela no palco.
-10-10 23:37 | lari | Ela tava aqui agorinha. Duda?
-10-10 23:40 | lari | !img:eq_banda_camarim | a banda atacando o churrasco no camarim 😂🍖
-10-10 23:41 | marcos | kkkkk o cantor de chapéu de couro comendo costela
-10-10 23:42 | igor | O Rafa não solta a costela 😂
+10-10 23:32 | lari | acabou o gelo do bar 😩 alguém?
+10-10 23:33 | marcos | Vou eu buscar. Igor, segura a live.
+10-10 23:34 | igor | tô com a live
+10-10 23:35 | lari | !img:eq_banda_camarim | a banda atacando o churrasco no camarim 😂🍖
+10-10 23:36 | lari | o Rafa saiu, disse que ia fumar 🙄 se a banda atrasar pra voltar eu mato
+10-10 23:40 | igor | sinal caiu uns segundos, já voltou
 10-10 23:46 | iara | Fui no mirante fazer uns timelapse. Já volto. | ::st=delivered;react=👍
 10-10 23:49 | lari | Vai de lanterna, Iara! Tá escuro lá
-10-10 23:52 | marcos | Live encerrada. Pico de 1.240 pessoas assistindo.
+10-10 23:51 | lari | o Rafa voltou com a bota toda suja de barro vermelho kkkk pisou onde, homi
+10-10 23:53 | igor | Live encerrada. Pico de 1.240 pessoas assistindo.
 10-10 23:55 | duda | voltei, tava no banheiro, fila enorme 😩
 10-10 23:57 | lari | Kkkk fila de banheiro de festa é sempre assim
 10-11 00:15 | lari | alguém viu a Iara? o tripé dela tá aqui no camarim
 10-11 00:17 | duda | Ela me disse que ia direto pra casa depois
 10-11 00:20 | lari | ah ok, amanhã eu entrego o tripé
+10-11 00:30 | marcos | Cheguei com o gelo. 6 sacos. Alguém me ajuda a descarregar
+10-11 00:31 | lari | Marcos, tu foi buscar gelo no Piauí? kkkk
+10-11 00:33 | marcos | O mercadinho mais perto fecha às 22h. Tive que ir no centro.
 10-11 00:41 | igor | Banda indo embora. Valeu pela noite, galera!
 10-11 01:10 | marcos | Resultado ótimo, Caio satisfeito. Descansem. Amanhã eu preciso do material bruto, Iara 🙏
 10-11 06:41 | ze | Bom dia. Alguem da familia da dona Duda me ligue urgente
@@ -149,6 +159,8 @@ const equipe = chat('equipe-evento', 'eq-', {
 10-11 08:58 | lari | O tripé dela tá aqui comigo... eu disse que entregava amanhã...
 10-11 09:20 | duda | A polícia tá aqui. Disseram que parece acidente. A cerca do mirante tava quebrada, eu pedi tanto...
 10-11 10:15 | marcos | Sinto muito pela Iara. O Caio pediu que ninguém se manifeste nas redes por enquanto. Nota oficial em breve.
+10-11 11:30 | marcos | !img:nf_gelo | Lari, nota do gelo de ontem pra reembolso. Desculpa mandar isso hoje.
+10-11 11:41 | lari | Depois a gente vê isso, Marcos.
 10-12 07:55 | duda | O velório é hoje às 10h na Igreja Matriz de Guaraciaba. A família pediu que quem for use branco 🤍
 10-12 12:30 | lari | Obrigada a quem foi. A mãe dela agradeceu.
 10-12 17:02 | marcos | Pessoal, favor devolver à produção qualquer material da Iara (cartões de memória, HD, pendrive). A Colheita precisa organizar o acervo do evento.
@@ -160,7 +172,7 @@ const equipe = chat('equipe-evento', 'eq-', {
 
 /* ===================== VOCÊ (jogador) ===================== */
 const voce = chat('voce', 'vc-', { type: 'direct', phone: '5585988124417' }, `
-10-10 23:31 | iara | Bruna, é a Iara. Número novo? Salva esse. Tô indo encontrar ela no mirante agora. Vou gravar tudo. Se eu não te mandar nada até amanhã, o Théo sabe onde tá a pasta. | ::st=delivered
+10-10 23:31 | iara | Bruna, é a Iara. Número novo? Salva esse. Tô indo pro mirante agora encontrar a pessoa. Vou gravar tudo. Se eu não te mandar nada até amanhã, o Théo sabe onde tá a pasta. | ::st=delivered
 `);
 
 /* ===================== NÚMERO DESCONHECIDO (chip da Duda) ===================== */
@@ -181,20 +193,31 @@ const duda = chat('duda', 'du-', { type: 'direct', contact: 'duda', lastSeen: '2
 05-22 18:40 | iara | assinei o contrato. tô nervosa kkkk
 05-22 18:41 | duda | bora ganhar dinheiro juntas 🌻🌻🌻
 05-22 18:42 | duda | e finalmente tu vai ter motivo pra vir mais na serra
+06-02 13:15 | duda | tu viu que a Tati da 4ª B tá grávida??
+06-02 13:20 | iara | VI no grupo kkkk a Tati!! a que chorava na fila do recreio
+06-02 13:21 | duda | a própria 😂
 06-12 20:05 | duda | !aud:48 | Amiga, tu não vai acreditar. A Lúcia do salão, aquela que casou com o Wagner, largou o marido e foi morar em Sobral com o professor de zumba. Eu tô passada. Me liga amanhã que eu te conto tudo, tá?
 06-12 20:09 | iara | KKKKKKKKK não acredito
 06-12 20:10 | iara | o do zumba?? aquele de 50 anos??
 06-12 20:10 | duda | ele mesmo 😂😂
+06-21 16:40 | duda | tu vem pro São João? a quadrilha do Anchieta vai ter ex-aluno kkk
+06-21 16:52 | iara | vou!! mas não danço nem morta
+06-21 16:52 | duda | tu vai dançar sim 🌻
 06-28 22:12 | duda | !img:duda_iara_saojoao | São João de Guaraciaba 2026, edição "a gente ficou velha" 🔥
 06-28 22:15 | iara | essa foto tá linda!! me manda em qualidade
 06-28 22:15 | duda | mandei no drive 🌻
+06-30 09:10 | duda | minha mãe perguntando se tu gostou da canjica kkk ela fez 3 panelas
+06-30 09:25 | iara | diz pra Dona Eunice que eu sonhei com a canjica dela
 07-12 21:38 | duda | amiga, tu continua usando o mesmo PIN no celular, né? vi tu digitando ontem kkkk
 07-12 21:40 | duda | tua senha ainda é o aniversário do Bento? kkkk
 07-12 21:42 | iara | para de saber minhas senhas 😂
-07-12 21:43 | duda | 22 de março, nunca esqueço, dia do nosso netinho 🐶🌻
+07-12 21:43 | duda | tu posta o aniversário dele todo ano, criatura, a serra inteira sabe 🐶🌻
 07-12 21:43 | iara | kkkkkk sua doida. vou trocar
 07-12 21:44 | duda | tu não troca nada, tu é preguiçosa
 07-12 21:44 | iara | ...é verdade
+07-25 19:30 | duda | !img:eq_ceu_manha | olha o céu daqui hoje. tu tá perdendo
+07-25 19:41 | iara | tô aqui no trânsito da Bezerra de Menezes, obrigada por esfregar na cara
+07-25 19:41 | duda | 😂🌻
 08-03 09:20 | duda | bom dia, minha estrela 🌻 tu vem no fim de semana do dia 15?
 08-03 09:41 | iara | tô sem fôlego de trabalho, mas vou tentar
 08-14 19:30 | duda | amiga, o povo da serra tá todo animado com a Colheita, tá todo mundo entrando
@@ -204,38 +227,54 @@ const duda = chat('duda', 'du-', { type: 'direct', contact: 'duda', lastSeen: '2
 08-15 08:50 | duda | fui na casa dos teus pais ontem levar bolo de macaxeira da minha mãe. teu pai é um amor 🌻
 08-15 09:12 | iara | ele me contou! disse que tu falou da Colheita o tempo todo kkk
 08-15 09:13 | duda | kkk eu falo da Colheita até dormindo
+08-22 21:00 | duda | tu viu a resenha da turma em dezembro? tu vai, né? sem desculpa
+08-22 21:14 | iara | se eu não tiver casamento pra fotografar, vou
+08-22 21:14 | duda | tu marca o casamento pra outra data kkkk
+09-02 18:05 | duda | !aud:22 | Amiga, a Jéssica me ligou chorando porque a costureira errou o vestido. De novo. Eu disse que tu ia fotografar ela linda de qualquer jeito, então não me faz passar vergonha, viu? Beijo.
+09-02 18:20 | iara | kkkkk eu fotografo até de pijama, diz pra ela
 09-06 11:02 | duda | pegou o convite do casamento da prima Jéssica? é em novembro
 09-06 11:30 | iara | peguei. vou de vestido verde
+09-06 11:31 | duda | verde de novo? tu só tem roupa verde kkk
+09-06 11:31 | iara | é minha cor, respeita
+09-14 20:40 | duda | tu tá sabendo que o Rafa voltou a tocar na serra? a banda dele tá fazendo festa em tudo que é canto
+09-14 20:55 | iara | não quero saber do Rafa, Duda
+09-14 20:55 | duda | tá bom tá bom 🙊
+09-16 21:02 | duda | amigaaa tô indo pra Fortaleza dia 18, treinamento da firma. bora se ver?? 🌻
+09-16 21:30 | iara | bora. tu fica onde?
+09-16 21:31 | duda | hotel na Aldeota que a empresa paga kkk chique
+09-19 16:40 | duda | saí do treinamento agora, morta. café do Dragão?
+09-19 16:52 | iara | tô indo pra lá. 17h30
+09-19 16:52 | duda | fechou 🌻
+09-19 22:01 | duda | racha o bora comigo? me deixa no hotel no caminho
+09-19 22:02 | iara | claro, já chamei
+09-19 22:58 | duda | te mandei minha parte do bora. saiu da conta da firma, que é a que tem saldo kkk 🌻
+09-19 23:03 | iara | conta da firma kkkk tu virou empresa mesmo
+09-19 23:04 | duda | MEI, amiga. sou microempreendedora agora 💅
+09-19 23:10 | iara | tu tá diferente, Duda. sei lá
+09-19 23:11 | duda | diferente como? 🌻
+09-19 23:30 | iara | nada. boa noite
 09-20 17:15 | duda | tu tá estranha comigo?
 09-20 17:40 | iara | tô só atolada
 09-20 17:41 | duda | tá bom. mas se for outra coisa tu me fala, tá? a gente nunca escondeu nada uma da outra 🌻
 09-25 20:30 | duda | ainda tá atolada?
+09-27 12:10 | duda | !stk:🥺
 09-30 09:00 | duda | vamos tomar um café quando tu vier?
 09-30 21:14 | iara | semana que vem a gente se fala
-10-01 22:14 | iara | Duda. preciso falar contigo e não consigo esperar até sábado
-10-01 22:15 | duda | o que foi? tu tá me assustando 🌻
-10-01 22:16 | iara | taxa de garantia.
-10-01 22:16 | duda | que taxa?
-10-01 22:17 | iara | não faz isso comigo. eu vi a tua planilha. a Colheita nunca cobrou taxa de garantia de ninguém. tem o nome do meu pai na tua lista.
-10-01 22:19 | duda | Iara
-10-01 22:19 | duda | eu posso explicar
-10-01 22:20 | iara | R$ 30 mil, Duda. do meu pai. que planta milho e feijão.
-10-01 22:22 | duda | eu ia devolver
-10-01 22:22 | duda | foi só um empréstimo, o dinheiro da Colheita atrasou e eu tava apertada
-10-01 22:24 | iara | empréstimo?? e os outros nomes da tua lista? as famílias da serra?
-10-01 22:26 | duda | Iara pelo amor de Deus
-10-01 22:27 | duda | me dá um tempo, eu resolvo, eu devolvo tudo
-10-01 22:28 | duda | por favor. a gente é irmã desde a 4ª série
-10-01 22:31 | iara | dia 12.
-10-01 22:31 | iara | dia 12 eu entrego tudo pra quem tem que entregar. até lá tu devolve pra todo mundo.
-10-01 22:33 | duda | entrega pra quem??
-10-01 22:40 | iara | boa noite, Duda.
-10-01 22:41 | duda | Iara
-10-01 22:41 | duda | me responde
+10-01 22:14 | iara | Duda, me liga. agora.
+10-01 22:15 | iara | !call:out:1860
+10-01 22:48 | duda | amiga
+10-01 22:48 | duda | sobre aquilo. me dá um tempo, eu resolvo. eu juro
+10-01 22:52 | iara | !aud:52 | Duda, eu te amo, tu sabe disso. Mas eu não vou fingir que não vi. Tu tem até o dia 12. Dia 12 eu entrego pra quem tem que entregar, com ou sem tu ter resolvido. Não me pede mais nada, por favor.
+10-01 22:55 | duda | entrega pra quem??
 10-01 23:02 | duda | por favor não faz nada precipitado. eu te peço
+10-02 07:40 | duda | bom dia. desculpa por ontem 🌻
 10-03 11:20 | duda | oi amiga, tudo bem?
+10-04 16:10 | duda | a Jéssica quer saber se tu faz o making of da noiva também ou só a cerimônia
+10-04 18:02 | iara | faço os dois. passa o meu número pra ela de novo
+10-04 18:03 | duda | passei 🌻
 10-05 21:05 | duda | Iara, a gente precisa conversar
-10-05 21:30 | iara | dia 12.
+10-05 21:30 | iara | depois do dia 12.
+10-07 14:20 | duda | a festa de sábado vai ser a coisa mais linda que essa serra já viu. queria tanto tu feliz lá
 10-08 18:10 | duda | tu vem pro evento sábado, né? ainda conto contigo, minha casa é tua casa
 10-08 18:40 | iara | vou. é trabalho.
 10-09 20:15 | duda | te busco na casa dos teus pais amanhã às 15h50, pode ser?
@@ -283,19 +322,19 @@ const pai = chat('pai', 'pa-', { type: 'direct', contact: 'pai', pinned: true, l
 08-15 07:52 | iara | kkk ela é assim mesmo, pai
 09-12 20:20 | pai | Filha tu vem no aniversário da tua mãe dia 20?
 09-12 20:45 | iara | vou sim pai! levo o bolo
-10-02 19:10 | iara | pai, o senhor pagou alguma taxa pra Colheita da Duda? preciso saber, é sério. não conta pra mãe.
+10-02 19:10 | iara | pai, o senhor pagou alguma taxa pra Colheita? preciso saber, é sério. não conta pra mãe.
 10-02 19:14 | pai | Paguei sim filha mas foi pra garantir, ela disse que era assim pra todo mundo da serra
 10-02 19:15 | iara | quanto, pai?
 10-02 19:17 | pai | 30 mil. Era o que eu tinha juntado do milho e do feijão, pra operar o joelho da tua mãe
 10-02 19:18 | iara | meu Deus pai
-10-02 19:19 | pai | Foi a Dudinha que organizou, filha, ela é de casa
+10-02 19:19 | pai | Foi uma moça da Colheita que veio aqui em casa explicar tudo direitinho, filha. Gente de confiança
 10-02 19:21 | iara | o senhor tem o comprovante?
-10-02 19:25 | pai | !img:comprovante_pai | Comprovante Pix R$ 30.000,00 · 14/08/2026 · Para: MARIA EDUARDA S ANDRADE · Chave: (88) 99645-1209 · Taxa de garantia
-10-02 19:25 | pai | O comprovante tá ai filha, taxa de garantia, pix pra Maria Eduarda
+10-02 19:25 | pai | !img:comprovante_pai | Comprovante Pix R$ 30.000,00 · 14/08/2026 · Para: M E S ANDRADE ME · Chave aleatória · Taxa de garantia
+10-02 19:26 | pai | Ta ai filha. Taxa de garantia. Ela disse que era o seguro do aporte
 10-02 19:27 | pai | Aconteceu alguma coisa filha? Tu me assustou
-10-02 19:30 | iara | nada ainda pai. mas não paga mais nada pra ninguém, tá? nem pra Duda. depois eu explico
+10-02 19:30 | iara | nada ainda pai. mas não paga mais nada pra ninguém, tá? pra ninguém da Colheita. depois eu explico
 10-02 19:31 | pai | Tá bom filha. Tu tá me deixando preocupado
-10-02 19:32 | iara | tá tudo bem. te amo. não fala disso com ninguém, nem com a Duda
+10-02 19:32 | iara | tá tudo bem. te amo. não fala disso com ninguém, nem com a moça que veio aí
 10-02 19:33 | pai | Tá bom ❤️
 10-03 08:12 | pai | Bom dia filha. Tua mãe perguntou porque tu tava tão séria no telefone. Eu disse que era cansaço do trabalho
 10-03 08:30 | iara | foi isso mesmo pai. fica tranquilo
@@ -373,6 +412,16 @@ const theo = chat('theo', 'th-', { type: 'direct', contact: 'theo', lastSeen: '2
 08-24 18:15 | theo | tu mandou o orçamento do casamento da marina?
 08-24 18:30 | iara | mandei sim. ela quis desconto kkk
 08-24 18:31 | theo | o clássico
+09-13 23:40 | theo | posso te falar uma coisa sem tu rir
+09-13 23:41 | iara | kkk depende
+09-13 23:52 | theo | eu gosto de ti faz tempo. desde sobral. não do jeito de amigo
+09-14 00:20 | theo | esquece. bebi
+09-14 08:31 | iara | corujão... tu é meu irmão. tu sabe disso. desculpa
+09-14 08:33 | iara | não quero te perder por causa disso
+09-14 09:47 | theo | tá
+09-14 09:48 | theo | não perde
+09-20 21:00 | iara | tu sumiu
+09-20 23:15 | theo | prazo
 09-28 23:10 | iara | corujão, acho que é pirâmide. prometem 4% ao mês "lastreado em contratos de safra"
 09-28 23:12 | theo | 4% ao mês é 60% ao ano. só pirâmide paga isso
 09-28 23:13 | iara | as fazendas dos vídeos... eu edito e é sempre a mesma paisagem com a cor mudada
@@ -404,6 +453,9 @@ const theo = chat('theo', 'th-', { type: 'direct', contact: 'theo', lastSeen: '2
 10-10 22:17 | iara | não. tô bem. só fiquei com o estômago embrulhado
 10-10 22:18 | theo | me manda mensagem quando sair de lá
 10-10 22:19 | iara | mando
+10-10 23:39 | theo | saiu de lá?
+10-10 23:53 | theo | iara
+10-11 00:46 | theo | teu celular tá desligado. o espelho parou às 23:47. tu nunca desliga o celular
 10-11 07:22 | theo | tu não mandou mensagem quando saiu de lá. tá tudo bem?
 10-11 07:50 | theo | iara
 10-11 09:58 | theo | acabei de ver a notícia
@@ -618,12 +670,23 @@ const marcos = chat('marcos', 'mk-', { type: 'direct', contact: 'marcos', lastSe
 09-30 11:15 | marcos | O Caio quer o vídeo institucional até dia 15. Sem especificar fazenda, usa as imagens de arquivo.
 09-30 11:30 | iara | Imagens de arquivo de quê, exatamente?
 09-30 11:35 | marcos | Das fazendas parceiras. Está na pasta compartilhada.
+09-29 15:02 | iara | Marcos, a foto da Fazenda Santa Rita do vídeo é de Uruçuí, no Piauí. tá no metadado. e as outras três são de banco de imagem, eu achei as originais
+09-29 15:20 | marcos | Iara, não é o que parece.
+09-29 15:21 | marcos | Me dá até segunda pra resolver isso internamente. Por favor. Não fala com o Caio ainda.
+09-29 15:40 | iara | até segunda, Marcos.
+09-29 22:10 | marcos | Você mandou isso pra alguém?
+09-29 22:31 | marcos | Iara?
+10-01 09:00 | marcos | Conversei com o Caio. Ele disse que as imagens são "ilustrativas" e que está no contrato. Assunto encerrado do lado de cá.
+10-01 09:30 | iara | do lado de cá não.
 10-02 16:00 | marcos | Iara, preciso do material bruto do evento de Sobral até terça.
 10-02 16:20 | iara | Te mando em pendrive na segunda, tá pesado demais pro drive.
 10-02 16:21 | marcos | Pendrive não. Sobe no drive da empresa.
 10-10 17:50 | marcos | Chegou bem no sítio? Qualquer coisa me chama.
 10-10 18:05 | iara | Cheguei, tudo certo.
+10-10 23:33 | marcos | Tô indo buscar gelo no centro. Se precisar de mim é só ligar, aqui o 4G pega na estrada.
+10-11 09:15 | marcos | Iara, o Caio quer o material bruto ainda hoje. Me liga.
 10-12 16:50 | marcos | Iara, preciso saber onde estão os cartões de memória da Noite da Colheita.
+10-12 16:52 | marcos | E o HD externo. Tudo que tiver das visitas às fazendas.
 `);
 
 const ze = chat('ze', 'ze-', { type: 'direct', contact: 'ze', lastSeen: '2026-10-13T06:10' }, `
@@ -633,6 +696,7 @@ const ze = chat('ze', 'ze-', { type: 'direct', contact: 'ze', lastSeen: '2026-10
 10-10 18:40 | ze | Vish dona, essa e velha. Vou ver amanha, hoje to na luz e no gerador
 10-10 18:41 | iara | tá. só avisa o povo pra não chegar muito perto da pedra
 10-10 18:42 | ze | pode deixar
+10-10 23:27 | ze | Dona Iara amarrei a fita de perigo na cerca do mirante como a senhora pediu. Ja to voltando pro galpao, o patrao Caio quer luz na faixa
 10-11 07:20 | ze | Dona Iara. Fui eu que achei a senhora la embaixo. Perdoa esse velho.
 10-11 07:21 | ze | Aquela cerca eu devia ter arrumado. Deus a tenha.
 `);

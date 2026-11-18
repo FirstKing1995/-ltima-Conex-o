@@ -3,8 +3,8 @@
 export const CONFIG = {
   API_URL: 'https://script.google.com/macros/s/AKfycbwa1hxdi0lI9zy8ReW57INhMkdXuUQeSp9BJWHG-hjAw9HX0XpcMjLnICdKojw-yY7K/exec',
   CASE_ID: 'caso01',
-  VERSION: '1.3.6',
-  SAVE_KEY: 'uc01_save',
+  VERSION: '1.4.0',
+  SAVE_KEY: 'uc01_save_v3', // v1.4: caso reescrito, saves antigos não valem mais
   // ?debug na URL liga atalhos de teste (pular capítulos, revelar termos)
   DEBUG: new URLSearchParams(location.search).has('debug'),
 };

@@ -4,7 +4,7 @@ const events = [
   /* ---- todo ano ---- */
   { id: 'aniv-bento', title: 'Aniversário Bento 🐶', start: '2026-03-22', allDay: true, color: 'laranja', repeat: 'yearly', notes: 'O caramelo completa mais um ano. Ligar pros pais pra cantar parabéns.' },
   { id: 'aniv-duda', title: 'Aniversário Duda 🌻', start: '2026-04-05', allDay: true, color: 'amarelo', repeat: 'yearly', notes: 'Presente: caderno de campo + gift card da livraria.' },
-  { id: 'aniv-mae', title: 'Aniversário da mãe 🤍', start: '2026-06-17', allDay: true, color: 'rosa', repeat: 'yearly' },
+  { id: 'aniv-mae', title: 'Aniversário da mãe 🤍', start: '2026-09-20', allDay: true, color: 'rosa', repeat: 'yearly' },
   { id: 'aniv-nanda', title: 'Aniversário Nanda', start: '2026-09-19', allDay: true, color: 'roxo', repeat: 'yearly' },
   { id: 'aniv-leo', title: 'Aniversário Léo', start: '2026-10-30', allDay: true, color: 'azul', repeat: 'yearly', notes: 'O primo vai fazer 22 e vai querer churrasco.' },
   { id: 'aniv-pai', title: 'Aniversário do pai ❤️', start: '2026-11-02', allDay: true, color: 'vermelho', repeat: 'yearly', notes: 'Chapéu novo. Foto do Bento emoldurada.' },

@@ -48,6 +48,7 @@ const transactions = [
   t('renata-2009', '2026-09-20T14:12', 'pix_in', 1400, { name: 'Renata Almeida', doc: '•••.340.972-••', bank: 'Banco Mandacaru', key: '(85) 99211-4058' }, 'saldo do ensaio, clínica', 'Renda'),
   t('fotobras-2309', '2026-09-23T18:05', 'credito', 389.00, FOTOBRAS, 'Filtro polarizador + cartão 128 GB', 'Equipamento'),
   t('bonus-2509', '2026-09-25T10:12', 'pix_in', 20000, COLHEITA, 'Bônus performance', 'Renda'),
+  t('racha-bora', '2026-09-19T22:57', 'pix_in', 9.55, { name: 'M E S ANDRADE ME', doc: '52.318.044/0001-09', bank: 'Cooperativa Sertão Crédito', key: '3f9a2c71-8e4b-4d10-b6a5-c0de91a7e112' }, 'minha parte do bora 🌻', 'Transporte'),
   t('devolucao-2509', '2026-09-25T10:40', 'devolucao_out', 20000, COLHEITA, 'Devolução — não aceito', 'Devolução'),
   t('mercado-2509', '2026-09-25T20:30', 'debito', 63.80, MERCADO, 'Compra no débito', 'Mercado'),
   t('moura-2609', '2026-09-26T11:02', 'pix_in', 900, { name: 'Adriana Moura', doc: '•••.118.056-••', bank: 'Banco do Nordeste Popular', key: '(88) 99620-4452' }, 'ensaio da família, obrigada', 'Renda'),

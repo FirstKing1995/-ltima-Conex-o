@@ -191,24 +191,24 @@ const files = [
     id: 'taxas-garantia', name: 'taxas_garantia.xlsx', folder: 'segura', type: 'xlsx', size: 19000, at: '2026-10-05T22:10',
     sheets: [
       { name: 'Famílias', rows: [
-        ['N.º', 'Família', 'Município', 'Valor pago', 'Data', 'Pix para', 'Contato'],
-        ['1', 'Antônio Fontenele (meu pai)', 'Guaraciaba do Norte', 'R$ 30.000,00', '14/08', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'confirmou comigo 02/10'],
-        ['2', 'José Raimundo Moura', 'Ibiapina', 'R$ 18.000,00', '19/07', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'vizinho do pai'],
-        ['3', 'Francisca das Chagas Lima', 'Ubajara', 'R$ 12.500,00', '22/07', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'prima da mãe'],
-        ['4', 'Manoel Ferreira Neto', 'São Benedito', 'R$ 25.000,00', '02/08', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'vendeu um gado'],
-        ['5', 'Raimunda Pinheiro', 'Carnaubal', 'R$ 8.000,00', '08/08', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'aposentada'],
-        ['6', 'Sebastião e Lúcia Araújo', 'Guaraciaba do Norte', 'R$ 20.000,00', '25/08', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'padrinhos de uma amiga'],
-        ['7', 'Pedro Alves Sobrinho', 'Viçosa do Ceará', 'R$ 15.000,00', '31/08', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'indicado pelo Sebastião'],
-        ['8', 'Maria Neuma Costa', 'Tianguá', 'R$ 10.000,00', '09/09', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'comerciante'],
-        ['9', 'Cícero Batista', 'Croatá', 'R$ 6.500,00', '14/09', '(88) 99645-1209 MARIA EDUARDA S ANDRADE', 'pediu para não aparecer'],
-        ['Total', '9 famílias', '', 'R$ 145.000,00', '', '', ''],
+        ['N.º', 'Família', 'Município', 'Valor pago', 'Data', 'Pix para', 'Cobrança', 'Contato'],
+        ['1', 'Antônio Fontenele (meu pai)', 'Guaraciaba do Norte', 'R$ 30.000,00', '14/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'confirmou comigo 02/10'],
+        ['2', 'José Raimundo Moura', 'Ibiapina', 'R$ 18.000,00', '19/07', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'vizinho do pai'],
+        ['3', 'Francisca das Chagas Lima', 'Ubajara', 'R$ 12.500,00', '22/07', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'prima da mãe'],
+        ['4', 'Manoel Ferreira Neto', 'São Benedito', 'R$ 25.000,00', '02/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'vendeu um gado'],
+        ['5', 'Raimunda Pinheiro', 'Carnaubal', 'R$ 8.000,00', '08/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'aposentada'],
+        ['6', 'Sebastião e Lúcia Araújo', 'Guaraciaba do Norte', 'R$ 20.000,00', '25/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'padrinhos de uma amiga'],
+        ['7', 'Pedro Alves Sobrinho', 'Viçosa do Ceará', 'R$ 15.000,00', '31/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'indicado pelo Sebastião'],
+        ['8', 'Maria Neuma Costa', 'Tianguá', 'R$ 10.000,00', '09/09', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'comerciante'],
+        ['9', 'Cícero Batista', 'Croatá', 'R$ 6.500,00', '14/09', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'pediu para não aparecer'],
+        ['Total', '9 famílias', '', 'R$ 145.000,00', '', '', '', ''],
       ] },
       { name: 'Observações', rows: [
         ['Observação', 'Texto'],
-        ['1', '"Taxa de garantia" cobrada antes de liberar o aporte do investidor. Pix sempre para o mesmo número.'],
+        ['1', '"Taxa de garantia" cobrada antes de liberar o aporte do investidor. Pix sempre para a mesma firma, M E S ANDRADE ME, CNPJ 52.318.044/0001-09.'],
         ['2', 'A Colheita Capital não cobra taxa nenhuma — confirmado no contrato padrão, cláusula 7.'],
-        ['3', 'Quem cobra é a consultora regional. Ela diz que "a empresa exige".'],
-        ['4', 'Nenhum recibo da Colheita. Só comprovante de Pix para o chip de trabalho dela.'],
+        ['3', 'Quem cobra se apresenta como gente da Colheita e diz que "a empresa exige". A cobrança chega sempre do mesmo número no Papo.'],
+        ['4', 'Nenhum recibo da Colheita. Só comprovante de Pix para a firma. M E S: conferir de quem são as iniciais.'],
         ['5', 'Falta conferir se o Caio sabe da taxa ou se é por fora.'],
       ] },
     ],
@@ -221,16 +221,16 @@ const files = [
 Se você está lendo isto, ou eu te passei a senha, ou aconteceu alguma coisa comigo. Tomara que seja a primeira.
 
 O que tem aqui:
-- taxas_garantia.xlsx: a lista das famílias da serra que pagaram uma "taxa de garantia" por Pix para a chave (88) 99645-1209.
+- taxas_garantia.xlsx: a lista das famílias da serra que pagaram uma "taxa de garantia" por Pix para a firma M E S ANDRADE ME.
 - fazendas_conferencia.xlsx: a conferência, fazenda por fazenda, do que a Colheita Capital diz que tem.
 - comprovante_devolucao_2509.pdf: o comprovante dos R$ 20 mil que o Caio mandou e eu devolvi.
 
 O que eu descobri:
 1. A Colheita Capital é uma pirâmide. Não existe fazenda. Eu fotografei e editei tudo: as "fazendas" são sítios de terceiros alugados por um dia ou fotos de banco de imagens. Os 4% ao mês são pagos com o dinheiro dos novos entrando.
 2. O Caio sabe. Ele me mandou R$ 20 mil de "bônus" no dia 25/09. Eu devolvi. Em 08/10 ele me lembrou do termo de confidencialidade, com aquela multa de R$ 100 mil.
-3. A taxa de garantia é coisa da Duda. A Colheita Capital não cobra taxa nenhuma: está no contrato padrão, cláusula 7. A Duda cobra por fora, por Pix, no número de trabalho dela, e usa o nome da empresa. O meu pai pagou R$ 30 mil em 14/08.
+3. A taxa de garantia não é da Colheita. A Colheita Capital não cobra taxa nenhuma: está no contrato padrão, cláusula 7. Alguém de dentro cobra por fora, por Pix, numa firma de iniciais, e usa o nome da empresa. O meu pai pagou R$ 30 mil em 14/08.
 
-Eu fui falar com ela no dia 1º. Ela chorou, pediu um tempo, disse que ia devolver tudo. Eu disse que dava até o dia 12. Quero acreditar que ela vai devolver. Ela é minha melhor amiga desde a 4ª série. Mas o dinheiro das famílias não é meu para perdoar.
+Eu sei quem é. Não vou escrever o nome aqui: se você chegou até esta pasta, o número e a firma te levam até a pessoa. Eu dei até o dia 12 para ela devolver tudo. Quero acreditar que vai devolver. Mas o dinheiro das famílias não é meu para perdoar.
 
 O que fazer:
 - Entregar tudo para a Bruna Leal, do O Farol, na segunda, dia 12, 10h. O e-mail dela é bruna.leal@ofarol.com.br.

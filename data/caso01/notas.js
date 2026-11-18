@@ -39,21 +39,21 @@ Levar: o celular com a Pasta Segura, um documento com foto, o contrato padrão i
 Lembrar: não mandar nada por e-mail. Entregar em mãos.`,
   },
   {
-    id: 'coisas-que-eu-sei', title: 'coisas que eu sei', pinned: true, color: 'vermelho',
+    id: 'coisas-que-eu-sei', title: 'coisas que eu sei', pinned: true, color: 'vermelho', req: 'cap3',
     created: '2026-09-30T21:50', edited: '2026-10-05T22:20',
     body: `1. A Colheita Capital é uma pirâmide. Não tem fazenda. Santa Luzia é um sítio alugado por um dia (R$ 800, conhecido do Caio). As fotos de colheita são de banco de imagens.
 2. Os 4% ao mês saem do dinheiro dos novos. O bônus de indicação (1%) é o motor.
 3. O Caio sabe de tudo. Ouvi ele dizer ao Marcos, na van: "a safra é o evento".
 4. Bônus de R$ 20 mil em 25/09 era para eu ficar calada. Devolvi.
 5. Termo de confidencialidade, cláusula 4: multa de R$ 100 mil. Ele me lembrou em 08/10.
-6. A taxa de garantia: quem cobra é a Duda. Por fora, por Pix, no número de trabalho dela, (88) 99645-1209. 9 famílias, R$ 145 mil.
+6. A taxa de garantia: por fora, por Pix, para a firma M E S ANDRADE ME. A cobrança vem do (88) 99645-1209. 9 famílias, R$ 145 mil. Eu sei de quem é. Não consigo escrever o nome.
 7. O pai está entre elas: R$ 30 mil em 14/08.
 8. A cláusula 7 do contrato padrão diz que a Colheita Capital não cobra taxa nenhuma.
 9. A Bruna Leal é quem pode publicar. Dia 12, 10h.
 10. Tudo guardado na Pasta Segura. O Théo sabe onde.`,
   },
   {
-    id: 'desabafo-duda', title: 'duda', color: 'rosa',
+    id: 'desabafo-duda', title: 'duda', color: 'rosa', req: 'solved:d3',
     created: '2026-10-02T00:12', edited: '2026-10-02T00:48',
     body: `Eu não tô conseguindo dormir.
 
