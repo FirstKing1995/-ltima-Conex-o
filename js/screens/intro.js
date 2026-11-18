@@ -30,7 +30,7 @@ export async function play() {
       if (v.length < 2) { inp.focus(); inp.classList.add('err'); return; }
       state.player.apelido = v.slice(0, 24); save(true);
       bus.emit('player:name', { name: state.player.apelido });
-      api.register(state.player.apelido).then(() => api.save());
+      (api.registered ? api.profile({ apelido: state.player.apelido }) : api.register(state.player.apelido)).then(() => api.save());
       sfx.play('unlock');
       el.classList.add('out');
       setTimeout(() => { clear(root); setFlag('intro_done'); }, 650);

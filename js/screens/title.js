@@ -1,6 +1,7 @@
 // Tela de título e menu.
 import { h, clear } from '../core/dom.js';
-import { state, hasSave, reset, save } from '../core/state.js';
+import { state, hasSave, reset, save, adoptCloud } from '../core/state.js';
+import { api } from '../core/api.js';
 import { bus } from '../core/bus.js';
 import { sfx } from '../core/sfx.js';
 import { CASE } from '../core/store.js';
@@ -20,7 +21,7 @@ function shell(content, { dim = false } = {}) {
 
 export function show({ inGame = false } = {}) {
   const close = () => clear(root());
-  const start = () => { sfx.unlockAudio(); reset(false); state.startedAt = Date.now(); save(true); location.href = location.pathname + location.search + '#novo'; location.reload(); };
+  const start = () => { sfx.unlockAudio(); reset(true); state.startedAt = Date.now(); save(true); location.href = location.pathname + location.search + '#novo'; location.reload(); };
   const novo = () => {
     if (!(hasSave() && state.flags.intro_done)) { sfx.unlockAudio(); close(); bus.emit('game:new'); return; }
     shell([
@@ -39,6 +40,7 @@ export function show({ inGame = false } = {}) {
       inGame ? h('button', { class: 'tbtn primary', on: { click: close } }, 'Voltar ao caso') : null,
       !inGame && started ? h('button', { class: 'tbtn primary', on: { click: cont } }, 'Continuar investigação') : null,
       h('button', { class: `tbtn ${!inGame && !started ? 'primary' : ''}`, on: { click: novo } }, started ? 'Novo jogo' : 'Começar'),
+      !inGame ? h('button', { class: 'tbtn ghost', on: { click: () => login(inGame) } }, 'Entrar com código') : h('button', { class: 'tbtn ghost', on: { click: () => account(inGame) } }, 'Meu código de acesso'),
       h('button', { class: 'tbtn ghost', on: { click: howTo } }, 'Como jogar'),
       h('button', { class: 'tbtn ghost', on: { click: credits } }, 'Créditos')),
     h('p', { class: 'ts-foot' }, 'Ficção. Pessoas, empresas e fatos são inventados.'),
@@ -46,6 +48,50 @@ export function show({ inGame = false } = {}) {
 }
 
 export function menu() { show({ inGame: true }); }
+
+/** Mostra o código de acesso do jogador (a "conta"). */
+function account(inGame) {
+  const back = () => show({ inGame });
+  const cod = state.player.codigo;
+  shell([
+    h('h2', { class: 'ts-h2' }, 'Seu código de acesso'),
+    cod ? h('p', { class: 'ts-code' }, cod) : h('p', { class: 'ts-note' }, 'Ainda sem código: o servidor não respondeu. Ele é criado assim que houver internet.'),
+    h('p', { class: 'ts-note' }, 'Com ele você continua o caso de onde parou em qualquer celular ou computador: na tela inicial, toque em "Entrar com código". O progresso vai para a nuvem sozinho enquanto você joga. Guarde o código: ele é a sua conta.'),
+    h('div', { class: 'title-menu' },
+      cod ? h('button', { class: 'tbtn primary', on: { click: (e) => { const b = e.currentTarget; navigator.clipboard?.writeText(cod).then(() => { b.textContent = 'Copiado'; }).catch(() => {}); } } }, 'Copiar código') : null,
+      h('button', { class: 'tbtn ghost', on: { click: back } }, 'Voltar')),
+  ]);
+}
+
+/** Entrar com o código de acesso: traz a conta e o progresso salvos na nuvem. */
+function login(inGame) {
+  const back = () => show({ inGame });
+  const inp = h('input', { class: 'ts-input', type: 'text', maxlength: '9', placeholder: 'ABCD-1234', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', 'aria-label': 'Código de acesso' });
+  const msg = h('p', { class: 'ts-note', role: 'status' }, 'O código aparece no menu do jogo, em "Meu código de acesso".');
+  const btn = h('button', { class: 'tbtn primary' }, 'Entrar');
+  const go = async () => {
+    const raw = inp.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (raw.length < 8) { msg.textContent = 'O código tem 8 letras e números, como ABCD-1234.'; inp.focus(); return; }
+    const mine = (state.player.codigo || '').replace(/[^A-Z0-9]/g, '');
+    if (hasSave() && state.flags.intro_done && mine && mine !== raw && !confirm('Este navegador já tem um caso em andamento com outro código. Trocar pelo caso deste código?')) return;
+    btn.disabled = true; msg.textContent = 'Procurando o seu caso…';
+    const j = await api.restore(raw);
+    btn.disabled = false;
+    if (!j) { msg.textContent = 'Não encontrei esse código, ou estou sem internet. Confira e tente de novo.'; return; }
+    const tem = adoptCloud({ id: j.id, token: j.token, codigo: j.codigo, apelido: j.apelido }, j.estado);
+    msg.textContent = tem ? 'Achei. Abrindo o caso…' : 'Código certo. Esse caso ainda não tinha progresso nesta versão: vamos começar.';
+    setTimeout(() => location.reload(), tem ? 600 : 1600);
+  };
+  btn.addEventListener('click', go);
+  inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+  shell([
+    h('h2', { class: 'ts-h2' }, 'Entrar com código'),
+    h('p', { class: 'ts-note' }, 'Digite o código de acesso para continuar o caso de onde parou, em qualquer aparelho.'),
+    inp, msg,
+    h('div', { class: 'title-menu' }, btn, h('button', { class: 'tbtn ghost', on: { click: back } }, 'Voltar')),
+  ]);
+  setTimeout(() => inp.focus(), 80);
+}
 
 
 function howTo() {
@@ -59,7 +105,7 @@ function howTo() {
       h('li', null, h('b', null, 'A lupa. '), 'Ligue o Modo Análise e toque nas palavras destacadas para guardar nomes, horas, lugares e objetos.'),
       h('li', null, h('b', null, 'O Quadro. '), 'Objetivos, provas fixadas, dossiês e linha do tempo. Cada capítulo termina numa dedução que você preenche com os termos guardados.'),
       h('li', null, h('b', null, 'O relatório. '), 'No fim, você monta o relatório para a jornalista. Ele decide o final.')),
-    h('p', { class: 'ts-note' }, 'O progresso fica salvo neste navegador. Jogue em computador ou celular; no celular, o Caderno e o Quadro ficam na barra do topo.'),
+    h('p', { class: 'ts-note' }, 'O progresso fica salvo neste navegador e na nuvem. Para continuar em outro aparelho, use o seu código de acesso (menu, "Meu código de acesso"). Jogue em computador ou celular; no celular, o Caderno e o Quadro ficam na barra do topo.'),
     h('div', { class: 'title-menu' }, h('button', { class: 'tbtn primary', on: { click: back } }, 'Entendi')),
   ]);
 }

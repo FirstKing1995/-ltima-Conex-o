@@ -3,10 +3,12 @@ import { bus } from './bus.js';
 import { CONFIG } from '../config.js';
 
 const VERSION = 1;
+export const CASE_V = 3; // versão do conteúdo do caso: saves de outra versão mantêm só a conta
 
 function fresh() {
   return {
     v: VERSION,
+    caseV: CASE_V,
     caseId: CONFIG.CASE_ID,
     player: { id: '', token: '', codigo: '', apelido: '' },
     startedAt: 0,
@@ -35,6 +37,7 @@ export let state = fresh();
 export function setFlag(name) {
   if (!name || state.flags[name]) return false;
   state.flags[name] = Date.now();
+  if (name === 'intro_done' && !state.startedAt) state.startedAt = Date.now();
   bus.emit('flag', { name });
   save();
   return true;
@@ -98,9 +101,10 @@ export function save(immediate = false) {
 export function load() {
   try {
     const raw = localStorage.getItem(CONFIG.SAVE_KEY);
-    if (!raw) return false;
+    if (!raw) { adoptOldPlayer(); return false; }
     const data = JSON.parse(raw);
     if (!data || data.caseId !== CONFIG.CASE_ID) return false;
+    if (data.caseV !== CASE_V) { state = fresh(); state.player = Object.assign(fresh().player, data.player || {}); save(true); return false; }
     state = Object.assign(fresh(), data);
     state.settings = Object.assign(fresh().settings, data.settings || {});
     state.eco = Object.assign(fresh().eco, data.eco || {});
@@ -108,8 +112,27 @@ export function load() {
   } catch (e) { return false; }
 }
 
+/** Quem jogava a v1.3 mantém o mesmo código de acesso (só o progresso recomeça). */
+function adoptOldPlayer() {
+  try {
+    const old = JSON.parse(localStorage.getItem('uc01_save') || 'null');
+    if (old?.player?.id && old.player.token) { state = fresh(); state.player = Object.assign(fresh().player, old.player); save(true); }
+  } catch (e) { /* nada */ }
+}
+
+/** Entrar com o código: troca a conta e, se o save da nuvem for desta versão do caso, o progresso. */
+export function adoptCloud(player, estado) {
+  const keepSettings = state.settings;
+  if (estado && estado.caseId === CONFIG.CASE_ID && estado.caseV === CASE_V) state = Object.assign(fresh(), estado);
+  else state = fresh();
+  state.player = Object.assign(fresh().player, player);
+  state.settings = Object.assign(fresh().settings, keepSettings, (estado && estado.caseV === CASE_V && estado.settings) || {});
+  save(true);
+  return !!(estado && estado.caseV === CASE_V && (estado.startedAt || estado.flags?.intro_done));
+}
+
 export function hasSave() {
-  try { const raw = localStorage.getItem(CONFIG.SAVE_KEY); if (!raw) return false; const d = JSON.parse(raw); return !!(d && d.startedAt); } catch (e) { return false; }
+  try { const raw = localStorage.getItem(CONFIG.SAVE_KEY); if (!raw) return false; const d = JSON.parse(raw); return !!(d && (d.startedAt || d.flags?.intro_done)); } catch (e) { return false; }
 }
 
 export function replaceState(data) {

@@ -75,4 +75,10 @@ export function cloudSaveSoon() {
   lastCloudSave = now;
   api.save();
 }
-window.addEventListener('pagehide', () => { api.flush(); });
+// Ao sair da página, manda o save por beacon (não espera resposta).
+function beaconSave() {
+  if (!CONFIG.API_URL || !api.registered || !navigator.sendBeacon) return;
+  try { navigator.sendBeacon(CONFIG.API_URL, new Blob([JSON.stringify({ action: 'save', ...cred(), capitulo: state.chapter, versao: CONFIG.VERSION, estado: snapshot() })], { type: 'text/plain;charset=utf-8' })); } catch (e) { /* nada */ }
+}
+window.addEventListener('pagehide', () => { api.flush(); beaconSave(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') beaconSave(); });

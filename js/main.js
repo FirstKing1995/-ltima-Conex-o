@@ -41,6 +41,7 @@ async function boot() {
   bus.on('final:submitted', async (r) => { const end = await import('./screens/ending.js'); end.play(r); });
   bus.on('ending:start', async (a) => { const end = await import('./screens/ending.js'); end.play(state.finalResult || a); });
   bus.on('chapter', () => cloudSaveSoon());
+  bus.on('flag', () => cloudSaveSoon());
   bus.on('objective', ({ text }) => phone.toast(`Objetivo concluído: ${text}`, { icon: 'check', ms: 3200 }));
   bus.on('phone:unlocked', () => {});
 
