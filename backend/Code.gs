@@ -515,7 +515,7 @@ function setup() {
 
 /** Separador de argumentos das fórmulas: "," (inglês) ou ";" (português e outros). Testa na própria aba. */
 function separador_(sh) {
-  const c = sh.getRange('H1');
+  const c = sh.getRange('J1');
   c.setFormula('=SUM(1,1)');
   SpreadsheetApp.flush();
   const ok = c.getDisplayValue() === '2';
@@ -567,13 +567,13 @@ function montarPainel_(sh) {
   sh.getRange('D4').setValue('Quem os jogadores acusam').setFontWeight('bold');
   sh.getRange('D5').setFormula(fx_('=IFERROR(QUERY(Relatorios!A:M,"select D, count(D) where D is not null and D <> \'\' group by D order by count(D) desc label count(D) \'vezes\'",1),"—")', sep));
 
-  sh.getRange('D13').setValue('Eventos mais comuns').setFontWeight('bold');
-  sh.getRange('D14').setFormula(fx_('=IFERROR(QUERY(Eventos!A:E,"select C, count(C) where C is not null and C <> \'\' group by C order by count(C) desc limit 15 label count(C) \'vezes\'",1),"—")', sep));
+  sh.getRange('G4').setValue('Eventos mais comuns').setFontWeight('bold');
+  sh.getRange('G5').setFormula(fx_('=IFERROR(QUERY(Eventos!A:E,"select C, count(C) where C is not null and C <> \'\' group by C order by count(C) desc limit 15 label count(C) \'vezes\'",1),"—")', sep));
 
   sh.getRange('A22').setValue('Top 10 do ranking').setFontWeight('bold');
   sh.getRange('A23').setFormula(fx_('=IFERROR(QUERY(Ranking!A:I,"select B, C, D, E where C is not null order by C desc limit 10 label B \'apelido\', C \'pontos\', D \'min\', E \'dicas\'",1),"—")', sep));
 
-  sh.setColumnWidth(1, 260).setColumnWidth(2, 110).setColumnWidth(3, 30).setColumnWidth(4, 240).setColumnWidth(5, 90);
+  sh.setColumnWidth(1, 260).setColumnWidth(2, 110).setColumnWidth(3, 30).setColumnWidth(4, 240).setColumnWidth(5, 90).setColumnWidth(6, 30).setColumnWidth(7, 240).setColumnWidth(8, 90);
 }
 
 function limparDadosDeTeste() {
