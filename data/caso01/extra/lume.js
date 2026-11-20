@@ -1,6 +1,6 @@
 // Instagram — conteúdo extra (ruído): perfis, posts, stories, DMs e notificações que NÃO são pista.
 // As listas são somadas às de data/caso01/lume.js. Isca: @eunice.sobreira (Maria Eunice Sobreira Andrade, mãe da Duda).
-// Posts sem `media` são de propósito: aparecem como "foto ainda não baixada da nuvem".
+// Fotos dos posts e stories extras: Pexels (créditos em privado/imagens/pexels2/creditos.txt). Os sem `media` são de texto (memes, notas de luto, avisos).
 
 const IMG = (n) => `assets/caso01/img/${n}.jpg`;
 const AV = (n) => `assets/caso01/avatars/${n}.jpg`; // eslint-disable-line no-unused-vars
@@ -40,7 +40,7 @@ export default {
   posts: [
     /* ---------- Iara: trabalhos e viagens antigos ---------- */
     {
-      id: 'x-ia-casamento-ipu-2503', author: ME, at: '2025-03-16T11:40', ratio: '4/5', place: 'Ipu, CE',
+      id: 'x-ia-casamento-ipu-2503', media: [IMG('x_ia_casamento_ipu_2503')], author: ME, at: '2025-03-16T11:40', ratio: '4/5', place: 'Ipu, CE',
       caption: "primeiro casamento do ano e logo no pé da Bica do Ipu 💍💦 noiva chorando, padrinho chorando, fotógrafa chorando atrás da câmera. Ana e Rodrigo, obrigada pela confiança! #casamentonoceara #fotografiadecasamento",
       likes: 389,
       comments: [
@@ -51,7 +51,7 @@ export default {
       ],
     },
     {
-      id: 'x-ia-saojoao-2506', author: ME, at: '2025-06-24T10:15', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-ia-saojoao-2506', media: [IMG('x_ia_saojoao_2506')], author: ME, at: '2025-06-24T10:15', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "São João de Guaraciaba 2025 🔥🌽 quadrilha, milho assado e a serra inteira na praça. Voltar pra casa também é um tipo de viagem.",
       likes: 702,
       comments: [
@@ -62,7 +62,7 @@ export default {
       ],
     },
     {
-      id: 'x-ia-apartamento-2509', author: ME, at: '2025-09-07T18:50', ratio: '4/3', place: 'Benfica, Fortaleza',
+      id: 'x-ia-apartamento-2509', media: [IMG('x_ia_apartamento_2509')], author: ME, at: '2025-09-07T18:50', ratio: '4/5', place: 'Benfica, Fortaleza',
       caption: "apê novo no Benfica 🏠🪴 caixa pra todo lado, uma suculenta sobrevivente e a melhor colega de apê do mundo @nanda.lopes. Fortaleza, agora é sério.",
       likes: 455,
       comments: [
@@ -73,7 +73,7 @@ export default {
       ],
     },
     {
-      id: 'x-ia-retro-2512', author: ME, at: '2025-12-30T21:00', ratio: '1/1', place: 'Fortaleza, CE',
+      id: 'x-ia-retro-2512', media: [IMG('x_ia_retro_2512')], author: ME, at: '2025-12-30T21:00', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "2025 em números: 14 casamentos, 31 ensaios, 2 HDs cheios, 1 lente quebrada (descanse em paz, 50mm) e muita gente de verdade na frente da câmera. obrigada a cada cliente. 2026, vem com luz boa ✨📸 #retrospectiva",
       likes: 812,
       comments: [
@@ -84,7 +84,7 @@ export default {
       ],
     },
     {
-      id: 'x-ia-praia-2601', author: ME, at: '2026-01-18T17:55', ratio: '4/5', place: 'Praia de Iracema, Fortaleza',
+      id: 'x-ia-praia-2601', media: [IMG('x_ia_praia_2601')], author: ME, at: '2026-01-18T17:55', ratio: '4/5', place: 'Praia de Iracema, Fortaleza',
       caption: "fim de tarde na Praia de Iracema com a Lu e o Pedro 🌅 a luz boa dura quinze minutos. fotografe como se fosse a última. #ensaiodecasal #fortaleza",
       likes: 534,
       comments: [
@@ -105,7 +105,7 @@ export default {
       ],
     },
     {
-      id: 'x-ia-gestante-2608', author: ME, at: '2026-08-26T19:20', ratio: '4/5', place: 'Fortaleza, CE',
+      id: 'x-ia-gestante-2608', media: [IMG('x_ia_gestante_2608')], author: ME, at: '2026-08-26T19:20', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "luz de janela, tecido solto e uma mãe respirando fundo antes do clique 🤍 ensaio gestante da @camilabezerra.mae. o Heitor já chegou cheio de luz. #ensaiogestante #luznatural",
       likes: 640,
       comments: [
@@ -115,7 +115,7 @@ export default {
       ],
     },
     {
-      id: 'x-ia-clinica-2609', author: ME, at: '2026-09-21T12:10', ratio: '4/3', place: 'Aldeota, Fortaleza',
+      id: 'x-ia-clinica-2609', media: [IMG('x_ia_clinica_2609')], author: ME, at: '2026-09-21T12:10', ratio: '4/5', place: 'Aldeota, Fortaleza',
       caption: "seis profissionais, um consultório pequeno e nenhuma cara de foto 3x4 👩‍⚕️📸 ensaio institucional da @clinicaalmeida.ce. retrato corporativo também pode ter alma.",
       likes: 298,
       comments: [
@@ -158,7 +158,7 @@ export default {
 
     /* ---------- Eunice (isca: mesmas iniciais da firma) ---------- */
     {
-      id: 'x-eunice-oracao-0614', author: 'eunice.sobreira', at: '2026-06-14T06:20', ratio: '1/1', place: 'Sítio Flor da Serra',
+      id: 'x-eunice-oracao-0614', media: [IMG('x_eunice_oracao_0614')], author: 'eunice.sobreira', at: '2026-06-14T06:20', ratio: '4/5', place: 'Sítio Flor da Serra',
       caption: "Bom dia, família! 🙏🌻 \"Entrega o teu caminho ao Senhor, confia nele, e o mais ele fará.\" Salmo 37:5. Que Deus abençoe o domingo de todos. Aqui na serra amanheceu frio, o café já tá passado ☕",
       likes: 86,
       comments: [
@@ -168,7 +168,7 @@ export default {
       ],
     },
     {
-      id: 'x-duda-mae-0714', author: 'dudaandrade.oficial', at: '2026-07-14T07:30', ratio: '4/5', place: 'Sítio Flor da Serra',
+      id: 'x-duda-mae-0714', media: [IMG('x_duda_mae_0714')], author: 'dudaandrade.oficial', at: '2026-07-14T07:30', ratio: '4/5', place: 'Sítio Flor da Serra',
       caption: "Feliz aniversário, Maria Eunice Sobreira Andrade, minha rainha 👑🌻 a mulher que acorda 5h pra rezar, passar café e ainda fazer bolo pra metade da serra. Tudo que eu sou começou na tua cozinha, mainha. Te amo infinito!",
       likes: 1104,
       comments: [
@@ -180,7 +180,7 @@ export default {
       ],
     },
     {
-      id: 'x-eunice-bolo-0726', author: 'eunice.sobreira', at: '2026-07-26T16:10', ratio: '1/1', place: 'Sítio Flor da Serra',
+      id: 'x-eunice-bolo-0726', media: [IMG('x_eunice_bolo_0726')], author: 'eunice.sobreira', at: '2026-07-26T16:10', ratio: '4/5', place: 'Sítio Flor da Serra',
       caption: "Bolo de milho verde da roça aqui do sítio 🌽🍰 a receita é segredo de família, mas quem vier tomar café comigo come um pedaço 😂 Domingo abençoado!",
       likes: 142,
       comments: [
@@ -192,7 +192,7 @@ export default {
       ],
     },
     {
-      id: 'x-eunice-filha-0828', author: 'eunice.sobreira', at: '2026-08-28T19:40', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-eunice-filha-0828', media: [IMG('x_eunice_filha_0828')], author: 'eunice.sobreira', at: '2026-08-28T19:40', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "Minha filha consultora! 🌱🌻 Orgulho dessa menina que cresceu aqui na serra e hoje ajuda tanta família a ter uma renda a mais. Deus te guarde, Dudinha. Mainha tá sempre aqui. @dudaandrade.oficial @colheitacapital",
       likes: 233,
       comments: [
@@ -203,7 +203,7 @@ export default {
       ],
     },
     {
-      id: 'x-eunice-aporte-0918', author: 'eunice.sobreira', at: '2026-09-18T20:15', ratio: '1/1', place: 'Sítio Flor da Serra',
+      id: 'x-eunice-aporte-0918', media: [IMG('x_eunice_aporte_0918')], author: 'eunice.sobreira', at: '2026-09-18T20:15', ratio: '4/5', place: 'Sítio Flor da Serra',
       caption: "Segundo aporte na Colheita feito hoje 🙏🌱 Deus é fiel! Meu finado pai dizia que dinheiro parado é terra sem semente. Quem planta com fé colhe em dobro. #colheitacapital #gratidao",
       likes: 198,
       comments: [
@@ -216,7 +216,7 @@ export default {
       ],
     },
     {
-      id: 'x-eunice-festa-1010', author: 'eunice.sobreira', at: '2026-10-10T16:45', ratio: '4/5', place: 'Sítio Flor da Serra',
+      id: 'x-eunice-festa-1010', media: [IMG('x_eunice_festa_1010')], author: 'eunice.sobreira', at: '2026-10-10T16:45', ratio: '4/5', place: 'Sítio Flor da Serra',
       caption: "Hoje o Sítio Flor da Serra recebe a Noite da Colheita! 🌻🌽 Casa arrumada, café passado, coração cheio. Que Deus abençoe essa festa e todas as famílias que vêm subir a serra. @colheitacapital @dudaandrade.oficial",
       likes: 176,
       comments: [
@@ -227,7 +227,7 @@ export default {
       ],
     },
     {
-      id: 'x-eunice-luto-1011', author: 'eunice.sobreira', at: '2026-10-11T19:30', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-eunice-luto-1011', media: [IMG('x_eunice_luto_1011')], author: 'eunice.sobreira', at: '2026-10-11T19:30', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "Hoje a serra amanheceu mais triste. Iara, minha menina, que eu vi crescer correndo nesse terreiro com a Dudinha, de câmera na mão desde pequena. Não tenho palavras pra Socorro e pro Toinho. Que Deus console essa família. Descansa, filha. 🕊️🙏 @iarafontenele.foto",
       likes: 612,
       comments: [
@@ -241,7 +241,7 @@ export default {
 
     /* ---------- prima Jéssica e o noivo ---------- */
     {
-      id: 'x-jessica-noivado-2512', author: 'jessica.fontenele', at: '2025-12-25T22:10', ratio: '4/5', place: 'São Benedito, CE',
+      id: 'x-jessica-noivado-2512', media: [IMG('x_jessica_noivado_2512')], author: 'jessica.fontenele', at: '2025-12-25T22:10', ratio: '4/5', place: 'São Benedito, CE',
       caption: "ELE PEDIU!!! 💍😭 no meio da ceia, na frente da família toda, com a voz tremendo. Sim, sim e sim, @thiago.paiva_. Novembro de 2026, aguarde!",
       likes: 1340,
       comments: [
@@ -252,7 +252,7 @@ export default {
       ],
     },
     {
-      id: 'x-thiago-cha-2609', author: 'thiago.paiva_', at: '2026-09-27T20:40', ratio: '4/3', place: 'Guaraciaba do Norte, CE',
+      id: 'x-thiago-cha-2609', media: [IMG('x_thiago_cha_2609')], author: 'thiago.paiva_', at: '2026-09-27T20:40', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "chá de panela sobrevivido 🍳😅 me pintaram, me fizeram dançar e ganhei 4 airfryers. obrigado, família Fontenele! falta pouco, @jessica.fontenele 💍",
       likes: 288,
       comments: [
@@ -262,7 +262,7 @@ export default {
       ],
     },
     {
-      id: 'x-jessica-luto-1012', author: 'jessica.fontenele', at: '2026-10-12T21:15', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-jessica-luto-1012', media: [IMG('x_jessica_luto_1012')], author: 'jessica.fontenele', at: '2026-10-12T21:15', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "minha prima, minha fotógrafa, minha primeira melhor amiga da vida. tu ia fotografar o dia mais feliz da minha vida e eu não sei como vou entrar naquela igreja sem tu atrás da câmera. a gente te ama, Iara. pra sempre. 🕊️💍 @iarafontenele.foto",
       likes: 1520,
       comments: [
@@ -276,7 +276,7 @@ export default {
 
     /* ---------- ex-colegas de escola (Guaraciaba) ---------- */
     {
-      id: 'x-kel-benicio-0905', author: 'kel.araujo', at: '2026-09-05T15:30', ratio: '4/5', place: 'Tianguá, CE',
+      id: 'x-kel-benicio-0905', media: [IMG('x_kel_benicio_0905')], author: 'kel.araujo', at: '2026-09-05T15:30', ratio: '4/5', place: 'Tianguá, CE',
       caption: "5 anos do meu Benício 💙🦖 festa de dinossauro, bolo de dinossauro e um aniversariante que dormiu antes do parabéns. Mãe cansada, coração cheio.",
       likes: 312,
       comments: [
@@ -286,7 +286,7 @@ export default {
       ],
     },
     {
-      id: 'x-kel-luto-1011', author: 'kel.araujo', at: '2026-10-11T22:40', ratio: '1/1', place: 'Tianguá, CE',
+      id: 'x-kel-luto-1011', media: [IMG('x_kel_luto_1011')], author: 'kel.araujo', at: '2026-10-11T22:40', ratio: '4/5', place: 'Tianguá, CE',
       caption: "Iara da 4ª B. A menina que levava a câmera da tia pro recreio e tirava foto da merenda. Que fotografou o aniversário do meu filho sem cobrar nada \"porque era presente\". Não dá pra acreditar. Descansa, amiga. 🕊️",
       likes: 488,
       comments: [
@@ -296,7 +296,7 @@ export default {
       ],
     },
     {
-      id: 'x-tati-unhas-0920', author: 'tati.melo.nails', at: '2026-09-20T11:00', ratio: '1/1', place: 'Guaraciaba do Norte, CE',
+      id: 'x-tati-unhas-0920', media: [IMG('x_tati_unhas_0920')], author: 'tati.melo.nails', at: '2026-09-20T11:00', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "francesinha com glitter dourado pra noiva de outubro 💅✨ agenda de outubro e novembro abrindo hoje, corre que o casamento da serra tá movimentado! #unhasemgel #guaraciaba",
       likes: 164,
       comments: [
@@ -315,7 +315,7 @@ export default {
       ],
     },
     {
-      id: 'x-mayara-forro-1010', author: 'mayara.sousa_', at: '2026-10-10T22:20', ratio: '4/5', place: 'Sítio Flor da Serra',
+      id: 'x-mayara-forro-1010', media: [IMG('x_mayara_forro_1010')], author: 'mayara.sousa_', at: '2026-10-10T22:20', ratio: '4/5', place: 'Sítio Flor da Serra',
       caption: "noite de forró na serra 🌽🪗 baião de dois, paçoca e o pé doendo de tanto dançar. obrigada pela noite, tia Eunice! #noitedacolheita",
       likes: 118,
       comments: [
@@ -325,7 +325,7 @@ export default {
       ],
     },
     {
-      id: 'x-mayara-luto-1012', author: 'mayara.sousa_', at: '2026-10-12T19:10', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-mayara-luto-1012', media: [IMG('x_mayara_luto_1012')], author: 'mayara.sousa_', at: '2026-10-12T19:10', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "o velório mais cheio que essa cidade já viu. a serra inteira veio dizer tchau pra Iara. a gente nunca sabe quando é a última vez que dá um abraço em alguém. abracem os seus hoje. 🕊️",
       likes: 391,
       comments: [
@@ -338,7 +338,7 @@ export default {
 
     /* ---------- faculdade (Sobral) ---------- */
     {
-      id: 'x-camila-podcast-0915', author: 'camila.sa.jor', at: '2026-09-15T18:00', ratio: '1/1', place: 'Sobral, CE',
+      id: 'x-camila-podcast-0915', media: [IMG('x_camila_podcast_0915')], author: 'camila.sa.jor', at: '2026-09-15T18:00', ratio: '4/5', place: 'Sobral, CE',
       caption: "episódio 40 do Pauta Norte no ar! 🎙️ hoje: por que a rádio do interior ainda é a maior rede social do Ceará. link na bio. #podcast #sobral",
       likes: 143,
       comments: [
@@ -348,7 +348,7 @@ export default {
       ],
     },
     {
-      id: 'x-camila-luto-1011', author: 'camila.sa.jor', at: '2026-10-11T21:30', ratio: '4/5', place: 'Sobral, CE',
+      id: 'x-camila-luto-1011', media: [IMG('x_camila_luto_1011')], author: 'camila.sa.jor', at: '2026-10-11T21:30', ratio: '4/5', place: 'Sobral, CE',
       caption: "a turma de Comunicação de 2017 perdeu a melhor de nós. a Iara via o que ninguém via, e fazia a gente se ver bonito também. ontem ela passou aqui em Sobral e eu não fui. não deixem pra depois. 🕊️ @iarafontenele.foto",
       likes: 702,
       comments: [
@@ -358,7 +358,7 @@ export default {
       ],
     },
     {
-      id: 'x-davi-casamento-0905', author: 'davimendes.av', at: '2026-09-06T10:00', ratio: '16/9', place: 'Meruoca, CE',
+      id: 'x-davi-casamento-0905', media: [IMG('x_davi_casamento_0905')], author: 'davimendes.av', at: '2026-09-06T10:00', ratio: '4/5', place: 'Meruoca, CE',
       caption: "teaser do casamento de Rita e Hugo na Meruoca 🎥🌿 neblina das 6h, drone corajoso e uma noiva que entrou cantando. vídeo completo em breve.",
       likes: 410,
       comments: [
@@ -368,7 +368,7 @@ export default {
       ],
     },
     {
-      id: 'x-davi-luto-1012', author: 'davimendes.av', at: '2026-10-12T10:30', ratio: '16/9', place: 'Sobral, CE',
+      id: 'x-davi-luto-1012', media: [IMG('x_davi_luto_1012')], author: 'davimendes.av', at: '2026-10-12T10:30', ratio: '4/5', place: 'Sobral, CE',
       caption: "editei hoje de madrugada um vídeo com tudo que eu tinha da Iara: os bastidores da faculdade, o TCC, a gente correndo atrás de luz em Sobral. não vou postar. é da família. só queria dizer que ela tá em cada quadro. 🎞️🕊️",
       likes: 356,
       comments: [
@@ -378,7 +378,7 @@ export default {
       ],
     },
     {
-      id: 'x-renata-recife-0920', author: 'renata.pinho.rp', at: '2026-09-20T17:30', ratio: '4/5', place: 'Recife, PE',
+      id: 'x-renata-recife-0920', media: [IMG('x_renata_recife_0920')], author: 'renata.pinho.rp', at: '2026-09-20T17:30', ratio: '4/5', place: 'Recife, PE',
       caption: "pôr do sol no Capibaribe, mas confesso que nenhum chega aos pés de um fim de tarde na Ibiapaba 🌇 saudade da serra (e do cuscuz)",
       likes: 189,
       comments: [
@@ -387,7 +387,7 @@ export default {
       ],
     },
     {
-      id: 'x-paulo-dica-0928', author: 'pauloribeiro.foto', at: '2026-09-28T09:00', ratio: '4/5', place: 'Sobral, CE',
+      id: 'x-paulo-dica-0928', media: [IMG('x_paulo_dica_0928')], author: 'pauloribeiro.foto', at: '2026-09-28T09:00', ratio: '4/5', place: 'Sobral, CE',
       caption: "dica de segunda: no casamento ao ar livre, chegue 1h antes e ande o espaço todo com o fotômetro. a luz das 16h não é a das 17h. carrossel completo nos destaques 📷 #fotografiadecasamento #iluminacao",
       likes: 520,
       comments: [
@@ -409,7 +409,7 @@ export default {
 
     /* ---------- clientes ---------- */
     {
-      id: 'x-livia-noivado-0915', author: 'livia.carv', at: '2026-09-15T20:10', ratio: '4/5', place: 'Fortaleza, CE',
+      id: 'x-livia-noivado-0915', media: [IMG('x_livia_noivado_0915')], author: 'livia.carv', at: '2026-09-15T20:10', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "faltam 88 dias 💍 data fechada, igreja fechada, buffet fechado e FOTÓGRAFA fechada (a mais disputada de Fortaleza, viu @iarafontenele.foto?) agora só falta o João aprender a dançar.",
       likes: 231,
       comments: [
@@ -418,7 +418,7 @@ export default {
       ],
     },
     {
-      id: 'x-livia-luto-1012', author: 'livia.carv', at: '2026-10-12T13:00', ratio: '1/1', place: 'Fortaleza, CE',
+      id: 'x-livia-luto-1012', media: [IMG('x_livia_luto_1012')], author: 'livia.carv', at: '2026-10-12T13:00', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "Não sei bem como escrever isso. A Iara ia fotografar nosso casamento em dezembro. Conversei com ela por mensagem semana passada, cheia de ideia, cheia de vida. Meus sentimentos à família. Nada mais importa hoje. 🕊️",
       likes: 304,
       comments: [
@@ -427,7 +427,7 @@ export default {
       ],
     },
     {
-      id: 'x-camilab-heitor-1003', author: 'camilabezerra.mae', at: '2026-10-03T14:20', ratio: '4/5', place: 'Fortaleza, CE',
+      id: 'x-camilab-heitor-1003', media: [IMG('x_camilab_heitor_1003')], author: 'camilabezerra.mae', at: '2026-10-03T14:20', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "Heitor chegou 💛👶 3,2 kg de pura luz, às 5h40 da manhã. Parto longo, coração gigante. Obrigada a cada pessoa que rezou por nós. (as fotos da barriga feitas pela @iarafontenele.foto estão emolduradas no quarto dele 🤍)",
       likes: 1630,
       comments: [
@@ -437,7 +437,7 @@ export default {
       ],
     },
     {
-      id: 'x-clinica-equipe-0922', author: 'clinicaalmeida.ce', at: '2026-09-22T09:00', ratio: '4/3', place: 'Aldeota, Fortaleza',
+      id: 'x-clinica-equipe-0922', media: [IMG('x_clinica_equipe_0922')], author: 'clinicaalmeida.ce', at: '2026-09-22T09:00', ratio: '4/5', place: 'Aldeota, Fortaleza',
       caption: "Conheça a nossa equipe! 🩺💙 Seis profissionais dedicados à saúde da sua família. Retratos por @iarafontenele.foto. Agende sua consulta pelo link da bio.",
       likes: 176,
       comments: [
@@ -446,7 +446,7 @@ export default {
       ],
     },
     {
-      id: 'x-pedroelu-save-0901', author: 'pedroelu.casal', at: '2026-09-01T19:00', ratio: '4/5', place: 'Fortaleza, CE',
+      id: 'x-pedroelu-save-0901', media: [IMG('x_pedroelu_save_0901')], author: 'pedroelu.casal', at: '2026-09-01T19:00', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "save the date oficial 💛 maio de 2027. fotos do pré-wedding em outubro com a @iarafontenele.foto (a gente já tá treinando a pose natural, que é a mais difícil kkk)",
       likes: 129,
       comments: [
@@ -457,7 +457,7 @@ export default {
 
     /* ---------- lojas, café e marcas ---------- */
     {
-      id: 'x-foco-promo-0925', author: 'foconordeste.lentes', at: '2026-09-25T10:00', ratio: '1/1', place: 'Centro, Fortaleza',
+      id: 'x-foco-promo-0925', media: [IMG('x_foco_promo_0925')], author: 'foconordeste.lentes', at: '2026-09-25T10:00', ratio: '4/5', place: 'Centro, Fortaleza',
       caption: "SEMANA DA LENTE FIXA 📸 35mm f/1.8, 50mm f/1.4 e 85mm f/1.8 seminovas revisadas, troca em 6 meses e parcelamento em 10x. Estoque limitado, chama no direct! #lentes #fotografia #fortaleza",
       likes: 342,
       comments: [
@@ -477,7 +477,7 @@ export default {
       ],
     },
     {
-      id: 'x-cajueiro-bolo-0928', author: 'cafe.cajueiro', at: '2026-09-28T08:00', ratio: '4/5', place: 'Benfica, Fortaleza',
+      id: 'x-cajueiro-bolo-0928', media: [IMG('x_cajueiro_bolo_0928')], author: 'cafe.cajueiro', at: '2026-09-28T08:00', ratio: '4/5', place: 'Benfica, Fortaleza',
       caption: "segunda-feira pede bolo de rolo quentinho e coado de Guaramiranga ☕🍰 abrimos às 7h. a mesa da janela já tem dona, mas a do lado tá livre 😉",
       likes: 612,
       comments: [
@@ -487,7 +487,7 @@ export default {
       ],
     },
     {
-      id: 'x-cajueiro-mesa-1013', author: 'cafe.cajueiro', at: '2026-10-13T08:00', ratio: '4/5', place: 'Benfica, Fortaleza',
+      id: 'x-cajueiro-mesa-1013', media: [IMG('x_cajueiro_mesa_1013')], author: 'cafe.cajueiro', at: '2026-10-13T08:00', ratio: '4/5', place: 'Benfica, Fortaleza',
       caption: "Hoje a mesa da janela vai ficar vazia, com uma flor e um café. Era o lugar da Iara, que editava aqui quase toda manhã e sempre deixava a gente rir antes das 8h. Obrigado por tanto, vizinha. 🌼☕",
       likes: 1980,
       comments: [
@@ -497,7 +497,7 @@ export default {
       ],
     },
     {
-      id: 'x-brisaria-colecao-0930', author: 'brisaria.moda', at: '2026-09-30T12:00', ratio: '4/5', place: 'Fortaleza, CE',
+      id: 'x-brisaria-colecao-0930', media: [IMG('x_brisaria_colecao_0930')], author: 'brisaria.moda', at: '2026-09-30T12:00', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "Coleção Maré Alta chegou 🌊 estampas pintadas à mão por artistas cearenses. Frete grátis pra todo o Ceará até domingo! #modapraia #feitonoceara",
       likes: 1420,
       comments: [
@@ -515,7 +515,7 @@ export default {
       ],
     },
     {
-      id: 'x-bia-praia-0927', author: 'bia.rangel', at: '2026-09-27T17:40', ratio: '4/5', place: 'Praia de Iracema, Fortaleza',
+      id: 'x-bia-praia-0927', media: [IMG('x_bia_praia_0927')], author: 'bia.rangel', at: '2026-09-27T17:40', ratio: '4/5', place: 'Praia de Iracema, Fortaleza',
       caption: "domingo é dia de Iracema, caldo de peixe e pôr do sol no Poço da Draga 🌅🐟 qual o seu lugar preferido pra ver o sol ir embora em Fortaleza? #fortaleza #pordosol",
       likes: 18400,
       comments: [
@@ -525,7 +525,7 @@ export default {
       ],
     },
     {
-      id: 'x-bia-cajueiro-1006', author: 'bia.rangel', at: '2026-10-06T10:30', ratio: '4/5', place: 'Benfica, Fortaleza',
+      id: 'x-bia-cajueiro-1006', media: [IMG('x_bia_cajueiro_1006')], author: 'bia.rangel', at: '2026-10-06T10:30', ratio: '4/5', place: 'Benfica, Fortaleza',
       caption: "achei o bolo de rolo mais honesto de Fortaleza e é no Benfica 🍰☕ @cafe.cajueiro, vocês me ganharam. (não é publi, é amor mesmo)",
       likes: 22100,
       comments: [
@@ -534,7 +534,7 @@ export default {
       ],
     },
     {
-      id: 'x-bia-iara-1012', author: 'bia.rangel', at: '2026-10-12T20:00', ratio: '1/1', place: 'Fortaleza, CE',
+      id: 'x-bia-iara-1012', media: [IMG('x_bia_iara_1012')], author: 'bia.rangel', at: '2026-10-12T20:00', ratio: '4/5', place: 'Fortaleza, CE',
       caption: "Eu não conhecia a Iara pessoalmente, só pelos ensaios lindos que salvava como referência. Desde ontem não paro de ver o perfil dela. Fica o pedido: mirante não é lugar de selfie na beirada, à noite ainda menos. Cuidem-se. Meus sentimentos à família. 🕊️",
       likes: 31200,
       comments: [
@@ -545,7 +545,7 @@ export default {
       ],
     },
     {
-      id: 'x-mila-saojoao-0624', author: 'mila.forrozeira', at: '2026-06-24T23:10', ratio: '4/5', place: 'Sobral, CE',
+      id: 'x-mila-saojoao-0624', media: [IMG('x_mila_saojoao_0624')], author: 'mila.forrozeira', at: '2026-06-24T23:10', ratio: '4/5', place: 'Sobral, CE',
       caption: "São João de Sobral com a banda do Rafa 🪗🔥 rouca, suada e feliz. forró pé de serra nunca morre! #forropedeserra",
       likes: 88,
       comments: [
@@ -588,7 +588,7 @@ export default {
       ],
     },
     {
-      id: 'x-visite-mirantes-0905', author: 'visiteibiapaba', at: '2026-09-05T09:00', ratio: '4/5', place: 'Serra da Ibiapaba',
+      id: 'x-visite-mirantes-0905', media: [IMG('x_visite_mirantes_0905')], author: 'visiteibiapaba', at: '2026-09-05T09:00', ratio: '4/5', place: 'Serra da Ibiapaba',
       caption: "5 mirantes da Ibiapaba pra ver o pôr do sol 🌄 1. Mirante do Gavião (Ubajara) 2. Pedra do Itagurussu (Tianguá) 3. Mirante de Ibiapina 4. Pedra Lisa (Guaraciaba, em propriedade particular, peça autorização) 5. Bica do Ipu vista de cima. Salve pra sua próxima viagem! #ibiapaba #mirante",
       likes: 7400,
       comments: [
@@ -598,7 +598,7 @@ export default {
       ],
     },
     {
-      id: 'x-visite-ubajara-0920', author: 'visiteibiapaba', at: '2026-09-20T10:00', ratio: '4/5', place: 'Ubajara, CE',
+      id: 'x-visite-ubajara-0920', media: [IMG('x_visite_ubajara_0920')], author: 'visiteibiapaba', at: '2026-09-20T10:00', ratio: '4/5', place: 'Ubajara, CE',
       caption: "Bondinho de Ubajara funcionando de terça a domingo 🚡 descida até a Gruta, cachoeira do Cafundó no caminho e friozinho de 19°C. Ingresso na bilheteria do Parque Nacional. #ubajara #turismoceara",
       likes: 5100,
       comments: [
@@ -619,7 +619,7 @@ export default {
       ],
     },
     {
-      id: 'x-trilhas-pedralisa-0912', author: 'trilhas.da.serra', at: '2026-09-12T08:00', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-trilhas-pedralisa-0912', media: [IMG('x_trilhas_pedralisa_0912')], author: 'trilhas.da.serra', at: '2026-09-12T08:00', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "Trilha curta, vista gigante 🥾🌄 saída domingo 6h com destino aos mirantes de Guaraciaba. Levar água, protetor, tênis de solado bom e respeito pela natureza. Vagas pelo direct.",
       likes: 640,
       comments: [
@@ -641,7 +641,7 @@ export default {
 
     /* ---------- mais vida ---------- */
     {
-      id: 'x-thiago-maracuja-0815', author: 'thiago.paiva_', at: '2026-08-15T17:20', ratio: '4/3', place: 'São Benedito, CE',
+      id: 'x-thiago-maracuja-0815', media: [IMG('x_thiago_maracuja_0815')], author: 'thiago.paiva_', at: '2026-08-15T17:20', ratio: '4/5', place: 'São Benedito, CE',
       caption: "maracujá da serra no ponto 🌱💛 três anos de assistência técnica nessa roça e hoje o seu Raimundo me deu a primeira caixa da colheita. agronomia é isso.",
       likes: 214,
       comments: [
@@ -651,7 +651,7 @@ export default {
       ],
     },
     {
-      id: 'x-cajueiro-tapioca-1009', author: 'cafe.cajueiro', at: '2026-10-09T08:00', ratio: '4/5', place: 'Benfica, Fortaleza',
+      id: 'x-cajueiro-tapioca-1009', media: [IMG('x_cajueiro_tapioca_1009')], author: 'cafe.cajueiro', at: '2026-10-09T08:00', ratio: '4/5', place: 'Benfica, Fortaleza',
       caption: "sexta é dia de tapioca de carne de sol com nata 🫓☕ e café coado na hora. vem antes das 9h que a fila do Benfica não perdoa!",
       likes: 488,
       comments: [
@@ -660,7 +660,7 @@ export default {
       ],
     },
     {
-      id: 'x-mila-noite-1010', author: 'mila.forrozeira', at: '2026-10-10T22:05', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
+      id: 'x-mila-noite-1010', media: [IMG('x_mila_noite_1010')], author: 'mila.forrozeira', at: '2026-10-10T22:05', ratio: '4/5', place: 'Guaraciaba do Norte, CE',
       caption: "subi a serra só pra ouvir a banda do Rafa 🪗🌽 frio, poeira e forró bom. vale cada curva da estrada! #forropedeserra #ibiapaba",
       likes: 64,
       comments: [
@@ -672,21 +672,21 @@ export default {
   ],
 
   stories: [
-    { id: 'x-st-cajueiro-0808', author: 'cafe.cajueiro', at: '2026-10-08T07:05', media: [], text: "abrimos! ☕ bolo de rolo saindo do forno agora" },
-    { id: 'x-st-jessica-0810', author: 'jessica.fontenele', at: '2026-10-08T18:40', media: [], text: "prova do vestido nº 3 👰‍♀️ não posso mostrar, o noivo segue 🙈💍" },
-    { id: 'x-st-bia-0910', author: 'bia.rangel', at: '2026-10-09T11:20', media: [], text: "sexta de praia 🌊 quem mais fugiu do trabalho?" },
+    { id: 'x-st-cajueiro-0808', author: 'cafe.cajueiro', at: '2026-10-08T07:05', media: [IMG('x_st_cajueiro_0808')], text: "abrimos! ☕ bolo de rolo saindo do forno agora" },
+    { id: 'x-st-jessica-0810', author: 'jessica.fontenele', at: '2026-10-08T18:40', media: [IMG('x_st_jessica_0810')], text: "prova do vestido nº 3 👰‍♀️ não posso mostrar, o noivo segue 🙈💍" },
+    { id: 'x-st-bia-0910', author: 'bia.rangel', at: '2026-10-09T11:20', media: [IMG('x_st_bia_0910')], text: "sexta de praia 🌊 quem mais fugiu do trabalho?" },
     { id: 'x-st-humor-0910', author: 'ibiapabasemfiltro', at: '2026-10-09T19:00', media: [], text: "previsão do fim de semana na serra: 17°C. prepare o casaco de pele 🥶" },
-    { id: 'x-st-eunice-1730', author: 'eunice.sobreira', at: '2026-10-10T17:30', media: [], text: "Casa sede pronta pra receber todo mundo 🌻🙏 Deus abençoe" },
-    { id: 'x-st-eunice-1915', author: 'eunice.sobreira', at: '2026-10-10T19:15', media: [], text: "Já tem gente chegando! Que alegria ver o sítio cheio assim 🥰" },
-    { id: 'x-st-mayara-1950', author: 'mayara.sousa_', at: '2026-10-10T19:50', media: [], text: "chegamos 🌽 fila no portão, mas o cheiro de churrasco compensa" },
-    { id: 'x-st-eunice-2030', author: 'eunice.sobreira', at: '2026-10-10T20:30', media: [], text: "Baião de dois, paçoca e o meu bolo de milho na mesa do jantar 😋🌽" },
-    { id: 'x-st-mayara-2045', author: 'mayara.sousa_', at: '2026-10-10T20:45', media: [], text: "a comida tá maravilhosa, já tô no segundo prato 🙈" },
-    { id: 'x-st-mayara-2125', author: 'mayara.sousa_', at: '2026-10-10T21:25', media: [], text: "forró começou 🪗🔥 meu pai já tirou mainha pra dançar" },
-    { id: 'x-st-eunice-2140', author: 'eunice.sobreira', at: '2026-10-10T21:40', media: [], text: "Olha o forró! Até eu dancei 😂🪗" },
-    { id: 'x-st-mayara-2250', author: 'mayara.sousa_', at: '2026-10-10T22:50', media: [], text: "pé doendo, alma feliz. a gente desce a serra já já 🌙" },
-    { id: 'x-st-visite-1011', author: 'visiteibiapaba', at: '2026-10-11T07:30', media: [], text: "Domingo de neblina em Ubajara ☁️ bondinho funciona normalmente" },
+    { id: 'x-st-eunice-1730', author: 'eunice.sobreira', at: '2026-10-10T17:30', media: [IMG('x_st_eunice_1730')], text: "Casa sede pronta pra receber todo mundo 🌻🙏 Deus abençoe" },
+    { id: 'x-st-eunice-1915', author: 'eunice.sobreira', at: '2026-10-10T19:15', media: [IMG('x_st_eunice_1915')], text: "Já tem gente chegando! Que alegria ver o sítio cheio assim 🥰" },
+    { id: 'x-st-mayara-1950', author: 'mayara.sousa_', at: '2026-10-10T19:50', media: [IMG('x_st_mayara_1950')], text: "chegamos 🌽 fila no portão, mas o cheiro de churrasco compensa" },
+    { id: 'x-st-eunice-2030', author: 'eunice.sobreira', at: '2026-10-10T20:30', media: [IMG('x_st_eunice_2030')], text: "Baião de dois, paçoca e o meu bolo de milho na mesa do jantar 😋🌽" },
+    { id: 'x-st-mayara-2045', author: 'mayara.sousa_', at: '2026-10-10T20:45', media: [IMG('x_st_mayara_2045')], text: "a comida tá maravilhosa, já tô no segundo prato 🙈" },
+    { id: 'x-st-mayara-2125', author: 'mayara.sousa_', at: '2026-10-10T21:25', media: [IMG('x_st_mayara_2125')], text: "forró começou 🪗🔥 meu pai já tirou mainha pra dançar" },
+    { id: 'x-st-eunice-2140', author: 'eunice.sobreira', at: '2026-10-10T21:40', media: [IMG('x_st_eunice_2140')], text: "Olha o forró! Até eu dancei 😂🪗" },
+    { id: 'x-st-mayara-2250', author: 'mayara.sousa_', at: '2026-10-10T22:50', media: [IMG('x_st_mayara_2250')], text: "pé doendo, alma feliz. a gente desce a serra já já 🌙" },
+    { id: 'x-st-visite-1011', author: 'visiteibiapaba', at: '2026-10-11T07:30', media: [IMG('x_st_visite_1011')], text: "Domingo de neblina em Ubajara ☁️ bondinho funciona normalmente" },
     { id: 'x-st-cajueiro-1212', author: 'cafe.cajueiro', at: '2026-10-12T07:10', media: [], text: "hoje o café abre mais tarde. estamos de luto pela nossa vizinha Iara 🌼" },
-    { id: 'x-st-bia-1211', author: 'bia.rangel', at: '2026-10-11T16:00', media: [], text: "domingo tranquilo em casa, recarregando 🤍" },
+    { id: 'x-st-bia-1211', author: 'bia.rangel', at: '2026-10-11T16:00', media: [IMG('x_st_bia_1211')], text: "domingo tranquilo em casa, recarregando 🤍" },
     { id: 'x-st-humor-1310', author: 'ibiapabasemfiltro', at: '2026-10-13T10:00', media: [], text: "a serra segue de luto 🕊️ voltamos com os memes depois" },
   ],
 
