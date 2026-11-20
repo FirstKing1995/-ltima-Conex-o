@@ -2,7 +2,7 @@
 // Sem abas novas. Ids com prefixo "x" para não colidir com q01/p01 do original.
 
 let n = 0;
-const q = (at, query) => ({ id: 'xq' + String(++n).padStart(2, '0'), at, query, url: 'https://busca.vento.app/?q=' + encodeURIComponent(query) });
+const q = (at, query) => ({ id: 'xq' + String(++n).padStart(2, '0'), at, query, url: 'https://google.com/?q=' + encodeURIComponent(query) });
 const p = (at, title, url, page) => ({ id: 'xp' + String(++n).padStart(2, '0'), at, title, url, ...(page ? { page } : {}) });
 
 const history = [

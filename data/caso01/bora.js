@@ -1,4 +1,4 @@
-// Bora — corridas de Iara em Fortaleza e Sobral. Nenhuma em Guaraciaba do Norte: lá ela foi de carro com a Duda.
+// Uber — corridas de Iara em Fortaleza e Sobral. Nenhuma em Guaraciaba do Norte: lá ela foi de carro com a Duda.
 
 const P = {
   apto: { name: 'Apê · Rua Carapinima, Benfica', lat: -3.74, lng: -38.541 },

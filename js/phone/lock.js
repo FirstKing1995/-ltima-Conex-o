@@ -12,7 +12,7 @@ import { appIconEl, hasAppIcon } from '../ui/appicons.js';
 const APPCOLORS = { papo: '#1fa37a', sms: '#5b8def', telefone: '#34c27a', correio: '#e25b45', lume: '#f0567a', jandaia: '#1f9d6b', pulso: '#ef4f6c', agenda: '#4c7ef3', relogio: '#5b6b82' };
 
 const MOON = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>';
-const appName = (id) => ({ papo: 'Papo', lume: 'Lume', pulso: 'Pulso', sms: 'Mensagens', correio: 'Correio' }[id] || id);
+const appName = (id) => ({ papo: 'WhatsApp', lume: 'Instagram', pulso: 'Mi Fitness', sms: 'Mensagens', correio: 'Gmail' }[id] || id);
 export function renderLock(el) {
   const meta = CASE.meta || {};
   if (meta.wallpapers?.lock) el.style.backgroundImage = `url("${asset(meta.wallpapers.lock)}")`;

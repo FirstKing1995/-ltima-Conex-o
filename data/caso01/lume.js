@@ -1,4 +1,4 @@
-// Lume — rede social de Iara (nuvem: continua até ter 13/10, 23:12). Imagens em assets/caso01/img/.
+// Instagram — rede social de Iara (nuvem: continua até ter 13/10, 23:12). Imagens em assets/caso01/img/.
 
 const IMG = (n) => `assets/caso01/img/${n}.jpg`;
 const AV = (n) => `assets/caso01/avatars/${n}.jpg`;
@@ -11,12 +11,12 @@ export default {
   me: ME,
 
   profiles: [
-    prof(ME, 'Iara Fontenele', "fotógrafa e videomaker 📸\nGuaraciaba do Norte → Fortaleza\nluz natural, gente de verdade\niara.fontenele@correio.app", 4812, 623, { avatar: AV('iara'), posts: 214 }),
+    prof(ME, 'Iara Fontenele', "fotógrafa e videomaker 📸\nGuaraciaba do Norte → Fortaleza\nluz natural, gente de verdade\niara.fontenele@gmail.com", 4812, 623, { avatar: AV('iara'), posts: 214 }),
     prof('dudaandrade.oficial', 'Duda Andrade 🌻', "consultora @colheitacapital na Ibiapaba 🌱\nfilha da serra | gratidão sempre\nSítio Flor da Serra, Guaraciaba do Norte", 6240, 811, { avatar: AV('duda'), posts: 342 }),
     prof('colheitacapital', 'Colheita Capital', "Seu dinheiro cresce como a safra 🌱\n4% ao mês, lastreado em contratos de safra.\nEscritório: Av. Dom Luís, Aldeota, Fortaleza", 38900, 112, { verified: true, posts: 468 }),
     prof('caiomontenegro', 'Caio Montenegro', "CEO @colheitacapital | palestrante\n#mentalidadedecolheita\nFortaleza, CE", 21400, 340, { avatar: AV('caio'), verified: true, posts: 289 }),
     prof('rafaaguiar.voz', 'Rafa Aguiar', "vocalista | Forró Pé de Serra do Rafa 🎤\nSobral, CE\ncontratações pelo direct", 8930, 1204, { avatar: AV('rafa'), posts: 531 }),
-    prof('visto.por.ultimo', 'visto por último', "só olhando.", 0, 1, { fake: true, posts: 0, recovery: { phone: "(88) 9••••-••56", email: "r•••••••••r@correio.app" } }),
+    prof('visto.por.ultimo', 'visto por último', "só olhando.", 0, 1, { fake: true, posts: 0, recovery: { phone: "(88) 9••••-••56", email: "r•••••••••r@gmail.com" } }),
     prof('lari.producao', 'Lari Produção', "produção de eventos | Fortaleza/CE\ncada detalhe conta ✨\norçamentos: direct", 2310, 1050, { posts: 176 }),
     prof('theo.castro', 'théo castro', "análise de segurança. fortaleza.\n🦉", 214, 187, { avatar: IMG('theo_coruja'), private: true, posts: 3 }),
     prof('nanda.lopes', 'Nanda Lopes', "design | café | Fortaleza 🌴\ncolega de apê da @iarafontenele.foto", 1870, 902, { posts: 203 }),
@@ -230,7 +230,7 @@ export default {
         start: '23:30', end: '23:52',
         media: [IMG('live_caio_frame')],
         transcript: [
-          { t: '23:30:08', who: 'CAIO', text: "Boa noite, Guaraciaba do Norte! Boa noite, Ibiapaba! Estamos ao vivo no Lume direto do palco da Noite da Colheita." },
+          { t: '23:30:08', who: 'CAIO', text: "Boa noite, Guaraciaba do Norte! Boa noite, Ibiapaba! Estamos ao vivo no Instagram direto do palco da Noite da Colheita." },
           { t: '23:30:41', who: 'CAIO', text: "Quero agradecer à família Andrade, que abriu as portas do Sítio Flor da Serra pra gente." },
           { t: '23:31:05', who: null, text: "(a câmera passeia pela plateia; ao fundo, perto da porta do camarim, uma moça de camisa jeans e rabo de cavalo, de costas, digita no celular)", kind: 'sfx' },
           { t: '23:31:20', who: 'CAIO', text: "Um ano atrás eu tinha uma ideia. Hoje são mais de duas mil famílias plantando com a Colheita." },
@@ -371,7 +371,7 @@ export default {
     {
       id: 'dm-duda', with: 'dudaandrade.oficial',
       messages: [
-        { id: 'm1', from: 'them', at: '2026-08-03T09:12', text: "vi que o Lume tá bombando teu post 😍" },
+        { id: 'm1', from: 'them', at: '2026-08-03T09:12', text: "vi que o Instagram tá bombando teu post 😍" },
         { id: 'm2', from: 'me', at: '2026-08-03T09:15', text: "kkkk foi tu que ficou bonita" },
         { id: 'm3', from: 'them', at: '2026-09-08T13:05', text: "tu vem pro evento mesmo? quero tu comigo no sítio" },
         { id: 'm4', from: 'me', at: '2026-09-08T13:20', text: "vou sim, chego sexta lá na casa dos meus pais" },
@@ -389,7 +389,7 @@ export default {
       id: 'dm-nanda', with: 'nanda.lopes',
       messages: [
         { id: 'm1', from: 'them', at: '2026-09-19T17:40', text: "tô na praia, chega logo!" },
-        { id: 'm2', from: 'me', at: '2026-09-19T17:42', text: "tô no Bora, 5 min" },
+        { id: 'm2', from: 'me', at: '2026-09-19T17:42', text: "tô no Uber, 5 min" },
         { id: 'm3', from: 'them', at: '2026-10-05T17:10', text: "comprei pão e queijo pra tu, não esquece de comer" },
         { id: 'm4', from: 'me', at: '2026-10-08T21:12', text: "tô com a cabeça cheia. depois te conto tudo, tu nem acredita" },
         { id: 'm5', from: 'them', at: '2026-10-08T21:14', text: "tá tudo bem? tu vai pra serra amanhã?" },
@@ -406,7 +406,7 @@ export default {
         { id: 'm1', from: 'them', at: '2026-09-14T11:20', text: "Oi Iara! Aqui é da Lente Viva. Tem interesse em parceria? Cupom pra seus seguidores em troca de 3 posts." },
         { id: 'm2', from: 'me', at: '2026-09-14T12:05', text: "Oi! Tenho sim. Me manda os valores?" },
         { id: 'm3', from: 'them', at: '2026-09-14T12:10', text: "Mandamos por e-mail. Pode ser?" },
-        { id: 'm4', from: 'me', at: '2026-09-14T12:12', text: "Pode, iara.fontenele@correio.app" },
+        { id: 'm4', from: 'me', at: '2026-09-14T12:12', text: "Pode, iara.fontenele@gmail.com" },
       ],
     },
     {

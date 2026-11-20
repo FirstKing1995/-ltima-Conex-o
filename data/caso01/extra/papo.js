@@ -1,4 +1,4 @@
-// Papo (extra) — conversas comuns do celular de Iara: ruído realista.
+// WhatsApp (extra) — conversas comuns do celular de Iara: ruído realista.
 // Mesmo formato compacto de data/caso01/papo.js (ver explicação lá). Arquivo autônomo.
 // Pistas só em turma-anchieta (21/08 19:02–19:06) e turma-sobral (11/10 10:22–10:31).
 
@@ -416,7 +416,7 @@ const bianca = chat('bianca-gestante', 'bg-', { type: 'direct', contact: 'bianca
 
 /* ===================== CAFÉ SERRA VERDE (pagamento atrasado) ===================== */
 const cafeSerra = chat('cafe-serra-verde', 'cs-', { type: 'direct', contact: 'cafe-serra', lastSeen: '2026-10-13T09:20' }, `
-06-22 09:30 | cafe-serra | Bom dia, Iara! Rodrigo, do Café Serra Verde, de Ubajara. Peguei teu contato no Lume. Tamo lançando embalagem nova e queria fotos de produto pro site e pro marketplace
+06-22 09:30 | cafe-serra | Bom dia, Iara! Rodrigo, do Café Serra Verde, de Ubajara. Peguei teu contato no Instagram. Tamo lançando embalagem nova e queria fotos de produto pro site e pro marketplace
 06-22 10:15 | iara | Bom dia, Rodrigo! Conheço o Serra Verde, meu pai só toma ele kkk. quantos produtos?
 06-22 10:16 | cafe-serra | 6: três de 250 g, dois de 500 g e o drip. fundo branco + umas fotos ambientadas
 06-22 10:40 | iara | fundo branco + 2 ambientadas por produto sai R$ 1.200. metade na aprovação, metade na entrega

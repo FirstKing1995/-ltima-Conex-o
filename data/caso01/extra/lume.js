@@ -1,4 +1,4 @@
-// Lume — conteúdo extra (ruído): perfis, posts, stories, DMs e notificações que NÃO são pista.
+// Instagram — conteúdo extra (ruído): perfis, posts, stories, DMs e notificações que NÃO são pista.
 // As listas são somadas às de data/caso01/lume.js. Isca: @eunice.sobreira (Maria Eunice Sobreira Andrade, mãe da Duda).
 // Posts sem `media` são de propósito: aparecem como "foto ainda não baixada da nuvem".
 
@@ -374,7 +374,7 @@ export default {
       comments: [
         c('c1', 'camila.sa.jor', '2026-10-12T10:44', "manda pra mãe dela, Davi. ela vai querer.", 8),
         c('c2', 'davimendes.av', '2026-10-12T10:50', "@camila.sa.jor vou mandar pelo Léo, o primo", 3),
-        c('c3', 'leofontenele', '2026-10-12T11:20', "me chama no Papo, Davi. obrigado.", 6),
+        c('c3', 'leofontenele', '2026-10-12T11:20', "me chama no WhatsApp, Davi. obrigado.", 6),
       ],
     },
     {
@@ -690,7 +690,7 @@ export default {
     { id: 'x-st-humor-1310', author: 'ibiapabasemfiltro', at: '2026-10-13T10:00', media: [], text: "a serra segue de luto 🕊️ voltamos com os memes depois" },
   ],
 
-  // Destaques para os stories acima aparecerem no app (o Lume só mostra stories dentro de destaques).
+  // Destaques para os stories acima aparecerem no app (o Instagram só mostra stories dentro de destaques).
   highlights: [
     { id: 'x-hl-mayara-noite', author: 'mayara.sousa_', title: 'Colheita 🌽', stories: ['x-st-mayara-1950', 'x-st-mayara-2045', 'x-st-mayara-2125', 'x-st-mayara-2250'] },
     { id: 'x-hl-eunice-sitio', author: 'eunice.sobreira', title: 'Sítio 🌻', stories: ['x-st-eunice-1730', 'x-st-eunice-1915', 'x-st-eunice-2030', 'x-st-eunice-2140'] },
@@ -719,7 +719,7 @@ export default {
       messages: [
         { id: 'm1', from: 'them', at: '2026-10-06T15:20', text: "oi! aqui é a Ana Clara, minha mãe pediu pra eu perguntar quanto é um ensaio de 15 anos 🎀 é em dezembro" },
         { id: 'm2', from: 'me', at: '2026-10-07T09:10', text: "oi, Ana Clara! que lindo 🎀 o ensaio externo de 2h sai R$ 650 com 40 fotos editadas. me passa o número da tua mãe que eu mando tudo certinho?" },
-        { id: 'm3', from: 'them', at: '2026-10-07T13:45', text: "ela vai te chamar no Papo! ela queria na praia ou no Dragão do Mar" },
+        { id: 'm3', from: 'them', at: '2026-10-07T13:45', text: "ela vai te chamar no WhatsApp! ela queria na praia ou no Dragão do Mar" },
         { id: 'm4', from: 'me', at: '2026-10-07T13:50', text: "os dois são ótimos! no Dragão o fim de tarde fica lindo 💜" },
         { id: 'm5', from: 'them', at: '2026-10-11T16:30', text: "oi! a mãe perguntou se dá pra fazer dia 28/11?" },
         { id: 'm6', from: 'them', at: '2026-10-13T11:02', text: "oi? 🥺" },

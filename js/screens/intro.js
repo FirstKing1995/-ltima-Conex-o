@@ -40,7 +40,7 @@ export async function play() {
       h('p', { class: 'in-doc-k' }, 'Polícia Civil do Estado do Ceará'),
       h('p', { class: 'in-doc-t' }, 'Requisição de análise de aparelho celular'),
       h('p', { class: 'in-doc-p' }, 'Inquérito 0417/2026 · Delegacia Municipal de Guaraciaba do Norte · situação: arquivado (morte acidental).'),
-      h('p', { class: 'in-doc-p' }, 'Objeto: um aparelho Nimbus N9, pertencente à vítima Iara Fontenele, entregue voluntariamente pela mãe. Extração em modo avião. Dados de nuvem obtidos até a data desta requisição.'),
+      h('p', { class: 'in-doc-p' }, 'Objeto: um aparelho moto g85, pertencente à vítima Iara Fontenele, entregue voluntariamente pela mãe. Extração em modo avião. Dados de nuvem obtidos até a data desta requisição.'),
       h('label', { class: 'in-doc-l' }, 'Investigador responsável', h('div', { class: 'in-sign' }, h('span', null, 'Insp.'), inp)),
       h('button', { class: 'tbtn primary', on: { click: go } }, 'Assinar e abrir o caso'));
     stage.appendChild(form);
@@ -50,7 +50,7 @@ export async function play() {
 
   // Cada cena aparece em partes; o jogador avança no próprio ritmo (toque, clique, Enter ou espaço).
   const notifEl = () => h("div", { class: "in-phone" }, h("div", { class: "in-notif" }, appIconEl("papo", 34, "round"),
-    h("div", { class: "in-n-body" }, h("div", { class: "in-n-hd" }, "Papo · agora"), h("div", { class: "in-n-tt" }, "+55 85 98741-2290"), h("div", { class: "in-n-tx" }, MSG))));
+    h("div", { class: "in-n-body" }, h("div", { class: "in-n-hd" }, "WhatsApp · agora"), h("div", { class: "in-n-tt" }, "+55 85 98741-2290"), h("div", { class: "in-n-tx" }, MSG))));
   const beats = [
     { items: [["when", "Sábado, 10 de outubro · 23:31"], ["where", "Fortaleza. Você acabou de chegar do plantão."]] },
     { items: [["notif"]] },

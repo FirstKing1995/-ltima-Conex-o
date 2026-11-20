@@ -3,16 +3,16 @@
 
 export default {
   threads: [
-    /* ---------- cartão Jandaia (outro código curto, só cartão) ---------- */
+    /* ---------- cartão Nubank (outro código curto, só cartão) ---------- */
     {
-      id: 'x-jandaia-cartao', phone: '28410', name: 'Jandaia Cartões',
+      id: 'x-jandaia-cartao', phone: '28410', name: 'Nubank Cartões',
       messages: [
-        { id: 'xjc-1', from: 'them', at: '2026-05-14T19:22', text: 'Jandaia: compra aprovada no cartão final 7731, R$ 62,40, PAGUE BEM BENFICA, hoje 19:22.' },
-        { id: 'xjc-2', from: 'them', at: '2026-06-22T14:01', text: 'Jandaia: compra aprovada no cartão final 7731, 3x de R$ 137,60, LOJA FOCO, hoje 14:01.' },
-        { id: 'xjc-3', from: 'them', at: '2026-07-28T08:02', text: 'Jandaia: a fatura do seu cartão final 7731 fechou em R$ 1.012,48. Vencimento 05/08.' },
-        { id: 'xjc-4', from: 'them', at: '2026-08-19T13:01', text: 'Jandaia: seu novo limite de R$ 4.500 já está disponível no cartão final 7731.' },
-        { id: 'xjc-5', from: 'them', at: '2026-09-12T20:47', text: 'Jandaia: compra aprovada no cartão final 7731, R$ 54,90, IFOME*PIZZARIA DO BENFICA, hoje 20:47.' },
-        { id: 'xjc-6', from: 'them', at: '2026-10-03T11:15', text: 'Jandaia: compra aprovada no cartão final 7731, R$ 189,00, LIVRARIA DO CENTRO, hoje 11:15.' },
+        { id: 'xjc-1', from: 'them', at: '2026-05-14T19:22', text: 'Nubank: compra aprovada no cartão final 7731, R$ 62,40, PAGUE BEM BENFICA, hoje 19:22.' },
+        { id: 'xjc-2', from: 'them', at: '2026-06-22T14:01', text: 'Nubank: compra aprovada no cartão final 7731, 3x de R$ 137,60, LOJA FOCO, hoje 14:01.' },
+        { id: 'xjc-3', from: 'them', at: '2026-07-28T08:02', text: 'Nubank: a fatura do seu cartão final 7731 fechou em R$ 1.012,48. Vencimento 05/08.' },
+        { id: 'xjc-4', from: 'them', at: '2026-08-19T13:01', text: 'Nubank: seu novo limite de R$ 4.500 já está disponível no cartão final 7731.' },
+        { id: 'xjc-5', from: 'them', at: '2026-09-12T20:47', text: 'Nubank: compra aprovada no cartão final 7731, R$ 54,90, IFOME*PIZZARIA DO BENFICA, hoje 20:47.' },
+        { id: 'xjc-6', from: 'them', at: '2026-10-03T11:15', text: 'Nubank: compra aprovada no cartão final 7731, R$ 189,00, LIVRARIA DO CENTRO, hoje 11:15.' },
       ],
     },
 
@@ -21,23 +21,23 @@ export default {
       id: 'x-litoral-ofertas', phone: '30580', name: 'Litoral Ofertas',
       messages: [
         { id: 'xlo-1', from: 'them', at: '2026-06-01T10:00', text: 'Litoral: troque seu pré por um plano controle de 30 GB por R$ 49,90/mês nos 3 primeiros meses. Responda QUERO.' },
-        { id: 'xlo-2', from: 'them', at: '2026-07-15T10:00', text: 'Litoral: assista ao Streamflix sem gastar internet no plano Mais Vídeo. Saiba mais em litoralmovel.com.br/video. Para sair, responda SAIR.' },
+        { id: 'xlo-2', from: 'them', at: '2026-07-15T10:00', text: 'Litoral: assista ao Netflix sem gastar internet no plano Mais Vídeo. Saiba mais em claro.com.br/video. Para sair, responda SAIR.' },
         { id: 'xlo-3', from: 'them', at: '2026-09-18T10:00', text: 'Litoral: aniversário Litoral! Ganhe 2 GB de bônus ao recarregar R$ 20 até domingo.' },
       ],
     },
 
     /* ---------- códigos ---------- */
     {
-      id: 'x-nimbus-conta', phone: '27310', name: 'Nimbus',
+      id: 'x-nimbus-conta', phone: '27310', name: 'Google',
       messages: [
-        { id: 'xnb-1', from: 'them', at: '2026-05-03T09:41', text: 'Nimbus: seu código de verificação é 118 402. Use para concluir a configuração do seu Nimbus N9.' },
-        { id: 'xnb-2', from: 'them', at: '2026-08-09T16:20', text: 'Nimbus: a atualização de sistema 14.2 está disponível para o seu Nimbus N9. Conecte-se ao Wi-Fi para baixar.' },
+        { id: 'xnb-1', from: 'them', at: '2026-05-03T09:41', text: 'Google: seu código de verificação é 118 402. Use para concluir a configuração do seu moto g85.' },
+        { id: 'xnb-2', from: 'them', at: '2026-08-09T16:20', text: 'Motorola: a atualização de sistema 14.2 está disponível para o seu moto g85. Conecte-se ao Wi-Fi para baixar.' },
       ],
     },
     {
-      id: 'x-streamflix-cod', phone: '25009', name: 'Streamflix',
+      id: 'x-streamflix-cod', phone: '25009', name: 'Netflix',
       messages: [
-        { id: 'xsf-1', from: 'them', at: '2026-07-30T22:04', text: 'Streamflix: seu código é 7381. Não compartilhe.' },
+        { id: 'xsf-1', from: 'them', at: '2026-07-30T22:04', text: 'Netflix: seu código é 7381. Não compartilhe.' },
       ],
     },
     {

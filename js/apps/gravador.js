@@ -1,5 +1,5 @@
-// Gravador — gravações do aparelho de Iara (espelho somente leitura), Lixeira de 30 dias
-// e arquivos protegidos pela Pasta Segura (só abrem por params {rec}).
+// Gravador (Google Gravador) — gravações do aparelho de Iara (espelho somente leitura), Lixeira de 30 dias
+// e arquivos protegidos pela Pasta Trancada (só abrem por params {rec}).
 import { h, clear } from '../core/dom.js';
 import { bus } from '../core/bus.js';
 import { state } from '../core/state.js';
@@ -14,12 +14,24 @@ const dateTag = (at) => `${time.weekday(at)}, ${time.dateShort(at)} · ${time.hh
 const delTag = (at) => `Apagada ${time.weekday(at)} ${time.hhmm(at)}`;
 const isTrash = (r) => r.folder === 'lixeira' || (!!r.deletedAt && r.folder !== 'segura');
 const isSafe = (r) => r.folder === 'segura';
+const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 const sizeOf = (r) => {
   const kb = secs(r) * 16;
   return kb >= 1024 ? `${(kb / 1024).toLocaleString('pt-BR', { maximumFractionDigits: 1 })} MB` : `${Math.max(1, Math.round(kb))} KB`;
 };
 const purgeDate = (at) => { const d = time.parse(at); d.setDate(d.getDate() + 30); return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`; };
 const trText = (r) => (r.transcript || []).map((l) => (l.who ? `${l.who}: ` : '') + (l.text || '')).join(' ');
+const longDate = (at) => { const d = time.parse(at); return `${time.weekday(at)}., ${d.getDate()} de ${time.monthShort(d.getMonth())}. de ${d.getFullYear()} · ${time.hhmm(at)}`; };
+
+function dayGroup(at) {
+  const a = time.parse(at), b = time.parse(time.MIRROR_NOW);
+  const dd = Math.round((Date.UTC(b.getFullYear(), b.getMonth(), b.getDate()) - Date.UTC(a.getFullYear(), a.getMonth(), a.getDate())) / 86400000);
+  if (dd === 0) return 'Hoje';
+  if (dd === 1) return 'Ontem';
+  if (dd < 7) return 'Nesta semana';
+  const m = time.monthName(a.getMonth());
+  return `${m.charAt(0).toUpperCase() + m.slice(1)}${a.getFullYear() !== b.getFullYear() ? ' de ' + a.getFullYear() : ''}`;
+}
 
 function rng(seed) {
   let s = 2166136261;
@@ -42,12 +54,12 @@ function waveEl(seed, { n = 44, bad = false, tall = false } = {}) {
     }
     bars.push(h('i', { class: cls, style: { height: Math.round(v * 100) + '%' } }));
   }
-  return h('div', { class: `gv-wave ${bad ? 'bad' : ''} ${tall ? 'tall' : ''}`, 'aria-hidden': 'true' }, bars);
+  return h('div', { class: `rc-wave ${bad ? 'bad' : ''} ${tall ? 'tall' : ''}`, 'aria-hidden': 'true' }, bars);
 }
 
 /** Botão de fixar compacto (ícone). */
 function pinMini(game, spec) {
-  const b = h('button', { class: 'gv-pinmini', title: 'Fixar no Quadro' });
+  const b = h('button', { class: 'rc-pinmini', title: 'Fixar no Quadro' });
   const draw = () => {
     const on = game.isPinned(spec.key);
     b.classList.toggle('on', on);
@@ -60,54 +72,59 @@ function pinMini(game, spec) {
   return b;
 }
 
-/* ---------- cartão da lista ---------- */
-function recCard(rec, game, onOpen, { trash = false } = {}) {
+/* ---------- item da lista ---------- */
+function recRow(rec, game, onOpen, { trash = false } = {}) {
   const dur = time.duration(secs(rec));
   if (trash && !game.req(rec)) {
     // conteúdo ainda indisponível na extração: visual de arquivo corrompido
-    return h('button', { class: 'gv-card bad', on: { click: onOpen }, 'aria-label': `${rec.name}, arquivo corrompido` },
+    return h('button', { class: 'rc-row bad', on: { click: onOpen }, 'aria-label': `${rec.name}, arquivo corrompido` },
       h('div', { class: 'top' },
-        h('div', { class: 'ic warn' }, icon('triangle-alert', { size: 22 })),
+        h('span', { class: 'lead warn' }, icon('triangle-alert', { size: 20 })),
         h('div', { class: 'tx' },
           h('div', { class: 'nm' }, rec.name),
           h('div', { class: 'sub warn' }, `Arquivo corrompido na extração · ${dur} · ${delTag(rec.deletedAt || rec.at).toLowerCase()}`))),
       waveEl(rec.id, { bad: true }),
       h('div', { class: 'eco-note' }, icon('square-terminal', { size: 15 }), 'A recuperação dos fragmentos está em andamento.'));
   }
-  return h('button', { class: `gv-card ${trash ? 'trash' : ''}`, on: { click: onOpen } },
+  return h('button', { class: `rc-row ${trash ? 'trash' : ''}`, on: { click: onOpen } },
     h('div', { class: 'top' },
-      h('div', { class: 'ic' }, icon(isSafe(rec) ? 'lock' : 'mic', { size: 22 })),
+      h('span', { class: 'lead' }, icon(isSafe(rec) ? 'lock' : trash ? 'trash-2' : 'audio-lines', { size: 20 })),
       h('div', { class: 'tx' },
         h('div', { class: 'nm' }, rec.name),
-        h('div', { class: 'sub' }, trash && rec.deletedAt ? `${delTag(rec.deletedAt)} · exclusão definitiva em ${purgeDate(rec.deletedAt)}` : dateTag(rec.at))),
-      h('div', { class: 'dur' }, dur)),
-    waveEl(rec.id));
+        h('div', { class: 'sub' }, trash && rec.deletedAt ? `${delTag(rec.deletedAt)} · exclusão em ${purgeDate(rec.deletedAt)}` : `${time.dateShort(rec.at)} · ${time.hhmm(rec.at)}`)),
+      h('span', { class: 'dur' }, dur)));
 }
 
-/* ---------- detalhe da gravação ---------- */
+/* ---------- detalhe da gravação (player) ---------- */
 function drawDetail(ctx, el, rec) {
   const { kit, game, phone } = ctx;
   const trash = isTrash(rec);
   const locked = isSafe(rec) && !game.has('pasta_aberta');
   const gated = !locked && trash && !game.req(rec);
   const dur = secs(rec);
+  const ro = () => phone.toast('Extração somente leitura.', { icon: 'lock' });
   clear(el);
-  el.append(kit.appBar({
-    title: rec.name,
-    subtitle: locked ? 'Pasta Segura' : gated ? 'Arquivo corrompido' : `${dateTag(rec.at)} · ${time.duration(dur)}`,
-  }));
+  el.append(
+    h('header', { class: 'rc-subbar' },
+      kit.iconButton({ icon: 'arrow-left', label: 'Voltar', onClick: () => phone.back() }),
+      h('span', { class: 'sp' }),
+      kit.iconButton({ icon: 'share-2', label: 'Compartilhar', onClick: ro }),
+      kit.iconButton({ icon: 'ellipsis-vertical', label: 'Mais opções', onClick: ro })),
+    h('div', { class: 'rc-head' },
+      h('h1', null, rec.name),
+      h('p', null, locked ? 'Pasta Trancada' : gated ? 'Arquivo corrompido' : `${longDate(rec.at)} · ${time.duration(dur)}`)));
 
   if (locked) {
-    el.append(h('div', { class: 'gv-lock' },
+    el.append(h('div', { class: 'rc-lock' },
       h('div', { class: 'ring' }, icon('folder-lock', { size: 34 })),
-      h('h3', null, 'Arquivo protegido pela Pasta Segura'),
-      h('p', null, 'Esta gravação está guardada na Pasta Segura da Galeria. Abra a pasta para ouvir.'),
-      kit.button({ label: 'Ir para a Galeria', icon: 'images', variant: 'tonal', onClick: () => phone.open('galeria', { album: 'segura' }) })));
+      h('h3', null, 'Arquivo protegido pela Pasta Trancada'),
+      h('p', null, 'Esta gravação está guardada na Pasta Trancada do Fotos. Abra a pasta para ouvir.'),
+      kit.button({ label: 'Abrir no Fotos', icon: 'images', variant: 'tonal', onClick: () => phone.open('galeria', { album: 'segura' }) })));
     return 'locked';
   }
 
   if (gated) {
-    el.append(h('div', { class: 'gv-corrupt' },
+    el.append(h('div', { class: 'rc-corrupt' },
       waveEl(rec.id + '-d', { n: 52, bad: true, tall: true }),
       h('div', { class: 'msg' },
         h('div', { class: 'badge' }, icon('triangle-alert', { size: 18 }), 'Arquivo corrompido na extração'),
@@ -128,18 +145,24 @@ function drawDetail(ctx, el, rec) {
     detail: `${dateTag(rec.at)} · ${time.duration(dur)}${deletedTxt ? ' · ' + deletedTxt : ''}`,
   };
   if (trash) {
-    el.append(h('div', { class: 'gv-note slim' }, icon('trash-2', { size: 17 }),
+    el.append(h('div', { class: 'rc-note slim' }, icon('trash-2', { size: 17 }),
       h('span', null, `${delTag(rec.deletedAt || rec.at)}${rec.deletedAt ? ` · exclusão definitiva em ${purgeDate(rec.deletedAt)}` : ''}`)));
   }
   const player = kit.audioPlayer({ title: rec.name, at: dateTag(rec.at), duration: dur, transcript: rec.transcript || [], key: `gravador:rec:${rec.id}` });
+  player.classList.add('rc-player');
   const tr = player.querySelector('.k-transcript');
-  const pinRow = h('div', { class: 'gv-pinrow' }, kit.pinButton(pinSpec));
+  const pinRow = h('div', { class: 'rc-pinrow' }, kit.pinButton(pinSpec));
+  const speakers = [...new Set((rec.transcript || []).map((l) => l.who).filter(Boolean))];
   if (tr) {
-    tr.before(pinRow, h('div', { class: 'gv-trhead' }, icon('audio-lines', { size: 16 }), 'Transcrição automática', h('small', null, 'toque numa fala para ir até ela')));
-    // fixar uma fala específica
+    tr.before(pinRow, h('div', { class: 'rc-trhead' },
+      h('span', { class: 'tabs' }, h('b', null, icon('audio-lines', { size: 16 }), 'Transcrição')),
+      h('small', null, speakers.length ? `${speakers.length} ${speakers.length === 1 ? 'pessoa' : 'pessoas'} · toque numa fala` : 'toque numa fala para ir até ela')));
+    // cor por falante, como os rótulos do Gravador
     const lines = [...tr.querySelectorAll('.ln')];
     (rec.transcript || []).forEach((l, i) => {
-      if (!lines[i] || (l.kind && l.kind !== 'speech')) return;
+      if (!lines[i]) return;
+      if (l.who) lines[i].dataset.spk = String(Math.max(0, speakers.indexOf(l.who)) % 4);
+      if (l.kind && l.kind !== 'speech') return;
       lines[i].appendChild(pinMini(game, {
         key: `gravador:rec:${rec.id}#${l.t}`,
         label: `${rec.name} · ${l.t}${l.who ? ' · ' + l.who : ''}`,
@@ -150,22 +173,22 @@ function drawDetail(ctx, el, rec) {
   } else player.append(pinRow);
   el.append(player);
   el.append(
-    h('div', { class: 'gv-trhead info' }, icon('info', { size: 16 }), 'Detalhes'),
-    kit.kv([
+    h('div', { class: 'rc-trhead info' }, h('span', { class: 'tabs' }, h('b', null, icon('info', { size: 16 }), 'Detalhes'))),
+    h('div', { class: 'rc-kv' }, kit.kv([
       ['Nome', rec.name],
       ['Gravada em', `${time.dayLabel(rec.at)} às ${time.hhmm(rec.at)}`],
       ['Duração', time.duration(dur)],
       ['Formato', 'M4A · 128 kbps'],
       ['Tamanho', sizeOf(rec)],
-      ['Pasta', isSafe(rec) ? 'Pasta Segura' : trash ? 'Lixeira' : 'Gravações'],
-    ]));
+      ['Pasta', isSafe(rec) ? 'Pasta Trancada' : trash ? 'Lixeira' : 'Gravações'],
+    ])));
   return 'open';
 }
 
 function openRec(ctx, rec) {
   ctx.nav.push({
     title: rec.name,
-    className: 'gv-sub',
+    className: 'app-gravador rc-sub',
     render(el) {
       let last = drawDetail(ctx, el, rec);
       // quando um capítulo libera o conteúdo (ex.: cap4), a tela se refaz sozinha
@@ -201,36 +224,71 @@ export default {
     const target = params?.rec ? all.find((r) => r.id === params.rec) : null;
     let tab = prefs().tab === 'lixeira' ? 'lixeira' : 'rec';
     if (target && isTrash(target)) tab = 'lixeira';
-    const listEl = h('div', { class: 'gv-list' });
+    let query = '';
+    const listEl = h('div', { class: 'rc-list' });
+    const chipsEl = h('div', { class: 'rc-chips', role: 'tablist', 'aria-label': 'Pastas do Gravador' });
+
+    const match = (r) => !query || norm(`${r.name} ${game.req(r) ? trText(r) : ''}`).includes(query);
+    const grouped = (items, opts) => {
+      let cur = null, box = null;
+      for (const r of items) {
+        const g = dayGroup(opts.trash ? (r.deletedAt || r.at) : r.at);
+        if (g !== cur) { cur = g; listEl.append(h('h3', { class: 'rc-day' }, g)); box = h('div', { class: 'rc-group' }); listEl.append(box); }
+        box.append(recRow(r, game, () => openRec(ctx, r), opts));
+      }
+    };
+
+    const drawChips = () => {
+      clear(chipsEl);
+      const nT = trash().length;
+      for (const [id, label, ic, n] of [['rec', 'Gravações', 'audio-lines', normal().length], ['lixeira', 'Lixeira', 'trash-2', nT]]) {
+        chipsEl.append(h('button', { class: `rc-chip ${tab === id ? 'on' : ''}`, role: 'tab', 'aria-selected': String(tab === id), on: { click: () => { sfx.play('tap'); setTab(id); } } },
+          icon(tab === id ? 'check' : ic, { size: 16 }), label, n ? h('span', { class: 'n' }, String(n)) : null));
+      }
+    };
 
     const draw = () => {
       clear(listEl);
+      drawChips();
       if (tab === 'lixeira') {
-        listEl.append(h('div', { class: 'gv-note' }, icon('info', { size: 18 }), h('span', null, 'Gravações apagadas ficam aqui por 30 dias')));
-        const items = trash();
-        if (!items.length) listEl.append(kit.empty({ icon: 'trash-2', title: 'A lixeira está vazia', text: 'Nenhuma gravação apagada.' }));
-        items.forEach((r) => listEl.append(recCard(r, game, () => openRec(ctx, r), { trash: true })));
+        listEl.append(h('div', { class: 'rc-note' }, icon('info', { size: 18 }), h('span', null, 'As gravações na lixeira são excluídas permanentemente após 30 dias.')));
+        const items = trash().filter(match);
+        if (!items.length) listEl.append(kit.empty({ icon: 'trash-2', title: query ? 'Nada encontrado' : 'A lixeira está vazia', text: query ? 'Nenhuma gravação apagada com esse termo.' : 'Nenhuma gravação apagada.' }));
+        else grouped(items, { trash: true });
       } else {
-        const items = normal();
-        if (!items.length) listEl.append(kit.empty({ icon: 'mic', title: 'Nenhuma gravação', text: 'As gravações do aparelho aparecem aqui.' }));
-        else listEl.append(h('div', { class: 'gv-count' }, `${items.length} ${items.length === 1 ? 'gravação' : 'gravações'}`));
-        items.forEach((r) => listEl.append(recCard(r, game, () => openRec(ctx, r))));
+        const items = normal().filter(match);
+        if (!items.length) listEl.append(kit.empty({ icon: 'mic', title: query ? 'Nada encontrado' : 'Nenhuma gravação', text: query ? 'Nenhuma gravação ou transcrição com esse termo.' : 'As gravações do aparelho aparecem aqui.' }));
+        else grouped(items, { trash: false });
       }
       phone.scan(listEl);
     };
+    function setTab(id) { tab = id; prefs().tab = id; draw(); }
 
-    const tabs = kit.tabs({
-      items: [{ id: 'rec', label: 'Gravações' }, { id: 'lixeira', label: 'Lixeira' }],
-      active: tab,
-      onChange: (id) => { tab = id; prefs().tab = id; draw(); },
-    });
-    const fab = h('button', { class: 'gv-fab', 'aria-label': 'Gravar', on: { click: () => phone.toast('Extração somente leitura: não é possível gravar.', { icon: 'mic' }) } }, icon('mic', { size: 26 }));
-    el.append(kit.appBar({ title: 'Gravador', subtitle: 'Gravações do aparelho' }), tabs, listEl, h('div', { class: 'gv-pad' }));
-    screen.appendChild(fab);
+    /* busca nas gravações e transcrições (como no Gravador) */
+    const sInput = h('input', { type: 'search', placeholder: 'Pesquisar gravações', 'aria-label': 'Pesquisar gravações', autocomplete: 'off', spellcheck: 'false' });
+    let st = null;
+    sInput.addEventListener('input', () => { clearTimeout(st); st = setTimeout(() => { query = norm(sInput.value).trim(); draw(); }, 140); });
+    const sBar = h('label', { class: 'rc-search', hidden: true }, icon('search', { size: 20 }), sInput,
+      h('button', { class: 'rc-sx', 'aria-label': 'Fechar a pesquisa', on: { click: (e) => { e.preventDefault(); sInput.value = ''; query = ''; sBar.hidden = true; draw(); } } }, icon('x', { size: 18 })));
+
+    const more = h('button', { class: 'k-iconbtn', 'aria-label': 'Mais opções' }, icon('ellipsis-vertical', { size: 22 }));
+    more.addEventListener('click', () => kit.menu(more, [
+      { label: 'Lixeira', icon: 'trash-2', onClick: () => setTab('lixeira') },
+      { label: 'Configurações', icon: 'settings', onClick: () => phone.toast('Extração somente leitura.', { icon: 'lock' }) },
+    ]));
+    const top = h('header', { class: 'rc-top' },
+      h('h1', null, 'Gravador'),
+      kit.iconButton({ icon: 'search', label: 'Pesquisar', onClick: () => { sBar.hidden = !sBar.hidden; if (!sBar.hidden) setTimeout(() => sInput.focus(), 60); } }),
+      more);
+
+    const recBtn = h('button', { class: 'rc-recbtn', 'aria-label': 'Gravar', on: { click: () => phone.toast('Extração somente leitura: não é possível gravar.', { icon: 'mic' }) } }, h('i'));
+    const dock = h('div', { class: 'rc-dock' }, recBtn);
+    el.append(top, sBar, chipsEl, listEl);
+    screen.appendChild(dock);
     draw();
 
     // quando o capítulo libera a gravação corrompida, a lista se atualiza
-    const off = bus.on('flag', () => { if (!el.isConnected) { off(); return; } if (!screen.querySelector('.gv-sub')) draw(); });
+    const off = bus.on('flag', () => { if (!el.isConnected) { off(); return; } draw(); });
 
     if (params?.rec) {
       if (!target) phone.toast('Gravação não encontrada', { icon: 'mic' });

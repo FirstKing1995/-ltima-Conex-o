@@ -1,41 +1,75 @@
-/* Notas — o bloco de notas de Iara. Cartões em tons escuros tingidos (cada nota traz --nt-bg e --nt-ac). Prefixo: .nt- */
-.nt-sec { padding: 14px 18px 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ph-mut); }
-.nt-wrap { padding-bottom: 104px; }
-.nt-cols { display: flex; align-items: flex-start; gap: 10px; padding: 2px 14px 4px; }
+/* ===== NOTAS — Google Keep para Android (modo escuro). Cada card colorido traz --nt-bg. Prefixo: .nt- ===== */
+.app-notas, .nt-screen {
+  --k-bg: #202124;
+  --k-pill: #303134;
+  --k-fg: #e8eaed;
+  --k-fg2: #c4c7c5;
+  --k-mut: #9aa0a6;
+  --k-line: #5f6368;
+}
+.ph-screen.app-notas { background: var(--k-bg); color: var(--k-fg); }
+
+/* ---------- topo: barra de pesquisa ---------- */
+.nt-top { position: sticky; top: 0; z-index: 5; background: var(--k-bg); padding: 6px 0 4px; }
+.nt-search { margin: 4px 14px 6px; height: 50px; border-radius: 25px; background: var(--k-pill); display: flex; align-items: center; gap: 0; padding: 0 6px 0 3px; cursor: text; }
+.nt-search input { flex: 1; min-width: 0; height: 100%; padding-left: 6px; background: none; border: 0; outline: 0; font-size: 16px; color: var(--k-fg); font-family: inherit; -webkit-appearance: none; appearance: none; }
+.nt-search input::placeholder { color: var(--k-fg2); }
+.nt-search input::-webkit-search-cancel-button { display: none; }
+.nt-tbtn { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--k-fg2); }
+.nt-tbtn:active { background: rgba(255, 255, 255, .1); }
+.nt-me { flex: none; width: 40px; height: 40px; display: grid; place-items: center; }
+
+/* ---------- grade ---------- */
+.nt-sec { padding: 14px 22px 8px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--k-fg2); }
+.nt-wrap { padding: 2px 0 120px; }
+.nt-cols { display: flex; align-items: flex-start; gap: 10px; padding: 0 12px 4px; }
 .nt-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
 
 .nt-card {
-  position: relative; display: block; width: 100%; text-align: left; padding: 14px 14px 11px; border-radius: 20px;
-  background: var(--nt-bg); color: var(--ph-fg);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nt-ac) 26%, transparent);
-  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast);
+  display: block; width: 100%; text-align: left; padding: 12px 14px 14px; border-radius: 12px;
+  background: transparent; color: var(--k-fg); border: 1px solid var(--k-line);
+  transition: transform var(--t-fast) var(--ease);
 }
-.nt-card:active { transform: scale(.975); }
-.nt-card.pinned { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--nt-ac) 55%, transparent); }
-.nt-card h3 { margin: 0 0 7px; font-size: 15.5px; font-weight: 600; line-height: 1.25; letter-spacing: -.005em; color: #fff; overflow-wrap: anywhere; }
-.nt-pv { margin: 0; font-size: 13.5px; line-height: 1.45; color: rgba(236, 235, 232, .84); white-space: pre-line; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
-.nt-ckp { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.nt-ckp li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; line-height: 1.3; color: rgba(236, 235, 232, .9); }
-.nt-ckp li.more { padding-left: 23px; color: var(--ph-mut); font-size: 12.5px; }
-.nt-dt { margin-top: 11px; display: flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 500; color: color-mix(in srgb, var(--nt-ac) 82%, #fff); }
-.nt-dt .ic { flex: none; }
+.nt-card.tint { background: var(--nt-bg); border-color: transparent; }
+.nt-card:active { transform: scale(.98); }
+.nt-card h3 { margin: 0 0 8px; font-size: 16px; font-weight: 500; line-height: 1.35; color: var(--k-fg); overflow-wrap: anywhere; }
+.nt-card h3:last-child { margin-bottom: 0; }
+.nt-pv { margin: 0; font-size: 14px; line-height: 1.45; color: var(--k-fg); white-space: pre-line; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 10; -webkit-box-orient: vertical; overflow: hidden; }
+.nt-cols.one .nt-pv { -webkit-line-clamp: 6; }
+.nt-ckp { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.nt-ckp li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.35; color: var(--k-fg); overflow-wrap: anywhere; }
+.nt-ckp li.more { padding-left: 26px; color: var(--k-mut); }
+.nt-ckp .nt-box { flex: none; color: var(--k-mut); display: grid; place-items: center; margin-top: -1px; }
+.nt-donen { margin-top: 8px; font-size: 13px; color: var(--k-mut); }
+.nt-empty { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 90px 40px; text-align: center; color: var(--k-mut); }
+.nt-empty .ic { opacity: .5; }
+.nt-empty p { margin: 0; font-size: 16px; color: var(--k-fg2); }
 
-/* caixa de seleção desenhada em CSS (marcada = ☑, vazia = ☐) */
-.nt-box { position: relative; flex: none; width: 15px; height: 15px; margin-top: 1px; border-radius: 4.5px; box-shadow: inset 0 0 0 1.7px color-mix(in srgb, var(--nt-ac) 85%, transparent); }
-.done > .nt-box { background: var(--nt-ac); box-shadow: none; }
-.done > .nt-box::after { content: ''; position: absolute; left: 50%; top: 46%; width: 28%; height: 52%; border: solid #15181b; border-width: 0 2px 2px 0; transform: translate(-50%, -52%) rotate(42deg); }
-.done > .nt-ct { text-decoration: line-through; text-decoration-color: rgba(236, 235, 232, .45); opacity: .55; }
+/* botão "+" (quadrado arredondado com o "+" colorido do Google) */
+.nt-fab { position: absolute; right: 16px; bottom: 64px; z-index: 6; width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: #3c4043; box-shadow: 0 4px 12px rgba(0, 0, 0, .45), 0 1px 3px rgba(0, 0, 0, .3); }
+.nt-fab:active { background: #46494d; }
 
 /* ---------- a nota aberta ---------- */
-.ph-screen.nt-screen { background: var(--nt-bg); }
-.nt-screen .k-appbar { background: var(--nt-bg); }
-.nt-view { padding: 4px 22px 40px; }
-.nt-title { margin: 6px 0 6px; font-size: 25px; font-weight: 600; line-height: 1.22; letter-spacing: -.01em; color: #fff; overflow-wrap: anywhere; }
-.nt-meta { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; font-size: 12.5px; color: color-mix(in srgb, var(--nt-ac) 78%, var(--ph-mut)); }
-.nt-body { white-space: pre-wrap; font-size: 16.5px; line-height: 1.62; color: rgba(236, 235, 232, .94); overflow-wrap: anywhere; }
-.nt-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.nt-li { display: flex; align-items: flex-start; gap: 14px; padding: 9px 0; font-size: 16.5px; line-height: 1.4; border-bottom: 1px solid color-mix(in srgb, var(--nt-ac) 14%, transparent); }
-.nt-li:last-child { border-bottom: 0; }
-.nt-li .nt-box { width: 21px; height: 21px; margin-top: 0; border-radius: 6px; }
-.nt-bottom { position: sticky; bottom: 0; display: flex; justify-content: center; padding: 26px 16px 14px; background: linear-gradient(180deg, transparent, var(--nt-bg) 48%); pointer-events: none; }
-.nt-bottom > * { pointer-events: auto; }
+.ph-screen.nt-screen { background: var(--nt-bg, var(--k-bg)); color: var(--k-fg); }
+.nt-screen .k-appbar { background: var(--nt-bg, var(--k-bg)); }
+.nt-screen .k-iconbtn { color: var(--k-fg2); }
+.nt-view { padding: 0 20px 24px; min-height: calc(100% - 120px); }
+.nt-title { margin: 4px 0 12px; font-size: 22px; font-weight: 400; line-height: 1.3; color: var(--k-fg); overflow-wrap: anywhere; }
+.nt-body { white-space: pre-wrap; font-size: 16px; line-height: 1.55; color: var(--k-fg); overflow-wrap: anywhere; }
+.nt-list { list-style: none; margin: 0 0 0 -4px; padding: 0; display: flex; flex-direction: column; }
+.nt-list[hidden] { display: none; }
+.nt-body + .nt-list { margin-top: 14px; }
+.nt-li { display: flex; align-items: flex-start; gap: 12px; padding: 7px 0; font-size: 16px; line-height: 1.4; color: var(--k-fg); }
+.nt-li .nt-box { flex: none; display: grid; place-items: center; color: var(--k-fg2); margin-top: -1px; }
+.nt-li .nt-ct { overflow-wrap: anywhere; min-width: 0; }
+.nt-li.done .nt-ct { text-decoration: line-through; color: var(--k-mut); }
+.nt-li.done .nt-box { color: var(--k-mut); }
+.nt-donehead { display: flex; align-items: center; gap: 8px; width: 100%; margin: 6px 0 2px -4px; padding: 10px 0 6px; border-top: 1px solid rgba(255, 255, 255, .14); font-size: 14px; color: var(--k-fg2); text-align: left; }
+.nt-donehead .ic { transform: rotate(-90deg); transition: transform var(--t-fast); }
+.nt-donehead.open .ic { transform: none; }
+.nt-dates { display: flex; flex-direction: column; gap: 2px; margin-top: 28px; font-size: 12px; color: var(--k-mut); }
+.nt-pinrow { display: flex; margin-top: 14px; }
+.nt-bottom { position: sticky; bottom: 0; z-index: 3; display: flex; align-items: center; gap: 2px; height: 52px; padding: 0 4px; background: var(--nt-bg, var(--k-bg)); }
+.nt-bbtn { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--k-fg2); }
+.nt-bbtn:active { background: rgba(255, 255, 255, .1); }
+.nt-edited { flex: 1; min-width: 0; text-align: center; font-size: 12px; color: var(--k-fg2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

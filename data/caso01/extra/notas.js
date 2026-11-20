@@ -84,12 +84,12 @@ Conclusão: esperar o pagamento do casamento da Lívia. Até lá, a 50 resolve.`
   {
     id: 'x-filmes', title: 'Filmes pra ver', color: 'rosa',
     created: '2026-05-30T23:10', edited: '2026-09-27T23:40',
-    checklist: ck(['Central do Brasil (rever)', 1], ['Bacurau', 1], ['Aquarius', 0], ['O Som ao Redor', 0], ['Maré Baixa (série, Streamflix)', 0], ['Documentário do Sebastião Salgado', 1]),
+    checklist: ck(['Central do Brasil (rever)', 1], ['Bacurau', 1], ['Aquarius', 0], ['O Som ao Redor', 0], ['Maré Baixa (série, Netflix)', 0], ['Documentário do Sebastião Salgado', 1]),
   },
   {
     id: 'x-gastos-outubro', title: 'Contas de outubro', color: 'vermelho',
     created: '2026-10-01T08:10', edited: '2026-10-07T20:25',
-    checklist: ck(['Aluguel R$ 1.450', 1], ['Luz R$ 168,32', 1], ['Internet R$ 99,90', 1], ['Celular R$ 79,90', 1], ['Academia R$ 119,90', 0], ['Rateio caixa d\'água R$ 85', 0], ['Streamflix R$ 39,90', 1]),
+    checklist: ck(['Aluguel R$ 1.450', 1], ['Luz R$ 168,32', 1], ['Internet R$ 99,90', 1], ['Celular R$ 79,90', 1], ['Academia R$ 119,90', 0], ['Rateio caixa d\'água R$ 85', 0], ['Netflix R$ 39,90', 1]),
   },
 ];
 

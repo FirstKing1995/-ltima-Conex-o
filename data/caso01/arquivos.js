@@ -1,4 +1,4 @@
-// Arquivos do aparelho de Iara (até sáb 23:47). Pastas: Downloads, Documentos e segura (Pasta Segura, só abre com a senha).
+// Arquivos do aparelho de Iara (até sáb 23:47). Pastas: Downloads, Documentos e segura (Pasta Trancada, só abre com a senha).
 // Blocos: h1 h2 p li table(rows, 1ª linha = cabeçalho) highlight sign. **negrito** e ==marca-texto== funcionam dentro do texto.
 
 const pdf = (id, name, folder, at, size, pages, x = {}) => ({ id, name, folder, type: 'pdf', size, at, pages: pages.map(blocks => ({ blocks })), ...x });
@@ -15,7 +15,7 @@ const files = [
       ['16:20', 'Chegada da equipe na casa sede; café e alinhamento', 'Lari'],
       ['17:00', 'Passagem de som da banda', 'Igor Som'],
       ['17:55', 'Fotos da propriedade e do mirante (pôr do sol)', 'Iara'],
-      ['18:30', 'Teste de transmissão ao vivo (Lume)', 'Marcos'],
+      ['18:30', 'Teste de transmissão ao vivo (Instagram)', 'Marcos'],
       ['19:00', 'Abertura dos portões e credenciamento', 'Lari / recepção'],
       ['19:30', 'Coquetel de boas-vindas', 'Buffet'],
       ['20:00', 'Jantar', 'Buffet'],
@@ -23,7 +23,7 @@ const files = [
       ['22:15', 'Intervalo da banda (20 min)', 'Igor'],
       ['22:35', 'Show: 2º set', 'Banda'],
       ['23:25', 'Banda para. Caio sobe ao palco', 'Lari / Igor'],
-      ['23:30', 'Discurso do Caio (ao vivo no Lume, @colheitacapital)', 'Caio / Marcos'],
+      ['23:30', 'Discurso do Caio (ao vivo no Instagram, @colheitacapital)', 'Caio / Marcos'],
       ['23:30', 'Churrasco da equipe e da banda no camarim', 'Buffet'],
       ['23:52', 'Fim do discurso e brinde', 'Caio'],
       ['00:00', 'Queima de fogos no pátio', 'Fogos Serra Azul'],
@@ -150,13 +150,13 @@ const files = [
 
   pdf('curriculo-iara', 'Curriculo_Iara_Fontenele.pdf', 'Documentos', '2026-08-12T16:38', 156000, [[
     { type: 'h1', text: 'Iara Fontenele' },
-    { type: 'p', text: 'Fotógrafa e videomaker · Fortaleza (CE) · @iarafontenele.foto · iara.fontenele@correio.app' },
+    { type: 'p', text: 'Fotógrafa e videomaker · Fortaleza (CE) · @iarafontenele.foto · iara.fontenele@gmail.com' },
     { type: 'h2', text: 'Resumo' },
     { type: 'p', text: 'Cinco anos de experiência em fotografia de eventos, casamentos e institucional. Formada em Comunicação (Sobral). Fotografia documental, luz natural e edição de vídeo curto para redes.' },
     { type: 'h2', text: 'Experiência' },
     { type: 'li', text: 'Freelancer, Colheita Capital (mai/2026 a hoje): fotografia e vídeo de eventos e ações institucionais.' },
     { type: 'li', text: 'Fotógrafa autônoma (2021 a hoje): casamentos, ensaios e eventos corporativos em Fortaleza e na Serra da Ibiapaba.' },
-    { type: 'li', text: 'Assistente de fotografia, Estúdio Lume Claro (2020/2021).' },
+    { type: 'li', text: 'Assistente de fotografia, Estúdio Instagram Claro (2020/2021).' },
     { type: 'h2', text: 'Formação' },
     { type: 'li', text: 'Comunicação Social, Sobral (2018 a 2022).' },
   ]]),
@@ -186,28 +186,28 @@ const files = [
       ['Noite da Colheita', 'Evento', '10/10', 'Contratado'],
     ] }] },
 
-  /* ---------------- Pasta Segura ---------------- */
+  /* ---------------- Pasta Trancada ---------------- */
   {
     id: 'taxas-garantia', name: 'taxas_garantia.xlsx', folder: 'segura', type: 'xlsx', size: 19000, at: '2026-10-05T22:10',
     sheets: [
       { name: 'Famílias', rows: [
         ['N.º', 'Família', 'Município', 'Valor pago', 'Data', 'Pix para', 'Cobrança', 'Contato'],
-        ['1', 'Antônio Fontenele (meu pai)', 'Guaraciaba do Norte', 'R$ 30.000,00', '14/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'confirmou comigo 02/10'],
-        ['2', 'José Raimundo Moura', 'Ibiapina', 'R$ 18.000,00', '19/07', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'vizinho do pai'],
-        ['3', 'Francisca das Chagas Lima', 'Ubajara', 'R$ 12.500,00', '22/07', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'prima da mãe'],
-        ['4', 'Manoel Ferreira Neto', 'São Benedito', 'R$ 25.000,00', '02/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'vendeu um gado'],
-        ['5', 'Raimunda Pinheiro', 'Carnaubal', 'R$ 8.000,00', '08/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'aposentada'],
-        ['6', 'Sebastião e Lúcia Araújo', 'Guaraciaba do Norte', 'R$ 20.000,00', '25/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'padrinhos de uma amiga'],
-        ['7', 'Pedro Alves Sobrinho', 'Viçosa do Ceará', 'R$ 15.000,00', '31/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'indicado pelo Sebastião'],
-        ['8', 'Maria Neuma Costa', 'Tianguá', 'R$ 10.000,00', '09/09', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'comerciante'],
-        ['9', 'Cícero Batista', 'Croatá', 'R$ 6.500,00', '14/09', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'Papo (88) 99645-1209', 'pediu para não aparecer'],
+        ['1', 'Antônio Fontenele (meu pai)', 'Guaraciaba do Norte', 'R$ 30.000,00', '14/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'confirmou comigo 02/10'],
+        ['2', 'José Raimundo Moura', 'Ibiapina', 'R$ 18.000,00', '19/07', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'vizinho do pai'],
+        ['3', 'Francisca das Chagas Lima', 'Ubajara', 'R$ 12.500,00', '22/07', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'prima da mãe'],
+        ['4', 'Manoel Ferreira Neto', 'São Benedito', 'R$ 25.000,00', '02/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'vendeu um gado'],
+        ['5', 'Raimunda Pinheiro', 'Carnaubal', 'R$ 8.000,00', '08/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'aposentada'],
+        ['6', 'Sebastião e Lúcia Araújo', 'Guaraciaba do Norte', 'R$ 20.000,00', '25/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'padrinhos de uma amiga'],
+        ['7', 'Pedro Alves Sobrinho', 'Viçosa do Ceará', 'R$ 15.000,00', '31/08', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'indicado pelo Sebastião'],
+        ['8', 'Maria Neuma Costa', 'Tianguá', 'R$ 10.000,00', '09/09', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'comerciante'],
+        ['9', 'Cícero Batista', 'Croatá', 'R$ 6.500,00', '14/09', 'M E S ANDRADE ME (chave aleatória 3f9a2c71…e112)', 'WhatsApp (88) 99645-1209', 'pediu para não aparecer'],
         ['Total', '9 famílias', '', 'R$ 145.000,00', '', '', '', ''],
       ] },
       { name: 'Observações', rows: [
         ['Observação', 'Texto'],
         ['1', '"Taxa de garantia" cobrada antes de liberar o aporte do investidor. Pix sempre para a mesma firma, M E S ANDRADE ME, CNPJ 52.318.044/0001-09.'],
         ['2', 'A Colheita Capital não cobra taxa nenhuma — confirmado no contrato padrão, cláusula 7.'],
-        ['3', 'Quem cobra se apresenta como gente da Colheita e diz que "a empresa exige". A cobrança chega sempre do mesmo número no Papo.'],
+        ['3', 'Quem cobra se apresenta como gente da Colheita e diz que "a empresa exige". A cobrança chega sempre do mesmo número no WhatsApp.'],
         ['4', 'Nenhum recibo da Colheita. Só comprovante de Pix para a firma. M E S: conferir de quem são as iniciais.'],
         ['5', 'Falta conferir se o Caio sabe da taxa ou se é por fora.'],
       ] },
@@ -216,7 +216,7 @@ const files = [
 
   {
     id: 'leia-me-segura', name: 'LEIA-ME.txt', folder: 'segura', type: 'txt', size: 3200, at: '2026-10-05T22:34',
-    text: `LEIA-ME — Pasta Segura
+    text: `LEIA-ME — Pasta Trancada
 
 Se você está lendo isto, ou eu te passei a senha, ou aconteceu alguma coisa comigo. Tomara que seja a primeira.
 
@@ -243,7 +243,7 @@ Iara`,
   {
     id: 'comprovante-devolucao', name: 'comprovante_devolucao_2509.pdf', folder: 'segura', type: 'pdf', size: 88000, at: '2026-09-25T10:42',
     pages: [{ blocks: [
-      { type: 'h1', text: 'Jandaia: Comprovante de devolução de Pix' },
+      { type: 'h1', text: 'Nubank: Comprovante de devolução de Pix' },
       { type: 'table', rows: [
         ['Tipo', 'Devolução de Pix'],
         ['Valor', 'R$ 20.000,00'],
@@ -253,7 +253,7 @@ Iara`,
         ['Mensagem', 'Devolução — não aceito'],
         ['Pix original', 'Bônus performance, recebido às 10:12'],
       ] },
-      { type: 'p', text: 'Comprovante gerado pelo app Jandaia.' },
+      { type: 'p', text: 'Comprovante gerado pelo app Nubank.' },
     ] }],
   },
 
@@ -346,7 +346,7 @@ Iara`,
         { type: 'p', text: 'A pessoa que eu mais amei nessa vida está tirando dinheiro do meu pai. Eu fico escrevendo isso para ver se a frase fica menos absurda. Não fica.' },
         { type: 'p', text: 'Eu não quero que ela seja presa. Eu quero que ela devolva, e que pare. E que me olhe na cara uma vez sem a família dela atrás.' },
         { type: 'h2', text: '6. Eles' },
-        { type: 'p', text: 'O Ademar fala da festa como quem fala de missa. A Lúcia não sobe na pedra. O cartório de Ipu tem um estatuto de 1941 com o nome do bisavô da Duda. Tem uma associação que recebe dinheiro e não faz caridade nenhuma.' },
+        { type: 'p', text: 'O Ademar fala da festa como quem fala de missa. A Dona Eunice não sobe na pedra. O cartório de Ipu tem um estatuto de 1941 com o nome do bisavô da Duda. Tem uma associação que recebe dinheiro e não faz caridade nenhuma.' },
         { type: 'p', text: 'A serra não pede nada. Quem pede são eles.' },
         { type: 'p', text: 'Sábado eu subo. Com a câmera, com o gravador, com o celular no bolso. Se a pedra fizer barulho, eu gravo o barulho. Se for gente, eu gravo a gente.' },
       ] },
@@ -374,6 +374,7 @@ Iara`,
         ['Endereço', 'Sítio Flor da Serra, s/n — o mesmo do evento'],
         ['Caridade registrada', 'nenhuma que eu tenha achado'],
         ['Obs.', 'A Duda não ficava com tudo. 40% ia para o pai, toda vez, no dia seguinte. "Dízimo".'],
+        ['Obs. 2', 'A firma M E S ANDRADE ME tem como endereço a sede da Associação, no Sítio Flor da Serra.'],
       ] },
     ],
   },

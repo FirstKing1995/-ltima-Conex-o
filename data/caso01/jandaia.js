@@ -1,14 +1,14 @@
-// Jandaia — banco de Iara (nuvem). Extrato de agosto a 10/10. Pix de entrada: Colheita Capital (R$ 3.500 mensais, dia 5).
+// Nubank — banco de Iara (nuvem). Extrato de agosto a 10/10. Pix de entrada: Colheita Capital (R$ 3.500 mensais, dia 5).
 
 const COLHEITA = { name: 'COLHEITA CAPITAL GESTAO LTDA', doc: '41.208.774/0001-50', bank: 'Banco Mandacaru', key: '41208774000150' };
 const IMOB = { name: 'IMOBILIARIA BENFICA LTDA', doc: '08.331.902/0001-14', bank: 'Banco Alvorada' };
 const FIBRA = { name: 'FIBRANET TELECOM LTDA', doc: '17.455.021/0001-88', bank: 'Banco Alvorada' };
 const MERCADO = { name: 'SUPERMERCADO PAGUE BEM', doc: '10.222.314/0003-60' };
-const BORA = { name: 'BORA CORRIDAS', doc: '32.909.553/0001-02' };
+const BORA = { name: 'UBER DO BRASIL TECNOLOGIA', doc: '32.909.553/0001-02' };
 const MAE = { name: 'Maria do Socorro Fontenele', doc: '•••.220.318-••', bank: 'Banco do Nordeste Popular', key: '(88) 99430-5562' };
-const NANDA = { name: 'Fernanda Lopes', doc: '•••.771.045-••', bank: 'Banco Alvorada', key: 'nanda.lopes@correio.app' };
+const NANDA = { name: 'Fernanda Lopes', doc: '•••.771.045-••', bank: 'Banco Alvorada', key: 'nanda.lopes@gmail.com' };
 const LEO = { name: 'Leonardo Fontenele', doc: '•••.509.882-••', bank: 'Banco Alvorada', key: '(85) 98890-3344' };
-const STREAM = { name: 'STREAMFLIX SERVICOS DIGITAIS', doc: '25.014.980/0001-30' };
+const STREAM = { name: 'NETFLIX ENTRETENIMENTO BRASIL', doc: '25.014.980/0001-30' };
 const FOTOBRAS = { name: 'FOTOBRAS COMERCIO DE EQUIPAMENTOS', doc: '12.774.301/0001-07' };
 const DELIVERY = { name: 'BOCADO DELIVERY', doc: '30.660.120/0001-45' };
 
@@ -26,10 +26,10 @@ const transactions = [
   t('mae-1208', '2026-08-12T10:15', 'pix_out', 300, MAE, 'pra ajudar com a luz, mãe', 'Família'),
   t('farmacia-1408', '2026-08-14T13:22', 'debito', 62.90, { name: 'FARMACIA POPULAR DO CENTRO', doc: '04.118.660/0001-73' }, 'Antialérgico e protetor', 'Saúde'),
   t('delivery-1708', '2026-08-17T20:45', 'debito', 48.00, DELIVERY, 'Pedido noturno', 'Alimentação'),
-  t('camila-2108', '2026-08-21T15:30', 'pix_in', 800, { name: 'Camila Bezerra', doc: '•••.664.130-••', bank: 'Banco Alvorada', key: 'camilabezerra@correio.app' }, 'sinal do ensaio gestante', 'Renda'),
+  t('camila-2108', '2026-08-21T15:30', 'pix_in', 800, { name: 'Camila Bezerra', doc: '•••.664.130-••', bank: 'Banco Alvorada', key: 'camilabezerra@gmail.com' }, 'sinal do ensaio gestante', 'Renda'),
   t('renata-2108', '2026-08-21T16:12', 'pix_in', 1400, { name: 'Renata Almeida', doc: '•••.340.972-••', bank: 'Banco Mandacaru', key: '(85) 99211-4058' }, 'reserva da data, clínica', 'Renda'),
-  t('camila-2408', '2026-08-24T09:50', 'pix_in', 800, { name: 'Camila Bezerra', doc: '•••.664.130-••', bank: 'Banco Alvorada', key: 'camilabezerra@correio.app' }, 'resto do ensaio, obrigada!', 'Renda'),
-  t('tarifa-2808', '2026-08-28T06:00', 'tarifa', 14.90, { name: 'Jandaia' }, 'Pacote de serviços', 'Tarifas'),
+  t('camila-2408', '2026-08-24T09:50', 'pix_in', 800, { name: 'Camila Bezerra', doc: '•••.664.130-••', bank: 'Banco Alvorada', key: 'camilabezerra@gmail.com' }, 'resto do ensaio, obrigada!', 'Renda'),
+  t('tarifa-2808', '2026-08-28T06:00', 'tarifa', 14.90, { name: 'Nubank' }, 'Pacote de serviços', 'Tarifas'),
   t('mercado-2908', '2026-08-29T18:30', 'debito', 71.20, MERCADO, 'Compra no débito', 'Mercado'),
   t('bora-3008', '2026-08-30T21:10', 'debito', 44.00, BORA, 'Corrida Praia de Iracema → Benfica', 'Transporte'),
 
@@ -52,7 +52,7 @@ const transactions = [
   t('devolucao-2509', '2026-09-25T10:40', 'devolucao_out', 20000, COLHEITA, 'Devolução — não aceito', 'Devolução'),
   t('mercado-2509', '2026-09-25T20:30', 'debito', 63.80, MERCADO, 'Compra no débito', 'Mercado'),
   t('moura-2609', '2026-09-26T11:02', 'pix_in', 900, { name: 'Adriana Moura', doc: '•••.118.056-••', bank: 'Banco do Nordeste Popular', key: '(88) 99620-4452' }, 'ensaio da família, obrigada', 'Renda'),
-  t('tarifa-2809', '2026-09-28T06:00', 'tarifa', 14.90, { name: 'Jandaia' }, 'Pacote de serviços', 'Tarifas'),
+  t('tarifa-2809', '2026-09-28T06:00', 'tarifa', 14.90, { name: 'Nubank' }, 'Pacote de serviços', 'Tarifas'),
   t('delivery-2909', '2026-09-29T21:12', 'debito', 52.50, DELIVERY, 'Pedido noturno', 'Alimentação'),
   t('bora-3009', '2026-09-30T08:20', 'debito', 29.40, BORA, 'Corrida Benfica → Dom Luís', 'Transporte'),
 
@@ -68,7 +68,7 @@ const transactions = [
   t('dentista-0610', '2026-10-06T21:20', 'pix_out', 80, { name: 'Clínica Sorriso Benfica', doc: '22.188.409/0001-70', bank: 'Banco Alvorada', key: '22188409000170' }, 'sinal da consulta 15/10', 'Saúde'),
   t('van-0710', '2026-10-07T10:32', 'pix_out', 35, { name: 'COOPERATIVA VAN SERRANA', doc: '13.905.620/0001-39', bank: 'Banco do Nordeste Popular', key: 'reservas@vanserrana.com.br' }, 'Reserva van 09/10', 'Transporte'),
   t('luz-0710', '2026-10-07T20:02', 'boleto', 168.32, { name: 'ENERGIA CEARA SA', doc: '07.047.251/0001-70' }, 'Conta de luz setembro', 'Moradia'),
-  t('litoral-0710', '2026-10-07T20:05', 'boleto', 79.90, { name: 'LITORAL MOVEL TELECOM', doc: '02.558.157/0001-62' }, 'Plano pós-pago', 'Telefonia'),
+  t('litoral-0710', '2026-10-07T20:05', 'boleto', 79.90, { name: 'CLARO TELECOM', doc: '02.558.157/0001-62' }, 'Plano pós-pago', 'Telefonia'),
   t('fibra-0810', '2026-10-08T12:10', 'boleto', 99.90, FIBRA, 'Internet 500 Mega', 'Moradia'),
   t('delivery-0810', '2026-10-08T20:15', 'debito', 36.00, DELIVERY, 'Pedido noturno', 'Alimentação'),
   t('bora-0910', '2026-10-09T06:12', 'debito', 14.90, BORA, 'Corrida Benfica → Rodoviária', 'Transporte'),
@@ -81,6 +81,6 @@ const transactions = [
 
 export default {
   account: { holder: 'Iara Fontenele', agency: '0481', number: '27719-3', doc: '012.481.117-27', balance: 4312.66, limit: 1705.83 },
-  pixKeys: ['iara.fontenele@correio.app', '(85) 98741-2290', '012.481.117-27'],
+  pixKeys: ['iara.fontenele@gmail.com', '(85) 98741-2290', '012.481.117-27'],
   transactions,
 };

@@ -108,7 +108,7 @@ const tabs = [
 ];
 
 let n = 0;
-const q = (at, query) => ({ id: 'q' + String(++n).padStart(2, '0'), at, query, url: 'https://busca.vento.app/?q=' + encodeURIComponent(query) });
+const q = (at, query) => ({ id: 'q' + String(++n).padStart(2, '0'), at, query, url: 'https://google.com/?q=' + encodeURIComponent(query) });
 const p = (at, title, url, tab) => ({ id: 'p' + String(++n).padStart(2, '0'), at, title, url, ...(tab ? { tab } : {}) });
 
 const history = [
@@ -121,7 +121,7 @@ const history = [
   q('2026-09-17T23:20', 'Colheita Capital reclame'),
   p('2026-09-17T23:22', 'Colheita Capital: reclamações — Queixa Certa', 'https://queixacerta.com.br/empresa/colheita-capital', 'tab-reclame'),
   q('2026-09-18T20:30', 'como denunciar pirâmide financeira'),
-  q('2026-09-20T11:15', 'Pulso Band 4 como ativar detecção de queda'),
+  q('2026-09-20T11:15', 'Smart Band 8 como ativar detecção de queda'),
   q('2026-09-22T19:02', 'dipirona alergia substituto'),
   q('2026-09-27T14:40', 'colheita capital gestao ltda cnpj'),
   q('2026-09-28T21:50', 'CVM consulta empresa autorizada'),

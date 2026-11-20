@@ -1,0 +1,85 @@
+/* Câmera — app de câmera do Android (estilo Pixel/Moto). Prefixo cx-.
+   As regras antigas (cm-) de extras.css não são mais usadas pelo app. */
+
+.ph-screen.app-camera { background: #000; padding-top: 0; }
+.app-camera .ph-body { overflow: hidden; display: flex; flex-direction: column; background: #000; }
+.cx-root { flex: 1; min-height: 0; display: flex; flex-direction: column; background: #000; color: #fff; --cx-acc: #ffd36e; --cx-pill: rgba(255, 255, 255, .14); }
+
+/* topo */
+.cx-top { flex: none; display: flex; align-items: center; gap: 2px; padding: 38px 10px 8px; }
+.cx-sp { flex: 1; }
+.cx-tool { position: relative; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; transition: background var(--t-fast), color var(--t-fast); }
+.cx-tool:active { background: rgba(255, 255, 255, .16); }
+.cx-tool.on { color: var(--cx-acc); }
+.cx-tool small { position: absolute; right: 4px; bottom: 6px; padding: 0 3px; border-radius: 6px; background: var(--cx-acc); color: #2a1d00; font-size: 9.5px; font-weight: 800; line-height: 13px; }
+.cx-ratio { display: grid; place-items: center; min-width: 30px; height: 22px; padding: 0 3px; border: 2px solid currentColor; border-radius: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 0; }
+
+/* visor */
+.cx-finder { position: relative; flex: 1; min-height: 0; max-height: calc((100vw - 16px) * 4 / 3 + 40px); margin: 0 8px; border-radius: 18px; overflow: hidden; cursor: crosshair;
+  background: radial-gradient(120% 90% at 50% 40%, #1b1d21 0%, #0e0f11 60%, #060607 100%); transition: border-radius var(--t-med); }
+.cx-root[data-ratio="1x1"] .cx-finder { flex: none; aspect-ratio: 1 / 1; margin-top: auto; margin-bottom: auto; }
+.cx-root[data-ratio="9x16"] .cx-finder { margin: 0; border-radius: 0; }
+.cx-noise { position: absolute; inset: 0; pointer-events: none; opacity: .5; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .014) 0 2px, transparent 2px 4px), radial-gradient(80% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, .55)); }
+.cx-grid { position: absolute; inset: 0; pointer-events: none; }
+.cx-grid i { position: absolute; background: rgba(255, 255, 255, .2); }
+.cx-grid i:nth-child(1) { left: 33.333%; top: 0; bottom: 0; width: 1px; }
+.cx-grid i:nth-child(2) { left: 66.666%; top: 0; bottom: 0; width: 1px; }
+.cx-grid i:nth-child(3) { top: 33.333%; left: 0; right: 0; height: 1px; }
+.cx-grid i:nth-child(4) { top: 66.666%; left: 0; right: 0; height: 1px; }
+.cx-hint { position: absolute; left: 50%; top: 45%; width: 240px; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; color: rgba(255, 255, 255, .6); pointer-events: none; }
+.cx-hint-ic { display: grid; place-items: center; width: 58px; height: 58px; margin-bottom: 4px; border-radius: 50%; border: 1.5px dashed rgba(255, 255, 255, .28); }
+.cx-hint b { font-size: 15px; font-weight: 500; color: rgba(255, 255, 255, .86); }
+.cx-hint small { font-size: 12.5px; line-height: 1.4; }
+.cx-finder.flash::after { content: ''; position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; animation: cx-flash 260ms ease-out; }
+
+/* foco ao tocar: anel + controle de exposição */
+.cx-focus { position: absolute; width: 64px; height: 64px; margin: -32px 0 0 -32px; opacity: 0; pointer-events: none; }
+.cx-focus i { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid #fff; }
+.cx-focus .sun { position: absolute; right: -26px; top: 50%; margin-top: -9px; color: #fff; }
+.cx-focus.show { animation: cx-focus 1.2s var(--ease) forwards; }
+
+/* gravação (só no modo vídeo) */
+.cx-rec { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 12px; background: rgba(0, 0, 0, .5); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.cx-rec i { width: 8px; height: 8px; border-radius: 50%; background: #f2665a; }
+.cx-mode-video .cx-rec { display: inline-flex; }
+
+/* zoom */
+.cx-zoom { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 6px; padding: 4px; border-radius: 22px; background: rgba(0, 0, 0, .4); backdrop-filter: blur(8px); cursor: default; }
+.cx-z { width: 36px; height: 36px; border-radius: 50%; font-size: 11.5px; font-weight: 700; color: #fff; background: rgba(255, 255, 255, .08); transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast); }
+.cx-z.on { width: 42px; height: 42px; margin: -3px 0; background: rgba(255, 255, 255, .92); color: #111; font-size: 12.5px; }
+
+/* modos (carrossel com o selecionado em pílula) */
+.cx-modes { position: relative; flex: none; display: flex; gap: 4px; overflow-x: auto; padding: 14px 40% 6px; scrollbar-width: none; scroll-snap-type: x proximity; }
+.cx-modes::-webkit-scrollbar { display: none; }
+.cx-mode { flex: none; height: 34px; padding: 0 14px; border-radius: 17px; font-size: 13.5px; font-weight: 500; white-space: nowrap; color: rgba(255, 255, 255, .7); scroll-snap-align: center; transition: color var(--t-fast), background var(--t-fast); }
+.cx-mode.on { color: #111; background: rgba(255, 255, 255, .92); }
+
+/* base: miniatura · disparador · virar */
+.cx-bar { flex: none; display: flex; align-items: center; justify-content: space-between; padding: 10px 30px 22px; }
+.cx-thumb { position: relative; width: 52px; height: 52px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: #1f1f1f; color: rgba(255, 255, 255, .7); box-shadow: 0 0 0 2px rgba(255, 255, 255, .85); transition: transform var(--t-fast) var(--ease); }
+.cx-thumb:active { transform: scale(.92); }
+.cx-thumb .k-img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto !important; }
+.cx-shutter { position: relative; width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; border: 4px solid #fff; transition: transform var(--t-fast) var(--ease); }
+.cx-shutter:active { transform: scale(.94); }
+.cx-shutter-in { display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; background: #fff; transition: background var(--t-med), transform var(--t-fast) var(--ease); }
+.cx-shutter-in i { display: block; width: 0; height: 0; border-radius: 50%; background: #fff; transition: width var(--t-med), height var(--t-med), border-radius var(--t-med); }
+.cx-shutter.snap .cx-shutter-in { animation: cx-snap 320ms var(--ease); }
+.cx-mode-video .cx-shutter-in { background: #e8453c; }
+.cx-mode-video .cx-shutter-in i { width: 0; height: 0; }
+.cx-mode-noturno .cx-shutter-in { background: #c6d4ff; }
+.cx-mode-noturno .cx-shutter-in i { width: 22px; height: 22px; background: radial-gradient(circle at 70% 30%, transparent 46%, #2b3a6b 47%); }
+.cx-mode-retrato .cx-finder::before { content: ''; position: absolute; left: 50%; top: 44%; width: 58%; aspect-ratio: 3 / 4; transform: translate(-50%, -50%); border-radius: 50% / 46%; border: 1.5px dashed rgba(255, 255, 255, .32); pointer-events: none; }
+.cx-mode-pano .cx-finder::before { content: ''; position: absolute; left: 10%; right: 10%; top: 50%; height: 2px; background: rgba(255, 255, 255, .45); pointer-events: none; }
+.cx-flip { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .14); color: #fff; transition: background var(--t-fast); }
+.cx-flip:active { background: rgba(255, 255, 255, .26); }
+.cx-flip.spin .ic { animation: cx-spin 480ms var(--ease); }
+
+@keyframes cx-focus { 0% { opacity: 0; transform: scale(1.5); } 18% { opacity: 1; transform: scale(1); } 75% { opacity: 1; } 100% { opacity: 0; transform: scale(.94); } }
+@keyframes cx-snap { 0% { transform: scale(1); } 40% { transform: scale(.82); } 100% { transform: scale(1); } }
+@keyframes cx-spin { to { transform: rotate(180deg); } }
+@keyframes cx-flash { 0% { opacity: .75; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cx-focus.show, .cx-shutter.snap .cx-shutter-in, .cx-flip.spin .ic, .cx-finder.flash::after { animation: none !important; }
+  .cx-focus.show { opacity: 1; }
+}

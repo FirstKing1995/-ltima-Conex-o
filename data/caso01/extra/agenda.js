@@ -6,7 +6,7 @@ const events = [
   { id: 'x-pos-aula-0516', title: 'Pós: seminário de projeto', start: '2026-05-16T08:00', end: '2026-05-16T12:00', color: 'roxo', place: 'Faculdade Atlântico, bloco B', notes: 'Levar 3 ideias de TCC impressas.' },
   { id: 'x-reuniao-rosilene', title: 'Call com Rosilene (15 anos da Thaís)', start: '2026-05-25T19:00', end: '2026-05-25T19:30', color: 'verde', notes: 'Alinhar estilo: ela quer "natural, nada de pose de revista".' },
   { id: 'x-preprojeto', title: 'Entregar pré-projeto do TCC', start: '2026-06-05', allDay: true, color: 'roxo' },
-  { id: 'x-mercado-1', title: 'Mercado São Sebastião: fotos do TCC', start: '2026-06-20T04:30', end: '2026-06-20T07:00', color: 'roxo', place: 'Mercado São Sebastião, Centro, Fortaleza', notes: 'Bora às 4h10. Levar o 35 e a lanterna pequena. Pedir autorização por escrito.' },
+  { id: 'x-mercado-1', title: 'Mercado São Sebastião: fotos do TCC', start: '2026-06-20T04:30', end: '2026-06-20T07:00', color: 'roxo', place: 'Mercado São Sebastião, Centro, Fortaleza', notes: 'Uber às 4h10. Levar o 35 e a lanterna pequena. Pedir autorização por escrito.' },
   { id: 'x-saojoao', title: 'São João de Guaraciaba', start: '2026-06-27', end: '2026-06-28', allDay: true, color: 'laranja', place: 'Guaraciaba do Norte' },
 
   /* ---- julho ---- */

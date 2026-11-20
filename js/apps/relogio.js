@@ -1,5 +1,5 @@
-// Relógio — alarmes de Iara (espelho somente leitura), relógio mundial parado em sáb 23:47,
-// cronômetro e timer funcionais (decorativos: não afetam o caso).
+// Relógio (Google Relógio) — alarmes de Iara (espelho somente leitura), relógio mundial parado em sáb 23:47,
+// timer e cronômetro funcionais (decorativos: não afetam o caso) e Hora de dormir.
 import { h, clear } from '../core/dom.js';
 import { state } from '../core/state.js';
 import { icon } from '../ui/icons.js';
@@ -10,12 +10,15 @@ import { sfx } from '../core/sfx.js';
 const pad = (n) => String(n).padStart(2, '0');
 const prefs = () => (state.apps.relogio = state.apps.relogio || {});
 const TABS = [
-  { id: 'alarme', label: 'Alarme' }, { id: 'relogio', label: 'Relógio' },
-  { id: 'cronometro', label: 'Cronômetro' }, { id: 'timer', label: 'Timer' },
+  { id: 'alarme', label: 'Alarme', icon: 'alarm-clock' },
+  { id: 'relogio', label: 'Relógio', icon: 'clock' },
+  { id: 'timer', label: 'Timer', icon: 'hourglass' },
+  { id: 'cronometro', label: 'Cronômetro', icon: 'timer' },
+  { id: 'dormir', label: 'Hora de dormir', icon: 'bed' },
 ];
 const DAY_KEYS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
 const DAY_LETTERS = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-const DAY_NAMES = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+const DAY_NAMES = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
 const strip = (s) => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
 
 function dayIdx(d) {
@@ -25,10 +28,10 @@ function dayIdx(d) {
 const idxSet = (days) => [...new Set((days || []).map(dayIdx).filter((n) => n >= 0))].sort((a, b) => a - b);
 function daysText(days) {
   const idx = idxSet(days), k = idx.join('');
-  if (!idx.length) return 'Uma vez';
+  if (!idx.length) return 'Sem repetição';
   if (idx.length === 7) return 'Todos os dias';
-  if (k === '12345') return 'Seg a sex';
-  if (k === '123456') return 'Seg a sáb';
+  if (k === '12345') return 'Seg. a sex.';
+  if (k === '123456') return 'Seg. a sáb.';
   if (k === '06') return 'Fim de semana';
   return idx.map((i) => DAY_NAMES[i]).join(', ');
 }
@@ -57,11 +60,11 @@ function untilText(ms) {
   if (t < 60) return `em ${t} min`;
   if (t < 1440) { const hh = Math.floor(t / 60), mm = t % 60; return `em ${hh} h${mm ? ` ${mm} min` : ''}`; }
   const dd = Math.floor(t / 1440), hh = Math.floor((t % 1440) / 60);
-  return `em ${dd} d${hh ? ` ${hh} h` : ''}`;
+  return `em ${dd} ${dd === 1 ? 'dia' : 'dias'}${hh ? ` e ${hh} h` : ''}`;
 }
 
 function pinMini(game, spec) {
-  const b = h('button', { class: 'rl-pin', title: 'Fixar no Quadro' });
+  const b = h('button', { class: 'ck-pin', title: 'Fixar no Quadro' });
   const draw = () => {
     const on = game.isPinned(spec.key);
     b.classList.toggle('on', on);
@@ -74,26 +77,20 @@ function pinMini(game, spec) {
   return b;
 }
 
-/* ---------- relógio analógico (desenhado à mão, parado na hora do espelho) ---------- */
+/* ---------- relógio analógico (parado na hora do espelho) ---------- */
 function clockSvg(hh, mm) {
-  const cx = 120, cy = 120;
-  let ticks = '', nums = '';
-  for (let i = 0; i < 60; i++) {
-    const a = ((i * 6 - 90) * Math.PI) / 180, big = i % 5 === 0, r1 = big ? 94 : 100, r2 = 107;
-    ticks += `<line x1="${(cx + r1 * Math.cos(a)).toFixed(1)}" y1="${(cy + r1 * Math.sin(a)).toFixed(1)}" x2="${(cx + r2 * Math.cos(a)).toFixed(1)}" y2="${(cy + r2 * Math.sin(a)).toFixed(1)}" stroke="${big ? '#8fa0bd' : '#3a4559'}" stroke-width="${big ? 2.6 : 1.2}" stroke-linecap="round"/>`;
-  }
-  for (const [n, ang] of [[12, 0], [3, 90], [6, 180], [9, 270]]) {
-    const a = ((ang - 90) * Math.PI) / 180;
-    nums += `<text x="${(cx + 76 * Math.cos(a)).toFixed(1)}" y="${(cy + 76 * Math.sin(a) + 6).toFixed(1)}" text-anchor="middle" fill="#c9d3e6" font-size="19" font-weight="300">${n}</text>`;
+  let dots = '';
+  for (let i = 0; i < 12; i++) {
+    const a = ((i * 30 - 90) * Math.PI) / 180;
+    dots += `<circle cx="${(120 + 96 * Math.cos(a)).toFixed(1)}" cy="${(120 + 96 * Math.sin(a)).toFixed(1)}" r="${i % 3 === 0 ? 4.2 : 2.6}" fill="${i % 3 === 0 ? '#c4c7c5' : '#5f6368'}"/>`;
   }
   const ha = ((hh % 12) + mm / 60) * 30, ma = mm * 6;
   return `<svg viewBox="0 0 240 240" width="100%" role="img" aria-label="Relógio analógico marcando ${pad(hh)}:${pad(mm)}" style="display:block">
-    <defs><radialGradient id="rlface" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#1e2432"/><stop offset="1" stop-color="#12161f"/></radialGradient></defs>
-    <circle cx="120" cy="120" r="116" fill="url(#rlface)" stroke="#2a3243" stroke-width="2"/>
-    ${ticks}${nums}
-    <g transform="rotate(${ha.toFixed(1)} 120 120)"><line x1="120" y1="132" x2="120" y2="66" stroke="#eef2fa" stroke-width="7.5" stroke-linecap="round"/></g>
-    <g transform="rotate(${ma.toFixed(1)} 120 120)"><line x1="120" y1="136" x2="120" y2="40" stroke="#a8c7fa" stroke-width="5" stroke-linecap="round"/></g>
-    <circle cx="120" cy="120" r="8" fill="#a8c7fa"/><circle cx="120" cy="120" r="3.2" fill="#12161f"/>
+    <circle cx="120" cy="120" r="116" fill="#1e1f20"/>
+    ${dots}
+    <g transform="rotate(${ha.toFixed(1)} 120 120)"><line x1="120" y1="120" x2="120" y2="66" stroke="#e3e3e3" stroke-width="12" stroke-linecap="round"/></g>
+    <g transform="rotate(${ma.toFixed(1)} 120 120)"><line x1="120" y1="120" x2="120" y2="38" stroke="#a8c7fa" stroke-width="8" stroke-linecap="round"/></g>
+    <circle cx="120" cy="120" r="6" fill="#131314"/>
   </svg>`;
 }
 
@@ -129,7 +126,7 @@ function cityClock(c) {
   const dayOf = (d) => Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
   const diff = Math.round((dayOf(loc) - dayOf(mine)) / 86400000);
   const delta = (off - FORTALEZA_OFF) / 60;
-  const dtxt = delta === 0 ? 'mesmo horário' : `${Math.abs(delta).toLocaleString('pt-BR', { maximumFractionDigits: 1 })} h ${delta > 0 ? 'à frente' : 'atrás'}`;
+  const dtxt = delta === 0 ? 'mesmo horário' : `${delta > 0 ? '+' : '−'}${Math.abs(delta).toLocaleString('pt-BR', { maximumFractionDigits: 1 })} h`;
   return { name: c.city || c.name || '—', sub: c.sub || c.country || '', hhmm: `${pad(loc.getUTCHours())}:${pad(loc.getUTCMinutes())}`, day: diff === 0 ? 'Hoje' : diff > 0 ? 'Amanhã' : 'Ontem', dtxt, night: loc.getUTCHours() >= 18 || loc.getUTCHours() < 6 };
 }
 
@@ -143,9 +140,9 @@ function fmtTimer(ms) {
   const s = Math.max(0, Math.ceil(ms / 1000)), hh = Math.floor(s / 3600), mm = Math.floor((s % 3600) / 60), ss = s % 60;
   return hh ? `${hh}:${pad(mm)}:${pad(ss)}` : `${pad(mm)}:${pad(ss)}`;
 }
-const RING_R = 104, RING_C = 2 * Math.PI * RING_R;
+const RING_R = 108, RING_C = 2 * Math.PI * RING_R;
 function ringSvg(cls) {
-  return `<svg viewBox="0 0 240 240" width="100%" aria-hidden="true" style="display:block"><circle cx="120" cy="120" r="${RING_R}" fill="none" stroke="#252b38" stroke-width="9"/><circle class="${cls}" cx="120" cy="120" r="${RING_R}" fill="none" stroke="#a8c7fa" stroke-width="9" stroke-linecap="round" stroke-dasharray="${RING_C.toFixed(2)}" stroke-dashoffset="${RING_C.toFixed(2)}" transform="rotate(-90 120 120)"/></svg>`;
+  return `<svg viewBox="0 0 240 240" width="100%" aria-hidden="true" style="display:block"><circle cx="120" cy="120" r="${RING_R}" fill="#1e1f20" stroke="#333537" stroke-width="7"/><circle class="${cls}" cx="120" cy="120" r="${RING_R}" fill="none" stroke="#a8c7fa" stroke-width="7" stroke-linecap="round" stroke-dasharray="${RING_C.toFixed(2)}" stroke-dashoffset="${RING_C.toFixed(2)}" transform="rotate(-90 120 120)"/></svg>`;
 }
 
 /* ---------- app ---------- */
@@ -169,60 +166,73 @@ export default {
     if (params?.tab && TABS.some((t) => t.id === params.tab)) S.tab = params.tab;
     if (params?.alarm) S.tab = 'alarme';
 
-    const body = h('div', { class: 'rl-body' });
+    const title = h('h1');
+    const more = h('button', { class: 'k-iconbtn', 'aria-label': 'Mais opções' }, icon('ellipsis-vertical', { size: 22 }));
+    more.addEventListener('click', () => kit.menu(more, [
+      { label: 'Configurações', icon: 'settings', onClick: () => ro('Extração somente leitura: os ajustes do Relógio não podem ser alterados.') },
+      { label: 'Enviar feedback', icon: 'message-square', onClick: () => ro('Sem conexão na extração.') },
+    ]));
+    const top = h('header', { class: 'ck-top' }, title, more);
+    const body = h('div', { class: 'ck-body' });
     let live = {};
 
-    const fab = h('button', { class: 'rl-fab', 'aria-label': 'Adicionar alarme', on: { click: () => ro('Extração somente leitura: não é possível criar alarmes.') } }, icon('plus', { size: 28 }));
+    const fab = h('button', { class: 'ck-fab' });
+    const navBtns = TABS.map((t) => h('button', { class: 'ck-navbtn', role: 'tab', 'aria-label': t.label, on: { click: () => { sfx.play('tap'); S.tab = t.id; prefs().tab = t.id; el.scrollTop = 0; draw(); } } },
+      h('span', { class: 'pill' }, icon(t.icon, { size: 22 })), h('span', { class: 'lb' }, t.label)));
+    const dock = h('div', { class: 'ck-dock' }, fab, h('nav', { class: 'ck-nav', role: 'tablist', 'aria-label': 'Seções do Relógio' }, navBtns));
+    const setFab = (ic, label, fn) => {
+      fab.hidden = !ic;
+      if (!ic) return;
+      clear(fab).append(icon(ic, { size: 28 }));
+      fab.setAttribute('aria-label', label);
+      fab.onclick = () => { sfx.play('tap'); fn(); };
+    };
 
     /* ----- Alarme ----- */
     const alarmCard = (a) => {
       const on = a.on !== false, idx = idxSet(a.days), hl = params?.alarm === a.id;
       const warn = () => ro('Extração somente leitura: os alarmes não podem ser alterados.');
-      return h('article', { class: `rl-alarm ${on ? 'on' : 'off'} ${hl ? 'hl' : ''}`, dataset: { id: a.id || '' }, tabindex: '0', role: 'button', 'aria-label': `Alarme ${a.time}${a.label ? ', ' + a.label : ''}, ${on ? 'ativado' : 'desativado'}`, on: { click: warn, keydown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); warn(); } } } },
+      return h('article', { class: `ck-alarm ${on ? 'on' : 'off'} ${hl ? 'hl' : ''}`, dataset: { id: a.id || '' }, tabindex: '0', role: 'button', 'aria-label': `Alarme ${a.time}${a.label ? ', ' + a.label : ''}, ${on ? 'ativado' : 'desativado'}`, on: { click: warn, keydown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); warn(); } } } },
         h('div', { class: 'top' },
           h('span', { class: 'lb txt' }, a.label || 'Alarme'),
           pinMini(game, {
             key: `relogio:alarm:${a.id || a.time}`, label: `Alarme ${a.time}${a.label ? ' · ' + a.label : ''}`, app: 'relogio',
             detail: `${daysText(a.days)} · ${on ? 'ativado' : 'desativado'}`,
-          })),
+          }),
+          h('span', { class: 'chev' }, icon('chevron-down', { size: 20 }))),
         h('div', { class: 'mid' },
           h('b', { class: 'tm' }, a.time),
-          h('span', { class: 'rl-tg' }, kit.toggle({ checked: on, disabled: true, label: `Alarme ${a.time}` }))),
+          h('span', { class: 'ck-tg' }, kit.toggle({ checked: on, disabled: true, label: `Alarme ${a.time}` }))),
         h('div', { class: 'days' },
-          idx.length ? h('span', { class: 'dots', 'aria-hidden': 'true' }, DAY_LETTERS.map((l, i) => h('i', { class: idx.includes(i) ? 'on' : '' }, l))) : null,
-          h('span', { class: 'dt' }, daysText(a.days))));
+          h('span', { class: 'dt' }, daysText(a.days)),
+          idx.length ? h('span', { class: 'dots', 'aria-hidden': 'true' }, DAY_LETTERS.map((l, i) => h('i', { class: idx.includes(i) ? 'on' : '' }, l))) : null));
     };
     const drawAlarm = () => {
       const nx = nextAlarm(alarms);
-      body.append(h('section', { class: 'rl-next' },
-        h('div', { class: 'ic' }, icon('alarm-clock', { size: 22 })),
-        h('div', { class: 'tx' },
-          h('small', null, 'Próximo alarme'),
-          nx
-            ? h('b', { class: 'txt' }, `${time.weekday(nx.at)} ${time.hhmm(nx.at)}`, h('span', null, ` · ${untilText(nx.at - now)}`))
-            : h('b', { class: 'txt' }, 'Nenhum alarme ativado'),
-          nx && nx.alarm.label ? h('em', { class: 'txt' }, nx.alarm.label) : null)));
+      body.append(h('p', { class: 'ck-next txt' }, icon('alarm-clock', { size: 16 }),
+        nx ? `Próximo alarme: ${time.weekday(nx.at)}. ${time.hhmm(nx.at)} (${untilText(nx.at - now)})${nx.alarm.label ? ' · ' + nx.alarm.label : ''}` : 'Nenhum alarme ativado'));
       if (!alarms.length) body.append(kit.empty({ icon: 'alarm-clock', title: 'Nenhum alarme', text: 'Os alarmes do aparelho aparecem aqui.' }));
-      else body.append(h('div', { class: 'rl-alarms' }, alarms.map(alarmCard)));
-      body.append(h('p', { class: 'rl-foot' }, icon('lock', { size: 14 }), 'Extração somente leitura: os alarmes não tocam neste aparelho.'));
-      const hit = body.querySelector('.rl-alarm.hl');
+      else body.append(h('div', { class: 'ck-alarms' }, alarms.map(alarmCard)));
+      body.append(h('p', { class: 'ck-foot' }, icon('lock', { size: 14 }), 'Extração somente leitura: os alarmes não tocam neste aparelho.'));
+      setFab('plus', 'Adicionar alarme', () => ro('Extração somente leitura: não é possível criar alarmes.'));
+      const hit = body.querySelector('.ck-alarm.hl');
       if (hit) setTimeout(() => hit.scrollIntoView({ block: 'center', behavior: 'smooth' }), 120);
     };
 
     /* ----- Relógio ----- */
     const drawClock = () => {
       body.append(
-        h('section', { class: 'rl-clock' },
-          h('div', { class: 'face', html: clockSvg(now.getHours(), now.getMinutes()) }),
+        h('section', { class: 'ck-clock' },
           h('div', { class: 'dg' }, h('b', null, time.hhmm(now))),
-          h('div', { class: 'dd txt' }, `${time.weekdayLong(now)}, ${time.dateLong(now)}`),
+          h('div', { class: 'dd txt' }, `${time.weekday(now)}., ${now.getDate()} de ${time.monthShort(now.getMonth())}.`),
+          h('div', { class: 'face', html: clockSvg(now.getHours(), now.getMinutes()) }),
           h('div', { class: 'zone' },
-            h('span', null, icon('map-pin', { size: 14 }), 'Fortaleza · UTC−3'),
+            h('span', null, icon('map-pin', { size: 14 }), 'Fortaleza · GMT−3'),
             h('span', { class: 'frozen' }, icon('lock', { size: 14 }), 'Hora da extração'))),
-        h('div', { class: 'rl-ct' }, 'Cidades'),
-        h('div', { class: 'rl-cities' }, cities.map((c) => h('div', { class: `rl-city ${c.night ? 'night' : ''}` },
+        h('div', { class: 'ck-cities' }, cities.map((c) => h('div', { class: `ck-city ${c.night ? 'night' : ''}` },
           h('div', { class: 'tx' }, h('b', { class: 'txt' }, c.name), h('small', null, `${c.day}, ${c.dtxt}${c.sub ? ' · ' + c.sub : ''}`)),
-          h('div', { class: 'hm' }, icon(c.night ? 'moon' : 'sun', { size: 16 }), h('b', null, c.hhmm))))));
+          h('div', { class: 'hm' }, h('b', null, c.hhmm))))));
+      setFab('globe', 'Adicionar cidade', () => ro('Extração somente leitura: não é possível adicionar cidades.'));
     };
 
     /* ----- Cronômetro ----- */
@@ -230,7 +240,7 @@ export default {
     const swPaint = (ms) => {
       if (!live.swMain) return;
       const f = fmtSw(ms);
-      live.swMain.textContent = f.main; live.swCs.textContent = `.${f.cs}`;
+      live.swMain.textContent = f.main; live.swCs.textContent = f.cs;
       live.swArc.style.strokeDashoffset = String(RING_C * (1 - ((ms / 1000) % 60) / 60));
     };
     const lapsPaint = () => {
@@ -242,31 +252,29 @@ export default {
         const sp = laps.map((l) => l.split), lo = Math.min(...sp), hi = Math.max(...sp);
         laps.forEach((l) => { l.tag = l.split === lo ? 'best' : l.split === hi ? 'worst' : ''; });
       } else laps.forEach((l) => { l.tag = ''; });
-      for (const l of laps) box.append(h('div', { class: `lap ${l.tag}` }, h('span', null, `Volta ${l.n}`), h('b', null, `+${fmtLap(l.split)}`), h('em', null, fmtLap(l.total))));
+      for (const l of laps) box.append(h('div', { class: `lap ${l.tag}` }, h('span', null, `#${l.n}`), h('b', null, fmtLap(l.split)), h('em', null, fmtLap(l.total))));
     };
     const drawSw = () => {
       const sw = S.sw;
       const main = h('span', { class: 'mm' }), cs = h('span', { class: 'cs' });
-      const left = h('button', { class: 'rl-btn sec' }), right = h('button', { class: 'rl-btn pri' });
-      const ring = h('div', { class: 'rl-ring' }, h('div', { html: ringSvg('arc') }), h('div', { class: 'big' }, h('div', { class: 'row' }, main, cs)));
-      const laps = h('div', { class: 'rl-laps' });
+      const left = h('button', { class: 'ck-round sec' }), right = h('button', { class: 'ck-round sec' });
+      const ring = h('div', { class: 'ck-ring' }, h('div', { html: ringSvg('arc') }), h('div', { class: 'big' }, h('div', { class: 'row' }, main, cs)));
+      const laps = h('div', { class: 'ck-laps' });
       const sync = () => {
         clear(left); clear(right);
-        left.append(sw.run ? 'Volta' : 'Zerar'); left.disabled = !sw.run && sw.acc === 0;
-        right.className = `rl-btn pri ${sw.run ? 'stop' : ''}`;
-        right.append(icon(sw.run ? 'pause' : 'play', { size: 22 }), sw.run ? 'Pausar' : (sw.acc ? 'Retomar' : 'Iniciar'));
+        left.append(icon('rotate-ccw', { size: 22 })); left.setAttribute('aria-label', 'Zerar'); left.disabled = sw.run || sw.acc === 0;
+        right.append(h('span', { class: 'lapic' }, 'Volta')); right.setAttribute('aria-label', 'Marcar volta'); right.disabled = !sw.run;
+        setFab(sw.run ? 'pause' : 'play', sw.run ? 'Pausar' : (sw.acc ? 'Retomar' : 'Iniciar'), toggleSw);
+        fab.classList.toggle('stop', sw.run);
       };
-      left.addEventListener('click', () => {
-        sfx.play('tap');
-        if (sw.run) { const t = swNow(); sw.laps.unshift({ n: sw.laps.length + 1, split: t - (sw.laps[0]?.total || 0), total: t }); lapsPaint(); } else { sw.acc = 0; sw.laps = []; lapsPaint(); swPaint(0); sync(); }
-      });
-      right.addEventListener('click', () => {
-        sfx.play('tap');
+      const toggleSw = () => {
         if (sw.run) { sw.acc += performance.now() - sw.t0; sw.run = false; } else { sw.t0 = performance.now(); sw.run = true; }
         sync(); swPaint(swNow());
-      });
+      };
+      left.addEventListener('click', () => { sfx.play('tap'); sw.acc = 0; sw.laps = []; lapsPaint(); swPaint(0); sync(); });
+      right.addEventListener('click', () => { sfx.play('tap'); if (!sw.run) return; const t = swNow(); sw.laps.unshift({ n: sw.laps.length + 1, split: t - (sw.laps[0]?.total || 0), total: t }); lapsPaint(); });
       live = { swMain: main, swCs: cs, swArc: ring.querySelector('.arc'), swLaps: laps };
-      body.append(ring, h('div', { class: 'rl-ctrl' }, left, right), laps);
+      body.append(ring, h('div', { class: 'ck-ctrl' }, left, h('span', { class: 'ck-gap' }), right), laps);
       sync(); swPaint(swNow()); lapsPaint();
     };
 
@@ -289,8 +297,8 @@ export default {
       const tm = S.tm;
       if (tm.mode === 'set') {
         const d = tm.digits.padStart(6, '0');
-        const disp = h('div', { class: 'rl-tdisp', role: 'timer' },
-          ['h', 'm', 's'].map((u, i) => h('span', { class: d.slice(i * 2, i * 2 + 2) === '00' ? 'z' : '' }, h('b', null, d.slice(i * 2, i * 2 + 2)), u)));
+        const disp = h('div', { class: `ck-tdisp ${tm.digits ? 'has' : ''}`, role: 'timer' },
+          ['h', 'm', 's'].map((u, i) => h('span', null, h('b', null, d.slice(i * 2, i * 2 + 2)), u)));
         const press = (k) => {
           sfx.play('tap');
           if (k === 'del') tm.digits = tm.digits.slice(0, -1);
@@ -299,52 +307,81 @@ export default {
         };
         const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '00', '0', 'del'];
         const ok = tm.digits.length > 0 && Number(tm.digits) > 0;
-        const start = h('button', { class: 'rl-go', 'aria-label': 'Iniciar timer', disabled: !ok, on: { click: () => {
-          const s = Number(d.slice(0, 2)) * 3600 + Number(d.slice(2, 4)) * 60 + Number(d.slice(4, 6));
-          if (!s) return;
-          sfx.play('tap');
-          tm.total = s * 1000; tm.left = tm.total; tm.endAt = performance.now() + tm.total; tm.mode = 'run';
-          draw();
-        } } }, icon('play', { size: 28 }));
+        const saved = (data.timers || []).slice(0, 3);
         body.append(
           disp,
-          h('div', { class: 'rl-presets' }, [['1 min', '100'], ['5 min', '500'], ['10 min', '1000']].map(([l, v]) => h('button', { class: 'rl-pre', on: { click: () => { sfx.play('tap'); tm.digits = v; draw(); } } }, icon('timer', { size: 15 }), l))),
-          h('div', { class: 'rl-keys' }, keys.map((k) => h('button', { 'aria-label': k === 'del' ? 'Apagar' : k, on: { click: () => press(k) } }, k === 'del' ? icon('delete', { size: 22 }) : k))),
-          h('div', { class: 'rl-gorow' }, start));
+          saved.length ? h('div', { class: 'ck-presets' }, saved.map((t) => {
+            const s = Number(t.seconds) || 0, v = `${pad(Math.floor(s / 3600))}${pad(Math.floor((s % 3600) / 60))}${pad(s % 60)}`.replace(/^0+/, '');
+            return h('button', { class: 'ck-pre', on: { click: () => { sfx.play('tap'); tm.digits = v; draw(); } } }, h('b', null, fmtTimer(s * 1000)), h('small', { class: 'txt' }, t.label || 'Timer'));
+          })) : null,
+          h('div', { class: 'ck-keys' }, keys.map((k) => h('button', { class: k === 'del' ? 'del' : '', 'aria-label': k === 'del' ? 'Apagar' : k, on: { click: () => press(k) } }, k === 'del' ? icon('delete', { size: 22 }) : k))));
+        setFab(ok ? 'play' : null, 'Iniciar timer', () => {
+          const s = Number(d.slice(0, 2)) * 3600 + Number(d.slice(2, 4)) * 60 + Number(d.slice(4, 6));
+          if (!s) return;
+          tm.total = s * 1000; tm.left = tm.total; tm.endAt = performance.now() + tm.total; tm.mode = 'run';
+          draw();
+        });
+        fab.classList.remove('stop');
         live = {};
         return;
       }
       const time_ = h('b', { class: 'tmv' });
-      const ring = h('div', { class: 'rl-ring t' }, h('div', { html: ringSvg('arc') }), h('div', { class: 'big' }, time_, tm.mode === 'done' ? h('span', { class: 'lbl' }, 'Timer finalizado') : h('span', { class: 'lbl' }, tm.mode === 'pause' ? 'Em pausa' : `de ${fmtTimer(tm.total)}`)));
+      const ring = h('div', { class: 'ck-ring t' }, h('div', { html: ringSvg('arc') }), h('div', { class: 'big' }, time_, tm.mode === 'done' ? h('span', { class: 'lbl' }, 'Timer finalizado') : h('span', { class: 'lbl' }, tm.mode === 'pause' ? 'Em pausa' : `de ${fmtTimer(tm.total)}`)));
       if (tm.mode === 'done') ring.classList.add('done');
       live = { tmTime: time_, tmArc: ring.querySelector('.arc') };
-      const cancel = h('button', { class: 'rl-btn sec', on: { click: () => { sfx.play('tap'); tm.mode = 'set'; draw(); } } }, tm.mode === 'done' ? 'Parar' : 'Cancelar');
-      const plus = h('button', { class: 'rl-btn sec', 'aria-label': 'Adicionar um minuto', on: { click: () => {
+      const cancel = h('button', { class: 'ck-round sec', 'aria-label': tm.mode === 'done' ? 'Parar' : 'Excluir', on: { click: () => { sfx.play('tap'); tm.mode = 'set'; draw(); } } }, icon(tm.mode === 'done' ? 'square' : 'trash-2', { size: 22 }));
+      const plus = h('button', { class: 'ck-round sec txtbtn', 'aria-label': 'Adicionar um minuto', on: { click: () => {
         sfx.play('tap');
         if (tm.mode === 'done') { tm.total = 60000; tm.left = 60000; tm.endAt = performance.now() + 60000; tm.mode = 'run'; }
         else { tm.total += 60000; if (tm.mode === 'run') tm.endAt += 60000; else tm.left += 60000; }
         draw();
       } } }, '+1:00');
-      const toggle = h('button', { class: `rl-btn pri ${tm.mode === 'run' ? 'stop' : ''}`, on: { click: () => {
-        sfx.play('tap');
-        if (tm.mode === 'run') { tm.left = Math.max(0, tm.endAt - performance.now()); tm.mode = 'pause'; } else if (tm.mode === 'pause') { tm.endAt = performance.now() + tm.left; tm.mode = 'run'; }
-        draw();
-      } } }, icon(tm.mode === 'run' ? 'pause' : 'play', { size: 22 }), tm.mode === 'run' ? 'Pausar' : 'Retomar');
-      body.append(ring, h('div', { class: 'rl-ctrl' }, cancel, plus, tm.mode === 'done' ? null : toggle));
+      body.append(ring, h('div', { class: 'ck-ctrl' }, cancel, h('span', { class: 'ck-gap' }), plus));
+      if (tm.mode === 'done') setFab(null);
+      else {
+        setFab(tm.mode === 'run' ? 'pause' : 'play', tm.mode === 'run' ? 'Pausar' : 'Retomar', () => {
+          if (tm.mode === 'run') { tm.left = Math.max(0, tm.endAt - performance.now()); tm.mode = 'pause'; } else if (tm.mode === 'pause') { tm.endAt = performance.now() + tm.left; tm.mode = 'run'; }
+          draw();
+        });
+        fab.classList.toggle('stop', tm.mode === 'run');
+      }
       tmPaint();
+    };
+
+    /* ----- Hora de dormir ----- */
+    const drawBed = () => {
+      const bed = alarms.find((a) => /dormir/i.test(a.label || '')) || null;
+      const wake = alarms.find((a) => /acordar/i.test(a.label || '')) || null;
+      const bedOn = bed ? bed.on !== false : false;
+      body.append(
+        h('section', { class: 'ck-bedhero' },
+          h('div', { class: 'moon', 'aria-hidden': 'true' }, icon('moon', { size: 34 })),
+          h('h2', null, 'Hora de dormir'),
+          h('p', null, bedOn ? 'Programação ativada' : 'Programação desativada neste aparelho')),
+        h('section', { class: 'ck-bedcard' },
+          h('div', { class: 'col' }, h('small', null, icon('bed', { size: 16 }), 'Hora de dormir'), h('b', null, bed ? bed.time : '—'), h('span', { class: 'txt' }, bed ? daysText(bed.days) : 'Não definida'), bed ? h('em', { class: bedOn ? 'on' : 'off' }, bedOn ? 'Ativado' : 'Desativado') : null),
+          h('div', { class: 'sep' }),
+          h('div', { class: 'col' }, h('small', null, icon('sunrise', { size: 16 }), 'Despertar'), h('b', null, wake ? wake.time : '—'), h('span', { class: 'txt' }, wake ? daysText(wake.days) : 'Não definido'), wake ? h('em', { class: wake.on !== false ? 'on' : 'off' }, wake.on !== false ? 'Ativado' : 'Desativado') : null)),
+        h('div', { class: 'ck-list' },
+          h('button', { class: 'ck-li', on: { click: () => ro('Sem conexão na extração.') } }, icon('music', { size: 20 }), h('div', null, h('b', null, 'Ouvir sons para dormir'), h('small', null, 'Nenhum som selecionado'))),
+          h('button', { class: 'ck-li', on: { click: () => ro('Extração somente leitura.') } }, icon('bell-off', { size: 20 }), h('div', null, h('b', null, 'Modo hora de dormir'), h('small', null, 'Silencia o telefone e escurece a tela'))),
+          h('button', { class: 'ck-li', on: { click: () => ro('Extração somente leitura.') } }, icon('sun', { size: 20 }), h('div', null, h('b', null, 'Alarme do nascer do sol'), h('small', null, 'Desativado')))));
+      setFab(null);
     };
 
     /* ----- montagem ----- */
     const draw = () => {
       clear(body);
       live = {};
-      fab.hidden = S.tab !== 'alarme';
-      ({ alarme: drawAlarm, relogio: drawClock, cronometro: drawSw, timer: drawTimer })[S.tab]();
+      fab.classList.remove('stop');
+      const t = TABS.find((x) => x.id === S.tab) || TABS[0];
+      title.textContent = t.label;
+      navBtns.forEach((b, k) => { const on = TABS[k].id === S.tab; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+      ({ alarme: drawAlarm, relogio: drawClock, cronometro: drawSw, timer: drawTimer, dormir: drawBed })[S.tab]();
       phone.scan(body);
     };
-    const tabs = kit.tabs({ items: TABS, active: S.tab, onChange: (id) => { S.tab = id; prefs().tab = id; draw(); } });
-    el.append(kit.appBar({ title: 'Relógio', subtitle: `${time.weekdayLong(now)} · Fortaleza` }), tabs, body);
-    screen.appendChild(fab);
+    el.append(top, body);
+    screen.appendChild(dock);
     draw();
 
     // um único ticker para cronômetro e timer; para sozinho quando o app é fechado

@@ -34,7 +34,7 @@ const notes = [
 5. Posso falar com o advogado do jornal antes de assinar qualquer coisa?
 6. E o termo de confidencialidade, a multa de R$ 100 mil vale?
 
-Levar: o celular com a Pasta Segura, um documento com foto, o contrato padrão impresso.
+Levar: o celular com a Pasta Trancada, um documento com foto, o contrato padrão impresso.
 
 Lembrar: não mandar nada por e-mail. Entregar em mãos.`,
   },
@@ -50,7 +50,7 @@ Lembrar: não mandar nada por e-mail. Entregar em mãos.`,
 7. O pai está entre elas: R$ 30 mil em 14/08.
 8. A cláusula 7 do contrato padrão diz que a Colheita Capital não cobra taxa nenhuma.
 9. A Bruna Leal é quem pode publicar. Dia 12, 10h.
-10. Tudo guardado na Pasta Segura. O Théo sabe onde.`,
+10. Tudo guardado na Pasta Trancada. O Théo sabe onde.`,
   },
   {
     id: 'desabafo-duda', title: 'duda', color: 'rosa', req: 'solved:d3',
@@ -126,7 +126,7 @@ Não falei nada. Fiquei com o vídeo bruto.`,
 "Tudo que eu amo cabe num cartão de memória."`,
   },
   {
-    id: 'pauta-lume', title: 'Pauta do Lume (outubro)', color: 'amarelo',
+    id: 'pauta-lume', title: 'Pauta do Instagram (outubro)', color: 'amarelo',
     created: '2026-10-01T09:05', edited: '2026-10-07T21:10',
     checklist: ck(['Reels: bastidor do ensaio da Camila', 1], ['Carrossel: 5 erros de luz', 1], ['Post: Noite da Colheita (só depois da liberação do Marcos)', 0], ['Story: antes e depois da edição', 0]),
   },

@@ -1,4 +1,4 @@
-// Papo — mensageiro na nuvem de Iara (vai até ter 13/10 23:12).
+// WhatsApp — mensageiro na nuvem de Iara (vai até ter 13/10 23:12).
 // O conteúdo é escrito em linhas compactas e expandido pelas funções abaixo:
 //   "MM-DD HH:MM | quem | texto"                         texto (ano 2026; use "AAAA-MM-DD HH:MM" para outros anos)
 //   "MM-DD HH:MM#tag | quem | texto"                     texto com id próprio (para respostas)
@@ -65,7 +65,7 @@ const equipe = chat('equipe-evento', 'eq-', {
 10-05 14:02 | sis | Lari adicionou você e mais 6 participantes
 10-05 14:03 | lari | Pessoal, grupo criado 🌻 Noite da Colheita, sábado 10/10, Sítio Flor da Serra, Guaraciaba do Norte. Aqui a gente alinha tudo, nada de decisão por ligação, combinado?
 10-05 14:05 | duda | Bem-vindos à minha casa kkkk 🌻 qualquer coisa de local, estrada, energia e comida é comigo e com o Seu Zé
-10-05 14:12 | marcos | Arte do convite aprovada pelo Caio. Solto hoje à noite no Lume.
+10-05 14:12 | marcos | Arte do convite aprovada pelo Caio. Solto hoje à noite no Instagram.
 10-05 14:31 | iara | Oi gente! Eu sou a Iara, foto e vídeo do evento 📸 Lari, preciso do cronograma pra me posicionar
 10-05 14:33 | lari | Te mando até quinta, Iara. Bem-vinda!
 10-05 15:10 | ze | Boa tarde a todos. O gerador novo ja chegou, ta no galpao. Qualquer coisa me chamem
@@ -137,6 +137,7 @@ const equipe = chat('equipe-evento', 'eq-', {
 10-10 23:35 | lari | !img:eq_banda_camarim | a banda atacando o churrasco no camarim 😂🍖
 10-10 23:36 | lari | o Rafa saiu, disse que ia fumar 🙄 se a banda atrasar pra voltar eu mato
 10-10 23:40 | igor | sinal caiu uns segundos, já voltou
+10-10 23:44 | lari | gente, o banheiro feminino tá vazio agora, quem quiser ir vai antes do forró voltar 😂
 10-10 23:46 | iara | Fui no mirante fazer uns timelapse. Já volto. | ::st=delivered;react=👍
 10-10 23:49 | lari | Vai de lanterna, Iara! Tá escuro lá
 10-10 23:51 | lari | o Rafa voltou com a bota toda suja de barro vermelho kkkk pisou onde, homi
@@ -403,7 +404,7 @@ const theo = chat('theo', 'th-', { type: 'direct', contact: 'theo', lastSeen: '2
 07-30 22:10 | iara | corujão, tu dorme nunca?
 07-30 22:11 | theo | dorme quem não tem prazo
 07-30 22:12 | iara | !stk:🦉
-08-10 21:02 | iara | corujão, tu viu o evento da Colheita no Lume? parece golpe ou eu tô paranoica?
+08-10 21:02 | iara | corujão, tu viu o evento da Colheita no Instagram? parece golpe ou eu tô paranoica?
 08-10 21:05 | theo | manda o site
 08-10 21:40 | theo | domínio registrado em março. cnpj existe, capital social de 10 mil reais. tu tá fotografando pra isso?
 08-10 21:41 | iara | tô. 3.500 por mês
@@ -537,7 +538,7 @@ const rafa = chat('rafa', 'rf-', { type: 'direct', contact: 'rafa', blocked: tru
 2026-08-04 09:00 | iara | Rafa, eu desbloqueei sem querer, tava limpando contatos. não responde mais.
 2026-08-04 09:02 | rafa | tá. só uma coisa: tu tá linda nas fotos da Colheita
 2026-08-04 09:03 | iara | como assim, fotos da Colheita?
-2026-08-04 09:05 | rafa | no Lume, uai. eu vejo tudo que tu posta
+2026-08-04 09:05 | rafa | no Instagram, uai. eu vejo tudo que tu posta
 2026-08-04 09:10 | sis | Você bloqueou este contato
 `);
 
@@ -585,7 +586,7 @@ const nanda = chat('nanda', 'na-', { type: 'direct', contact: 'nanda', lastSeen:
 09-28 22:44 | iara | não. tô trabalhando pra uma. e tô achando que é pirâmide
 09-28 22:45 | nanda | AMIGA sai fora disso
 09-28 22:46 | iara | depois eu te conto. segredo
-10-05 18:10 | iara | comprei um relógio novo, o Pulso Band 4! mede até queda
+10-05 18:10 | iara | comprei um relógio novo, o Smart Band 8! mede até queda
 10-05 18:11 | nanda | queda?? kkkk pra tu que vive tropeçando é perfeito
 10-05 18:12 | iara | kkkkk
 10-07 23:20 | iara | nanda, o Rafa me mandou mensagem de novo, de número que eu não conheço

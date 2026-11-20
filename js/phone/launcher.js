@@ -24,6 +24,8 @@ function badgeCounts() {
   return out;
 }
 
+const G_SVG = '<svg viewBox="0 0 48 48" width="24" height="24" aria-hidden="true"><path fill="#4285f4" d="M45.1 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h11.8c-.5 2.8-2.1 5.1-4.4 6.7v5.5h7.1c4.2-3.8 6.6-9.5 6.6-16.2z"/><path fill="#34a853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-7.1-5.5c-2 1.3-4.5 2.1-7.4 2.1-5.7 0-10.5-3.8-12.2-9H4.5v5.7C8.1 41.1 15.5 46 24 46z"/><path fill="#fbbc05" d="M11.8 28.3c-.4-1.3-.7-2.8-.7-4.3s.3-3 .7-4.3V14H4.5C3 17 2.2 20.4 2.2 24s.8 7 2.3 10z"/><path fill="#ea4335" d="M24 10.7c3.2 0 6.1 1.1 8.4 3.3l6.3-6.3C34.9 4.2 29.9 2 24 2 15.5 2 8.1 6.9 4.5 14l7.3 5.7c1.7-5.2 6.5-9 12.2-9z"/></svg>';
+const gLogo = () => { const s = h('span', { class: 'g' }); s.innerHTML = G_SVG; return s; };
 const MOON = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>';
 export function renderHome(el) {
   const meta = CASE.meta || {};
@@ -37,7 +39,7 @@ export function renderHome(el) {
     h('div', { class: 'hm-pages' }, h('div', { class: 'hm-grid' }, grid.map(a => appIcon(a, { badgeN: counts[a.id] })))),
     h('div', { class: 'hm-dots' }, h('i', { class: 'on' }), h('i')),
     h('div', { class: 'hm-dock' }, dock.map(a => appIcon(a, { badgeN: counts[a.id] }))),
-    h('button', { class: 'hm-search', on: { click: openSearch } }, icon('search', { size: 22 }), h('span', { class: 'sp' }, 'Pesquisar no celular'), h('span', { class: 'mic' }, icon('mic', { size: 20 }))));
+    h('button', { class: 'hm-search', on: { click: openSearch } }, gLogo(), h('span', { class: 'sp' }, 'Pesquisar'), h('span', { class: 'mic' }, icon('mic', { size: 20 })), h('span', { class: 'mic' }, icon('camera', { size: 20 }))));
 }
 
 /* ---------- busca global ---------- */
@@ -83,7 +85,7 @@ phone.openShade = function openShade() {
   phone.sheet({
     title: 'Notificações',
     render(body, close) {
-      const tiles = [['wifi-off', 'Wi-Fi', 'Desconectado'], ['bluetooth', 'Bluetooth', 'Ativado'], ['signal-medium', 'Dados', 'Litoral Móvel'], ['battery-low', 'Bateria', `${meta.device?.battery ?? 41}%`]];
+      const tiles = [['wifi-off', 'Wi-Fi', 'Desconectado'], ['bluetooth', 'Bluetooth', 'Ativado'], ['signal-medium', 'Dados', 'Claro'], ['battery-low', 'Bateria', `${meta.device?.battery ?? 41}%`]];
       body.append(
         h('div', { style: 'display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 10px' }, tiles.map(([ic, a, b]) => h('div', { style: 'background:var(--ph-s3);border-radius:18px;padding:12px;display:flex;gap:10px;align-items:center' }, icon(ic, { size: 20 }), h('div', null, h('div', { style: 'font-size:13.5px;font-weight:600' }, a), h('div', { style: 'font-size:12px;color:var(--ph-mut)' }, b))))),
         kit.sectionTitle('No aparelho às ' + time.hhmm(time.MIRROR_NOW)),

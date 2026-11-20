@@ -68,7 +68,15 @@ function avatarFor(env, t, size = 46) {
   return kit.avatar({ name: '?', size, icon: 'user-round', color: '#5f6368' });
 }
 
-/* ---------- raiz ---------- */
+/* ---------- raiz (Google Mensagens, Material You escuro) ---------- */
+const GM_NEW_CHAT = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM11 5h2v4h4v2h-4v4h-2v-4H7V9h4z"/>';
+function gmIcon(paths, size = 24) {
+  const t = document.createElement('template');
+  t.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor" class="ic" aria-hidden="true">${paths}</svg>`;
+  return t.content.firstChild;
+}
+const readOnlyToast = (env) => env.phone.toast('Somente leitura: extração do aparelho', { icon: 'lock' });
+
 function renderRoot(env, threads) {
   const { ctx, kit, game } = env;
   const views = threads.map((t) => {
@@ -76,14 +84,17 @@ function renderRoot(env, threads) {
     return { t, msgs, last: msgs[msgs.length - 1] || null, late: msgs.filter(isLate).length };
   });
   const byLast = (a, b) => (b.last ? time.parse(b.last.at).getTime() : -Infinity) - (a.last ? time.parse(a.last.at).getTime() : -Infinity);
+  const headSlot = h('div', { class: 'sm-head' });
   const listSlot = h('div', { class: 'sm-list' });
+  const scroll = h('div', { class: 'sm-scroll-root' }, listSlot);
   let query = '';
+  let searching = false;
 
   const row = (v) => kit.listItem({
-    avatar: avatarFor(env, v.t, 48),
+    avatar: avatarFor(env, v.t, 44),
     title: threadName(v.t),
     subtitle: v.last ? (isMe(v.last) ? 'Você: ' : '') + String(v.last.text || '').replace(/\s+/g, ' ') : 'Sem mensagens',
-    meta: v.last ? listTime(v.last) : '',
+    meta: v.last ? cap(listTime(v.last)) : '',
     badge: v.late || null,
     unread: v.late > 0,
     className: 'sm-row-item',
@@ -100,15 +111,31 @@ function renderRoot(env, threads) {
     vs = [...vs].sort(byLast);
     if (!vs.length) append(listSlot, [kit.empty({ icon: 'message-square', title: q.length >= 2 ? 'Nada encontrado' : 'Nenhuma conversa', text: q.length >= 2 ? `Nenhum resultado para "${query}".` : 'As mensagens de texto aparecem aqui.' })]);
     else append(listSlot, [kit.list(vs.map(row))]);
-    append(listSlot, [h('p', { class: 'sm-foot no-terms' }, icon('lock', { size: 13 }), 'Mensagens do aparelho, em modo somente leitura.')]);
+    append(listSlot, [h('p', { class: 'sm-foot no-terms' }, icon('lock', { size: 13 }),
+      h('span', null, 'Mensagens do aparelho, em modo somente leitura. ', h('span', { class: 'sm-when' }, `Registro até ${time.weekday(MIRROR)} ${time.hhmm(MIRROR)}`)))]);
     env.phone.scan(listSlot);
   };
 
-  append(ctx.el, [
-    kit.appBar({ title: 'Mensagens', subtitle: h('span', { class: 'no-terms' }, `No aparelho · ${time.weekday(MIRROR)} ${time.hhmm(MIRROR)}`) }),
-    kit.search({ placeholder: 'Pesquisar mensagens', onInput: (v) => { query = v; draw(); } }),
-    listSlot,
-  ]);
+  const fab = h('button', { class: 'sm-fab', on: { click: () => readOnlyToast(env) } }, gmIcon(GM_NEW_CHAT, 24), h('span', null, 'Iniciar conversa'));
+
+  const drawHead = () => {
+    clear(headSlot);
+    if (searching) {
+      headSlot.append(h('div', { class: 'sm-searchbar' },
+        kit.iconButton({ icon: 'arrow-left', label: 'Fechar busca', onClick: () => { searching = false; query = ''; fab.hidden = false; drawHead(); draw(); } }),
+        kit.search({ placeholder: 'Pesquisar mensagens', autofocus: true, onInput: (v) => { query = v; draw(); } })));
+      return;
+    }
+    const me = store.contact('iara');
+    headSlot.append(h('header', { class: 'k-appbar sm-top' },
+      h('div', { class: 'ttl' }, h('h1', null, 'Mensagens')),
+      kit.iconButton({ icon: 'search', label: 'Pesquisar', onClick: () => { searching = true; fab.hidden = true; drawHead(); } }),
+      h('button', { class: 'sm-me', 'aria-label': 'Conta', on: { click: () => readOnlyToast(env) } },
+        kit.avatar({ src: me?.avatar || '', name: me?.name || 'Iara', color: me?.color, size: 32 }))));
+  };
+
+  append(ctx.el, [headSlot, scroll, fab]);
+  drawHead();
   draw();
 }
 
@@ -129,14 +156,22 @@ function buildThread(env, t, opts, body, nav) {
 
   const bar = h('header', { class: 'k-appbar sm-bar' },
     kit.iconButton({ icon: 'arrow-left', label: 'Voltar', onClick: () => nav.back() }),
-    avatarFor(env, t, 38),
+    avatarFor(env, t, 34),
     h('div', { class: 'nm' }, h('span', { class: 't txt' }, name), h('span', { class: 's txt' }, threadSub(t))),
-    kit.iconButton({ icon: 'phone', label: 'Ligar', onClick: () => phone.toast('Ligações indisponíveis na extração', { icon: 'phone' }) }));
+    kit.iconButton({ icon: 'phone', label: 'Ligar', onClick: () => phone.toast('Ligações indisponíveis na extração', { icon: 'phone' }) }),
+    kit.iconButton({ icon: 'video', label: 'Videochamada', onClick: () => phone.toast('Ligações indisponíveis na extração', { icon: 'video' }) }),
+    kit.iconButton({ icon: 'ellipsis-vertical', label: 'Mais opções', onClick: () => readOnlyToast(env) }));
 
   const list = h('div', { class: 'sm-msgs' });
   const scroller = h('div', { class: 'sm-scroll' }, list);
-  const foot = h('div', { class: 'sm-foot-bar no-terms' }, h('div', { class: 'sm-input', 'aria-disabled': 'true' }, icon('lock', { size: 16 }),
-    h('input', { type: 'text', disabled: true, placeholder: 'Somente leitura — extração do aparelho', 'aria-label': 'Somente leitura — extração do aparelho' })));
+  // campo "Mensagem de texto" do Google Mensagens, desativado (extração forense)
+  const foot = h('div', { class: 'sm-foot-bar no-terms' },
+    h('button', { class: 'sm-plus', 'aria-label': 'Anexar (indisponível)', on: { click: () => readOnlyToast(env) } }, icon('plus', { size: 22 })),
+    h('div', { class: 'sm-input', 'aria-disabled': 'true', title: 'Somente leitura — extração do aparelho' },
+      h('input', { type: 'text', disabled: true, placeholder: 'Mensagem de texto', 'aria-label': 'Somente leitura — extração do aparelho' }),
+      h('span', { class: 'sm-ic' }, icon('smile', { size: 21 })),
+      h('span', { class: 'sm-ic' }, icon('image', { size: 21 }))),
+    h('button', { class: 'sm-mic', 'aria-label': 'Gravar áudio (indisponível)', on: { click: () => readOnlyToast(env) } }, icon('mic', { size: 22 })));
   append(body, [bar, scroller, foot]);
 
   let target = null, stick = true;
@@ -178,8 +213,10 @@ function buildThread(env, t, opts, body, nav) {
       kit.pinButton({ key, label: String(m.text || '').slice(0, 140), app: 'sms', detail: `${name} · ${when(m.at)}` }),
       h('button', { class: 'sm-copy', on: { click: (e) => { e.stopPropagation(); try { navigator.clipboard?.writeText(m.text || ''); } catch (err) { /* sem permissão */ } phone.toast('Texto copiado', { icon: 'copy' }); } } }, icon('copy', { size: 15 }), 'Copiar'));
     const bubble = h('div', { class: 'sm-b' }, h('span', { class: 'txt sm-text' }, m.text || ''));
+    // como no Google Mensagens: a foto de quem enviou aparece ao lado da última mensagem de cada sequência
+    const av = me ? null : h('div', { class: 'sm-av', 'aria-hidden': 'true' }, last ? avatarFor(env, t, 30) : null);
     const rowEl = h('div', { class: `sm-row ${me ? 'me' : 'them'}${first ? ' first' : ''}${last ? ' last' : ''}${late ? ' late' : ''}`, dataset: { id: m.id } },
-      h('div', { class: 'sm-col' }, bubble, timeLine, acts));
+      av, h('div', { class: 'sm-col' }, bubble, timeLine, acts));
     bubble.addEventListener('click', (e) => { if (!e.target.closest('mark')) select(rowEl); }); // marcas da lupa têm clique próprio
     list.append(rowEl);
   });

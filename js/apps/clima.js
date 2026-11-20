@@ -1,8 +1,9 @@
-// Clima — Guaraciaba do Norte (CE), sáb 10/10/2026 23:47 (hora do espelho): noite limpa, ventania na serra.
-// Lê CASE.clima se houver dados; o que faltar usa os padrões abaixo. Visual: céu noturno, vidro fosco, SVG desenhado à mão.
-import { h } from '../core/dom.js';
+// Clima (app de clima do Google/Pixel) — Guaraciaba do Norte (CE), sáb 10/10/2026 23:47 (hora do espelho):
+// noite limpa, ventania de sudeste na serra. Lê CASE.clima; o que faltar usa os padrões abaixo.
+import { h, clear } from '../core/dom.js';
 import { icon } from '../ui/icons.js';
 import * as time from '../core/time.js';
+import { sfx } from '../core/sfx.js';
 
 /* ---------- dados (padrões do caso + mescla com CASE.clima) ---------- */
 const DEF = {
@@ -50,65 +51,70 @@ function model(data) {
   };
 }
 
-/* ---------- ícones de tempo desenhados à mão ---------- */
+/* ---------- ícones de tempo (SVG desenhado à mão, no estilo dos ícones do Google) ---------- */
 let uid = 0;
 const CLOUD = 'M13 36a7 7 0 0 1-1-13.9A10 10 0 0 1 31.3 19.8 8.5 8.5 0 0 1 35 36z';
 const MOON = 'M-.16 -14A14 14 0 1 0 13.18 4.68A11.5 11.5 0 0 1 -.16 -14Z';
-const SPARK = 'M0 -3.4L.9 -.9L3.4 0L.9 .9L0 3.4L-.9 .9L-3.4 0L-.9 -.9Z';
 const ALIAS = { moon: 'clear-night', lua: 'clear-night', limpo: 'clear-night', sol: 'sun', 'cloud-sun': 'partly-day', 'cloud-moon': 'partly-night', nublado: 'cloud', chuva: 'rain', 'cloud-rain': 'rain' };
 
 function wx(kind, size = 44) {
   const k = ALIAS[kind] || kind, id = `clw${++uid}`;
-  const rays = (cx, cy, r1, r2, n = 8, from = 0, span = 360) => {
-    let s = '';
-    for (let i = 0; i < n; i++) {
-      const a = ((from + (span / (span === 360 ? n : n - 1)) * i - 90) * Math.PI) / 180;
-      s += `<line x1="${(cx + r1 * Math.cos(a)).toFixed(1)}" y1="${(cy + r1 * Math.sin(a)).toFixed(1)}" x2="${(cx + r2 * Math.cos(a)).toFixed(1)}" y2="${(cy + r2 * Math.sin(a)).toFixed(1)}"/>`;
-    }
-    return `<g stroke="#ffc65a" stroke-width="2.6" stroke-linecap="round">${s}</g>`;
-  };
-  const sun = (cx, cy, s) => `${rays(cx, cy, 12.5 * s, 17 * s)}<circle cx="${cx}" cy="${cy}" r="${(9 * s).toFixed(1)}" fill="url(#${id}s)"/>`;
+  const sun = (cx, cy, s) => `<circle cx="${cx}" cy="${cy}" r="${(11 * s).toFixed(1)}" fill="url(#${id}s)"/>`;
   const moon = (cx, cy, s) => `<path transform="translate(${cx} ${cy}) scale(${s})" d="${MOON}" fill="url(#${id}m)"/>`;
-  const star = (cx, cy, s) => `<path transform="translate(${cx} ${cy}) scale(${s})" d="${SPARK}" fill="#fff6d6"/>`;
   const cloud = (dx = 0, dy = 0, s = 1) => `<path transform="translate(${dx} ${dy}) scale(${s})" d="${CLOUD}" fill="url(#${id}c)"/>`;
   let g = '';
   switch (k) {
-    case 'sun': g = sun(24, 24, 1); break;
-    case 'sunrise': g = `${rays(24, 31, 13, 17.5, 5, -60, 120)}<path d="M12 32a12 12 0 0 1 24 0z" fill="url(#${id}s)"/><path d="M5 36.5h38" stroke="#bcd0f5" stroke-width="2.6" stroke-linecap="round"/><path d="M17 41.5h14" stroke="#bcd0f5" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>`; break;
-    case 'partly-day': g = `${sun(17, 16, .66)}${cloud(2, 4, .95)}`; break;
-    case 'partly-night': g = `${moon(17, 17, .78)}${star(35, 10, .7)}${cloud(2, 4, .95)}`; break;
+    case 'sun': g = sun(24, 24, 1.15); break;
+    case 'sunrise': g = `<path d="M10 33a14 14 0 0 1 28 0z" fill="url(#${id}s)"/><path d="M5 37h38" stroke="#c4c7c5" stroke-width="2.6" stroke-linecap="round"/><path d="M24 9v7M21 13l3 3 3-3" stroke="#fdd663" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`; break;
+    case 'partly-day': g = `${sun(18, 17, .8)}${cloud(2, 4, .95)}`; break;
+    case 'partly-night': g = `${moon(18, 18, .78)}${cloud(2, 4, .95)}`; break;
     case 'cloud': g = cloud(-1, 0, 1.08); break;
-    case 'rain': g = `${cloud(0, -5, 1)}<g stroke="#6cc3ff" stroke-width="2.8" stroke-linecap="round"><line x1="17" y1="37" x2="14.5" y2="43"/><line x1="25" y1="37" x2="22.5" y2="43"/><line x1="33" y1="37" x2="30.5" y2="43"/></g>`; break;
-    default: g = `${moon(22, 25, 1.12)}${star(37, 11, 1.15)}${star(38, 31, .7)}${star(9, 10, .8)}`;
+    case 'rain': g = `${cloud(0, -5, 1)}<g stroke="#7cacf8" stroke-width="2.8" stroke-linecap="round"><line x1="17" y1="37" x2="14.5" y2="43"/><line x1="25" y1="37" x2="22.5" y2="43"/><line x1="33" y1="37" x2="30.5" y2="43"/></g>`; break;
+    default: g = moon(23, 25, 1.12);
   }
-  return `<svg viewBox="0 0 48 48" width="${size}" height="${size}" aria-hidden="true" class="cl-gl" style="display:block"><defs>
-    <linearGradient id="${id}c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef3fc"/><stop offset="1" stop-color="#a9b9d6"/></linearGradient>
-    <linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ff9f43"/></linearGradient>
-    <linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6cf"/><stop offset="1" stop-color="#e8c878"/></linearGradient></defs>${g}</svg>`;
+  return `<svg viewBox="0 0 48 48" width="${size}" height="${size}" aria-hidden="true" class="cw-gl" style="display:block"><defs>
+    <linearGradient id="${id}c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f3f4"/><stop offset="1" stop-color="#bdc1c6"/></linearGradient>
+    <linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde293"/><stop offset="1" stop-color="#f9ab00"/></linearGradient>
+    <linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8eaed"/><stop offset="1" stop-color="#aecbfa"/></linearGradient></defs>${g}</svg>`;
 }
 const glyph = (kind, size) => h('span', { class: 'gw', html: wx(kind, size) });
 const dropSvg = (s = 18) => `<svg xmlns="http://www.w3.org/2000/svg" class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.2 4 6.2 7.1 6.2 11a6.2 6.2 0 0 1-12.4 0C5.8 10.1 8.8 7 12 3z"/></svg>`;
 const gaugeSvg = (s = 18) => `<svg xmlns="http://www.w3.org/2000/svg" class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.2 17a9 9 0 1 1 15.6 0"/><path d="M12 15l3.6-5.2"/><circle cx="12" cy="15.4" r="1.3"/></svg>`;
 
 /* ---------- vento / orvalho / sol ---------- */
-const DIRS = { N: [0, 'norte'], NE: [45, 'nordeste'], L: [90, 'leste'], E: [90, 'leste'], SE: [135, 'sudeste'], S: [180, 'sul'], SO: [225, 'sudoeste'], O: [270, 'oeste'], NO: [315, 'noroeste'] };
-function compassSvg(dir) {
-  const [deg] = DIRS[String(dir).toUpperCase()] || [90];
-  const to = deg + 180; // o vento sopra de `deg` para o lado oposto
-  const pt = (a, rr, cx = 32, cy = 32) => [(cx + rr * Math.sin((a * Math.PI) / 180)).toFixed(1), (cy - rr * Math.cos((a * Math.PI) / 180)).toFixed(1)];
-  const [x1, y1] = pt(deg, 15), [x2, y2] = pt(to, 15);
-  const [b1x, b1y] = pt(to + 150, 8, +x2, +y2), [b2x, b2y] = pt(to - 150, 8, +x2, +y2);
-  const lab = (t, a) => { const [x, y] = pt(a, 29); return `<text x="${x}" y="${(+y + 3).toFixed(1)}" text-anchor="middle" font-size="8.5" fill="#9fb0d0" font-weight="600">${t}</text>`; };
-  return `<svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><circle cx="32" cy="32" r="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)"/>${lab('N', 0)}${lab('L', 90)}${lab('S', 180)}${lab('O', 270)}
-    <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#bcd5ff" stroke-width="2.6" stroke-linecap="round"/>
-    <path d="M${b1x} ${b1y}L${x2} ${y2}L${b2x} ${b2y}" fill="none" stroke="#bcd5ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const DIRS = { N: [0, 'norte'], NE: [45, 'nordeste'], L: [90, 'leste'], E: [90, 'leste'], SE: [135, 'sudeste'], S: [180, 'sul'], SO: [225, 'sudoeste'], SW: [225, 'sudoeste'], O: [270, 'oeste'], W: [270, 'oeste'], NO: [315, 'noroeste'], NW: [315, 'noroeste'] };
+const dirOf = (d) => DIRS[String(d || '').toUpperCase()] || null;
+
+/** Bússola: a seta aponta para onde o vento vai (sopra DE `dir`). */
+function compassSvg(dir, size = 132) {
+  const [deg] = dirOf(dir) || [90];
+  const to = deg + 180;
+  const c = 60, pt = (a, rr) => [(c + rr * Math.sin((a * Math.PI) / 180)).toFixed(1), (c - rr * Math.cos((a * Math.PI) / 180)).toFixed(1)];
+  let ticks = '';
+  for (let a = 0; a < 360; a += 10) {
+    const big = a % 90 === 0, [x1, y1] = pt(a, big ? 44 : 47), [x2, y2] = pt(a, 52);
+    ticks += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${big ? '#c4c7c5' : 'rgba(196,199,197,.35)'}" stroke-width="${big ? 2 : 1.2}" stroke-linecap="round"/>`;
+  }
+  const lab = (t, a) => { const [x, y] = pt(a, 34); return `<text x="${x}" y="${(+y + 4).toFixed(1)}" text-anchor="middle" font-size="11" fill="#c4c7c5" font-weight="600">${t}</text>`; };
+  const [tx, ty] = pt(to, 40), [fx, fy] = pt(deg, 40);
+  const [b1x, b1y] = pt(to - 9, 30), [b2x, b2y] = pt(to + 9, 30);
+  return `<svg viewBox="0 0 120 120" width="${size}" height="${size}" role="img" aria-label="Vento de ${dirOf(dir)?.[1] || dir}" style="display:block">
+    <circle cx="60" cy="60" r="56" fill="rgba(255,255,255,.04)"/>${ticks}${lab('N', 0)}${lab('L', 90)}${lab('S', 180)}${lab('O', 270)}
+    <line x1="${fx}" y1="${fy}" x2="${tx}" y2="${ty}" stroke="#a8c7fa" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="${fx}" cy="${fy}" r="5" fill="#131314" stroke="#a8c7fa" stroke-width="3"/>
+    <path d="M${b1x} ${b1y}L${tx} ${ty}L${b2x} ${b2y}Z" fill="#a8c7fa" stroke="#a8c7fa" stroke-width="2" stroke-linejoin="round"/></svg>`;
 }
+/** Seta pequena (para onde o vento vai). */
+const arrowEl = (dir) => {
+  const [deg] = dirOf(dir) || [90];
+  return h('span', { class: 'arw', style: { transform: `rotate(${deg + 180}deg)` }, html: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3l6 15-6-3.5L6 18z" fill="currentColor"/></svg>' });
+};
 const dew = (t, rh) => Math.round(t - (100 - rh) / 5);
 const mins = (hhmm) => { const [a, b] = String(hhmm).split(':').map(Number); return (a || 0) * 60 + (b || 0); };
 
-/** Arco do dia: curva do sol nas 24 h, nascer/pôr marcados e a Lua na hora do espelho (abaixo do horizonte). */
+/** Arco do dia: curva do sol nas 24 h, nascer/pôr marcados e a hora do espelho (noite: abaixo do horizonte). */
 function sunArc(sun, nowHm) {
-  const W = 320, H = 132, L = 14, R = 14, pw = W - L - R, hor = 70, amp = 42;
+  const W = 300, H = 120, L = 10, R = 10, pw = W - L - R, hor = 64, amp = 40;
   const rise = mins(sun.rise), set = mins(sun.set), noon = (rise + set) / 2, D = set - rise;
   const f = (t) => Math.cos((2 * Math.PI * (t - noon)) / 1440) - Math.cos((Math.PI * D) / 1440);
   const X = (t) => L + (t / 1440) * pw, Y = (t) => hor - f(t) * amp;
@@ -117,17 +123,14 @@ function sunArc(sun, nowHm) {
   const d = (a, b) => pts.filter(([x]) => x >= X(a) - 0.01 && x <= X(b) + 0.01).map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
   const day = d(Math.ceil(rise / 10) * 10, Math.floor(set / 10) * 10);
   const nowT = mins(nowHm), nx = X(nowT), ny = Y(nowT);
-  const lab = (t, txt, anchor) => `<text x="${X(t).toFixed(1)}" y="${hor + 18}" text-anchor="${anchor}" fill="#cfdcf5" font-size="11" font-weight="600">${txt}</text>`;
+  const lab = (t, txt) => `<text x="${X(t).toFixed(1)}" y="${hor + 20}" text-anchor="middle" fill="#c4c7c5" font-size="11.5" font-weight="500">${txt}</text>`;
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Arco do sol: nascer ${sun.rise}, pôr ${sun.set}" style="display:block">
-    <defs><linearGradient id="clarc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffb55a"/><stop offset="1" stop-color="#ffd978"/></linearGradient></defs>
-    <rect x="${L}" y="${hor}" width="${pw}" height="${H - hor - 26}" fill="rgba(5,10,28,.35)"/>
-    <line x1="${L}" x2="${W - R}" y1="${hor}" y2="${hor}" stroke="rgba(255,255,255,.3)"/>
-    <path d="${d(0, 1440)}" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-dasharray="3 5"/>
-    <path d="${day}" fill="none" stroke="url(#clarc)" stroke-width="3.4" stroke-linecap="round"/>
-    <circle cx="${X(rise).toFixed(1)}" cy="${hor}" r="4.2" fill="#ffc65a"/><circle cx="${X(set).toFixed(1)}" cy="${hor}" r="4.2" fill="#ff9f43"/>
-    ${lab(rise, sun.rise, 'middle')}${lab(set, sun.set, 'middle')}
-    <line x1="${nx.toFixed(1)}" x2="${nx.toFixed(1)}" y1="14" y2="${(hor + 24).toFixed(1)}" stroke="rgba(255,255,255,.28)" stroke-dasharray="2 3"/>
-    <g transform="translate(${nx.toFixed(1)} ${ny.toFixed(1)}) scale(.62)"><circle r="16" fill="#0b1431" stroke="rgba(255,246,207,.5)"/><path d="${MOON}" fill="#fff0b8" transform="scale(.8)"/></g>
+    <line x1="${L}" x2="${W - R}" y1="${hor}" y2="${hor}" stroke="rgba(255,255,255,.25)"/>
+    <path d="${d(0, 1440)}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" stroke-dasharray="3 5"/>
+    <path d="${day}" fill="none" stroke="#fdd663" stroke-width="3.4" stroke-linecap="round"/>
+    <circle cx="${X(rise).toFixed(1)}" cy="${hor}" r="4" fill="#fdd663"/><circle cx="${X(set).toFixed(1)}" cy="${hor}" r="4" fill="#f9ab00"/>
+    ${lab(rise, sun.rise)}${lab(set, sun.set)}
+    <circle cx="${nx.toFixed(1)}" cy="${ny.toFixed(1)}" r="7" fill="#131314" stroke="#aecbfa" stroke-width="2.5"/>
   </svg>`;
 }
 
@@ -143,100 +146,134 @@ export default {
     const now = time.parse(time.MIRROR_NOW);
     const n = m.now;
     const place = `${m.city}, ${m.region}`;
-    const [, dirName] = DIRS[String(n.windDir).toUpperCase()] || [0, String(n.windDir)];
+    const dirName = dirOf(n.windDir)?.[1] || String(n.windDir);
+    const dirCode = String(n.windDir).toUpperCase();
     game.see('clima:agora');
+    const offline = () => phone.toast('Sem conexão: a extração só tem os dados salvos no aparelho.', { icon: 'cloud' });
 
-    /* estrelas (determinísticas) */
+    /* céu de fundo (estrelas determinísticas) */
     let seed = 7;
     const rnd = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
     let stars = '';
-    for (let i = 0; i < 70; i++) {
-      const x = (rnd() * 100).toFixed(1), y = (rnd() * 96).toFixed(1), r = (0.5 + rnd() * 1.2).toFixed(2);
-      stars += `<circle class="${i % 5 === 0 ? 'tw' : ''}" cx="${x}%" cy="${y}%" r="${r}" fill="#fff" opacity="${(0.35 + rnd() * 0.55).toFixed(2)}" style="animation-delay:${(rnd() * 4).toFixed(1)}s"/>`;
+    for (let i = 0; i < 60; i++) {
+      const x = (rnd() * 100).toFixed(1), y = (rnd() * 96).toFixed(1), r = (0.4 + rnd() * 1.1).toFixed(2);
+      stars += `<circle class="${i % 5 === 0 ? 'tw' : ''}" cx="${x}%" cy="${y}%" r="${r}" fill="#fff" opacity="${(0.3 + rnd() * 0.5).toFixed(2)}" style="animation-delay:${(rnd() * 4).toFixed(1)}s"/>`;
     }
-    const sky = h('div', { class: 'cl-sky', 'aria-hidden': 'true' },
-      h('div', { html: `<svg width="100%" height="100%">${stars}</svg>` }),
-      h('div', { class: 'gusts', html: '<svg viewBox="0 0 390 200" preserveAspectRatio="none" width="100%" height="100%"><path d="M-20 70C60 52 120 92 200 66S330 50 420 74"/><path d="M-30 120C50 104 100 138 190 116S320 100 430 124"/><path d="M-10 168C70 154 130 184 210 162S340 150 420 170"/></svg>' }));
+    const sky = h('div', { class: 'cw-sky', 'aria-hidden': 'true' }, h('div', { html: `<svg width="100%" height="100%">${stars}</svg>` }));
 
-    /* hero */
-    const hero = h('section', { class: 'cl-hero' },
-      h('div', { class: 'city' }, icon('map-pin', { size: 16 }), place),
-      h('div', { class: 'when' }, `${time.weekday(now)}, ${time.dateShort(now)} · ${time.hhmm(now)}`),
+    /* topo */
+    const top = h('header', { class: 'cw-top' },
+      h('button', { class: 'cw-loc', on: { click: () => openPlaces() } }, icon('map-pin', { size: 18 }), h('span', null, m.city), icon('chevron-down', { size: 18 })),
+      kit.iconButton({ icon: 'settings', label: 'Configurações', onClick: offline }));
+
+    /* agora */
+    const hero = h('section', { class: 'cw-hero' },
+      h('div', { class: 'now' }, 'Agora'),
       h('div', { class: 'main' },
         h('div', { class: 'temp' }, h('b', null, String(n.temp)), h('sup', null, '°')),
-        h('div', { class: 'moon' }, glyph(n.icon, 96))),
+        h('div', { class: 'gl' }, glyph(n.icon, 84))),
       h('div', { class: 'desc txt' }, n.desc),
-      h('div', { class: 'mm' }, h('span', null, icon('chevron-up', { size: 15 }), `Máx. ${n.max}°`), h('span', null, icon('chevron-down', { size: 15 }), `Mín. ${n.min}°`)),
+      h('div', { class: 'mm' }, `Máx.: ${n.max}° · Mín.: ${n.min}°`),
+      h('div', { class: 'feels' }, `Sensação térmica de ${n.feels}°`),
       h('div', { class: 'pinrow' }, kit.pinButton({
         key: 'clima:agora', label: `Clima em ${place} · ${time.weekday(now)} ${time.hhmm(now)}`, app: 'clima',
         detail: `${n.temp} °C (sensação ${n.feels} °C) · ${n.desc} · vento de ${dirName} a ${n.wind} km/h, rajadas de ${n.gust} km/h`,
       })));
 
-    /* próximas horas */
+    /* previsão por hora (Temperatura / Vento / Chuva) */
     const nextDay = (a, i, list) => i > 0 && time.ymd(a.at) !== time.ymd(list[i - 1].at);
-    const hours = h('div', { class: 'cl-hours' }, m.hourly.map((x, i, list) => {
-      const ev = !!x.event || x.temp === undefined;
-      const lbl = x.label && !ev ? x.label : ev ? time.hhmm(x.at) : `${nextDay(x, i, list) ? time.weekday(x.at) + ' ' : ''}${time.hhmm(x.at).slice(0, 2)}h`;
-      return h('div', { class: `hr ${i === 0 ? 'now' : ''} ${ev ? 'ev' : ''}` },
-        h('small', null, lbl), glyph(x.icon, 38),
-        ev ? h('span', { class: 'evn' }, x.label || '') : h('b', null, `${x.temp}°`),
-        !ev && x.wind ? h('span', { class: 'wd' }, icon('wind', { size: 12 }), `${x.wind}`) : null);
-    }));
-
-    /* tiles */
-    const tile = (ic, label, big, small, extra) => h('div', { class: 'cl-tile' },
-      h('div', { class: 'tl' }, ic, label), h('div', { class: 'tv' }, big), small ? h('div', { class: 'ts' }, small) : null, extra || null);
-    const raw = (svg) => h('span', { class: 'rw', html: svg });
-    const tiles = h('section', { class: 'cl-grid' },
-      h('div', { class: 'cl-tile wind' },
-        h('div', { class: 'tl' }, icon('wind', { size: 18 }), 'Vento'),
-        h('div', { class: 'wrow' }, h('div', null, h('div', { class: 'tv' }, h('b', null, String(n.wind)), h('small', null, ' km/h')), h('div', { class: 'ts' }, `de ${dirName} · rajadas de ${n.gust} km/h`)), h('div', { class: 'cmp', html: compassSvg(n.windDir) }))),
-      tile(icon('thermometer', { size: 18 }), 'Sensação', `${n.feels}°`, n.feels < n.temp ? 'Mais frio por causa do vento' : 'Parecida com a temperatura'),
-      tile(raw(dropSvg()), 'Umidade', `${n.humidity}%`, `Ponto de orvalho ${dew(n.temp, n.humidity)}°`),
-      tile(icon('eye', { size: 18 }), 'Visibilidade', h('span', null, h('b', null, String(n.visibility)), h('small', null, ' km')), 'Ótima: céu limpo'),
-      tile(icon('cloud', { size: 18 }), 'Chuva', `${n.rain ?? 0}%`, 'Nenhuma chuva nas próximas 24 h'),
-      tile(icon('sun', { size: 18 }), 'Índice UV', String(n.uv), n.uv === 0 ? 'Baixo (noite)' : 'Use protetor'),
-      tile(raw(gaugeSvg()), 'Pressão', h('span', null, h('b', null, String(n.pressure)), h('small', null, ' hPa')), 'Estável'));
+    const hoursBox = h('div', { class: 'cw-hours' });
+    let hmode = 'temp';
+    const drawHours = () => {
+      clear(hoursBox);
+      m.hourly.forEach((x, i, list) => {
+        const ev = !!x.event || x.temp === undefined;
+        const lbl = x.label && !ev ? x.label : ev ? time.hhmm(x.at) : `${nextDay(x, i, list) ? time.weekday(x.at) + '. ' : ''}${time.hhmm(x.at).slice(0, 2)}h`;
+        let mid, val;
+        if (ev) { mid = glyph(x.icon, 34); val = h('span', { class: 'evn' }, x.label || ''); }
+        else if (hmode === 'wind') { mid = arrowEl(x.windDir || n.windDir); val = h('b', null, x.wind != null ? `${x.wind}` : '—', h('small', null, ' km/h')); }
+        else if (hmode === 'rain') { mid = h('span', { class: 'drop', html: dropSvg(20) }); val = h('b', null, `${x.rain ?? n.rain ?? 0}%`); }
+        else { mid = glyph(x.icon, 34); val = h('b', null, `${x.temp}°`); }
+        hoursBox.append(h('div', { class: `hr ${i === 0 ? 'now' : ''} ${ev ? 'ev' : ''}` }, h('small', null, lbl), mid, val));
+      });
+      phone.scan(hoursBox);
+    };
+    const segs = [['temp', 'Temperatura'], ['wind', 'Vento'], ['rain', 'Chuva']].map(([id, label]) => h('button', { class: `cw-seg ${id === hmode ? 'on' : ''}`, on: { click: () => { sfx.play('tap'); hmode = id; segs.forEach((b) => b.classList.toggle('on', b.dataset.id === id)); drawHours(); } }, dataset: { id } }, label));
+    drawHours();
+    const hourly = h('section', { class: 'cw-card' },
+      h('div', { class: 'ch' }, icon('clock', { size: 18 }), h('h3', null, 'Previsão por hora')),
+      h('div', { class: 'cw-segs', role: 'group', 'aria-label': 'Tipo de previsão' }, segs),
+      hoursBox);
 
     /* 7 dias */
     const lo = Math.min(...m.daily.map((d) => d.min)), hi = Math.max(...m.daily.map((d) => d.max)), span = Math.max(1, hi - lo);
-    const days = h('div', { class: 'cl-days' }, m.daily.map((d, i) => h('div', { class: `dy ${i === 0 ? 'today' : ''}` },
-      h('span', { class: 'dn' }, i === 0 ? 'Hoje' : time.weekday(d.date)),
-      glyph(d.icon, 30),
-      h('span', { class: 'rn' }, d.rain ? h('span', { class: 'rr' }, raw(dropSvg(11)), `${d.rain}%`) : null),
-      h('span', { class: 'lo' }, `${d.min}°`),
-      h('span', { class: 'bar' }, h('i', { style: `left:${(((d.min - lo) / span) * 100).toFixed(1)}%;width:${(((d.max - d.min) / span) * 100).toFixed(1)}%` })),
-      h('span', { class: 'hi' }, `${d.max}°`))));
+    const daily = h('section', { class: 'cw-card' },
+      h('div', { class: 'ch' }, icon('calendar-days', { size: 18 }), h('h3', null, `Previsão para ${m.daily.length} dias`)),
+      h('div', { class: 'cw-days' }, m.daily.map((d, i) => h('div', { class: `dy ${i === 0 ? 'today' : ''}` },
+        h('span', { class: 'dn' }, i === 0 ? 'Hoje' : `${time.weekday(d.date)}.`),
+        h('span', { class: 'rn' }, d.rain ? h('span', { class: 'rr' }, h('span', { html: dropSvg(12) }), `${d.rain}%`) : null),
+        glyph(d.icon, 28),
+        h('span', { class: 'hi' }, `${d.max}°`),
+        h('span', { class: 'bar' }, h('i', { style: `left:${(((d.min - lo) / span) * 100).toFixed(1)}%;width:${(((d.max - d.min) / span) * 100).toFixed(1)}%` })),
+        h('span', { class: 'lo' }, `${d.min}°`)))));
 
-    /* sol */
+    /* cartões de detalhes */
+    const tile = (ic, label, big, small, extra, cls = '') => h('section', { class: `cw-tile ${cls}` },
+      h('div', { class: 'tl' }, ic, label), h('div', { class: 'tv' }, big), small ? h('div', { class: 'ts txt' }, small) : null, extra || null);
+    const raw = (svg) => h('span', { class: 'rw', html: svg });
+    const wind = h('section', { class: 'cw-tile cw-wind' },
+      h('div', { class: 'tl' }, icon('wind', { size: 18 }), 'Vento'),
+      h('div', { class: 'wrow' },
+        h('div', { class: 'wtx' },
+          h('div', { class: 'tv' }, h('b', null, String(n.wind)), h('small', null, ' km/h')),
+          h('div', { class: 'wd txt' }, `Vento de ${dirName}${dirCode && dirCode.length <= 2 ? ` (${dirCode})` : ''}`),
+          h('div', { class: 'ts txt' }, `Rajadas de até ${n.gust} km/h`),
+          h('div', { class: 'ts txt' }, `${time.weekday(now)}., ${now.getDate()} de ${time.monthShort(now.getMonth())}. · ${time.hhmm(now)}`)),
+        h('div', { class: 'cmp', html: compassSvg(n.windDir) })));
     const dl = mins(m.sun.set) - mins(m.sun.rise);
-    const sun = h('section', { class: 'cl-card cl-sun' },
-      h('div', { class: 'ch' }, icon('sunrise', { size: 18 }), h('h3', null, 'Nascer e pôr do sol'), h('small', null, `${Math.floor(dl / 60)} h ${String(dl % 60).padStart(2, '0')} min de sol`)),
+    const toRise = (1440 - mins(time.hhmm(now)) + mins(m.sun.rise)) % 1440;
+    const sun = h('section', { class: 'cw-tile cw-sun' },
+      h('div', { class: 'tl' }, icon('sunrise', { size: 18 }), 'Nascer e pôr do sol'),
+      h('div', { class: 'srow' },
+        h('div', null, h('small', null, 'Nascer do sol'), h('b', null, m.sun.rise)),
+        h('div', null, h('small', null, 'Pôr do sol'), h('b', null, m.sun.set))),
       h('div', { html: sunArc(m.sun, time.hhmm(now)) }),
-      h('p', { class: 'tip' }, icon('moon', { size: 14 }), `Agora é noite: o sol nasce às ${m.sun.rise}, em ${Math.floor((1440 - mins(time.hhmm(now)) + mins(m.sun.rise)) / 60)} h ${(1440 - mins(time.hhmm(now)) + mins(m.sun.rise)) % 60} min.`));
+      h('div', { class: 'ts' }, `${Math.floor(dl / 60)} h ${String(dl % 60).padStart(2, '0')} min de luz · o sol nasce em ${Math.floor(toRise / 60)} h ${toRise % 60} min`));
+    const tiles = h('div', { class: 'cw-grid' },
+      wind,
+      tile(raw(dropSvg()), 'Umidade', `${n.humidity}%`, `Ponto de orvalho: ${dew(n.temp, n.humidity)}°`, h('div', { class: 'meter' }, h('i', { style: `width:${Math.max(0, Math.min(100, n.humidity))}%` }))),
+      tile(icon('thermometer', { size: 18 }), 'Sensação térmica', `${n.feels}°`, n.feels < n.temp ? 'O vento faz parecer mais frio' : 'Parecida com a temperatura real'),
+      tile(icon('sun', { size: 18 }), 'Índice UV', String(n.uv), n.uv === 0 ? 'Baixo durante a noite' : 'Use protetor solar', h('div', { class: 'uvbar' }, h('i', { style: `left:${Math.min(100, (Number(n.uv) || 0) / 11 * 100)}%` }))),
+      tile(raw(gaugeSvg()), 'Pressão', h('span', null, h('b', null, String(n.pressure)), h('small', null, ' hPa')), 'Estável'),
+      tile(icon('eye', { size: 18 }), 'Visibilidade', h('span', null, h('b', null, String(n.visibility)), h('small', null, ' km')), 'Ótima: céu limpo'),
+      tile(icon('cloud', { size: 18 }), 'Precipitação', `${n.rain ?? 0}%`, 'Sem chuva prevista nas próximas horas'),
+      sun);
 
-    /* cidades salvas */
-    const saved = h('section', { class: 'cl-card cl-saved' },
-      h('div', { class: 'ch' }, icon('map-pin', { size: 18 }), h('h3', null, 'Cidades salvas')),
-      m.saved.map((c) => h('button', { class: 'sv', on: { click: () => phone.toast('Sem conexão: a previsão desta cidade não está na extração.', { icon: 'cloud' }) } },
-        h('div', { class: 'tx' }, h('b', null, c.city + (c.region ? `, ${c.region}` : '')), h('small', null, c.desc || '')),
-        glyph(c.icon || 'cloud', 34), h('span', { class: 'tp' }, `${c.temp}°`))));
-
-    const block = (title, ic, child, extra = '') => h('section', { class: `cl-card ${extra}` }, h('div', { class: 'ch' }, icon(ic, { size: 18 }), h('h3', null, title)), child);
     const upd = time.parse(m.updated);
-
     el.append(
-      kit.appBar({ title: 'Clima', subtitle: place, className: 'cl-bar' }),
       sky,
-      h('div', { class: 'cl-wrap' },
+      h('div', { class: 'cw-wrap' },
+        top,
         hero,
-        block('Próximas horas', 'clock', hours, 'cl-hourly'),
+        hourly,
+        daily,
         tiles,
-        block('Próximos 7 dias', 'calendar-days', days, 'cl-daily'),
-        sun,
-        saved,
-        h('p', { class: 'cl-foot' }, icon('info', { size: 14 }), `Atualizado ${time.weekday(upd)} ${time.hhmm(upd)} · dados salvos no aparelho`)));
+        h('p', { class: 'cw-foot' }, icon('info', { size: 14 }), `${place} · atualizado ${time.weekday(upd)}. ${time.hhmm(upd)} · dados salvos no aparelho`)));
     phone.scan(el);
+
+    /* locais salvos (folha inferior) */
+    function openPlaces() {
+      phone.sheet({
+        title: 'Locais',
+        render(body, close) {
+          body.classList.add('cw-places');
+          const item = (c, cur) => h('button', { class: `cw-place ${cur ? 'cur' : ''}`, on: { click: () => { if (cur) close(); else offline(); } } },
+            h('div', { class: 'tx' }, h('b', null, c.city + (c.region ? `, ${c.region}` : '')), h('small', null, cur ? `Local atual · ${n.desc}` : (c.desc || ''))),
+            glyph(c.icon || 'cloud', 34), h('span', { class: 'tp' }, `${c.temp}°`));
+          body.append(item({ city: m.city, region: m.region, temp: n.temp, icon: n.icon }, true), ...m.saved.map((c) => item(c, false)));
+        },
+      });
+    }
   },
 
   search({ data }) {

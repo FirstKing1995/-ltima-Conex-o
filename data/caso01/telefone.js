@@ -1,4 +1,4 @@
-// Telefone de Iara: chamadas de setembro a 10/10 (aparelho) + chamadas pelo Papo de 11 a 13/10 (nuvem, todas perdidas).
+// Telefone de Iara: chamadas de setembro a 10/10 (aparelho) + chamadas pelo WhatsApp de 11 a 13/10 (nuvem, todas perdidas).
 // Números fora dos contatos aparecem formatados. Duração em segundos.
 
 export default {
@@ -42,7 +42,7 @@ export default {
     { id: 'c-1010-duda', phone: '5588997120384', contact: 'duda', at: '2026-10-10T15:44', dir: 'in', duration: 35, via: 'phone' },
     { id: 'c-1010-nanda', phone: '5585999082231', contact: 'nanda', at: '2026-10-10T19:05', dir: 'missed', duration: 0, via: 'phone' },
 
-    /* ---------- depois do desligamento: nuvem, pelo Papo ---------- */
+    /* ---------- depois do desligamento: nuvem, pelo WhatsApp ---------- */
     { id: 'c-1011-pai1', phone: '5588994417710', contact: 'pai', at: '2026-10-11T07:40', dir: 'missed', duration: 0, via: 'papo' },
     { id: 'c-1011-mae1', phone: '5588994305562', contact: 'mae', at: '2026-10-11T08:06', dir: 'missed', duration: 0, via: 'papo' },
     { id: 'c-1011-pai2', phone: '5588994417710', contact: 'pai', at: '2026-10-11T08:12', dir: 'missed', duration: 0, via: 'papo' },

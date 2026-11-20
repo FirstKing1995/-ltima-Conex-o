@@ -1,7 +1,7 @@
 // Galeria de Iara (aparelho, até sáb 10/10 23:47). Imagens em assets/caso01/img/. Lista completa em privado/imagens/midia.md.
 
 const IMG = (n) => `assets/caso01/img/${n}.jpg`;
-const DEV = 'Nimbus N9';
+const DEV = 'moto g85';
 
 // lugares (coordenadas da bíblia)
 const L = {
@@ -28,10 +28,10 @@ export default {
   albums: [
     { id: 'camera', name: 'Câmera', icon: 'camera', locked: false },
     { id: 'capturas', name: 'Capturas de tela', icon: 'smartphone', locked: false },
-    { id: 'papo', name: 'Papo', icon: 'message-circle', locked: false },
-    { id: 'lume', name: 'Lume', icon: 'aperture', locked: false },
+    { id: 'papo', name: 'WhatsApp', icon: 'message-circle', locked: false },
+    { id: 'lume', name: 'Instagram', icon: 'aperture', locked: false },
     { id: 'favoritos', name: 'Favoritos', icon: 'heart', locked: false },
-    { id: 'segura', name: 'Pasta Segura', icon: 'folder-lock', locked: true, puzzle: 'pasta' },
+    { id: 'segura', name: 'Pasta Trancada', icon: 'folder-lock', locked: true, puzzle: 'pasta' },
     { id: 'lixeira', name: 'Lixeira', icon: 'trash-2' },
   ],
 
@@ -114,13 +114,13 @@ export default {
     ph('cap-passagem-0910', '2026-10-09T06:41', 'capturas', 1080, 2400, null,
       'Captura de tela da passagem de ônibus Fortaleza – Sobral, sexta, 09/10, saída 07:30, poltrona 14, R$ 78,00, com QR code do embarque.', { o: { device: 'Captura de tela' } }),
     ph('cap-lume-comentario', '2026-08-14T23:20', 'capturas', 1080, 2400, null,
-      'Captura de tela de um comentário do perfil @visto.por.ultimo, sem foto de perfil, numa foto de Iara no Lume: "linda nessa luz". Iara circulou o nome do perfil em vermelho.', { o: { device: 'Captura de tela' } }),
+      'Captura de tela de um comentário do perfil @visto.por.ultimo, sem foto de perfil, numa foto de Iara no Instagram: "linda nessa luz". Iara circulou o nome do perfil em vermelho.', { o: { device: 'Captura de tela' } }),
     ph('cap-receita-bolo', '2026-09-21T14:03', 'capturas', 1080, 2400, null,
       'Captura de tela de uma receita de bolo de macaxeira com coco, com lista de ingredientes e modo de preparo. Pedido da Dona Socorro.', { o: { device: 'Captura de tela' } }),
     ph('papo-flyer-noite', '2026-10-05T11:07', 'papo', 1080, 1350, null,
-      'Cartaz da "Noite da Colheita": fundo verde-escuro com espigas de milho douradas, data sábado 10/10, Sítio Flor da Serra, Guaraciaba do Norte, programação com jantar às 20h, show da banda às 21h e discurso do CEO. Enviado por Lari.', { o: { device: 'Recebida no Papo' } }),
+      'Cartaz da "Noite da Colheita": fundo verde-escuro com espigas de milho douradas, data sábado 10/10, Sítio Flor da Serra, Guaraciaba do Norte, programação com jantar às 20h, show da banda às 21h e discurso do CEO. Enviado por Lari.', { o: { device: 'Recebida no WhatsApp' } }),
     ph('serra-amanhecer-0507', '2026-05-07T06:02', 'lume', 1440, 1080, { name: 'Serra da Ibiapaba · Guaraciaba do Norte', lat: -4.1703, lng: -40.7311 },
-      'Amanhecer na Serra da Ibiapaba: neblina baixa cobrindo o vale, o sol nascendo atrás de uma fileira de eucaliptos e um telhado de telha colonial em primeiro plano. Tons de ouro e azul-acinzentado. Foto publicada no Lume.',
+      'Amanhecer na Serra da Ibiapaba: neblina baixa cobrindo o vale, o sol nascendo atrás de uma fileira de eucaliptos e um telhado de telha colonial em primeiro plano. Tons de ouro e azul-acinzentado. Foto publicada no Instagram.',
       { img: 'serra_amanhecer' }),
     ph('pipoca-2009', '2009-06-14T10:12', 'favoritos', 1080, 1440, L.casaPais,
       'Foto antiga, de câmera compacta digital, de uma cachorrinha branca e malhada de marrom, a Pipoca, deitada numa toalha no terraço, olhando para a câmera com a cabeça inclinada. Nas bordas aparece o dedo da pequena Iara, de 10 anos, e a data impressa no canto, 14/06/2009.',
@@ -147,7 +147,7 @@ export default {
     ph('seg-recibo-aluguel', '2026-08-19T13:15', 'segura', 1080, 1440, L.fazenda,
       'Foto de um recibo manuscrito num bloco: "Recebi de Colheita Capital R$ 1.800,00 pela diária do uso do sítio para filmagem, dia 19/08", assinado "Raimundo, caseiro". Atrás, a caminhonete branca da visita.'),
     ph('seg-print-bonus', '2026-09-25T10:44', 'segura', 1080, 2400, null,
-      'Captura de tela do extrato da Jandaia: Pix recebido de "Colheita Capital Gestão Ltda." de R$ 20.000,00 às 10:12 e, logo abaixo, a devolução do mesmo valor às 10:40, ambos em 25/09.',
+      'Captura de tela do extrato do Nubank: Pix recebido de "Colheita Capital Gestão Ltda." de R$ 20.000,00 às 10:12 e, logo abaixo, a devolução do mesmo valor às 10:40, ambos em 25/09.',
       { o: { device: 'Captura de tela' } }),
     ph('seg-print-cnpj', '2026-09-27T09:20', 'segura', 1080, 2400, null,
       'Captura de tela da consulta pública do CNPJ da Colheita Capital: capital social R$ 10.000,00, atividade principal "consultoria em gestão empresarial", sem registro de imóvel rural, sem inscrição agropecuária.',
@@ -158,7 +158,7 @@ export default {
       'Foto tremida da cerca de madeira do mirante, apagada logo antes da versão boa. Só se vê um borrão de estacas e o céu laranja.',
       { img: 'lx_cerca_tremida', o: { deletedAt: '2026-10-10T18:20' } }),
     ph('lx-print-caio', '2026-10-08T20:14', 'lixeira', 1080, 2400, null,
-      'Captura de tela da conversa com Caio Montenegro no Papo, às 20:14 de 08/10: o lembrete do termo de confidencialidade e, às 20:11, "Releia a cláusula 9. Não quero precisar lembrar de novo." A mensagem das 20:11 não existe mais na conversa. Iara apagou o print depois.',
+      'Captura de tela da conversa com Caio Montenegro no WhatsApp, às 20:14 de 08/10: o lembrete do termo de confidencialidade e, às 20:11, "Releia a cláusula 9. Não quero precisar lembrar de novo." A mensagem das 20:11 não existe mais na conversa. Iara apagou o print depois.',
       { img: 'lx_print_caio', o: { device: 'Captura de tela', deletedAt: '2026-10-08T20:30' } }),
 
     /* ---------- PARTE 2 ---------- */

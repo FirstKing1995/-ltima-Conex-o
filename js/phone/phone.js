@@ -44,7 +44,12 @@ export const phone = {
     clear(root);
     statusEl = statusBar();
     screensEl = h('div', { class: 'ph-screens' });
-    gestureEl = h('div', { class: 'ph-gesture' }, h('button', { 'aria-label': 'Início (voltar para a tela inicial)', on: { click: () => phone.home() } }));
+    // Barra de navegação do Android (3 botões): voltar, início, recentes. Vale em todos os apps.
+    const nb = (cls, label, svg, fn) => { const b = h('button', { class: 'nb-' + cls, 'aria-label': label, on: { click: (e) => { e.stopPropagation(); fn(); } } }); b.innerHTML = svg; return b; };
+    gestureEl = h('div', { class: 'ph-navbar' },
+      nb('back', 'Voltar', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 4.6v14.8L5.2 12z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>', () => { if (document.querySelector('#overlay-root > *')) { bus.emit('overlay:back'); return; } phone.back(); }),
+      nb('home', 'Início', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.4" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>', () => phone.home()),
+      nb('recent', 'Apps recentes', '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.6" y="5.6" width="12.8" height="12.8" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>', () => phone.home()));
     root.append(screensEl, statusEl, h('div', { class: 'ph-cam' }), gestureEl);
     statusEl.style.pointerEvents = 'auto';
     statusEl.addEventListener('click', () => phone.openShade?.());

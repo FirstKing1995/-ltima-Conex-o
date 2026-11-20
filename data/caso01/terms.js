@@ -50,7 +50,7 @@ export default {
     ...horas.map(t => ({ id: 'h-' + t.replace(':', ''), label: t, cat: 'hora', match: [t, t.replace(':', 'h')] })),
     // objetos
     { id: 'o-celular', label: 'celular', cat: 'objeto', match: ['celular'] },
-    { id: 'o-relogio', label: 'relógio', cat: 'objeto', match: ['relógio', 'Pulso Band'] },
+    { id: 'o-relogio', label: 'relógio', cat: 'objeto', match: ['relógio', 'Mi Fitness Band'] },
     { id: 'o-gravacao', label: 'gravação', cat: 'objeto', match: ['gravação', 'gravar', 'gravando'] },
     { id: 'o-tripe', label: 'tripé', cat: 'objeto', match: ['tripé'] },
     { id: 'o-pin', label: 'PIN', cat: 'objeto', match: ['PIN'], cs: true },
@@ -59,7 +59,7 @@ export default {
     { id: 'o-live', label: 'live', cat: 'objeto', match: ['live', 'ao vivo'] },
     { id: 'o-video', label: 'vídeo', cat: 'objeto', match: ['vídeo'] },
     { id: 'o-comprovante', label: 'comprovante', cat: 'objeto', match: ['comprovante', 'comprovantes'] },
-    { id: 'o-pasta', label: 'Pasta Segura', cat: 'objeto', match: ['Pasta Segura'] },
+    { id: 'o-pasta', label: 'Pasta Trancada', cat: 'objeto', match: ['Pasta Trancada'] },
     { id: 'o-gelo', label: 'gelo', cat: 'objeto', match: ['gelo'] },
     { id: 'o-fita', label: 'fita de perigo', cat: 'objeto', match: ['fita de perigo', 'fita de sinalização', 'fita'] },
     { id: 'o-barro', label: 'barro vermelho', cat: 'objeto', match: ['barro vermelho', 'barro'] },

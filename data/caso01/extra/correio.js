@@ -1,31 +1,31 @@
-// Correio — conteúdo extra (ruído do dia a dia + relatórios do Espelho Seguro + Iara → Bruna 29/09).
+// Gmail — conteúdo extra (ruído do dia a dia + relatórios do Espelho Seguro + Iara → Bruna 29/09).
 // Somado a data/caso01/correio.js. Mesmo formato: pastas inbox | sent | promo | spam | trash.
 // Iara só envia até sáb 10/10; depois disso só chegam e-mails (conta na nuvem, até ter 13/10 23:12).
 
-const IARA = { name: 'Iara Fontenele', email: 'iara.fontenele@correio.app' };
+const IARA = { name: 'Iara Fontenele', email: 'iara.fontenele@gmail.com' };
 const BRUNA = { name: 'Bruna Leal', email: 'bruna.leal@ofarol.com.br' };
 const ESPELHO = { name: 'Espelho Seguro', email: 'alertas@espelhoseguro.app' };
 const PROF = { name: 'Heitor Maranhão', email: 'heitor.maranhao@faculdadeatlantico.edu.br' };
 const POS = { name: 'Coordenação · Especialização em Fotojornalismo', email: 'pos.fotojornalismo@faculdadeatlantico.edu.br' };
-const JESSICA = { name: 'Jéssica e Thiago', email: 'casamento.jessicaethiago@correio.app' };
-const LITORAL = { name: 'Litoral Móvel', email: 'faturas@litoralmovel.com.br' };
-const JANDAIA = { name: 'Jandaia', email: 'fatura@jandaia.com.br' };
-const JANDAIA_AV = { name: 'Jandaia', email: 'avisos@jandaia.com.br' };
+const JESSICA = { name: 'Jéssica e Thiago', email: 'casamento.jessicaethiago@gmail.com' };
+const LITORAL = { name: 'Claro', email: 'faturas@claro.com.br' };
+const JANDAIA = { name: 'Nubank', email: 'fatura@nubank.com.br' };
+const JANDAIA_AV = { name: 'Nubank', email: 'avisos@nubank.com.br' };
 const ENERGIA = { name: 'Energia Ceará', email: 'contas@energiaceara.com.br' };
-const LUME = { name: 'Lume', email: 'notificacoes@lume.app' };
+const LUME = { name: 'Instagram', email: 'notificacoes@instagram.com' };
 const FOCO = { name: 'Loja Foco', email: 'pedidos@lojafoco.com.br' };
 const FOCO_NEWS = { name: 'Loja Foco', email: 'novidades@lojafoco.com.br' };
 const FOTOBRAS = { name: 'FotoBras', email: 'ofertas@fotobras.com.br' };
 const LENTE = { name: 'Revista Lente Viva', email: 'contato@lenteviva.com.br' };
 const OLHAR = { name: 'Escola Olhar', email: 'turmas@escolaolhar.com.br' };
 const PREMIO = { name: 'Prêmio Luz do Sertão', email: 'inscricoes@premioluzdosertao.org.br' };
-const SINDICO = { name: 'Condomínio Ed. Benfica Plaza', email: 'sindico.benficaplaza@correio.app' };
-const MOURA = { name: 'Patrícia Moura', email: 'patimoura@correio.app' };
-const LIVIA = { name: 'Lívia Carvalho', email: 'livia.carv@correio.app' };
-const THAIS = { name: 'Rosilene Freitas', email: 'rosilene.freitas@correio.app' };
-const BATIZADO = { name: 'Aline Sobreira Costa', email: 'aline.scosta@correio.app' };
-const CAMILA = { name: 'Camila Bezerra', email: 'camilabezerra@correio.app' };
-const SANDRO = { name: 'Sandro Alencar', email: 'sandro.alencar.foto@correio.app' };
+const SINDICO = { name: 'Condomínio Ed. Benfica Plaza', email: 'sindico.benficaplaza@gmail.com' };
+const MOURA = { name: 'Patrícia Moura', email: 'patimoura@gmail.com' };
+const LIVIA = { name: 'Lívia Carvalho', email: 'livia.carv@gmail.com' };
+const THAIS = { name: 'Rosilene Freitas', email: 'rosilene.freitas@gmail.com' };
+const BATIZADO = { name: 'Aline Sobreira Costa', email: 'aline.scosta@gmail.com' };
+const CAMILA = { name: 'Camila Bezerra', email: 'camilabezerra@gmail.com' };
+const SANDRO = { name: 'Sandro Alencar', email: 'sandro.alencar.foto@gmail.com' };
 const SONORA = { name: 'Sonora', email: 'oi@sonora.app' };
 
 const fim = 'Você recebe este alerta porque ativou o espelho em 03/10/2026.';
@@ -45,7 +45,7 @@ const emails = [
 
 Espelho ativado. Primeira sincronização completa.
 
-Aparelho de origem: Nimbus N9
+Aparelho de origem: moto g85
 Administrador do espelho: theo.castro
 Permissão do administrador: ativação e manutenção (sem acesso de leitura registrado)
 Data e hora: sáb., 3 de out. de 2026, 21:30
@@ -403,15 +403,15 @@ Escola Olhar`, { read: false }),
 Fundo de Cultura de Fortaleza`),
 
   /* ---------------- Contas, faturas e banco ---------------- */
-  inb('litoral-fatura-mai', '2026-05-02T06:30', LITORAL, 'Sua fatura Litoral Móvel (venc. 10/05)',
+  inb('litoral-fatura-mai', '2026-05-02T06:30', LITORAL, 'Sua fatura Claro (venc. 10/05)',
 `Olá! A fatura da linha (85) 98741-2290 está disponível: R$ 79,90, vencimento em 10/05. Pague pelo app e evite a suspensão.
 
-Litoral Móvel`),
+Claro`),
 
   inb('litoral-pago-1007', '2026-10-07T20:20', LITORAL, 'Pagamento recebido',
 `Recebemos o pagamento da sua fatura de outubro (R$ 79,90). Obrigado por escolher a Litoral!
 
-Litoral Móvel`),
+Claro`),
 
   inb('energia-ago', '2026-08-25T07:10', ENERGIA, 'Conta de luz de agosto: R$ 151,07',
 `Sua conta de luz (Rua Carneiro da Cunha, Benfica) chegou: R$ 151,07. Vencimento: 05/09.
@@ -421,19 +421,19 @@ Dica: o ar-condicionado em 23 °C gasta até 30% menos que em 18 °C.
 Energia Ceará`),
 
   inb('jandaia-fatura-jul', '2026-07-28T08:00', JANDAIA, 'Sua fatura de julho está disponível',
-`Olá, Iara. A fatura do seu cartão Jandaia fechou em R$ 1.012,48 e vence em 05/08. Você pode pagar pelo app, com Pix ou boleto.
+`Olá, Iara. A fatura do seu cartão Nubank fechou em R$ 1.012,48 e vence em 05/08. Você pode pagar pelo app, com Pix ou boleto.
 
-Jandaia · seu banco, do seu jeito`),
+Nubank · seu banco, do seu jeito`),
 
   inb('jandaia-limite', '2026-08-19T13:00', JANDAIA_AV, 'Boa notícia: seu limite aumentou',
-`Iara, o limite do seu cartão Jandaia agora é de R$ 4.500. O novo valor já está disponível no app.
+`Iara, o limite do seu cartão Nubank agora é de R$ 4.500. O novo valor já está disponível no app.
 
-Jandaia · seu banco, do seu jeito`),
+Nubank · seu banco, do seu jeito`),
 
   inb('jandaia-pix-regra', '2026-10-12T08:00', JANDAIA_AV, 'Novos limites do Pix à noite',
 `Olá, Iara. A partir de 01/11, o limite padrão do Pix entre 20h e 6h passa a ser de R$ 1.000. Você pode ajustar seus limites no app, em Pix > Meus limites.
 
-Jandaia · seu banco, do seu jeito`, { read: false }),
+Nubank · seu banco, do seu jeito`, { read: false }),
 
   inb('condominio-ata', '2026-09-10T19:30', SINDICO, 'Ata da assembleia e rateio da caixa d\'água',
 `Prezados moradores,
@@ -475,12 +475,12 @@ Se não foi você, ignore este e-mail.
 
 Loja Foco`),
 
-  inb('streamflix-codigo', '2026-07-30T22:05', { name: 'Streamflix', email: 'nao-responda@streamflix.com' }, 'Seu código de acesso temporário',
-`Alguém (provavelmente você) pediu para entrar na Streamflix em uma TV. Código: 7381. Válido por 15 minutos.
+  inb('streamflix-codigo', '2026-07-30T22:05', { name: 'Netflix', email: 'nao-responda@streamflix.com' }, 'Seu código de acesso temporário',
+`Alguém (provavelmente você) pediu para entrar na Netflix em uma TV. Código: 7381. Válido por 15 minutos.
 
-Streamflix`),
+Netflix`),
 
-  inb('lume-resumo-ago', '2026-09-01T10:00', LUME, 'Seu mês no Lume: agosto',
+  inb('lume-resumo-ago', '2026-09-01T10:00', LUME, 'Seu mês no Instagram: agosto',
 `@iarafontenele.foto, olha só o seu agosto:
 
 Contas alcançadas: 18.402 (+34%)
@@ -489,26 +489,26 @@ Post mais visto: "luz de janela, tecido solto" (ensaio gestante)
 
 Continue postando nos horários em que seu público está ativo: terças e quintas, às 19h.
 
-Lume`),
+Instagram`),
 
   inb('lume-alerta-reels', '2026-09-19T21:40', LUME, 'Seu carrossel está bombando',
 `Seu carrossel "5 erros de luz que eu cometia" passou de 10 mil visualizações em 24 horas. Que tal responder os comentários?
 
-Lume`),
+Instagram`),
 
-  inb('lume-resumo-set', '2026-10-01T10:00', LUME, 'Seu mês no Lume: setembro',
+  inb('lume-resumo-set', '2026-10-01T10:00', LUME, 'Seu mês no Instagram: setembro',
 `@iarafontenele.foto, olha só o seu setembro:
 
 Contas alcançadas: 31.977 (+73%)
 Novos seguidores: 640
 Post mais visto: "5 erros de luz que eu cometia"
 
-Lume`),
+Instagram`),
 
   inb('lume-marcacao-1210', '2026-10-12T19:10', LUME, 'Você foi marcada em 14 publicações',
-`@iarafontenele.foto, você foi marcada em 14 publicações e 37 comentários desde ontem. Abra o Lume para ver.
+`@iarafontenele.foto, você foi marcada em 14 publicações e 37 comentários desde ontem. Abra o Instagram para ver.
 
-Lume`, { read: false }),
+Instagram`, { read: false }),
 
   /* ---------------- Newsletters e promoções ---------------- */
   inb('lente-viva-213', '2026-10-13T07:30', LENTE, 'Edição 213: fotografar à noite sem medo do ISO',
@@ -538,15 +538,15 @@ FotoBras`),
 
 FotoBras`),
 
-  pro('promo-bora-1110', '2026-10-11T18:00', { name: 'Bora', email: 'ola@bora.app' }, 'Domingo de chuva? Seu cupom ainda vale',
+  pro('promo-bora-1110', '2026-10-11T18:00', { name: 'Uber', email: 'ola@uber.com' }, 'Domingo de chuva? Seu cupom ainda vale',
 `O cupom BORA10 vale até 15/10. Use na sua próxima viagem.
 
-Bora`),
+Uber`),
 
-  pro('promo-streamflix-1310', '2026-10-13T12:00', { name: 'Streamflix', email: 'oi@streamflix.com' }, 'Continue de onde parou',
+  pro('promo-streamflix-1310', '2026-10-13T12:00', { name: 'Netflix', email: 'oi@streamflix.com' }, 'Continue de onde parou',
 `Faltam 3 episódios para você terminar "Maré Baixa". Os novos episódios chegam sexta.
 
-Streamflix`),
+Netflix`),
 
   pro('promo-expresso', '2026-10-10T09:00', { name: 'Expresso Norte', email: 'vendas@expressonorte.com.br' }, 'Como foi sua viagem?',
 `Conte pra gente como foi a sua viagem Fortaleza → Sobral de 09/10. Leva menos de 1 minuto.

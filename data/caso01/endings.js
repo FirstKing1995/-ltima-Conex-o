@@ -7,7 +7,7 @@ export default {
     bonusKey: 'bonusEco',
     paragraphs: [
       'Ela leu o relatório de pé, na redação do O Farol, com o casaco ainda no braço. Depois sentou. Releu. Ligou para o editor-chefe e disse só uma frase: preciso de uma página inteira.',
-      'A reportagem saiu numa quinta-feira. Trazia os extratos da Pasta Segura, a taxa de garantia que a Colheita Capital nunca cobrou, a planilha das fazendas que não existiam. Trazia o nome de Iara Fontenele no primeiro parágrafo, antes do nome da empresa.',
+      'A reportagem saiu numa quinta-feira. Trazia os extratos da Pasta Trancada, a taxa de garantia que a Colheita Capital nunca cobrou, a planilha das fazendas que não existiam. Trazia o nome de Iara Fontenele no primeiro parágrafo, antes do nome da empresa.',
       'A gravação das 23:32 seguiu anexada ao seu relatório. Nove minutos e cinquenta e dois segundos. O delegado de Guaraciaba ouviu de pé e não pediu para ouvir de novo. O inquérito foi reaberto no mesmo dia. Quando ouviu a própria voz sair do alto-falante da delegacia, Duda não negou. Foi presa três dias depois. A mensagem do timelapse, o PIN, a gravação apagada, as três notificações: tudo estava onde ela tinha deixado, esperando alguém olhar.',
       'A Colheita Capital passou a ser investigada pela Comissão de Valores Mobiliários e pela Polícia Federal. Caio Montenegro falou em perseguição.',
     ],
@@ -51,7 +51,7 @@ export default {
   bonusEco: {
     title: 'Anexo · e-mail recebido às 03:12',
     paragraphs: [
-      'De: theo.castro@correio.app. Assunto: (sem assunto).',
+      'De: theo.castro@gmail.com. Assunto: (sem assunto).',
       'inspetor, o senhor chegou no meu nome pelo backup. ninguém mais teria chegado.',
       'no dia 3 de outubro a iara me pediu uma cópia cifrada do celular. disse: se acontecer alguma coisa, você sabe o que fazer. eu configurei rindo dela. chamei de paranoia.',
       'quando ela morreu eu abri a cópia. não tinha ordem judicial, não tinha nada. só tinha medo. passei dois dias olhando para a tela sem saber a quem entregar aquilo.',

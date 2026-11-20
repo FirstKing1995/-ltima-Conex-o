@@ -1,4 +1,4 @@
-// Pulso Band 4 — passos, sono e frequência cardíaca. Dados do aparelho, até sáb 10/10 às 23:41:31 (última sincronização).
+// Smart Band 8 — passos, sono e frequência cardíaca. Dados do aparelho, até sáb 10/10 às 23:41:31 (última sincronização).
 
 // 01/09 a 10/10 (40 dias)
 const stepsList = [
@@ -20,7 +20,7 @@ const day = (i) => {
 };
 
 export default {
-  device: { name: 'Pulso Band 4', lastSync: '2026-10-10T23:41:31' },
+  device: { name: 'Smart Band 8', lastSync: '2026-10-10T23:41:31' },
 
   steps: stepsList.map((value, i) => ({ date: day(i), value })),
 
@@ -45,6 +45,6 @@ export default {
     { at: '2026-10-10T22:20', kind: 'high-hr', title: 'Frequência cardíaca alta', text: '108 bpm sem atividade física registrada.' },
     { at: '2026-10-10T23:39:20', kind: 'high-hr', title: 'Frequência cardíaca alta', text: '139 bpm. Sem passos registrados nos últimos 2 minutos.' },
     { at: '2026-10-10T23:41:02', kind: 'fall', title: 'Queda forte detectada', text: 'Impacto forte seguido de ausência de movimento. Sem resposta do usuário.' },
-    { at: '2026-10-10T23:41:31', kind: 'disconnect', title: 'Pulso Band 4 desconectado', text: 'Conexão Bluetooth com o celular perdida. Última leitura enviada: 23:41.' },
+    { at: '2026-10-10T23:41:31', kind: 'disconnect', title: 'Smart Band 8 desconectado', text: 'Conexão Bluetooth com o celular perdida. Última leitura enviada: 23:41.' },
   ],
 };

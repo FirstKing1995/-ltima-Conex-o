@@ -1,7 +1,7 @@
-// Correio — e-mail de Iara (nuvem: chega até ter 13/10 23:12).
+// Gmail — e-mail de Iara (nuvem: chega até ter 13/10 23:12).
 // Pastas: inbox | sent | promo | spam | trash. Anexos apontam para ids de arquivos.js.
 
-const IARA = { name: 'Iara Fontenele', email: 'iara.fontenele@correio.app' };
+const IARA = { name: 'Iara Fontenele', email: 'iara.fontenele@gmail.com' };
 const BRUNA = { name: 'Bruna Leal', email: 'bruna.leal@ofarol.com.br' };
 const CAIO = { name: 'Caio Montenegro', email: 'caio@colheitacapital.com.br' };
 const MARCOS = { name: 'Marcos Vieira', email: 'marcos@colheitacapital.com.br' };
@@ -64,7 +64,7 @@ O que ajuda:
 5. Nomes: quem manda, quem recruta, quem lida com o dinheiro.
 6. Se alguém te oferecer dinheiro, favor ou ameaça para você ficar calada, guarde o registro.
 
-Guarde tudo num lugar seguro e não encaminhe nada por e-mail nem pelo Papo. Quando você tiver o material, a gente marca para se ver pessoalmente, aqui em Fortaleza.
+Guarde tudo num lugar seguro e não encaminhe nada por e-mail nem pelo WhatsApp. Quando você tiver o material, a gente marca para se ver pessoalmente, aqui em Fortaleza.
 
 Me avise se algo mudar.
 
@@ -142,11 +142,11 @@ ${SIG_BRUNA}`, { read: false, important: true }),
   /* ---------------- Segurança da conta ---------------- */
   {
     id: 'seguranca-login', folder: 'inbox', live: true, important: true, read: false,
-    from: { name: 'Segurança do Correio', email: 'seguranca@correio.app' }, to: [IARA], at: '2026-10-13T22:58',
+    from: { name: 'Google', email: 'seguranca@gmail.com' }, to: [IARA], at: '2026-10-13T22:58',
     subject: 'Nova tentativa de acesso à sua conta',
     body: `Olá, Iara.
 
-Detectamos uma nova tentativa de acesso à sua conta iara.fontenele@correio.app.
+Detectamos uma nova tentativa de acesso à sua conta iara.fontenele@gmail.com.
 
 Local: Guaraciaba do Norte, CE, Brasil
 Dispositivo: Android
@@ -156,7 +156,7 @@ Se foi você, nenhuma ação é necessária. Se não foi você, altere sua senha
 
 Nunca compartilhe códigos de verificação com ninguém.
 
-Equipe de Segurança · Correio`,
+Equipe de Segurança · Gmail`,
   },
 
   /* ---------------- Colheita Capital ---------------- */
@@ -179,14 +179,14 @@ Fazenda Boa Esperança (Itapipoca): 28/07
 Fazenda Vale Verde (Quixadá): 11/08
 Fazenda Novo Horizonte (Canindé): 25/08
 
-Leve o cartão formatado e o drone carregado. O Caio quer cortes curtos para o Lume, vertical. Pode ser?
+Leve o cartão formatado e o drone carregado. O Caio quer cortes curtos para o Instagram, vertical. Pode ser?
 
 Marcos Vieira · Marketing, Colheita Capital`),
 
   inb('colheita-convite', '2026-09-22T10:05', MARCOS, 'Convite: Noite da Colheita, sáb 10/10, Sítio Flor da Serra',
 `Iara,
 
-o convite oficial da Noite da Colheita já está pronto, em anexo. O evento será no sábado, 10 de outubro, no Sítio Flor da Serra, em Guaraciaba do Norte. Portões abertos às 19h, jantar às 20h, show da banda às 21h e o discurso do Caio ao vivo no Lume, perto da meia-noite.
+o convite oficial da Noite da Colheita já está pronto, em anexo. O evento será no sábado, 10 de outubro, no Sítio Flor da Serra, em Guaraciaba do Norte. Portões abertos às 19h, jantar às 20h, show da banda às 21h e o discurso do Caio ao vivo no Instagram, perto da meia-noite.
 
 Você vai cobrir o evento inteiro (foto e vídeo). A produção está com a Lari. Fique à vontade para chegar mais cedo e fotografar a propriedade.
 
@@ -207,9 +207,9 @@ Marcos Vieira · Marketing, Colheita Capital`),
   inb('lari-roteiro', '2026-10-08T12:20', LARI, 'Roteiro v4: Noite da Colheita (confere por favor)',
 `Oi, Iara!
 
-Segue o roteiro final da noite, versão 4. Dá uma olhada nos horários da sua cobertura e me avisa se alguma coisa não bate com o seu planejamento de equipamento. A banda toca até 23:25, o Caio sobe logo em seguida e o discurso é ao vivo no Lume. Fogos à meia-noite.
+Segue o roteiro final da noite, versão 4. Dá uma olhada nos horários da sua cobertura e me avisa se alguma coisa não bate com o seu planejamento de equipamento. A banda toca até 23:25, o Caio sobe logo em seguida e o discurso é ao vivo no Instagram. Fogos à meia-noite.
 
-Qualquer mudança eu te aviso no Papo.
+Qualquer mudança eu te aviso no WhatsApp.
 
 Larissa Prado · Produtora, Produções Prado`, { attachments: [{ name: 'Roteiro_Noite_da_Colheita_v4.pdf', file: 'roteiro' }], starred: true }),
 
@@ -294,7 +294,7 @@ Cooperativa Van Serrana`, { attachments: [{ name: 'Reserva_Van_0910.pdf', file: 
 
   /* ---------------- Clientes e trabalho de fotógrafa ---------------- */
   inb('cliente-renata', '2026-08-20T14:12', { name: 'Renata Almeida', email: 'renata.almeida@clinicaalmeida.com.br' }, 'Orçamento: ensaio profissional para a clínica',
-`Oi, Iara! Vi seu trabalho no Lume e adorei. Pode me passar um orçamento para um ensaio com 6 profissionais da clínica, mais fotos da recepção e dos consultórios?
+`Oi, Iara! Vi seu trabalho no Instagram e adorei. Pode me passar um orçamento para um ensaio com 6 profissionais da clínica, mais fotos da recepção e dos consultórios?
 
 Preciso das fotos até o fim de setembro, para o site novo.
 
@@ -308,14 +308,14 @@ Segue o orçamento em anexo. Inclui diária de 4 horas, 40 fotos tratadas e dire
 
 Iara`, { attachments: [{ name: 'Orcamento_Ensaio_Clinica.pdf', file: 'orcamento-ensaio-renata' }] }),
 
-  inb('cliente-livia', '2026-09-12T19:40', { name: 'Lívia Carvalho', email: 'livia.carv@correio.app' }, 'Casamento 12/12: você ainda tem data?',
+  inb('cliente-livia', '2026-09-12T19:40', { name: 'Lívia Carvalho', email: 'livia.carv@gmail.com' }, 'Casamento 12/12: você ainda tem data?',
 `Iara, oi! O João e eu vimos suas fotos de casamento e queremos muito você. A data é 12 de dezembro, em Cascavel. Você ainda tem agenda?
 
 Pode nos mandar os valores?
 
 Lívia`),
 
-  snd('cliente-livia-r', '2026-09-13T09:30', { name: 'Lívia Carvalho', email: 'livia.carv@correio.app' }, 'Re: Casamento 12/12: você ainda tem data?',
+  snd('cliente-livia-r', '2026-09-13T09:30', { name: 'Lívia Carvalho', email: 'livia.carv@gmail.com' }, 'Re: Casamento 12/12: você ainda tem data?',
 `Lívia, que alegria! Tenho a data, sim. Mandei o orçamento em anexo, com as duas opções (só cerimônia, ou cerimônia + festa). Sinal de 30% para reservar a data.
 
 Iara`, { attachments: [{ name: 'Orcamento_Casamento_Livia_Joao.xlsx', file: 'orcamento-casamento' }] }),
@@ -323,7 +323,7 @@ Iara`, { attachments: [{ name: 'Orcamento_Casamento_Livia_Joao.xlsx', file: 'orc
   snd('curriculo-rh', '2026-08-12T16:40', { name: 'RH Agência Pulsar', email: 'rh@agenciapulsar.com.br' }, 'Candidatura: fotógrafa e videomaker (vaga híbrida)',
 `Olá,
 
-envio meu currículo para a vaga de fotógrafa e videomaker. Tenho 5 anos de experiência com eventos, casamentos e institucional. Portfólio no Lume (@iarafontenele.foto).
+envio meu currículo para a vaga de fotógrafa e videomaker. Tenho 5 anos de experiência com eventos, casamentos e institucional. Portfólio no Instagram (@iarafontenele.foto).
 
 Atenciosamente,
 Iara Fontenele`, { attachments: [{ name: 'Curriculo_Iara_Fontenele.pdf', file: 'curriculo-iara' }] }),
@@ -333,27 +333,27 @@ Iara Fontenele`, { attachments: [{ name: 'Curriculo_Iara_Fontenele.pdf', file: '
 
 Equipe de RH · Agência Pulsar`, { read: true }),
 
-  inb('cliente-camila', '2026-08-24T08:55', { name: 'Camila Bezerra', email: 'camilabezerra@correio.app' }, 'Fotos do ensaio gestante',
+  inb('cliente-camila', '2026-08-24T08:55', { name: 'Camila Bezerra', email: 'camilabezerra@gmail.com' }, 'Fotos do ensaio gestante',
 `Iara, as fotos ficaram LINDAS. Chorei no meio da galeria. Obrigada! Já indiquei para duas amigas.
 
 Beijos,
 Camila`),
 
   /* ---------------- Contas e faturas ---------------- */
-  inb('fatura-jandaia-set', '2026-09-28T08:00', { name: 'Jandaia', email: 'fatura@jandaia.com.br' }, 'Sua fatura de setembro está disponível',
-`Olá, Iara. A fatura do seu cartão Jandaia fechou em R$ 1.294,17 e vence em 05/10. Você pode pagar pelo app, com Pix ou boleto.
+  inb('fatura-jandaia-set', '2026-09-28T08:00', { name: 'Nubank', email: 'fatura@nubank.com.br' }, 'Sua fatura de setembro está disponível',
+`Olá, Iara. A fatura do seu cartão Nubank fechou em R$ 1.294,17 e vence em 05/10. Você pode pagar pelo app, com Pix ou boleto.
 
-Jandaia · seu banco, do seu jeito`),
+Nubank · seu banco, do seu jeito`),
 
-  inb('fatura-jandaia-out', '2026-10-05T08:00', { name: 'Jandaia', email: 'fatura@jandaia.com.br' }, 'Pagamento da fatura confirmado',
+  inb('fatura-jandaia-out', '2026-10-05T08:00', { name: 'Nubank', email: 'fatura@nubank.com.br' }, 'Pagamento da fatura confirmado',
 `Recebemos o pagamento da sua fatura de setembro. Obrigado!
 
-Jandaia`),
+Nubank`),
 
-  inb('litoral-fatura', '2026-10-02T06:30', { name: 'Litoral Móvel', email: 'faturas@litoralmovel.com.br' }, 'Sua fatura Litoral Móvel (venc. 10/10)',
+  inb('litoral-fatura', '2026-10-02T06:30', { name: 'Claro', email: 'faturas@claro.com.br' }, 'Sua fatura Claro (venc. 10/10)',
 `Olá! A fatura da linha (85) 98741-2290 está disponível: R$ 79,90, vencimento em 10/10. Pague pelo app e evite a suspensão.
 
-Litoral Móvel`),
+Claro`),
 
   inb('energia-fatura', '2026-09-25T07:10', { name: 'Energia Ceará', email: 'contas@energiaceara.com.br' }, 'Conta de luz de setembro: R$ 168,32',
 `Sua conta de luz (Rua Carneiro da Cunha, Benfica) chegou: R$ 168,32. Vencimento: 05/10.
@@ -365,10 +365,10 @@ Energia Ceará`),
 
 FibraNet`),
 
-  inb('streamflix', '2026-10-03T12:00', { name: 'Streamflix', email: 'cobranca@streamflix.com' }, 'Cobrança realizada: R$ 39,90',
-`Recebemos o pagamento da sua assinatura Streamflix Padrão (R$ 39,90). Aproveite a nova temporada.
+  inb('streamflix', '2026-10-03T12:00', { name: 'Netflix', email: 'cobranca@streamflix.com' }, 'Cobrança realizada: R$ 39,90',
+`Recebemos o pagamento da sua assinatura Netflix Padrão (R$ 39,90). Aproveite a nova temporada.
 
-Streamflix`, { read: true }),
+Netflix`, { read: true }),
 
   inb('nuvem-armazenamento', '2026-09-16T08:00', { name: 'Nuvem+', email: 'avisos@nuvemmais.com' }, 'Seu armazenamento está quase cheio (92%)',
 `Você usou 92% dos seus 100 GB. Libere espaço ou faça upgrade por R$ 9,90/mês.
@@ -403,14 +403,14 @@ FotoBras`),
 `O tripé que cabe na mochila: 1,1 kg, suporta 12 kg. Só até domingo.
 
 FotoBras`),
-  pro('promo-bora', '2026-10-04T18:00', { name: 'Bora', email: 'ola@bora.app' }, 'Cupom de R$ 10 para a sua próxima corrida',
+  pro('promo-bora', '2026-10-04T18:00', { name: 'Uber', email: 'ola@uber.com' }, 'Cupom de R$ 10 para a sua próxima corrida',
 `Use o cupom BORA10 na sua próxima viagem em Fortaleza. Válido até 15/10.
 
-Bora`),
-  pro('promo-streamflix', '2026-09-22T10:00', { name: 'Streamflix', email: 'oi@streamflix.com' }, 'Novos episódios esta semana',
+Uber`),
+  pro('promo-streamflix', '2026-09-22T10:00', { name: 'Netflix', email: 'oi@streamflix.com' }, 'Novos episódios esta semana',
 `Cinco estreias para o seu fim de semana. Maratone com a gente.
 
-Streamflix`),
+Netflix`),
   pro('promo-passagens', '2026-10-01T08:00', { name: 'Viaje Mais', email: 'ofertas@viajemais.com' }, 'Fortaleza → Jericoacoara por R$ 69',
 `Ônibus leito para Jeri com 40% off. Ofertas até 20/10.
 
@@ -427,25 +427,25 @@ Pague Bem`),
 [Resgatar prêmio](http://premiobr-sorteio.xyz/r)`),
   spm('spam-2', '2026-10-05T14:55', { name: 'Credito Facil', email: 'contato@credfacil-online.net' }, 'Empréstimo aprovado sem consulta ao SPC',
 `Dinheiro na sua conta em 10 minutos. Sem comprovar renda. Responda este e-mail com seu CPF.`),
-  spm('spam-3', '2026-09-30T22:10', { name: 'Jandaia Segurança', email: 'seguranca@jandaia-verifica.com' }, 'URGENTE: sua conta será bloqueada',
+  spm('spam-3', '2026-09-30T22:10', { name: 'Nubank Segurança', email: 'seguranca@nubank-verifica.com' }, 'URGENTE: sua conta será bloqueada',
 `Detectamos atividade suspeita. Acesse o link para confirmar seus dados em até 2 horas.
 
-[Confirmar agora](http://jandaia-verifica.com/login)`),
+[Confirmar agora](http://nubank-verifica.com/login)`),
   spm('spam-4', '2026-09-14T09:08', { name: 'Dr. Marcos Emagrece', email: 'vendas@emagreca-ja.biz' }, 'Perca 12 kg em 15 dias (método secreto)',
 `Chega de dieta! Clique e descubra o método que os médicos não querem que você conheça.`),
 
-  { id: 'lixo-1', folder: 'trash', from: { name: 'Bora', email: 'ola@bora.app' }, to: [IARA], at: '2026-09-10T18:00', subject: 'Sua corrida foi avaliada', body: 'Obrigado por avaliar sua motorista. Sua opinião ajuda a melhorar o Bora.', read: true },
+  { id: 'lixo-1', folder: 'trash', from: { name: 'Uber', email: 'ola@uber.com' }, to: [IARA], at: '2026-09-10T18:00', subject: 'Sua corrida foi avaliada', body: 'Obrigado por avaliar sua motorista. Sua opinião ajuda a melhorar o Uber.', read: true },
   { id: 'lixo-2', folder: 'trash', from: { name: 'Fotografe Mais', email: 'oi@fotografemais.com' }, to: [IARA], at: '2026-09-15T07:30', subject: 'Webinar grátis: iluminação com luz natural', body: 'Quinta, às 19h, ao vivo. Inscreva-se.', read: true },
   { id: 'lixo-3', folder: 'trash', from: IARA, to: [IARA], at: '2026-09-27T16:00', subject: 'rascunho (sem assunto)', body: 'Pergunta pro Théo se ele consegue fazer aquele backup cifrado de que a gente falou.', read: true },
 
   /* ---------------- PARTE 2 ---------------- */
   {
     id: 'nuvem-edicao', folder: 'inbox', live: true, important: false, read: false, req: 'cap6',
-    from: { name: 'Nimbus Nuvem', email: 'nao-responda@nimbus.cloud' }, to: [IARA], at: '2026-10-12T03:19',
+    from: { name: 'Google Drive', email: 'nao-responda@nimbus.cloud' }, to: [IARA], at: '2026-10-12T03:19',
     subject: '"Caderno_da_Serra_rascunho.docx" foi alterado em outro dispositivo',
     body: `Olá, Iara.
 
-Um arquivo da sua Nimbus Nuvem foi modificado.
+Um arquivo da sua Google Drive foi modificado.
 
 Arquivo: Caderno_da_Serra_rascunho.docx
 Alteração: 3 trechos editados
@@ -453,15 +453,15 @@ Horário: seg., 12 de out. de 2026, 03:17
 Dispositivo: Notebook · Windows 10 (usuário do sistema: ademar.sa)
 Local aproximado: Guaraciaba do Norte, CE
 
-A versão do seu celular Nimbus N9 não foi sincronizada desde sáb., 10 de out., 23:47, porque o aparelho está desligado.
+A versão do seu celular moto g85 não foi sincronizada desde sáb., 10 de out., 23:47, porque o aparelho está desligado.
 
 Se não foi você, troque sua senha e revise os dispositivos com acesso à conta.
 
-Nimbus Nuvem`,
+Google Drive`,
   },
 ];
 
 export default {
-  account: 'iara.fontenele@correio.app',
+  account: 'iara.fontenele@gmail.com',
   emails,
 };

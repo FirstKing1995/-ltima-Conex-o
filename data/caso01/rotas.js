@@ -1,4 +1,4 @@
-// Rotas — histórico de localização do aparelho de Iara (até sáb 10/10 23:47).
+// Google Maps — histórico de localização do aparelho de Iara (até sáb 10/10 23:47).
 
 const place = (id, name, kind, address, lat, lng) => ({ id, name, kind, address, lat, lng });
 const visit = (p, start, end, note) => ({ type: 'visit', place: p, start, end, ...(note ? { note } : {}) });

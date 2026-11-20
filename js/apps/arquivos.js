@@ -1,5 +1,5 @@
-// Arquivos — o gerenciador de arquivos do aparelho de Iara (dados do aparelho: até sáb 23:47).
-// Raiz: pastas + recentes. Subtelas: pasta, Pasta Segura (3 estados) e visualizador (PDF, planilha, texto, áudio, imagem).
+// Files — o gerenciador de arquivos do aparelho de Iara (dados do aparelho: até sáb 23:47). Visual do Files by Google (modo escuro).
+// Raiz: pastas + recentes. Subtelas: pasta, Pasta Trancada (3 estados) e visualizador (PDF, planilha, texto, áudio, imagem).
 import { h, clear } from '../core/dom.js';
 import { icon } from '../ui/icons.js';
 import * as time from '../core/time.js';
@@ -9,7 +9,7 @@ import { bus } from '../core/bus.js';
 const FOLDERS = [
   { id: 'downloads', label: 'Downloads', icon: 'download', tone: 'blue' },
   { id: 'documentos', label: 'Documentos', icon: 'file-text', tone: 'gold' },
-  { id: 'segura', label: 'Pasta Segura', icon: 'folder-lock', tone: 'vault' },
+  { id: 'segura', label: 'Pasta Trancada', icon: 'folder-lock', tone: 'vault' },
 ];
 
 const TYPES = {
@@ -135,7 +135,7 @@ const isNumeric = (t) => /^[\s\-−+]*(R\$\s*)?[\d.,]+\s*(%|kg|m²|ha)?\s*$/.tes
 /* ---------- app ---------- */
 export default {
   id: 'arquivos',
-  title: 'Arquivos',
+  title: 'Files',
   cloud: false,
 
   render(ctx) {
@@ -153,15 +153,19 @@ export default {
     /* ----- linha de arquivo ----- */
     const fileRow = (f, { sub } = {}) => {
       const t = typeOf(f);
-      const tile = h('div', { class: 'ar-ft', style: `--ft:${t.color}` }, icon(t.icon, { size: 20 }), h('b', null, extOf(f).toUpperCase().slice(0, 4)));
-      return kit.listItem({
-        avatar: tile,
-        title: f.name,
-        subtitle: sub ?? [fileSize(f.size), fileDate(f.at, NOW)].filter(Boolean).join(' · '),
-        onClick: () => openFile(f),
-        className: 'ar-row',
-      });
+      return h('div', { class: 'ar-frow' },
+        h('button', { class: 'ar-fopen', on: { click: () => openFile(f) } },
+          h('span', { class: 'ar-ft', style: `--ft:${t.color}` }, icon(t.icon, { size: 22 })),
+          h('span', { class: 'ar-fmain' },
+            h('span', { class: 'ar-fname' }, f.name),
+            h('span', { class: 'ar-fsub' }, sub ?? [fileSize(f.size), fileDate(f.at, NOW)].filter(Boolean).join(', ')))),
+        h('button', { class: 'ar-fmore', 'aria-label': 'Mais opções', on: { click: () => phone.toast('Opções do arquivo indisponíveis na extração', { icon: 'info' }) } }, icon('ellipsis-vertical', { size: 20 })));
     };
+    const fileList = (list, opts) => h('div', { class: 'ar-flist' }, list.map(f => fileRow(f, opts?.(f))));
+    const emptyBox = (ic, title, text, extra) => h('div', { class: 'ar-empty' }, h('span', { class: 'ar-empty-ic' }, icon(ic, { size: 40, stroke: 1.5 })), h('b', null, title), text ? h('span', null, text) : null, extra || null);
+    const sortBar = (n) => h('div', { class: 'ar-sort' },
+      h('button', { class: 'ar-sortbtn', on: { click: () => phone.toast('Ordenação fixa: mais recentes primeiro', { icon: 'info' }) } }, h('span', null, 'Mais recentes'), icon('arrow-up-right', { size: 15 })),
+      h('span', { class: 'ar-sort-ct' }, `${n} ${n === 1 ? 'item' : 'itens'}`));
 
     /* ----- pasta ----- */
     function openFolder(key) {
@@ -173,10 +177,13 @@ export default {
             if (key === 'segura' && (!game.has('cap3') || !segOpen())) return drawLocked(body, n, draw);
             const info = folderInfo(key);
             const list = inFolder(key);
-            body.appendChild(kit.appBar({ title: info.label, subtitle: `${list.length} ${list.length === 1 ? 'arquivo' : 'arquivos'}` }));
-            if (key === 'segura') body.appendChild(h('div', { class: 'ar-vault-note' }, icon('lock-open', { size: 15 }), 'Pasta aberta — conteúdo criptografado neste aparelho'));
-            if (!list.length) body.appendChild(kit.empty({ icon: 'folder-open', title: 'Pasta vazia', text: 'Nenhum arquivo por aqui.' }));
-            else body.appendChild(kit.list(list.map(f => fileRow(f))));
+            body.appendChild(kit.appBar({ title: info.label, actions: [
+              { icon: 'search', label: 'Pesquisar', onClick: () => phone.toast('Use a pesquisa na tela inicial do Files', { icon: 'search' }) },
+              { icon: 'ellipsis-vertical', label: 'Mais opções', onClick: () => phone.toast('Opções indisponíveis na extração', { icon: 'info' }) },
+            ] }));
+            if (key === 'segura') body.appendChild(h('div', { class: 'ar-vault-note' }, icon('lock-open', { size: 16 }), 'Pasta aberta. O conteúdo fica criptografado neste aparelho.'));
+            if (!list.length) body.appendChild(emptyBox('folder-open', 'Pasta vazia', 'Nenhum arquivo por aqui.'));
+            else body.append(sortBar(list.length), fileList(list));
             phone.scan(body);
           };
           draw();
@@ -186,14 +193,14 @@ export default {
       });
     }
 
-    /* ----- Pasta Segura trancada ----- */
+    /* ----- Pasta Trancada trancada ----- */
     function drawLocked(body, n, redraw) {
-      body.appendChild(kit.appBar({ title: 'Pasta Segura', subtitle: 'Criptografada' }));
+      body.appendChild(kit.appBar({ title: 'Pasta Trancada', subtitle: 'Criptografada' }));
       const hint = ctx.store.CASE.puzzles?.pasta?.hint || 'meu primeiro amor + o ano em que tudo começou';
       if (!game.has('cap3')) {
         body.appendChild(h('div', { class: 'ar-locked' },
           h('div', { class: 'ar-lockring wait' }, icon('lock', { size: 38, stroke: 1.6 })),
-          h('h3', null, 'Pasta Segura'),
+          h('h3', null, 'Pasta Trancada'),
           h('p', { class: 'txt' }, 'A extração ainda não conseguiu abrir a criptografia desta pasta.'),
           h('div', { class: 'ar-crack', 'aria-hidden': 'true' }, h('i')),
           h('small', null, 'Isso pode levar algum tempo. Continue investigando.')));
@@ -201,11 +208,11 @@ export default {
       }
       const unlock = async () => {
         const v = await phone.prompt({
-          title: 'Pasta Segura', text: 'Digite a senha para abrir a pasta.', placeholder: 'Senha', type: 'password', confirmLabel: 'Abrir',
+          title: 'Pasta Trancada', text: 'Digite a senha para abrir a pasta.', placeholder: 'Senha', type: 'password', confirmLabel: 'Abrir',
           check: async (val) => (await game.verify('pasta', val)) || 'Senha incorreta',
         });
         if (v !== null && v !== undefined) {
-          phone.toast('Pasta Segura aberta', { icon: 'lock-open' });
+          phone.toast('Pasta Trancada aberta', { icon: 'lock-open' });
           redraw();
           refreshRoot();
         }
@@ -399,67 +406,152 @@ export default {
         kit.audioPlayer({ title: f.name, at: fileDate(f.at, NOW), duration: f.duration || 60, transcript: f.transcript || [], key: 'arquivos:file:' + f.id }));
     }
 
-    /* ----- raiz ----- */
+    /* ----- raiz: aba Navegar (pesquisa, categorias, coleções, armazenamento, recentes) ----- */
     const results = h('div', { class: 'ar-results' });
     const home = h('div', { class: 'ar-home' });
-    const search = kit.search({
-      placeholder: 'Pesquisar arquivos',
-      onInput: (q) => {
-        const query = fold(q).trim();
-        if (query.length < 2) { results.hidden = true; home.hidden = false; clear(results); return; }
-        home.hidden = true; results.hidden = false; clear(results);
-        const hits = shown().filter(f => fold(f.name).includes(query) || fold(fileText(f)).includes(query));
-        if (!hits.length) { results.appendChild(kit.empty({ icon: 'search', title: 'Nada encontrado', text: `Nenhum arquivo com "${q}".` })); return; }
-        results.appendChild(kit.list(hits.map(f => {
-          const text = fileText(f);
-          const i = fold(text).indexOf(query);
-          let snip = '';
-          if (i >= 0 && !fold(f.name).includes(query)) { const a = Math.max(0, i - 28); snip = (a ? '…' : '') + text.slice(a, i + query.length + 50) + '…'; }
-          return fileRow(f, { sub: snip || [fileSize(f.size), fileDate(f.at, NOW)].filter(Boolean).join(' · ') });
-        })));
-        phone.scan(results);
-      },
-    });
+    const cleanTab = h('div', { class: 'ar-clean' });
+    const runSearch = (q) => {
+      const query = fold(q).trim();
+      if (query.length < 2) { results.hidden = true; home.hidden = tab !== 'browse'; cleanTab.hidden = tab !== 'clean'; clear(results); return; }
+      home.hidden = true; cleanTab.hidden = true; results.hidden = false; clear(results);
+      const hits = shown().filter(f => fold(f.name).includes(query) || fold(fileText(f)).includes(query));
+      results.appendChild(h('div', { class: 'ar-sec' }, 'Resultados'));
+      if (!hits.length) { results.appendChild(emptyBox('search', 'Nenhum resultado', `Nenhum arquivo com "${q}".`)); return; }
+      results.appendChild(fileList(hits, (f) => {
+        const text = fileText(f);
+        const i = fold(text).indexOf(query);
+        let snip = '';
+        if (i >= 0 && !fold(f.name).includes(query)) { const a = Math.max(0, i - 28); snip = (a ? '…' : '') + text.slice(a, i + query.length + 50) + '…'; }
+        return { sub: snip || [fileSize(f.size), fileDate(f.at, NOW)].filter(Boolean).join(', ') };
+      }));
+      phone.scan(results);
+    };
+    const input = h('input', { type: 'search', placeholder: 'Pesquisar no Files', 'aria-label': 'Pesquisar no Files', autocomplete: 'off', spellcheck: 'false', enterkeyhint: 'search' });
+    let tmr = null;
+    input.addEventListener('input', () => { clearTimeout(tmr); tmr = setTimeout(() => runSearch(input.value), 120); });
+    const searchBar = h('div', { class: 'ar-top' },
+      h('div', { class: 'ar-search', on: { click: (e) => { if (!e.target.closest('button')) input.focus(); } } },
+        h('span', { class: 'ar-search-ic' }, icon('search', { size: 22 })),
+        input,
+        h('span', { class: 'ar-me' }, kit.avatar({ src: 'assets/caso01/avatars/iara.jpg', name: 'Iara', color: '#e25b45', size: 32 }))));
     results.hidden = true;
 
-    function folderTile(info) {
-      const list = files().filter(f => folderKey(f) === info.id);
-      const locked = info.id === 'segura' && !segOpen();
-      let line;
-      if (locked) line = game.has('cap3') ? 'Protegida por senha' : 'Criptografada';
-      else line = `${list.length} ${list.length === 1 ? 'arquivo' : 'arquivos'}`;
-      return h('button', { class: `ar-folder tone-${info.tone}`, on: { click: () => openFolder(info.id) } },
-        h('span', { class: 'ar-folder-ic' }, icon(locked ? 'lock' : info.icon, { size: 22, stroke: 1.8 })),
-        h('span', { class: 'ar-folder-nm' }, info.label),
-        h('span', { class: 'ar-folder-ct' }, line));
+    /* categorias: Downloads e Documentos são pastas; mídias mostram os arquivos daquele tipo */
+    const CATS = [
+      { id: 'downloads', label: 'Downloads', icon: 'download', folder: 'downloads' },
+      { id: 'img', label: 'Imagens', icon: 'image', types: ['jpg', 'jpeg', 'png'], app: ['galeria', 'Abrir a Galeria'] },
+      { id: 'vid', label: 'Vídeos', icon: 'video', types: ['mp4', 'mov'], app: ['galeria', 'Abrir a Galeria'] },
+      { id: 'aud', label: 'Áudio', icon: 'music', types: ['m4a', 'mp3', 'ogg'], app: ['gravador', 'Abrir o Gravador'] },
+      { id: 'documentos', label: 'Documentos', icon: 'file-text', folder: 'documentos' },
+      { id: 'apps', label: 'Apps', icon: 'smartphone' },
+    ];
+    function openCategory(c) {
+      if (c.folder) { openFolder(c.folder); return; }
+      if (!c.types) { phone.toast('Lista de apps indisponível na extração', { icon: 'smartphone' }); return; }
+      nav.push({
+        className: 'ar-screen',
+        render: (body) => {
+          const list = shown().filter(f => c.types.includes(extOf(f))).sort((a, b) => time.compare(b.at, a.at));
+          body.appendChild(kit.appBar({ title: c.label }));
+          if (!list.length) body.appendChild(emptyBox(c.icon, `Nenhum arquivo em ${c.label}`, 'As mídias deste aparelho ficam nos apps dele.',
+            h('button', { class: 'ar-tonal', on: { click: () => phone.open(c.app[0]) } }, c.app[1])));
+          else body.append(sortBar(list.length), fileList(list));
+        },
+      });
     }
+
+    /* armazenamento interno: as pastas do Android */
+    function openStorage() {
+      nav.push({
+        className: 'ar-screen',
+        render: (body) => {
+          body.appendChild(kit.appBar({ title: 'Armazenamento interno' }));
+          const count = (k) => files().filter(f => folderKey(f) === k).length;
+          const rows = [
+            ['Alarms', () => emptyFolder('Alarms')],
+            ['Android', () => phone.toast('Pasta do sistema protegida', { icon: 'lock' })],
+            ['DCIM', () => phone.open('galeria')],
+            ['Documents', () => openFolder('documentos'), count('documentos')],
+            ['Download', () => openFolder('downloads'), count('downloads')],
+            ['Music', () => emptyFolder('Music')],
+            ['Pictures', () => phone.open('galeria')],
+            ['Recordings', () => phone.open('gravador')],
+          ];
+          for (const f of files()) { const k = folderKey(f); if (!['segura', 'downloads', 'documentos'].includes(k) && !rows.some(r => r[3] === k)) rows.push([folderInfo(k).label, () => openFolder(k), count(k), k]); }
+          body.appendChild(h('div', { class: 'ar-flist' }, rows.map(([name, fn, n]) => h('div', { class: 'ar-frow' },
+            h('button', { class: 'ar-fopen', on: { click: fn } },
+              h('span', { class: 'ar-ft dir' }, icon('folder', { size: 22 })),
+              h('span', { class: 'ar-fmain' }, h('span', { class: 'ar-fname' }, name), n !== undefined ? h('span', { class: 'ar-fsub' }, `${n} ${n === 1 ? 'item' : 'itens'}`) : null))))));
+        },
+      });
+    }
+    const emptyFolder = (name) => phone.toast(`A pasta ${name} está vazia`, { icon: 'folder-open' });
+
+    const tile = (ic, label, onClick, cls = '') => h('button', { class: `ar-cat ${cls}`, on: { click: onClick } }, h('span', { class: 'ar-cat-ic' }, ic), h('span', { class: 'ar-cat-nm' }, label));
 
     function drawHome() {
       clear(home);
-      const keys = [...FOLDERS.map(f => f.id)];
-      for (const f of files()) { const k = folderKey(f); if (!keys.includes(k)) keys.push(k); }
-      home.appendChild(h('div', { class: 'ar-sec' }, 'Pastas'));
-      home.appendChild(h('div', { class: 'ar-folders' }, keys.map(k => folderTile(folderInfo(k)))));
-      home.appendChild(storageCard());
-      home.appendChild(h('div', { class: 'ar-sec' }, icon('clock', { size: 15 }), 'Recentes'));
+      const st = data.storage || { used: 41.2, total: 128 };
+      const locked = !segOpen();
+      const segLine = locked ? (game.has('cap3') ? 'Protegida por senha' : 'Criptografada') : `${files().filter(f => folderKey(f) === 'segura').length} arquivos`;
       const recent = shown().sort((a, b) => time.compare(b.at, a.at)).slice(0, 8);
-      if (!recent.length) home.appendChild(kit.empty({ icon: 'folder-open', title: 'Nenhum arquivo', text: 'Os arquivos do aparelho aparecem aqui.' }));
-      else home.appendChild(kit.list(recent.map(f => fileRow(f, { sub: `${folderInfo(folderKey(f)).label} · ${fileSize(f.size)} · ${fileDate(f.at, NOW)}` }))));
+      home.append(
+        h('div', { class: 'ar-sec' }, 'Recentes'),
+        recent.length ? fileList(recent, (f) => ({ sub: `${folderInfo(folderKey(f)).label}, ${[fileSize(f.size), fileDate(f.at, NOW)].filter(Boolean).join(', ')}` })) : emptyBox('clock', 'Nenhum arquivo recente', ''),
+        h('div', { class: 'ar-sec' }, 'Categorias'),
+        h('div', { class: 'ar-cats' }, CATS.map(c => tile(icon(c.icon, { size: 22 }), c.label, () => openCategory(c)))),
+        h('div', { class: 'ar-sec' }, 'Coleções'),
+        h('div', { class: 'ar-cats' },
+          tile(icon('star', { size: 22 }), 'Favoritos', () => phone.toast('Nenhum arquivo nos favoritos', { icon: 'star' })),
+          h('button', { class: `ar-cat vault ${locked ? 'locked' : ''}`, on: { click: () => openFolder('segura') } },
+            h('span', { class: 'ar-cat-ic' }, icon(locked ? 'lock' : 'folder-lock', { size: 22 })),
+            h('span', { class: 'ar-cat-nm' }, folderInfo('segura').label, h('small', null, segLine)))),
+        h('div', { class: 'ar-sec' }, 'Armazenamento do dispositivo'),
+        h('button', { class: 'ar-storage', on: { click: openStorage } },
+          h('span', { class: 'ar-st-ic' }, icon('smartphone', { size: 22 })),
+          h('span', { class: 'ar-st-main' },
+            h('b', null, 'Armazenamento interno'),
+            h('span', null, `${String(st.used).replace('.', ',')} GB usados de ${st.total} GB`),
+            h('span', { class: 'ar-st-bar', role: 'img', 'aria-label': 'Uso do armazenamento' }, h('i', { style: { width: Math.min(100, st.used / st.total * 100) + '%' } }))),
+          icon('chevron-right', { size: 20 })));
       phone.scan(home);
     }
 
-    function storageCard() {
-      const st = data.storage || { used: 41.2, total: 128, parts: [['Fotos e vídeos', 24.6, '#a78bfa'], ['Apps', 9.8, '#5b93ee'], ['Documentos', 2.1, '#e0a526'], ['Outros', 4.7, '#6b7078']] };
-      const tot = st.total;
-      return h('div', { class: 'ar-storage' },
-        h('div', { class: 'ar-st-top' }, h('b', null, 'Armazenamento do aparelho'), h('span', null, `${String(st.used).replace('.', ',')} GB de ${tot} GB`)),
-        h('div', { class: 'ar-st-bar', role: 'img', 'aria-label': 'Uso do armazenamento' }, st.parts.map(([n, v, c]) => h('i', { style: { width: (v / tot * 100) + '%', background: c }, title: n }))),
-        h('div', { class: 'ar-st-leg' }, st.parts.map(([n, , c]) => h('span', null, h('i', { style: { background: c } }), n))));
+    /* aba Limpar (sugestões de limpeza, só visual) */
+    function drawClean() {
+      clear(cleanTab);
+      const st = data.storage || { used: 41.2, total: 128 };
+      const free = String(Math.round((st.total - st.used) * 10) / 10).replace('.', ',');
+      const no = () => phone.toast('Limpeza indisponível na extração', { icon: 'info' });
+      const card = (ic, title, text, btn) => h('div', { class: 'ar-ccard' },
+        h('div', { class: 'ar-ccard-h' }, h('span', { class: 'ar-cat-ic' }, icon(ic, { size: 22 })), h('div', null, h('b', null, title), h('span', null, text))),
+        h('button', { class: 'ar-tonal', on: { click: no } }, btn));
+      cleanTab.append(
+        h('div', { class: 'ar-cleanhead' },
+          h('div', { class: 'ar-ring', style: { '--p': Math.round(st.used / st.total * 100) } }, h('span', null, `${Math.round(st.used / st.total * 100)}%`)),
+          h('div', null, h('b', null, `${free} GB livres`), h('span', null, `Usados: ${String(st.used).replace('.', ',')} GB de ${st.total} GB`))),
+        card('trash-2', 'Arquivos inúteis', 'Arquivos temporários de apps: 412 MB', 'Limpar 412 MB'),
+        card('copy', 'Arquivos duplicados', '6 arquivos iguais em Downloads', 'Selecionar arquivos'),
+        card('download', 'Arquivos baixados', 'Revise os arquivos antigos da pasta Download', 'Selecionar arquivos'));
+    }
+
+    /* barra inferior: Limpar | Navegar */
+    let tab = 'browse';
+    const tabBtn = (id, ic, label) => h('button', { class: `ar-ntab ${tab === id ? 'on' : ''}`, dataset: { tab: id }, on: { click: () => setTab(id) } }, h('span', { class: 'ar-nind' }, ic), h('span', { class: 'ar-nlbl' }, label));
+    const bottom = h('nav', { class: 'ar-nav', 'aria-label': 'Files' }, tabBtn('clean', icon('sparkles', { size: 22 }), 'Limpar'), tabBtn('browse', icon('folder-open', { size: 22 }), 'Navegar'));
+    function setTab(id) {
+      tab = id;
+      bottom.querySelectorAll('.ar-ntab').forEach(b => b.classList.toggle('on', b.dataset.tab === id));
+      if (id === 'clean') drawClean();
+      input.value = ''; runSearch('');
+      el.scrollTop = 0;
     }
 
     function refreshRoot() { drawHome(); }
-    el.append(kit.appBar({ title: 'Arquivos', subtitle: 'Armazenamento interno' }), search, home, results);
+    el.append(searchBar, home, cleanTab, results);
+    cleanTab.hidden = true;
     drawHome();
+    (ctx.screen || el).appendChild(bottom);
     nav.refresh?.(refreshRoot);
 
     if (params.folder) openFolder(folderKey({ folder: params.folder }));

@@ -1,10 +1,11 @@
-// App "Papo" — mensageiro na nuvem de Iara (mostra o que o servidor tem até terça 13/10 23:12).
+// App "WhatsApp" — mensageiro na nuvem de Iara (mostra o que o servidor tem até terça 13/10 23:12).
 // Lista de conversas, conversa com balões, mídia, apagadas, pendentes (não entregues) e dados do contato/grupo.
 import { h, clear, append } from '../core/dom.js';
 import { icon } from '../ui/icons.js';
 import * as time from '../core/time.js';
 import * as store from '../core/store.js';
 import { normalize } from '../core/hash.js';
+import { isSeen } from '../core/state.js';
 
 const NOW = time.PRESENT_NOW;
 const MIRROR = time.MIRROR_NOW;
@@ -94,7 +95,8 @@ const STATUS_TEXT = { read: 'Lida', delivered: 'Entregue', sent: 'Enviada', pend
 function tick(status, size = 15) {
   if (status === 'read') return icon('check-check', { size, stroke: 2.2, className: 'tk read' });
   if (status === 'delivered') return icon('check-check', { size, stroke: 2.2, className: 'tk' });
-  if (status === 'sent' || status === 'pending') return icon('check', { size, stroke: 2.2, className: 'tk' });
+  if (status === 'sent') return icon('check', { size, stroke: 2.2, className: 'tk' });
+  if (status === 'pending') return icon('clock', { size: size - 3, stroke: 2.2, className: 'tk pend' }); // relógio, como no WhatsApp
   return null;
 }
 
@@ -145,7 +147,7 @@ function snippet(m) {
   }
 }
 
-/** Texto pesquisável de uma mensagem (busca global e busca do Papo). */
+/** Texto pesquisável de uma mensagem (busca global e busca do WhatsApp). */
 function searchText(m) {
   switch (m.kind) {
     case 'text': return m.text || '';
@@ -187,13 +189,33 @@ function whoAvatar(env, who, size) {
 }
 
 /* =====================================================================
+   Ícones no estilo do WhatsApp (Material, preenchidos) — SVG inline
+   ===================================================================== */
+const WA_ICONS = {
+  chat: '<path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>',
+  updates: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="11.5 2.6" transform="rotate(-80 12 12)"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="2"/>',
+  communities: '<path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.61-.91 4.24-.91zM4 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm1.13 1.1c-.37-.06-.74-.1-1.13-.1-.99 0-1.93.21-2.78.58C.48 14.9 0 15.62 0 16.43V18h4.5v-1.61c0-.83.23-1.61.63-2.29zM20 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 3.43c0-.81-.48-1.53-1.22-1.85-.85-.37-1.79-.58-2.78-.58-.39 0-.76.04-1.13.1.4.68.63 1.46.63 2.29V18H24v-1.57zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>',
+  calls: '<path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/>',
+  newChat: '<path d="M22 4c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2L2 16c0 1.1.9 2 2 2h14l4 4V4zm-2 13.17L18.83 16H4V4h16v13.17zM13 5h-2v4H7v2h4v4h2v-4h4V9h-4z"/>',
+  mic: '<path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>',
+};
+function waIcon(name, size = 24, cls = '') {
+  const t = document.createElement('template');
+  t.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor" class="ic ${cls}" aria-hidden="true">${WA_ICONS[name] || ''}</svg>`;
+  return t.content.firstChild;
+}
+
+const readOnlyToast = (env) => env.phone.toast('Somente leitura: extração do aparelho', { icon: 'lock' });
+const isFav = (chat) => !!(chat.favorite || (!isGroup(chat) && contactOf(chatWho(chat))?.favorite));
+
+/* =====================================================================
    Raiz: lista de conversas
    ===================================================================== */
 function previewNode(chat, m) {
   if (!m) return h('span', { class: 'pv' }, 'Sem mensagens');
   const d = describe(m);
   const kids = [];
-  if (isMe(m.from) && m.kind !== 'system') kids.push(tick(statusOf(m), 15));
+  if (isMe(m.from) && m.kind !== 'system') kids.push(tick(statusOf(m), 16));
   if (isGroup(chat) && m.kind !== 'system') kids.push(h('span', { class: 'pv-who' }, nameOf(m.from) + ': '));
   if (d.ic) kids.push(icon(d.ic, { size: 15, className: 'pv-ic' }));
   kids.push(d.text);
@@ -203,15 +225,18 @@ function previewNode(chat, m) {
 function chatRow(env, v) {
   const { chat, last, pending } = v;
   const title = [h('span', { class: 'pp-name' }, chatName(chat))];
-  if (chat.muted) title.push(icon('bell-off', { size: 14, className: 'pp-mini' }));
   if (isBlocked(chat)) title.push(icon('ban', { size: 14, className: 'pp-mini danger' }));
+  const marks = [
+    chat.muted ? icon('bell-off', { size: 16, className: 'pp-mini' }) : null,
+    chat.pinned ? icon('pin', { size: 16, className: 'pp-pin' }) : null,
+    pending ? env.kit.badge(pending) : null,
+  ].filter(Boolean);
   return env.kit.listItem({
-    avatar: chatAvatar(env, chat, 50),
+    avatar: chatAvatar(env, chat, 52),
     title,
     subtitle: previewNode(chat, last),
-    meta: last ? time.relative(last.at, env.now) : '',
-    badge: pending || null,
-    trailing: chat.pinned ? icon('pin', { size: 14, className: 'pp-pin' }) : null,
+    meta: last ? cap(time.relative(last.at, env.now)) : '',
+    trailing: marks.length ? h('span', { class: 'pp-marks' }, marks) : null,
     unread: pending > 0,
     className: 'pp-row',
     onClick: () => openChat(env, chat),
@@ -223,12 +248,13 @@ const byLast = (a, b) => (b.last ? time.parse(b.last.at).getTime() : -Infinity) 
 function openArchived(env, views) {
   const { kit, nav } = env;
   nav.push({
-    title: 'Conversas arquivadas',
+    title: 'Arquivadas',
     className: 'papo-arch',
     render(body) {
       const arch = views.filter((v) => v.chat.archived).sort(byLast);
       body.append(
-        kit.appBar({ title: 'Conversas arquivadas', subtitle: `${arch.length} ${arch.length === 1 ? 'conversa' : 'conversas'}` }),
+        kit.appBar({ title: 'Arquivadas', subtitle: `${arch.length} ${arch.length === 1 ? 'conversa' : 'conversas'}` }),
+        h('p', { class: 'pp-arch-note no-terms' }, 'Estas conversas ficam arquivadas e não aparecem na lista principal.'),
         arch.length
           ? kit.list(arch.map((v) => chatRow(env, v)))
           : kit.empty({ icon: 'archive', title: 'Nada arquivado', text: 'As conversas arquivadas aparecem aqui.' }));
@@ -244,6 +270,21 @@ function snippetAround(raw, q) {
   return (start ? '…' : '') + text.slice(start, i + q.length + 70) + (text.length > i + q.length + 70 ? '…' : '');
 }
 
+/** Barra inferior do WhatsApp (decorativa: só "Conversas" funciona). */
+function bottomNav(env, unreadChats) {
+  const tab = (id, ic, label, { on = false, badge = null, dot = false } = {}) => h('button', {
+    class: `pp-tab${on ? ' on' : ''}`, 'aria-label': label, 'aria-current': on ? 'page' : null,
+    on: { click: () => { if (!on) env.phone.toast(`${label}: sem dados nesta extração`, { icon: 'cloud' }); } },
+  },
+  h('span', { class: 'pp-tab-ic' }, waIcon(ic, 24), badge ? h('span', { class: 'pp-tab-badge' }, badge > 99 ? '99+' : String(badge)) : null, dot ? h('span', { class: 'pp-tab-dot' }) : null),
+  h('span', { class: 'pp-tab-lb' }, label));
+  return h('nav', { class: 'pp-nav no-terms', 'aria-label': 'Seções do WhatsApp' },
+    tab('chats', 'chat', 'Conversas', { on: true, badge: unreadChats }),
+    tab('updates', 'updates', 'Atualizações', { dot: true }),
+    tab('communities', 'communities', 'Comunidades'),
+    tab('calls', 'calls', 'Ligações'));
+}
+
 function renderRoot(env, views) {
   const { ctx, kit } = env;
   const { el } = ctx;
@@ -254,30 +295,28 @@ function renderRoot(env, views) {
   const headSlot = h('div', { class: 'pp-head' });
   const chipSlot = h('div', { class: 'pp-chips' });
   const listSlot = h('div', { class: 'pp-list' });
-  el.append(headSlot, chipSlot, listSlot);
+  const scroll = h('div', { class: 'pp-scroll' }, chipSlot, listSlot);
 
   const visible = views.filter((v) => !v.chat.archived);
   const pendChats = visible.filter((v) => v.pending).length;
   const archivedN = views.length - visible.length;
 
-  const logo = h('span', { class: 'pp-logo', 'aria-hidden': 'true' }, icon('message-circle', { size: 20, stroke: 2.2 }));
-  const sync = h('span', { class: 'pp-sync no-terms' }, icon('cloud', { size: 12 }), `Sincronizado · ${time.weekday(NOW)} ${time.hhmm(NOW)}`);
+  const fab = h('button', { class: 'pp-fab', 'aria-label': 'Nova conversa', title: 'Nova conversa', on: { click: () => readOnlyToast(env) } }, waIcon('newChat', 24));
+  el.append(headSlot, scroll, fab, bottomNav(env, pendChats));
 
   const drawHead = () => {
     clear(headSlot);
     if (searching) {
       headSlot.append(h('div', { class: 'pp-searchbar' },
-        kit.iconButton({ icon: 'arrow-left', label: 'Fechar busca', onClick: () => { searching = false; query = ''; drawHead(); drawChips(); drawList(); } }),
-        kit.search({ placeholder: 'Pesquisar conversas e mensagens', autofocus: true, onInput: (v) => { query = v; drawList(); } })));
+        kit.iconButton({ icon: 'arrow-left', label: 'Fechar busca', onClick: () => { searching = false; query = ''; fab.hidden = false; drawHead(); drawChips(); drawList(); } }),
+        kit.search({ placeholder: 'Pesquisar...', autofocus: true, onInput: (v) => { query = v; drawList(); } })));
       return;
     }
-    headSlot.append(kit.appBar({
-      title: 'Papo', subtitle: sync, avatar: logo,
-      actions: [
-        { icon: 'search', label: 'Pesquisar', onClick: () => { searching = true; drawHead(); drawChips(); drawList(); } },
-        { icon: 'ellipsis-vertical', label: 'Mais opções', onClick: (e) => kit.menu(e.currentTarget, [{ label: 'Conversas arquivadas', icon: 'archive', onClick: () => openArchived(env, views) }]) },
-      ],
-    }));
+    headSlot.append(h('header', { class: 'k-appbar pp-top' },
+      h('div', { class: 'ttl' }, h('h1', null, 'WhatsApp')),
+      kit.iconButton({ icon: 'camera', label: 'Câmera', onClick: () => readOnlyToast(env) }),
+      kit.iconButton({ icon: 'search', label: 'Pesquisar', onClick: () => { searching = true; fab.hidden = true; drawHead(); drawChips(); drawList(); } }),
+      kit.iconButton({ icon: 'ellipsis-vertical', label: 'Mais opções', onClick: (e) => kit.menu(e.currentTarget, [{ label: 'Conversas arquivadas', icon: 'archive', onClick: () => openArchived(env, views) }]) })));
   };
 
   const drawChips = () => {
@@ -285,14 +324,19 @@ function renderRoot(env, views) {
     if (searching) return;
     chipSlot.append(kit.chips({
       active: filter,
-      items: [{ id: 'all', label: 'Todas' }, { id: 'pend', label: pendChats ? `Não entregues · ${pendChats}` : 'Não entregues' }, { id: 'grp', label: 'Grupos' }],
+      items: [
+        { id: 'all', label: 'Todas' },
+        { id: 'pend', label: pendChats ? `Não lidas ${pendChats}` : 'Não lidas' },
+        { id: 'fav', label: 'Favoritas' },
+        { id: 'grp', label: 'Grupos' },
+      ],
       onChange: (id) => { filter = id; drawList(); },
     }));
   };
 
   const drawResults = () => {
     const q = query.trim();
-    if (fold(q).length < 2) { listSlot.append(kit.empty({ icon: 'search', title: 'Pesquise no Papo', text: 'Nomes de conversas, números e trechos de mensagens, fotos e áudios.' })); return; }
+    if (fold(q).length < 2) { listSlot.append(kit.empty({ icon: 'search', title: 'Pesquise no WhatsApp', text: 'Nomes de conversas, números e trechos de mensagens, fotos e áudios.' })); return; }
     const nq = normalize(q);
     const chats = views.filter((v) => normalize(chatName(v.chat)).includes(nq) || (nq.length >= 3 && normalize(store.digits(chatWho(v.chat) || '')).includes(nq)));
     const hits = [];
@@ -307,10 +351,10 @@ function renderRoot(env, views) {
     if (chats.length) listSlot.append(kit.sectionTitle('Conversas'), kit.list(chats.sort(byLast).map((v) => chatRow(env, v))));
     if (hits.length) {
       listSlot.append(kit.sectionTitle(`Mensagens · ${hits.length}`), kit.list(hits.slice(0, 80).map(({ v, m, t }) => kit.listItem({
-        avatar: chatAvatar(env, v.chat, 44),
+        avatar: chatAvatar(env, v.chat, 46),
         title: chatName(v.chat),
         subtitle: h('span', { class: 'pv txt' }, (isGroup(v.chat) ? nameOf(m.from) + ': ' : '') + snippetAround(t, q)),
-        meta: time.relative(m.at, env.now),
+        meta: cap(time.relative(m.at, env.now)),
         className: 'pp-row',
         onClick: () => openChat(env, v.chat, { msg: m.id }),
       }))));
@@ -322,19 +366,28 @@ function renderRoot(env, views) {
     if (searching) { drawResults(); env.phone.scan(listSlot); return; }
     let vs = visible;
     if (filter === 'pend') vs = vs.filter((v) => v.pending);
+    if (filter === 'fav') vs = vs.filter((v) => isFav(v.chat));
     if (filter === 'grp') vs = vs.filter((v) => isGroup(v.chat));
+    // como no WhatsApp: "Arquivadas" no topo, fixadas primeiro e depois por data
+    if (filter === 'all' && archivedN) {
+      listSlot.append(h('button', { class: 'pp-arch', on: { click: () => openArchived(env, views) } },
+        h('span', { class: 'ai' }, icon('archive', { size: 20 })), h('span', { class: 'al' }, 'Arquivadas'), h('span', { class: 'an' }, String(archivedN))));
+    }
     const pinned = vs.filter((v) => v.chat.pinned).sort(byLast);
     const rest = vs.filter((v) => !v.chat.pinned).sort(byLast);
     if (!vs.length) {
-      listSlot.append(kit.empty({ icon: filter === 'pend' ? 'check-check' : 'message-circle', title: filter === 'pend' ? 'Nada pendente' : 'Nenhuma conversa', text: filter === 'pend' ? 'Todas as mensagens foram entregues.' : 'Não há conversas neste filtro.' }));
+      const EMPTY = {
+        pend: { icon: 'check-check', title: 'Nenhuma conversa não lida', text: 'Todas as mensagens foram entregues.' },
+        fav: { icon: 'star', title: 'Nenhuma favorita', text: 'As conversas com contatos favoritos aparecem aqui.' },
+        grp: { icon: 'users', title: 'Nenhum grupo', text: 'Não há grupos nesta extração.' },
+      };
+      listSlot.append(kit.empty(EMPTY[filter] || { icon: 'message-circle', title: 'Nenhuma conversa', text: 'Não há conversas neste filtro.' }));
     } else {
-      if (pinned.length) append(listSlot, [kit.sectionTitle('Fixadas'), kit.list(pinned.map((v) => chatRow(env, v)))]);
-      if (rest.length) append(listSlot, [pinned.length ? kit.sectionTitle('Todas as conversas') : null, kit.list(rest.map((v) => chatRow(env, v)))]);
+      listSlot.append(kit.list([...pinned, ...rest].map((v) => chatRow(env, v))));
     }
-    if (filter === 'all' && archivedN) {
-      listSlot.append(kit.list([kit.listItem({ icon: 'archive', title: 'Conversas arquivadas', meta: String(archivedN), className: 'pp-row pp-arch', onClick: () => openArchived(env, views) })]));
-    }
-    listSlot.append(h('p', { class: 'pp-foot no-terms' }, icon('lock', { size: 13 }), 'Extração somente leitura. Nada do que você fizer aqui chega às outras pessoas.'));
+    listSlot.append(h('p', { class: 'pp-foot no-terms' }, icon('lock', { size: 12 }),
+      h('span', null, 'Extração somente leitura. Nada do que você fizer aqui chega às outras pessoas. ',
+        h('span', { class: 'pp-sync' }, `Sincronizado da nuvem · ${time.weekday(NOW)} ${time.hhmm(NOW)}`))));
     env.phone.scan(listSlot);
   };
 
@@ -412,8 +465,10 @@ function buildChat(env, chat, opts, body, nav) {
   const bar = h('header', { class: 'k-appbar pc-bar' },
     kit.iconButton({ icon: 'arrow-left', label: 'Voltar', onClick: () => nav.back() }),
     h('button', { class: 'pc-who', 'aria-label': `Dados de ${name}`, on: { click: () => openInfo() } },
-      chatAvatar(env, chat, 40),
+      chatAvatar(env, chat, 38),
       h('span', { class: 'nm' }, h('span', { class: 't' }, name), h('span', { class: 's' }, subtitle))),
+    kit.iconButton({ icon: 'video', label: 'Chamada de vídeo', onClick: () => readOnlyToast(env) }),
+    kit.iconButton({ icon: 'phone', label: 'Chamada de voz', onClick: () => readOnlyToast(env) }),
     kit.iconButton({ icon: 'ellipsis-vertical', label: 'Mais opções', onClick: (e) => chatMenu(e.currentTarget) }));
 
   const banners = [];
@@ -422,10 +477,17 @@ function buildChat(env, chat, opts, body, nav) {
 
   const list = h('div', { class: 'pc-list' });
   const scroller = h('div', { class: 'pc-scroll' }, list);
+  // campo de digitação como o do WhatsApp, desativado (extração forense)
   const foot = h('div', { class: 'pc-foot no-terms' },
-    h('div', { class: 'pc-input', 'aria-disabled': 'true' }, icon('lock', { size: 16 }),
-      h('input', { type: 'text', disabled: true, placeholder: 'Somente leitura — extração do aparelho', 'aria-label': 'Somente leitura — extração do aparelho' })));
+    h('div', { class: 'pc-input', 'aria-disabled': 'true', title: 'Somente leitura — extração do aparelho' },
+      h('span', { class: 'pc-ic' }, icon('smile', { size: 23 })),
+      h('input', { type: 'text', disabled: true, placeholder: 'Mensagem', 'aria-label': 'Somente leitura — extração do aparelho' }),
+      h('span', { class: 'pc-ic clip' }, icon('paperclip', { size: 21 })),
+      h('span', { class: 'pc-ic' }, icon('camera', { size: 21 }))),
+    h('button', { class: 'pc-mic', 'aria-label': 'Gravar áudio (indisponível na extração)', on: { click: () => readOnlyToast(env) } }, waIcon('mic', 24)));
   body.append(bar, ...banners, scroller, foot);
+  list.append(h('div', { class: 'pm-e2e no-terms', role: 'note' }, icon('lock', { size: 12 }),
+    h('span', null, 'Extração somente leitura. Nada do que você fizer aqui chega às outras pessoas.')));
 
   /* ---------- rolagem ---------- */
   let target = null;           // mensagem/divisor alvo (null = fim)
@@ -548,7 +610,15 @@ function buildChat(env, chat, opts, body, nav) {
       }
       case 'audio': {
         cls += ' audio';
-        parts.push(h('div', { class: 'pm-audio' }, kit.audioPlayer({ compact: true, duration: m.duration || 20, key: 'papo:audio:' + m.id, title: 'Áudio' })));
+        // nota de voz do WhatsApp: play + forma de onda + foto com o microfone; duração embaixo à esquerda, hora à direita
+        const akey = 'papo:audio:' + m.id;
+        const player = kit.audioPlayer({ compact: true, duration: m.duration || 20, key: akey, title: 'Áudio' });
+        const au = h('div', { class: `pm-audio${isSeen(akey) ? ' heard' : ''}` },
+          player,
+          h('span', { class: 'pm-av', 'aria-hidden': 'true' }, whoAvatar(env, isMe(m.from) ? 'iara' : m.from, 42), h('span', { class: 'mic' }, waIcon('mic', 13))),
+          metaNode(m));
+        player.querySelector('.play')?.addEventListener('click', () => au.classList.add('heard'));
+        parts.push(au);
         if (m.transcript) {
           const tr = h('div', { class: 'pm-trans txt', hidden: true }, m.transcript);
           const lbl = h('span', null, 'Transcrição');
@@ -561,7 +631,6 @@ function buildChat(env, chat, opts, body, nav) {
           } } }, icon('audio-lines', { size: 15 }), lbl);
           parts.push(btn, tr);
         }
-        parts.push(footMeta(m));
         break;
       }
       case 'doc': {
@@ -577,7 +646,7 @@ function buildChat(env, chat, opts, body, nav) {
       case 'location': {
         const p = m.place || {};
         const label = p.name || m.text || 'Localização compartilhada';
-        const coords = p.lat != null && p.lng != null ? `${Number(p.lat).toFixed(4)}, ${Number(p.lng).toFixed(4)}` : 'Toque para abrir no Rotas';
+        const coords = p.lat != null && p.lng != null ? `${Number(p.lat).toFixed(4)}, ${Number(p.lng).toFixed(4)}` : 'Toque para abrir no Google Maps';
         cls += ' loc';
         parts.push(h('button', { class: 'pm-loc', on: { click: (e) => { e.stopPropagation(); phone.open('rotas', {}); } } },
           h('span', { class: 'map', 'aria-hidden': 'true' }, h('span', { class: 'pin' }, icon('map-pin', { size: 24, stroke: 2.2 }))),
@@ -752,7 +821,7 @@ function showDetails(env, chat, m) {
    ===================================================================== */
 export default {
   id: 'papo',
-  title: 'Papo',
+  title: 'WhatsApp',
   cloud: true,
 
   render(ctx) {
