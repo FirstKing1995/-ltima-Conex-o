@@ -513,8 +513,30 @@ function setup() {
   return 'ok';
 }
 
+/** Separador de argumentos das fórmulas: "," (inglês) ou ";" (português e outros). Testa na própria aba. */
+function separador_(sh) {
+  const c = sh.getRange('H1');
+  c.setFormula('=SUM(1,1)');
+  SpreadsheetApp.flush();
+  const ok = c.getDisplayValue() === '2';
+  c.clearContent();
+  return ok ? ',' : ';';
+}
+
+/** Troca as vírgulas fora de aspas pelo separador da planilha. */
+function fx_(formula, sep) {
+  if (sep === ',') return formula;
+  let out = '', aspas = false;
+  for (const ch of formula) {
+    if (ch === '"') aspas = !aspas;
+    out += (ch === ',' && !aspas) ? sep : ch;
+  }
+  return out;
+}
+
 function montarPainel_(sh) {
   sh.clear();
+  const sep = separador_(sh);
   sh.setHiddenGridlines(true);
   sh.getRange('A1:F1').merge().setValue('ÚLTIMA CONEXÃO — PAINEL DO JOGO')
     .setFontSize(18).setFontWeight('bold').setFontColor('#f4efe6').setBackground('#0b0d10');
@@ -531,25 +553,25 @@ function montarPainel_(sh) {
     ['Média de dicas (quem resolveu)', '=IFERROR(AVERAGE(Ranking!E2:E),0)'],
   ];
   sh.getRange(4, 1, kpis.length, 1).setValues(kpis.map(function (k) { return [k[0]]; }));
-  sh.getRange(4, 2, kpis.length, 1).setFormulas(kpis.map(function (k) { return [k[1]]; }));
+  sh.getRange(4, 2, kpis.length, 1).setFormulas(kpis.map(function (k) { return [fx_(k[1], sep)]; }));
   sh.getRange('B6').setNumberFormat('0.0%');
   sh.getRange('B9:B10').setNumberFormat('0.0');
   sh.getRange(4, 2, kpis.length, 1).setFontWeight('bold').setFontSize(13);
 
   sh.getRange('A13').setValue('Funil — chegaram ao capítulo').setFontWeight('bold');
   const funil = [];
-  for (let c = 0; c <= 5; c++) funil.push(['Capítulo ' + c + '+', '=COUNTIF(Jogadores!I:I,">=' + c + '")']);
+  for (let c = 0; c <= 7; c++) funil.push(['Capítulo ' + c + '+', '=COUNTIF(Jogadores!I:I,">=' + c + '")']);
   sh.getRange(14, 1, funil.length, 1).setValues(funil.map(function (f) { return [f[0]]; }));
-  sh.getRange(14, 2, funil.length, 1).setFormulas(funil.map(function (f) { return [f[1]]; }));
+  sh.getRange(14, 2, funil.length, 1).setFormulas(funil.map(function (f) { return [fx_(f[1], sep)]; }));
 
   sh.getRange('D4').setValue('Quem os jogadores acusam').setFontWeight('bold');
-  sh.getRange('D5').setFormula('=IFERROR(QUERY(Relatorios!A:M,"select D, count(D) where D is not null and D <> \'\' group by D order by count(D) desc label count(D) \'vezes\'",1),"—")');
+  sh.getRange('D5').setFormula(fx_('=IFERROR(QUERY(Relatorios!A:M,"select D, count(D) where D is not null and D <> \'\' group by D order by count(D) desc label count(D) \'vezes\'",1),"—")', sep));
 
   sh.getRange('D13').setValue('Eventos mais comuns').setFontWeight('bold');
-  sh.getRange('D14').setFormula('=IFERROR(QUERY(Eventos!A:E,"select C, count(C) where C is not null and C <> \'\' group by C order by count(C) desc limit 15 label count(C) \'vezes\'",1),"—")');
+  sh.getRange('D14').setFormula(fx_('=IFERROR(QUERY(Eventos!A:E,"select C, count(C) where C is not null and C <> \'\' group by C order by count(C) desc limit 15 label count(C) \'vezes\'",1),"—")', sep));
 
   sh.getRange('A22').setValue('Top 10 do ranking').setFontWeight('bold');
-  sh.getRange('A23').setFormula('=IFERROR(QUERY(Ranking!A:I,"select B, C, D, E where C is not null order by C desc limit 10 label B \'apelido\', C \'pontos\', D \'min\', E \'dicas\'",1),"—")');
+  sh.getRange('A23').setFormula(fx_('=IFERROR(QUERY(Ranking!A:I,"select B, C, D, E where C is not null order by C desc limit 10 label B \'apelido\', C \'pontos\', D \'min\', E \'dicas\'",1),"—")', sep));
 
   sh.setColumnWidth(1, 260).setColumnWidth(2, 110).setColumnWidth(3, 30).setColumnWidth(4, 240).setColumnWidth(5, 90);
 }
